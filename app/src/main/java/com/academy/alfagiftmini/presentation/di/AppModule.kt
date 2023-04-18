@@ -1,7 +1,9 @@
 package com.academy.alfagiftmini.presentation.di
 
-import com.academy.alfagiftmini.data.repository.netwok.loginlogout.LoginDomainUseCase
-import com.academy.alfagiftmini.data.repository.netwok.loginlogout.LoginDomainUseCaseImpl
+import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
+import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCaseImpl
+import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
+import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCaseImpl
 import dagger.Binds
 import dagger.Module
 
@@ -9,5 +11,8 @@ import dagger.Module
 abstract class AppModule {
     @Binds
     abstract fun provideLoginDomainUseCase(useCaseImpl: LoginDomainUseCaseImpl): LoginDomainUseCase
+
+    @Binds
+    abstract fun provideOfficialStoreDomainUseCase(useCaseImpl: OfficialStoreDomainUseCaseImpl): OfficialStoreDomainUseCase
 
 }

@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.data.di
 
 import com.academy.alfagiftmini.data.DataUtils.BASE_URL
 import com.academy.alfagiftmini.data.repository.netwok.loginlogout.LoginApiService
+import com.academy.alfagiftmini.data.repository.netwok.officialstore.OfficialStoreApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -29,6 +30,10 @@ class NetworkModule {
     @Provides
     fun loginApiService(): LoginApiService {
         return retrofitClient().create(LoginApiService::class.java)
+    }
+    @Provides
+    fun officialStoreApiService(): OfficialStoreApiService {
+        return retrofitClient().create(OfficialStoreApiService::class.java)
     }
 
 

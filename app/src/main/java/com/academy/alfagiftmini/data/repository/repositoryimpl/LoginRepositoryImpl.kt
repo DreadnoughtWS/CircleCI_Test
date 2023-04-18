@@ -1,10 +1,10 @@
-package com.academy.alfagiftmini.data.repository.domainrepositoryimpl
+package com.academy.alfagiftmini.data.repository.repositoryimpl
 
 import com.academy.alfagiftmini.data.repository.netwok.loginlogout.LoginApiService
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import javax.inject.Inject
 
-class LoginDomainRepositoryImpl @Inject constructor(
+class LoginRepositoryImpl @Inject constructor(
     private val loginApiService: LoginApiService,
 ) : LoginDomainRepository {
 }
