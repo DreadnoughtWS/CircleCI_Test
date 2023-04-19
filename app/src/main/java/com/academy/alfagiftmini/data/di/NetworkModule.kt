@@ -16,21 +16,17 @@ class NetworkModule {
     private fun retrofitClient(): Retrofit {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
 
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
+        return Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()).client(client).build()
     }
 
     @Provides
     fun loginApiService(): LoginApiService {
         return retrofitClient().create(LoginApiService::class.java)
     }
+
     @Provides
     fun officialStoreApiService(): OfficialStoreApiService {
         return retrofitClient().create(OfficialStoreApiService::class.java)
