@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -33,7 +34,15 @@ class OfficialStoreActivity : AppCompatActivity() {
         setAdapter()
         setObserver()
         getDataFromApi()
+        setButtonLihatSemua()
 
+    }
+
+    private fun setButtonLihatSemua() {
+        binding.tvLihatSemuaOfficial.setOnClickListener {
+            val intent = Intent(this, DetailOfficialStoreActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getDataFromApi() {
@@ -54,11 +63,11 @@ class OfficialStoreActivity : AppCompatActivity() {
             if (it.size < 14) {
 
                 println(it)
-                setLihatSemua(DATA_OFFICIAL_STORE_KURANG_DARI_14)
+                setLihatSemua(DATA_OFFICIAL_STORE_LEBIH_DARI_14)
                 adapter.updateData(it)
                 return@observe
             }
-            setLihatSemua(DATA_OFFICIAL_STORE_LEBIH_DARI_14)
+            setLihatSemua(DATA_OFFICIAL_STORE_KURANG_DARI_14)
             adapter.updateData(it.dropLast(1))
 
         }

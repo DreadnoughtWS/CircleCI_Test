@@ -3,8 +3,10 @@ package com.academy.alfagiftmini.presentation.homepage.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,5 +22,11 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
             }
         }
     }
+
+    suspend fun getAllOfficialStore(): Flow<PagingData<OfficialStoreDomainItemModel>> {
+        return useCase.getAllOfficialStore(viewModelScope)
+    }
+
+
 
 }

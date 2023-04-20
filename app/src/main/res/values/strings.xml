@@ -3,4 +3,8 @@
     <string name="logo_official_store">Logo Official Store</string>
     <string name="lihat_semua">Lihat Semua</string>
     <string name="official_store">Official Store</string>
+    <string name="search_image_view">Search Image View</string>
+    <string name="back_image_view">Back Image View</string>
+    <string name="cart_image_view">Cart Image View</string>
+    <string name="official_store_popular">Official Store Popular</string>
 </resources>
