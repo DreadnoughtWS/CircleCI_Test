@@ -2,9 +2,9 @@ package com.academy.alfagiftmini.presentation.di
 
 import com.academy.alfagiftmini.data.di.CoreComponent
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.DetailOfficialStoreActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.OfficialStoreActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.ProductListActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.officialstore.DetailOfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.officialstore.OfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListHargaSpesialActivity
 import dagger.Component
 
 @AppScope
@@ -20,5 +20,5 @@ interface AppComponent {
     fun loginActivityInject(activity: LoginActivity)
     fun officialStoreActivityInject(activity: OfficialStoreActivity)
     fun detailOfficialStoreActivityInject(activity: DetailOfficialStoreActivity)
-    fun productListActivityInject(activity: ProductListActivity)
+    fun productListActivityInject(activity: ProductListHargaSpesialActivity)
 }

@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.activity
+package com.academy.alfagiftmini.presentation.homepage.activity.officialstore
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

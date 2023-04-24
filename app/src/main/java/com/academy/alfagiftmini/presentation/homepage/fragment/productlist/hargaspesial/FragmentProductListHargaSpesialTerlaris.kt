@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.fragment
+package com.academy.alfagiftmini.presentation.homepage.fragment.productlist.hargaspesial
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.academy.alfagiftmini.R
 
 
-class FragmentProductListTerlaris : Fragment() {
+class FragmentProductListHargaSpesialTerlaris : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

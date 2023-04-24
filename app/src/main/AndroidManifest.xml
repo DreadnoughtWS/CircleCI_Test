@@ -17,16 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.homepage.activity.ProductListActivity"
+            android:name=".presentation.homepage.activity.productlist.ProductListHargaSpesialActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.activity.DetailOfficialStoreActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.homepage.activity.OfficialStoreActivity"
+            android:name=".presentation.homepage.activity.officialstore.DetailOfficialStoreActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.homepage.activity.officialstore.OfficialStoreActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

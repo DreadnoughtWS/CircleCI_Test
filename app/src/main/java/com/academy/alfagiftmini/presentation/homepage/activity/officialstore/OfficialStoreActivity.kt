@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.activity
+package com.academy.alfagiftmini.presentation.homepage.activity.officialstore
 
 import android.app.Dialog
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.ActivityOfficialStoreBinding

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.homepage.fragment.FragmentProductListPromosi">
+    tools:context=".presentation.homepage.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialPromosi">
 
     <!-- TODO: Update blank fragment layout -->
 

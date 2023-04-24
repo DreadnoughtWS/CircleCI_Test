@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.fragment
+package com.academy.alfagiftmini.presentation.homepage.fragment.productlist.hargaspesial
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,17 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListPromosiBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.activity.ProductListActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListHargaSpesialActivity
 import com.academy.alfagiftmini.presentation.homepage.adapter.ProductListPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListPromosi : Fragment() {
+class FragmentProductListHargaSpesialPromosi : Fragment() {
     private lateinit var binding: FragmentProductListPromosiBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListPagingAdapter
@@ -54,7 +53,7 @@ class FragmentProductListPromosi : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListActivity).getProductListViewModel()
+        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
     }
 
 
