@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_produkList"
+    android:layout_width="match_parent"
+    android:layout_height="370dp"
+    android:layout_gravity="center"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_product"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:paddingHorizontal="5dp">
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/image_product"
+            android:src="@drawable/uniliver_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_nama_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_image"
+            tools:text="Indomie Goreng\nenak enak enak" />
+
+        <TextView
+            android:id="@+id/tv_harga_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_product"
+            tools:text="Rp. 50.000" />
+
+        <TextView
+            android:id="@+id/tv_jumlah_diskon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/red"
+            android:padding="5dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_harga_product"
+            tools:text="27%" />
+
+        <TextView
+            android:id="@+id/tv_harga_diskon_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/very_light_gray"
+            app:layout_constraintStart_toEndOf="@id/tv_jumlah_diskon"
+            app:layout_constraintTop_toBottomOf="@id/tv_harga_product"
+            tools:text="Rp 5000" />
+
+        <TextView
+            android:id="@+id/tv_stock_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:drawablePadding="5dp"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/stok_toko"
+            app:layout_constraintBottom_toTopOf="@id/divider_product"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Stok dari Toko" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider_product"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="10dp"
+            app:dividerColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/btn_keranjang" />
+
+        <com.omega_r.libs.OmegaCenterIconButton
+            android:id="@+id/btn_keranjang"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/shape_btn_keranjang"
+            android:drawableStart="@drawable/baseline_add_24"
+            android:text="@string/keranjang"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

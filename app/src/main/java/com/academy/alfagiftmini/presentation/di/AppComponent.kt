@@ -4,6 +4,7 @@ import com.academy.alfagiftmini.data.di.CoreComponent
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.DetailOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.OfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.ProductListActivity
 import dagger.Component
 
 @AppScope
@@ -19,4 +20,5 @@ interface AppComponent {
     fun loginActivityInject(activity: LoginActivity)
     fun officialStoreActivityInject(activity: OfficialStoreActivity)
     fun detailOfficialStoreActivityInject(activity: DetailOfficialStoreActivity)
+    fun productListActivityInject(activity: ProductListActivity)
 }

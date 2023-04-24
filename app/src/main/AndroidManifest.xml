@@ -17,13 +17,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.homepage.activity.ProductListActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.homepage.activity.DetailOfficialStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.authentication.activity.LoginActivity"
+            android:name=".presentation.homepage.activity.OfficialStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.activity.OfficialStoreActivity"
+            android:name=".presentation.authentication.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

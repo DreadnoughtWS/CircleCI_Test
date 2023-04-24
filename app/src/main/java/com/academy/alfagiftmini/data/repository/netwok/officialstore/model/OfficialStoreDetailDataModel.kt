@@ -2,11 +2,13 @@ package com.academy.alfagiftmini.data.repository.netwok.officialstore.model
 
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
+import com.google.gson.annotations.SerializedName
 
 data class OfficialStoreDetailDataModel(
     val id: Int?,
     val name: String?,
     val image: String?,
+    @SerializedName("product_images") val productImage:String?,
     val brands: List<OfficialStoreBrandsDataModel>?,
     val totalFollowers: Int?
 ) {
@@ -20,7 +22,8 @@ data class OfficialStoreDetailDataModel(
                             name = it.name,
                             image = it.image,
                             brands = it.brands,
-                            totalFollowers = it.totalFollowers
+                            totalFollowers = it.totalFollowers,
+                            productImage = it.productImage
                         )
                     )
                 }
@@ -40,7 +43,8 @@ data class OfficialStoreDetailDataModel(
                         brandName = it.brandName
                     )
                 } ?: listOf(),
-                totalFollowers = model.totalFollowers ?: 0
+                totalFollowers = model.totalFollowers ?: 0,
+                productImage = model.productImage ?: ""
             )
         }
     }

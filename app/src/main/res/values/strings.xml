@@ -7,4 +7,10 @@
     <string name="back_image_view">Back Image View</string>
     <string name="cart_image_view">Cart Image View</string>
     <string name="official_store_popular">Official Store Popular</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_product">Image Product</string>
+    <string name="keranjang">Keranjang</string>
+    <string name="stock_dari_gudang">Stock dari Gudang</string>
+    <string name="stock_dari_toko">Stock dari Toko</string>
+    <string name="stok_habis">Stok Habis</string>
 </resources>

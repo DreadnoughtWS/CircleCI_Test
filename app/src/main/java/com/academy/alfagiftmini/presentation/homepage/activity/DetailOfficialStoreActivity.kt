@@ -47,7 +47,6 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     private fun setAdapter() {
         adapter = DetailOfficialStorePagingAdapter()
         binding.rvDetailOfficialStore.layoutManager = GridLayoutManager(this, 3)
-        binding.rvDetailOfficialStore.isNestedScrollingEnabled = false
         binding.rvDetailOfficialStore.adapter = adapter
     }
 
