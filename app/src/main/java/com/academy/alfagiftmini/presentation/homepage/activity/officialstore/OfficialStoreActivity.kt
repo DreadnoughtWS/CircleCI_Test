@@ -51,7 +51,7 @@ class OfficialStoreActivity : AppCompatActivity() {
 
     private fun setButtonLihatSemua() {
         binding.tvLihatSemuaOfficial.setOnClickListener {
-            val intent = Intent(this, DetailOfficialStoreActivity::class.java)
+            val intent = Intent(this, AllOfficialStoreActivity::class.java)
             startActivity(intent)
         }
     }
@@ -78,6 +78,7 @@ class OfficialStoreActivity : AppCompatActivity() {
         viewModel.officialStore14.observe(this) {
             if (it.isNullOrEmpty()) {
                 setLoading(false, dialog)
+                setLihatSemua(DATA_OFFICIAL_STORE_KURANG_DARI_14)
                 if (isNetworkAvailable(this)) {
                     Toast.makeText(this, "Tidak ada internet", Toast.LENGTH_SHORT).show()
                 }

@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.fragment.productlist.hargaspesial
+package com.academy.alfagiftmini.presentation.homepage.fragment.productlist.gratisproduct
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,25 +8,28 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
+import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductTerlarisBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListTerlarisHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListHargaSpesialActivity
+import com.academy.alfagiftmini.presentation.homepage.adapter.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.adapter.ProductListPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListHargaSpesialTerlaris : Fragment() {
-    private lateinit var binding: FragmentProductListTerlarisHargaSpesialBinding
+class FragmentProductListGratisProductTerlaris : Fragment() {
+    private lateinit var binding: FragmentProductListGratisProductTerlarisBinding
     private lateinit var viewModel: ProductListViewModel
-    private lateinit var adapter: ProductListPagingAdapter
+    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
-        binding = FragmentProductListTerlarisHargaSpesialBinding.inflate(inflater, container, false)
+        binding = FragmentProductListGratisProductTerlarisBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -39,8 +42,8 @@ class FragmentProductListHargaSpesialTerlaris : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.getProductOrder(
-                PresentationUtils.TYPE_HARGA_SPESIAL,
+            viewModel.getProductGratisProductOrder(
+                PresentationUtils.TYPE_GRATIS_PRODUK,
                 PresentationUtils.ORDER_BY_DESCENDING,
                 "sales_quantity"
             ).collectLatest {
@@ -50,14 +53,13 @@ class FragmentProductListHargaSpesialTerlaris : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = ProductListPagingAdapter()
+        adapter = ProductListGratisProductPagingAdapter()
         binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListTerlaris.adapter = adapter
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
+        viewModel = (requireActivity() as ProductListGratisProductActivity).getProductViewModel()
+
     }
-
-
 }

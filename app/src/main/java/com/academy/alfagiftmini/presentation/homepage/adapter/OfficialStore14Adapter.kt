@@ -24,6 +24,7 @@ class OfficialStore14Adapter :
                 .into(binding.ivStoreLogo)
             Glide.with(itemView.context).load(data.productImage)
                 .placeholder(R.drawable.uniliver_logo).into(binding.ivProductLogo)
+
         }
     }
 
@@ -45,7 +46,7 @@ class OfficialStore14Adapter :
     fun updateData(data: List<OfficialStoreDomainItemModel>) {
         listData.clear()
         listData.addAll(data)
-        notifyItemChanged(0, listData.size - 1)
+        notifyDataSetChanged()
     }
 
 }

@@ -10,8 +10,8 @@ import com.academy.alfagiftmini.databinding.ItemOfficialStoreBinding
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.bumptech.glide.Glide
 
-class DetailOfficialStorePagingAdapter :
-    PagingDataAdapter<OfficialStoreDomainItemModel, DetailOfficialStorePagingAdapter.DetailOfficialStoreViewHolder>(
+class AllOfficialStorePagingAdapter :
+    PagingDataAdapter<OfficialStoreDomainItemModel, AllOfficialStorePagingAdapter.DetailOfficialStoreViewHolder>(
         DiffCallback
     ) {
 
@@ -43,6 +43,8 @@ class DetailOfficialStorePagingAdapter :
             }
             Glide.with(itemView.context).load(data.image).placeholder(R.drawable.uniliver_logo)
                 .into(binding.ivStoreLogo)
+            Glide.with(itemView.context).load(data.productImage)
+                .placeholder(R.drawable.uniliver_logo).into(binding.ivProductLogo)
         }
     }
 

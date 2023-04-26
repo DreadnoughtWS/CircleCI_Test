@@ -2,8 +2,7 @@ package com.academy.alfagiftmini.domain.produklist.model
 
 import com.google.gson.annotations.SerializedName
 
-
-data class ProductListDomainItemModel(
+data class ProductListPromotionProductDomainModel(
     val productId: Long,
     val productSku: String,
     val productName: String,
@@ -19,5 +18,6 @@ data class ProductListDomainItemModel(
     val stock: Int?,
     val salesQuantity: Int?,
     val officialStoreId: Int?,
+    val productGratis:List<Long>,
     val imgPreview103: String?,
     )

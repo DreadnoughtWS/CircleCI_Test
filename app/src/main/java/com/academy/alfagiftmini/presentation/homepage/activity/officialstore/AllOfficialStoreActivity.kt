@@ -7,17 +7,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ActivityDetailOfficialStoreBinding
+import com.academy.alfagiftmini.databinding.ActivityAllOfficialStoreBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.adapter.DetailOfficialStorePagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.adapter.AllOfficialStorePagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.viewmodel.OfficialStoreViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailOfficialStoreActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityDetailOfficialStoreBinding
-    private lateinit var adapter: DetailOfficialStorePagingAdapter
+class AllOfficialStoreActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityAllOfficialStoreBinding
+    private lateinit var adapter: AllOfficialStorePagingAdapter
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -28,7 +28,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.detailOfficialStoreActivityInject(this)
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailOfficialStoreBinding.inflate(layoutInflater)
+        binding = ActivityAllOfficialStoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setHideToolbar()
         setDetailToolbar()
@@ -45,7 +45,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        adapter = DetailOfficialStorePagingAdapter()
+        adapter = AllOfficialStorePagingAdapter()
         binding.rvDetailOfficialStore.layoutManager = GridLayoutManager(this, 3)
         binding.rvDetailOfficialStore.adapter = adapter
     }

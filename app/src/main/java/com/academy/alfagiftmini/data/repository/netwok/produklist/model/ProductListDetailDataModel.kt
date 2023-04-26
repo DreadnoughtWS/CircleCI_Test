@@ -16,8 +16,11 @@ data class ProductListDetailDataModel(
     @SerializedName("product_category") val productCategory: String?,
     @SerializedName("id") val id: Int?,
     @SerializedName("kodeStore") val kodeStore: String?,
-    @SerializedName("kodePromo") val kodePromo: List<Int>?
-) {
+    @SerializedName("kodePromo") val kodePromo: List<Int>?,
+    @SerializedName("sales_quantity") val salesQuantity: Int?,
+    @SerializedName("official_store_id") val officialStoreId: Int?,
+    @SerializedName("img_preview_103") val imgPreview103: String?,
+    ) {
     companion object {
         fun transforms(
             products: List<ProductListDetailDataModel>,
@@ -48,10 +51,13 @@ data class ProductListDetailDataModel(
                 productCategory = product.productCategory ?: "",
                 kodeStore = product.kodeStore ?: "",
                 kodePromo = product.kodePromo ?: listOf(),
-                stock = stock.stock ?: 0)
+                stock = stock.stock ?: 0,
+                salesQuantity = product.salesQuantity ?: 0,
+                officialStoreId = product.officialStoreId ?: 0,
+                imgPreview103 = product.imgPreview103 ?: "")
         }
 
-        private fun transformImages(image: ProductListImagesDataModel): ProductListImagesDomainModel {
+        fun transformImages(image: ProductListImagesDataModel): ProductListImagesDomainModel {
             return ProductListImagesDomainModel(
                 type = image.type ?: "", url = image.url ?: listOf()
             )

@@ -20,13 +20,16 @@
             android:name=".presentation.homepage.activity.productlist.ProductListHargaSpesialActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.activity.officialstore.DetailOfficialStoreActivity"
+            android:name=".presentation.homepage.activity.officialstore.OfficialStoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.homepage.activity.officialstore.AllOfficialStoreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.homepage.activity.productlist.ProductListGratisProductActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.homepage.activity.officialstore.OfficialStoreActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

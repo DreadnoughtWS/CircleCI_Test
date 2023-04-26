@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.academy.alfagiftmini.databinding.FragmentProductListPromosiBinding
+import com.academy.alfagiftmini.databinding.FragmentProductListPromosiHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListHargaSpesialActivity
 import com.academy.alfagiftmini.presentation.homepage.adapter.ProductListPagingAdapter
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class FragmentProductListHargaSpesialPromosi : Fragment() {
-    private lateinit var binding: FragmentProductListPromosiBinding
+    private lateinit var binding: FragmentProductListPromosiHargaSpesialBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListPagingAdapter
 
@@ -26,7 +26,7 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentProductListPromosiBinding.inflate(inflater, container, false)
+        binding = FragmentProductListPromosiHargaSpesialBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -15,6 +15,9 @@ object PresentationUtils {
     const val DATA_OFFICIAL_STORE_LEBIH_DARI_14 = true
     const val DATA_OFFICIAL_STORE_KURANG_DARI_14 = false
 
+    const val ORDER_BY_ASCENDING = "asc"
+    const val ORDER_BY_DESCENDING = "desc"
+
     const val TYPE_HARGA_SPESIAL = 203
     const val TYPE_GRATIS_PRODUK = 103
     const val TYPE_PAKET = 901
