@@ -38,7 +38,7 @@
             android:layout_margin="20dp"
             android:cursorVisible="true"
             android:inputType="number"
-            android:itemBackground="@color/white"
+            android:itemBackground="@color/light_white"
             app:cursorColor="@color/black"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
