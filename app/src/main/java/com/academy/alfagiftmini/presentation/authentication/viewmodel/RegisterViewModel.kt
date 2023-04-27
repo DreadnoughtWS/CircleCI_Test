@@ -10,7 +10,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
     private var _otp: String = "999999"
     var otp = _otp
     fun generateOTP() {
-        val otp = Random.nextInt(0,999999).toString()
-        _otp = String().format("%06d", otp)
+        val generatedOTP = Random.nextInt(0,999999).toString()
+        _otp = String().format("%06d", generatedOTP)
     }
 }
