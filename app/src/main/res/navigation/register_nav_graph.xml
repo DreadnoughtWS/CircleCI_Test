@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_nav_graph"
+    app:startDestination="@id/inputUserDataFragment">
+
+    <fragment
+        android:id="@+id/inputPhoneNumberFragment"
+        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.InputPhoneNumberFragment"
+        android:label="fragment_input_phone_number"
+        tools:layout="@layout/fragment_input_phone_number" >
+        <action
+            android:id="@+id/action_inputPhoneNumberFragment_to_inputUserDataFragment"
+            app:destination="@id/inputUserDataFragment" />
+        <action
+            android:id="@+id/action_inputPhoneNumberFragment_to_otpVerificationFragment2"
+            app:destination="@id/otpVerificationFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/inputUserDataFragment"
+        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.InputUserDataFragment"
+        android:label="fragment_input_user_data"
+        tools:layout="@layout/fragment_input_user_data" >
+        <action
+            android:id="@+id/action_inputUserDataFragment_to_inputPhoneNumberFragment"
+            app:destination="@id/inputPhoneNumberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpVerificationFragment2"
+        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.OtpVerificationFragment"
+        android:label="fragment_otp_verification"
+        tools:layout="@layout/fragment_otp_verification" >
+        <action
+            android:id="@+id/action_otpVerificationFragment2_to_inputPhoneNumberFragment"
+            app:destination="@id/inputPhoneNumberFragment" />
+    </fragment>
+</navigation>
