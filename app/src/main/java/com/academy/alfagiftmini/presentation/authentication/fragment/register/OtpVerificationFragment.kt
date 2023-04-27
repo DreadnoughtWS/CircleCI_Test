@@ -28,7 +28,7 @@ class OtpVerificationFragment : Fragment() {
             (requireActivity() as RegisterActivity).getModel().generateOTP()
             val generatedOTP = (requireActivity() as RegisterActivity).getModel().otp
             //create and send code via sms and broadcast receiver
-
+            //set countdown timer in viewmodel
         }
     }
 }
