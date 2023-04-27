@@ -42,4 +42,18 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
         return useCase.getProductGratisProductOrder(viewModelScope,type,order,sort)
     }
 
+    suspend fun getDetailOfficialStorePromosiProduct(
+        officialStoreId:Int
+    ):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getDetailOfficialStoreProductPromosi(viewModelScope,officialStoreId)
+    }
+
+    suspend fun getDetailOffiialStoreOrder(
+        order:String,
+        sort:String,
+        officialStoreId: Int
+    ):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getDetailOfficialStoreOrder(viewModelScope,order,sort,officialStoreId)
+    }
+
 }

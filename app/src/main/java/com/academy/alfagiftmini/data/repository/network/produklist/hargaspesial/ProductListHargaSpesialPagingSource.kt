@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.network.produklist
+package com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
@@ -6,6 +6,7 @@ import com.academy.alfagiftmini.data.DataUtils.TYPE_GRATIS_PRODUK
 import com.academy.alfagiftmini.data.DataUtils.TYPE_HARGA_SPESIAL
 import com.academy.alfagiftmini.data.DataUtils.TYPE_PAKET
 import com.academy.alfagiftmini.data.DataUtils.TYPE_TEBUS_MURAH
+import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 

@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.adapter
+package com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -14,7 +14,13 @@ class OfficialStore14Adapter :
     private val listData = arrayListOf<OfficialStoreDomainItemModel>()
     private lateinit var context: Context
 
-    class OfficialStoreViewHolder(private val binding: ItemOfficialStoreBinding) :
+
+    private var onItemClick: ((position: Int, data: OfficialStoreDomainItemModel) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (position: Int, data: OfficialStoreDomainItemModel) -> Unit) {
+        onItemClick = listener
+    }
+    class OfficialStoreViewHolder(val binding: ItemOfficialStoreBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: OfficialStoreDomainItemModel) {
             with(binding) {
@@ -41,6 +47,9 @@ class OfficialStore14Adapter :
 
     override fun onBindViewHolder(holder: OfficialStoreViewHolder, position: Int) {
         holder.bindData(listData[position])
+        holder.binding.root.setOnClickListener {
+            onItemClick?.invoke(position, listData[position])
+        }
     }
 
     fun updateData(data: List<OfficialStoreDomainItemModel>) {

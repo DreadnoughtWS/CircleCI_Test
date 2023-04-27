@@ -32,4 +32,23 @@ interface ProductListApiService {
     ): List<ProductListPromotionProductDataModel>
 
 
+    //    detail official store
+    @GET("products")
+    suspend fun getDetailOfficialStoreProduct(
+        @Query("status") status: Int = 1,
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int,
+        @Query("official_store_id") officialStoreIdL:Int
+    ): List<ProductListDetailDataModel>
+
+    @GET("products")
+    suspend fun getDetailOfficialStoreOrder(
+        @Query("status") status: Int = 1,
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int,
+        @Query("_sort") sort: String,
+        @Query("_order") order: String,
+        @Query("official_store_id") officialStoreIdL:Int
+    ): List<ProductListDetailDataModel>
+
 }

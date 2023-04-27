@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.adapter
+package com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -9,29 +9,27 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ItemProductGratisProductBinding
-import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.databinding.ItemProductBinding
+import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.presentation.PresentationUtils.hargaFormatter
 import com.bumptech.glide.Glide
 
-class ProductListGratisProductPagingAdapter :
-    PagingDataAdapter<ProductListPromotionProductDomainModel, ProductListGratisProductPagingAdapter.ProductListViewHolder>(
+class ProductListPagingAdapter :
+    PagingDataAdapter<ProductListDomainItemModel, ProductListPagingAdapter.ProductListViewHolder>(
         DiffCallback
     ) {
 
 
     companion object {
-        object DiffCallback : DiffUtil.ItemCallback<ProductListPromotionProductDomainModel>() {
+        object DiffCallback : DiffUtil.ItemCallback<ProductListDomainItemModel>() {
             override fun areItemsTheSame(
-                oldItem: ProductListPromotionProductDomainModel,
-                newItem: ProductListPromotionProductDomainModel
+                oldItem: ProductListDomainItemModel, newItem: ProductListDomainItemModel
             ): Boolean {
                 return (oldItem.id == newItem.id)
             }
 
             override fun areContentsTheSame(
-                oldItem: ProductListPromotionProductDomainModel,
-                newItem: ProductListPromotionProductDomainModel
+                oldItem: ProductListDomainItemModel, newItem: ProductListDomainItemModel
             ): Boolean {
                 return (oldItem == newItem)
             }
@@ -40,10 +38,10 @@ class ProductListGratisProductPagingAdapter :
     }
 
 
-    class ProductListViewHolder(private val binding: ItemProductGratisProductBinding) :
+    class ProductListViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ProductListPromotionProductDomainModel) {
+        fun bindData(data: ProductListDomainItemModel) {
             println(
                 """
                 name : ${data.productName}
@@ -97,25 +95,18 @@ class ProductListGratisProductPagingAdapter :
 
         }
 
-        private fun hitungDiskon(data: ProductListPromotionProductDomainModel): Int {
+        private fun hitungDiskon(data: ProductListDomainItemModel): Int {
             val hargaAsli = data.price
             val hargaDiskon = data.productSpecialPrice ?: 0
             return ((hargaAsli - hargaDiskon) / hargaAsli.toDouble() * 100).toInt()
         }
 
-        private fun showImageProduct(data: ProductListPromotionProductDomainModel) {
+        private fun showImageProduct(data: ProductListDomainItemModel) {
             Glide.with(itemView.context).load(data.productImages[0].url[0])
                 .placeholder(R.drawable.uniliver_logo).into(binding.ivImage)
-            Glide.with(itemView.context).load(data.imgPreview103)
-                .placeholder(R.drawable.uniliver_logo).into(binding.civProdukGratis)
-            if (data.productGratis.size > 1) {
-                binding.civProdukGratisLebih.visibility = View.VISIBLE
-            } else {
-                binding.civProdukGratisLebih.visibility = View.GONE
-            }
         }
 
-        private fun showSpecialPriceNull(data: ProductListPromotionProductDomainModel) {
+        private fun showSpecialPriceNull(data: ProductListDomainItemModel) {
             with(binding) {
                 tvHargaDiskonProduct.visibility = View.GONE
                 tvJumlahDiskon.visibility = View.GONE
@@ -123,7 +114,7 @@ class ProductListGratisProductPagingAdapter :
             }
         }
 
-        private fun showStockKosong(data: ProductListPromotionProductDomainModel) {
+        private fun showStockKosong(data: ProductListDomainItemModel) {
             with(binding) {
                 btnKeranjang.text = itemView.context.getString(R.string.stok_habis)
                 btnKeranjang.isClickable = false
@@ -143,7 +134,7 @@ class ProductListGratisProductPagingAdapter :
             }
         }
 
-        private fun showTvStockFrom(data: ProductListPromotionProductDomainModel) {
+        private fun showTvStockFrom(data: ProductListDomainItemModel) {
             with(binding) {
                 if (data.productPickupAvailability == 1) {
                     tvStockFrom.text = itemView.context.getString(R.string.stock_dari_toko)
@@ -163,12 +154,11 @@ class ProductListGratisProductPagingAdapter :
     }
 
     override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
-        println("MASUK4")
         holder.bindData(getItem(position) ?: return)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
-        val binding = ItemProductGratisProductBinding.inflate(
+        val binding = ItemProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ProductListViewHolder(binding)

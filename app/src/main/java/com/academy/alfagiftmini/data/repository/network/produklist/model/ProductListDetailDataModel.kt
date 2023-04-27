@@ -9,7 +9,7 @@ data class ProductListDetailDataModel(
     @SerializedName("product_sku") val productSku: String?,
     @SerializedName("product_name") val productName: String?,
     @SerializedName("product_desc") val productDesc: String?,
-    @SerializedName("price") val price: Int?,
+    @SerializedName("price") val price: Int,
     @SerializedName("product_special_price") val productSpecialPrice: Int?,
     @SerializedName("product_images") val productImages: List<ProductListImagesDataModel>?,
     @SerializedName("product_pickup_availability") val productPickupAvailability: Int?, // 1=toko, 0=gudang

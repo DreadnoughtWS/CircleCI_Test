@@ -1,32 +1,32 @@
-package com.academy.alfagiftmini.data.repository.network.produklist
+package com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.gratisproduct
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.academy.alfagiftmini.data.DataUtils
+import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 
-class ProductListHargaSpesialNamaProdukPagingSource(
-    private val apiService: ProductListApiService,
-    private val type: Int,
-    private val orderBy: String,
-    private val sort: String
-) : PagingSource<Int, ProductListDomainItemModel>() {
-    override fun getRefreshKey(state: PagingState<Int, ProductListDomainItemModel>): Int? {
+class ProductListGratisProductPagingSource(
+    private val apiService: ProductListApiService, private val type: Int
+) : PagingSource<Int, ProductListPromotionProductDomainModel>() {
+    override fun getRefreshKey(state: PagingState<Int, ProductListPromotionProductDomainModel>): Int? {
         return null
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListDomainItemModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListPromotionProductDomainModel> {
         val position = params.key ?: 1
         return try {
+            println("MASUK 5")
+            val responseProduct = apiService.getAllProduct(page = position, limit = 5)
+            println("MASUK 6")
+            val responseSale = apiService.getPromotionProduct()
+            println("MASUK 7")
             val responseStock = apiService.getProductStock()
-
-            val responseProduct = apiService.getProductsOrder(
-                page = position, limit = 10, order = orderBy, sort = sort
-            )
+            println("MASUK 8")
 
             val dataKodePromo: ArrayList<ProductListDetailDataModel> = arrayListOf()
-
 
             when (type) {
                 DataUtils.TYPE_HARGA_SPESIAL -> {
@@ -67,30 +67,31 @@ class ProductListHargaSpesialNamaProdukPagingSource(
                 }
             }
 
-            println(dataKodePromo)
 
-            val dataSudahDiTransform = ProductListDetailDataModel.transforms(
-                dataKodePromo, responseStock[0].productDetails ?: arrayListOf()
+            val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
+                dataKodePromo, responseSale, responseStock[0].productDetails ?: arrayListOf()
             )
+            println(dataKodePromo.size)
 
             toLoadResult(
                 dataSudahDiTransform,
                 nextKey = if (responseProduct.isEmpty()) null else position + 1
             )
-
-        } catch (e: Exception) {
-            println(e)
+        } catch (e: java.lang.Exception) {
+            println(e.message)
             LoadResult.Error(e)
         }
-
     }
 
     private fun toLoadResult(
-        data: List<ProductListDomainItemModel>, prevKey: Int? = null, nextKey: Int? = null
-    ): LoadResult<Int, ProductListDomainItemModel> {
+        data: List<ProductListPromotionProductDomainModel>,
+        prevKey: Int? = null,
+        nextKey: Int? = null
+    ): LoadResult<Int, ProductListPromotionProductDomainModel> {
         return LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )
     }
+
 
 }

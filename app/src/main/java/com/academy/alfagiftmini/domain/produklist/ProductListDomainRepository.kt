@@ -15,4 +15,8 @@ interface ProductListDomainRepository {
     suspend fun getProductGratisProduct(scope:CoroutineScope, type:Int):Flow<PagingData<ProductListPromotionProductDomainModel>>
     suspend fun getProductGratisProductOrder(scope: CoroutineScope,type:Int,order:String,sort:String): Flow<PagingData<ProductListPromotionProductDomainModel>>
 
+    suspend fun getDetailOfficialStoreProductPromosi(scope: CoroutineScope,officialStoreId:Int): Flow<PagingData<ProductListPromotionProductDomainModel>>
+
+    suspend fun getDetailOfficialStoreOrder(scope: CoroutineScope,order:String,sort:String,officialStoreId: Int): Flow<PagingData<ProductListPromotionProductDomainModel>>
+
 }

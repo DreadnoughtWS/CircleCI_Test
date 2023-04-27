@@ -13,7 +13,7 @@
         app:elevation="0dp">
 
         <include
-            android:id="@+id/detail_official_store_toolbar"
+            android:id="@+id/all_official_store_toolbar"
             layout="@layout/detail_official_store_toolbar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

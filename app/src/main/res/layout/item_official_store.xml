@@ -10,42 +10,6 @@
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:gravity="center"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/iv_store_logo"-->
-    <!--            android:layout_width="60dp"-->
-    <!--            android:layout_height="60dp"-->
-    <!--            android:layout_marginTop="10dp"-->
-    <!--            android:contentDescription="@string/logo_official_store"-->
-    <!--            android:src="@drawable/uniliver_logo" />-->
-
-    <!--        <View-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="1dp"-->
-    <!--            android:layout_marginVertical="10dp"-->
-    <!--            android:background="@color/very_light_gray" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tv_nama_store"-->
-    <!--            android:layout_width="wrap_content"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_marginHorizontal="15dp"-->
-    <!--            android:layout_marginBottom="10dp"-->
-    <!--            android:ellipsize="end"-->
-    <!--            android:maxLines="2"-->
-    <!--            android:textAlignment="center"-->
-    <!--            android:textColor="@color/teal"-->
-    <!--            android:textSize="12sp"-->
-    <!--            android:textStyle="bold"-->
-    <!--            tools:text="Uniliver" />-->
-
-    <!--    </LinearLayout>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="120dp"
         android:layout_height="180dp">

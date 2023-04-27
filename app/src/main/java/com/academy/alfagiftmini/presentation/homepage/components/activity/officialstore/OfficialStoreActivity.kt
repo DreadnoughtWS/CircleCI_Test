@@ -16,7 +16,7 @@ import com.academy.alfagiftmini.presentation.PresentationUtils.isNetworkAvailabl
 import com.academy.alfagiftmini.presentation.PresentationUtils.loadingAlertDialog
 import com.academy.alfagiftmini.presentation.PresentationUtils.setLoading
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.OfficialStore14Adapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.OfficialStore14Adapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import javax.inject.Inject
 
@@ -61,7 +61,13 @@ class OfficialStoreActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        adapter = OfficialStore14Adapter()
+        adapter = OfficialStore14Adapter().apply {
+            setOnItemClickListener { position, data ->
+                val intent = Intent(this@OfficialStoreActivity, DetailOfficialStoreActivity::class.java)
+                intent.putExtra("data", data)
+                startActivity(intent)
+            }
+        }
 
         binding.apply {
             rvOfficalStore.setHasFixedSize(true)

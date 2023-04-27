@@ -10,7 +10,7 @@ data class ProductListPromotionProductDataModel(
 ) {
     companion object {
         fun transforms(
-            products: List<ProductListDetailDataModel>,
+            products: ArrayList<ProductListDetailDataModel>,
             sales: List<ProductListPromotionProductDataModel>,
             stocks: List<ProductListStockDetailDataModel>
         ): List<ProductListPromotionProductDomainModel> {
@@ -18,16 +18,14 @@ data class ProductListPromotionProductDataModel(
             products.forEach { product ->
                 val sale = sales.find { it.productId == product.productId }
                 val stock = stocks.find { it.productId == product.productId }
-                if (sale != null) {
                     result.add(transform(product, sale, stock))
-                }
             }
             return result
         }
 
         private fun transform(
             product: ProductListDetailDataModel,
-            sale: ProductListPromotionProductDataModel,
+            sale: ProductListPromotionProductDataModel?,
             stock: ProductListStockDetailDataModel?
         ): ProductListPromotionProductDomainModel {
             return ProductListPromotionProductDomainModel(id = product.id ?: 0,
@@ -49,7 +47,7 @@ data class ProductListPromotionProductDataModel(
                 productCategory = product.productCategory ?: "",
                 kodeStore = product.kodeStore ?: "",
                 kodePromo = product.kodePromo ?: listOf(),
-                productGratis = sale.promoProductId,
+                productGratis = sale?.promoProductId ?: listOf(),
                 imgPreview103 = product.imgPreview103 ?: "")
         }
     }

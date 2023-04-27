@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.adapter
+package com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -15,6 +15,11 @@ class AllOfficialStorePagingAdapter :
         DiffCallback
     ) {
 
+    private var onItemClick: ((position: Int, data: OfficialStoreDomainItemModel) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (position: Int, data: OfficialStoreDomainItemModel) -> Unit) {
+        onItemClick = listener
+    }
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<OfficialStoreDomainItemModel>() {
             override fun areItemsTheSame(
@@ -32,7 +37,7 @@ class AllOfficialStorePagingAdapter :
         }
     }
 
-    class DetailOfficialStoreViewHolder(private val binding: ItemOfficialStoreBinding) :
+    class DetailOfficialStoreViewHolder(val binding: ItemOfficialStoreBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: OfficialStoreDomainItemModel) {
@@ -50,6 +55,9 @@ class AllOfficialStorePagingAdapter :
 
     override fun onBindViewHolder(holder: DetailOfficialStoreViewHolder, position: Int) {
         holder.bindData(getItem(position) ?: return)
+        holder.binding.root.setOnClickListener {
+            onItemClick?.invoke(position, getItem(position) ?: return@setOnClickListener)
+        }
     }
 
     override fun onCreateViewHolder(

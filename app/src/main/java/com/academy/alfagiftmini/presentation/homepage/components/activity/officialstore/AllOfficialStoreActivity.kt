@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -9,7 +10,7 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityAllOfficialStoreBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.AllOfficialStorePagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.AllOfficialStorePagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class AllOfficialStoreActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.detailOfficialStoreActivityInject(this)
+        (application as MyApplication).appComponent.allOfficialStoreActivityInject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityAllOfficialStoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -45,14 +46,20 @@ class AllOfficialStoreActivity : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        adapter = AllOfficialStorePagingAdapter()
+        adapter = AllOfficialStorePagingAdapter().apply {
+            setOnItemClickListener { position, data ->
+                val intent = Intent(this@AllOfficialStoreActivity, DetailOfficialStoreActivity::class.java)
+                intent.putExtra("data", data)
+                startActivity(intent)
+            }
+        }
         binding.rvDetailOfficialStore.layoutManager = GridLayoutManager(this, 3)
         binding.rvDetailOfficialStore.adapter = adapter
     }
 
     private fun setDetailToolbar() {
-        binding.detailOfficialStoreToolbar.tvToolbar.text = getString(R.string.official_store)
-        binding.detailOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
+        binding.allOfficialStoreToolbar.tvToolbar.text = getString(R.string.official_store)
+        binding.allOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
             finish()
         }
     }

@@ -1,8 +1,9 @@
-package com.academy.alfagiftmini.data.repository.network.produklist
+package com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.academy.alfagiftmini.data.DataUtils
+import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
