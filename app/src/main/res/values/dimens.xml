@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mrgn_0">5dp</dimen>
+    <dimen name="mrgn_1">10dp</dimen>
+    <dimen name="mrgn_1.5">15dp</dimen>
+    <dimen name="mrgn_2">20dp</dimen>
+    <dimen name="mrgn_3">30dp</dimen>
+    <dimen name="mrgn_4">10dp</dimen>
+    <dimen name="mrgn_5">10dp</dimen>
+    <dimen name="sv_height1">180dp</dimen>
+    <dimen name="svbtmrgin1">1.5dp</dimen>
+</resources>
