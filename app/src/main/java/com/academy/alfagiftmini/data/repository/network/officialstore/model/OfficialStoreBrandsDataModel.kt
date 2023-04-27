@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.officialstore.model
+package com.academy.alfagiftmini.data.repository.network.officialstore.model
 
 data class OfficialStoreBrandsDataModel(
     val brandId:Int?,

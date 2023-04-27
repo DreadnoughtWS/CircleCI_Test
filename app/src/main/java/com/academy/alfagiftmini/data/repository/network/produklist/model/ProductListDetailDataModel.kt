@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist.model
+package com.academy.alfagiftmini.data.repository.network.produklist.model
 
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListImagesDomainModel

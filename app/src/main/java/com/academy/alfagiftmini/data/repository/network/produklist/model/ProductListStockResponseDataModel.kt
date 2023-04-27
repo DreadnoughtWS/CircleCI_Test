@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist.model
+package com.academy.alfagiftmini.data.repository.network.produklist.model
 
 data class ProductListStockResponseDataModel(
     val kodeArea:String?,

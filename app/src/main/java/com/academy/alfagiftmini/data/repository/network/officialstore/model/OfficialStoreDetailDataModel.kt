@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.officialstore.model
+package com.academy.alfagiftmini.data.repository.network.officialstore.model
 
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel

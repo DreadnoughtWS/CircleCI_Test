@@ -1,8 +1,8 @@
-package com.academy.alfagiftmini.data.repository.netwok.officialstore
+package com.academy.alfagiftmini.data.repository.network.officialstore
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.model.OfficialStoreDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreDetailDataModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 
 class OfficialStoreListPagingSource(

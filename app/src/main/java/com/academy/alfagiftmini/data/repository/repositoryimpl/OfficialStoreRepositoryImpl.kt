@@ -4,9 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.OfficialStoreApiService
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.OfficialStoreListPagingSource
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.model.OfficialStoreDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
+import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreListPagingSource
+import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreDetailDataModel
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import kotlinx.coroutines.CoroutineScope

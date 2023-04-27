@@ -4,6 +4,7 @@ import android.content.Context
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
+import com.academy.alfagiftmini.domain.register.RegisterDomainRepository
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -21,4 +22,5 @@ interface CoreComponent {
     fun provideLoginRepository(): LoginDomainRepository
     fun provideOfficialStoreRepository(): OfficialStoreDomainRepository
     fun provideProductListRepository(): ProductListDomainRepository
+    fun provideRegisterRepository(): RegisterDomainRepository
 }

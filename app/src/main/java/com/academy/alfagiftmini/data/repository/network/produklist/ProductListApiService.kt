@@ -1,8 +1,8 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist
+package com.academy.alfagiftmini.data.repository.network.produklist
 
-import com.academy.alfagiftmini.data.repository.netwok.produklist.model.ProductListDetailDataModel
-import com.academy.alfagiftmini.data.repository.netwok.produklist.model.ProductListPromotionProductDataModel
-import com.academy.alfagiftmini.data.repository.netwok.produklist.model.ProductListStockResponseDataModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListStockResponseDataModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

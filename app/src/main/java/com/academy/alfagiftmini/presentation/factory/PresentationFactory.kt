@@ -5,13 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
+import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
+import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import javax.inject.Inject
 
 class PresentationFactory @Inject constructor(
     private var loginUseCase: LoginDomainUseCase,
+    private var registerUseCase: RegisterDomainUseCase,
     private var officialStoreUseCase: OfficialStoreDomainUseCase,
     private var productListDomainUseCase: ProductListDomainUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
@@ -21,6 +24,9 @@ class PresentationFactory @Inject constructor(
         return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> LoginViewModel(
                 loginUseCase
+            ) as T
+            modelClass.isAssignableFrom(RegisterViewModel::class.java) -> RegisterViewModel(
+                registerUseCase
             ) as T
             modelClass.isAssignableFrom(OfficialStoreViewModel::class.java) -> OfficialStoreViewModel(
                 officialStoreUseCase

@@ -1,6 +1,6 @@
-package com.academy.alfagiftmini.data.repository.netwok.officialstore
+package com.academy.alfagiftmini.data.repository.network.officialstore
 
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.model.OfficialStoreDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreDetailDataModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -4,13 +4,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.academy.alfagiftmini.data.repository.netwok.produklist.*
+import com.academy.alfagiftmini.data.repository.network.produklist.*
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.cache
 import javax.inject.Inject
 
 class ProductListRepositoryImpl @Inject constructor(

@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist.model
+package com.academy.alfagiftmini.data.repository.network.produklist.model
 
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.google.gson.annotations.SerializedName

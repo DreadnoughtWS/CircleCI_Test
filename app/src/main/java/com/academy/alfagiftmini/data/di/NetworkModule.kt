@@ -1,15 +1,17 @@
 package com.academy.alfagiftmini.data.di
 
 import com.academy.alfagiftmini.data.DataUtils.BASE_URL
-import com.academy.alfagiftmini.data.repository.netwok.loginlogout.LoginApiService
-import com.academy.alfagiftmini.data.repository.netwok.officialstore.OfficialStoreApiService
-import com.academy.alfagiftmini.data.repository.netwok.produklist.ProductListApiService
+import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
+import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
+import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
+import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 @Module
 class NetworkModule {
@@ -26,6 +28,11 @@ class NetworkModule {
     @Provides
     fun loginApiService(): LoginApiService {
         return retrofitClient().create(LoginApiService::class.java)
+    }
+
+    @Provides
+    fun registerApiService(): RegisterApiService {
+        return retrofitClient().create(RegisterApiService::class.java)
     }
 
     @Provides
