@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inputPhoneNumberFragment"
-        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.InputPhoneNumberFragment"
+        android:name="com.academy.alfagiftmini.presentation.authentication.fragment.register.InputPhoneNumberFragment"
         android:label="fragment_input_phone_number"
         tools:layout="@layout/fragment_input_phone_number" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/inputUserDataFragment"
-        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.InputUserDataFragment"
+        android:name="com.academy.alfagiftmini.presentation.authentication.fragment.register.InputUserDataFragment"
         android:label="fragment_input_user_data"
         tools:layout="@layout/fragment_input_user_data" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/otpVerificationFragment2"
-        android:name="com.academy.alfagiftmini.presentation.authentication.activity.register.fragment.OtpVerificationFragment"
+        android:name="com.academy.alfagiftmini.presentation.authentication.fragment.register.OtpVerificationFragment"
         android:label="fragment_otp_verification"
         tools:layout="@layout/fragment_otp_verification" >
         <action

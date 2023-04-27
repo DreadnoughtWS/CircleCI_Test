@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.authentication.activity.register.RegisterActivity"
+            android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"

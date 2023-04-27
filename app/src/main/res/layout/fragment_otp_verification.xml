@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.authentication.activity.register.fragment.OtpVerificationFragment">
+    tools:context=".presentation.authentication.fragment.register.OtpVerificationFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

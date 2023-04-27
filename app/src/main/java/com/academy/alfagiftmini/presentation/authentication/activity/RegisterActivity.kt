@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.authentication.activity.register
+package com.academy.alfagiftmini.presentation.authentication.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

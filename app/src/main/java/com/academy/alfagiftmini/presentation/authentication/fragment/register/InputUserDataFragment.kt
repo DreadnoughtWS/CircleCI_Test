@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.authentication.activity.register.fragment
+package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.R
 
-class OtpVerificationFragment : Fragment() {
-override fun onCreateView(
+class InputUserDataFragment : Fragment() {
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_otp_verification, container, false)
+        return inflater.inflate(R.layout.fragment_input_user_data, container, false)
     }
 }
