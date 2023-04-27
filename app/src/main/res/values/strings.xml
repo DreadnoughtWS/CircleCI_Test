@@ -13,4 +13,10 @@
     <string name="stock_dari_gudang">Stock dari Gudang</string>
     <string name="stock_dari_toko">Stock dari Toko</string>
     <string name="stok_habis">Stok Habis</string>
+
+    <string name="beranda">Beranda</string>
+    <string name="belanja">Belanja</string>
+    <string name="promo">Promo</string>
+    <string name="pesanan">Pesanan</string>
+    <string name="akun">Akun</string>
 </resources>

@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:background="@color/very_light_gray"
             android:padding="15dp"
-            tools:context=".presentation.homepage.activity.officialstore.AllOfficialStoreActivity">
+            tools:context=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity">
 
             <TextView
                 android:id="@+id/tv_official_store_popular"

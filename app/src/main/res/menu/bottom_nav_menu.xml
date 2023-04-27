@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bnv_item_beranda"
+        android:title="@string/beranda"
+        android:icon="@drawable/bnv_beranda"/>
+    <item
+        android:id="@+id/bnv_item_belanja"
+        android:title="@string/belanja"
+        android:icon="@drawable/bnv_belanja"/>
+    <item
+        android:id="@+id/bnv_item_promo"
+        android:title="@string/promo"
+        android:icon="@drawable/bnv_promo"/>
+    <item
+        android:id="@+id/bnv_item_pesanan"
+        android:title="@string/pesanan"
+        android:icon="@drawable/bnv_pesanan"/>
+    <item
+        android:id="@+id/bnv_item_akun"
+        android:title="@string/akun"
+        android:icon="@drawable/bnv_akun"/>
+</menu>

@@ -2,10 +2,10 @@ package com.academy.alfagiftmini.presentation.di
 
 import com.academy.alfagiftmini.data.di.CoreComponent
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.officialstore.AllOfficialStoreActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.officialstore.OfficialStoreActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListGratisProductActivity
-import com.academy.alfagiftmini.presentation.homepage.activity.productlist.ProductListHargaSpesialActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
 import dagger.Component
 
 @AppScope

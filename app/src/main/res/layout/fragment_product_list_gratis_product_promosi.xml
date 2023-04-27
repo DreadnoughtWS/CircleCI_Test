@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.homepage.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi">
+    tools:context=".presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi">
 
     <androidx.recyclerview.widget.RecyclerView
         tools:listitem="@layout/item_product_gratis_product"
