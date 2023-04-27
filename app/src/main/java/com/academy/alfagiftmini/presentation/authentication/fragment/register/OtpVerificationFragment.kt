@@ -26,7 +26,8 @@ class OtpVerificationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //belum di tes
         (requireActivity() as RegisterActivity).getModel().timer.observe(viewLifecycleOwner, Observer {
-            binding.btnGetOTPCode.text = it.toString()
+            if (it != 0 ) binding.btnGetOTPCode.text = it.toString()
+            else binding.btnGetOTPCode.text = R.string.send_otp_code.toString()
         })
         (requireActivity() as RegisterActivity).getModel().finished.observe(viewLifecycleOwner, Observer {
             if (it) {

@@ -34,6 +34,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
             // Callback function, fired
             // when the time is up
             override fun onFinish() {
+                _timer.value = 0
                 _finished.value = true
             }
         }.start()
