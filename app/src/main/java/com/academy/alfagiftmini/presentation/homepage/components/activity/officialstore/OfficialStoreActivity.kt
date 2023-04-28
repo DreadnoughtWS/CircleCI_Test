@@ -10,8 +10,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.ActivityOfficialStoreBinding
-import com.academy.alfagiftmini.presentation.PresentationUtils.DATA_OFFICIAL_STORE_KURANG_DARI_14
-import com.academy.alfagiftmini.presentation.PresentationUtils.DATA_OFFICIAL_STORE_LEBIH_DARI_14
+import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
+import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.isNetworkAvailable
 import com.academy.alfagiftmini.presentation.PresentationUtils.loadingAlertDialog
 import com.academy.alfagiftmini.presentation.PresentationUtils.setLoading
@@ -84,7 +84,7 @@ class OfficialStoreActivity : AppCompatActivity() {
         viewModel.officialStore14.observe(this) {
             if (it.isNullOrEmpty()) {
                 setLoading(false, dialog)
-                setLihatSemua(DATA_OFFICIAL_STORE_KURANG_DARI_14)
+                setLihatSemua(HIDE_LIHAT_SEMUA)
                 if (isNetworkAvailable(this)) {
                     Toast.makeText(this, "Tidak ada internet", Toast.LENGTH_SHORT).show()
                 }
@@ -92,19 +92,19 @@ class OfficialStoreActivity : AppCompatActivity() {
             }
             if (it.size < 14) {
                 setLoading(false, dialog)
-                setLihatSemua(DATA_OFFICIAL_STORE_KURANG_DARI_14)
+                setLihatSemua(HIDE_LIHAT_SEMUA)
                 adapter.updateData(it)
                 return@observe
             }
             setLoading(false, dialog)
-            setLihatSemua(DATA_OFFICIAL_STORE_LEBIH_DARI_14)
+            setLihatSemua(SHOW_LIHAT_SEMUA)
             adapter.updateData(it.dropLast(1))
 
         }
     }
 
     private fun setLihatSemua(banyakDataOfficialStore: Boolean) {
-        if (banyakDataOfficialStore == DATA_OFFICIAL_STORE_KURANG_DARI_14) {
+        if (banyakDataOfficialStore == HIDE_LIHAT_SEMUA) {
             binding.tvLihatSemuaOfficial.visibility = View.INVISIBLE
         } else {
             binding.tvLihatSemuaOfficial.visibility = View.VISIBLE

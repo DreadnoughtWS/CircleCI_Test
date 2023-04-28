@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.domain.officialstore
 
 import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
+import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -15,6 +16,12 @@ class OfficialStoreDomainUseCaseImpl @Inject constructor(private val repository:
 
     override suspend fun getAllOfficialStore(scope: CoroutineScope): Flow<PagingData<OfficialStoreDomainItemModel>> {
         return repository.getAllOfficialStore(scope)
+    }
+
+    override suspend fun getBrands(
+        id: String
+    ): Flow<List<OfficialStorebrandsDomainItemModel>> {
+        return repository.getBrands(id)
     }
 
 

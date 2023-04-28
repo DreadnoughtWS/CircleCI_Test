@@ -18,13 +18,9 @@ class ProductListGratisProductPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListPromotionProductDomainModel> {
         val position = params.key ?: 1
         return try {
-            println("MASUK 5")
             val responseProduct = apiService.getAllProduct(page = position, limit = 5)
-            println("MASUK 6")
             val responseSale = apiService.getPromotionProduct()
-            println("MASUK 7")
             val responseStock = apiService.getProductStock()
-            println("MASUK 8")
 
             val dataKodePromo: ArrayList<ProductListDetailDataModel> = arrayListOf()
 
@@ -71,7 +67,6 @@ class ProductListGratisProductPagingSource(
             val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
                 dataKodePromo, responseSale, responseStock[0].productDetails ?: arrayListOf()
             )
-            println(dataKodePromo.size)
 
             toLoadResult(
                 dataSudahDiTransform,

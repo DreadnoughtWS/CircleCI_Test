@@ -12,8 +12,8 @@ import com.academy.alfagiftmini.R
 import java.text.DecimalFormat
 
 object PresentationUtils {
-    const val DATA_OFFICIAL_STORE_LEBIH_DARI_14 = true
-    const val DATA_OFFICIAL_STORE_KURANG_DARI_14 = false
+    const val SHOW_LIHAT_SEMUA = true
+    const val HIDE_LIHAT_SEMUA = false
 
     const val ORDER_BY_ASCENDING = "asc"
     const val ORDER_BY_DESCENDING = "desc"

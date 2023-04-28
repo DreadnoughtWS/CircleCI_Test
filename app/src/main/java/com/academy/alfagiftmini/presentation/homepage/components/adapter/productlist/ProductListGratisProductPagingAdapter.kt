@@ -74,7 +74,7 @@ class ProductListGratisProductPagingAdapter() :
                 } else {
                     tvHargaDiskonProduct.visibility = View.GONE
                     tvJumlahDiskon.visibility = View.GONE
-                    tvHargaProduct.text = hargaFormatter(data.price)
+                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
                 }
 
 
@@ -160,7 +160,6 @@ class ProductListGratisProductPagingAdapter() :
     }
 
     override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
-        println("MASUK4 ${getItem(position)}")
         holder.bindData(getItem(position) ?: return)
     }
 
