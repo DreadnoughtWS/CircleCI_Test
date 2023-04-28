@@ -1,10 +1,18 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
+import android.Manifest
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.FLAG_MUTABLE
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.academy.alfagiftmini.R
@@ -26,7 +34,14 @@ class OtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //belum di tes
+        checkPermissions()
         setOTPGenerator()
+    }
+
+    private fun checkPermissions() {
+        if (ActivityCompat.checkSelfPermission((requireActivity() as RegisterActivity), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions((requireActivity() as RegisterActivity), arrayOf(Manifest.permission.SEND_SMS), 101)
+        }
     }
 
     private fun setOTPGenerator() {
@@ -36,15 +51,20 @@ class OtpVerificationFragment : Fragment() {
             val generatedOTP = (requireActivity() as RegisterActivity).getModel().otp
             Log.d("OTP", generatedOTP)
 
-            //create and send code via sms and broadcast receiver
-
+            //create and send code via sms and broadcast receiver, still not working
+            sendSMS("+6281249400599", generatedOTP)
             //set countdown timer in viewmodel to observe
             (requireActivity() as RegisterActivity).getModel().otpCountdownTimer()
             observer()
         }
     }
 
-    fun observer(){
+    private fun sendSMS(phoneNumber: String, message: String) {
+        val sentPI: PendingIntent = PendingIntent.getBroadcast(activity, 0, Intent("SMS_SENT"), FLAG_MUTABLE)
+        SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
+    }
+
+    private fun observer(){
         (requireActivity() as RegisterActivity).getModel().timer.observe(viewLifecycleOwner, Observer {
             binding.btnGetOTPCode.text = it.toString()
         })

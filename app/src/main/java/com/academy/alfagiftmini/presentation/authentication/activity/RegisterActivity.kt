@@ -28,7 +28,6 @@ class RegisterActivity : AppCompatActivity() {
     fun getModel(): RegisterViewModel {
         return registerViewModel
     }
-
     fun getApp(): Application {
         return application
     }
