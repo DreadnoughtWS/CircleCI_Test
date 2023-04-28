@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.data.repository.network.officialstore
 
+import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreBrandsDataModel
 import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreDetailDataModel
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,5 +11,11 @@ interface OfficialStoreApiService {
     suspend fun getAllOfficialStore(
         @Query("_page") page: Int, @Query("_limit") limit: Int
     ): List<OfficialStoreDetailDataModel>
+
+//    get brands
+    @GET("brands")
+    suspend fun getBrands(
+        @Query("brandid") id:String,
+    ):List<OfficialStoreBrandsDataModel>
 
 }
