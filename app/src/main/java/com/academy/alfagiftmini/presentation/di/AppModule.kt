@@ -1,5 +1,7 @@
 package com.academy.alfagiftmini.presentation.di
 
+import com.academy.alfagiftmini.domain.banner.BannerDomainUseCase
+import com.academy.alfagiftmini.domain.banner.BannerDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
@@ -21,5 +23,7 @@ abstract class AppModule {
     abstract fun provideOfficialStoreDomainUseCase(useCaseImpl: OfficialStoreDomainUseCaseImpl): OfficialStoreDomainUseCase
     @Binds
     abstract fun provideProductListDomainUseCase(useCaseImpl: ProductListDomainUseCaseImpl): ProductListDomainUseCase
+    @Binds
+    abstract fun provideBannerDomainUseCase(useCaseImpl: BannerDomainUseCaseImpl): BannerDomainUseCase
 
 }

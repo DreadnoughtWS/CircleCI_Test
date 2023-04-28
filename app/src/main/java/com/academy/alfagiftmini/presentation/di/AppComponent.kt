@@ -3,6 +3,7 @@ package com.academy.alfagiftmini.presentation.di
 import com.academy.alfagiftmini.data.di.CoreComponent
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.AllBannerListActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreActivity
@@ -27,4 +28,5 @@ interface AppComponent {
     fun detailOfficialStoreActivityInject(activity: DetailOfficialStoreActivity)
     fun productListHargaSepsialActivityInject(activity: ProductListHargaSpesialActivity)
     fun productListGratisProductActivityInject(activity: ProductListGratisProductActivity)
+    fun bannerListActivityInject(activity: AllBannerListActivity)
 }
