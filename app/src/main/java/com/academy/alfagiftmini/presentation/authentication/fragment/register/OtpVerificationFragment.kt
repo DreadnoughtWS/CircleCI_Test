@@ -12,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -52,16 +53,22 @@ class OtpVerificationFragment : Fragment() {
             Log.d("OTP", generatedOTP)
 
             //create and send code via sms and broadcast receiver, still not working
-            sendSMS("+6281249400599", generatedOTP)
+            sendSMS(generatedOTP)
             //set countdown timer in viewmodel to observe
             (requireActivity() as RegisterActivity).getModel().otpCountdownTimer()
             observer()
         }
     }
 
-    private fun sendSMS(phoneNumber: String, message: String) {
-        val sentPI: PendingIntent = PendingIntent.getBroadcast(activity, 0, Intent("SMS_SENT"), FLAG_MUTABLE)
-        SmsManager.getDefault().sendTextMessage(phoneNumber, null, message, sentPI, null)
+    private fun sendSMS(message: String) {
+        try {
+            val sms: SmsManager = (requireActivity() as RegisterActivity).getSystemService(SmsManager::class.java)
+            val sentPI = PendingIntent.getBroadcast(context, 0, Intent("SMS_SENT"), FLAG_IMMUTABLE)
+            sms.sendTextMessage("+6281249400599", null, message, sentPI, null)
+            Toast.makeText(context, "sent", Toast.LENGTH_SHORT).show()
+        }catch (e: Exception){
+            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun observer(){
