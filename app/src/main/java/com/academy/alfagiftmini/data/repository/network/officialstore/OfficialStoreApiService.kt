@@ -15,7 +15,7 @@ interface OfficialStoreApiService {
 //    get brands
     @GET("brands")
     suspend fun getBrands(
-        @Query("brandid") id:String,
+        @Query(encoded = true, value = "brandid") id: String
     ):List<OfficialStoreBrandsDataModel>
 
 }

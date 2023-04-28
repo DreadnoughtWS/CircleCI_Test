@@ -18,4 +18,5 @@ interface ProductListDomainUseCase {
 
     suspend fun getDetailOfficialStoreOrder(scope: CoroutineScope,order:String,sort:String,officialStoreId: Int): Flow<PagingData<ProductListPromotionProductDomainModel>>
 
+
 }

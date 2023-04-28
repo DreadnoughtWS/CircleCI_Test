@@ -68,7 +68,7 @@ class ProductListHargaSpesialNamaProdukPagingSource(
                 }
             }
 
-            println(dataKodePromo)
+
 
             val dataSudahDiTransform = ProductListDetailDataModel.transforms(
                 dataKodePromo, responseStock[0].productDetails ?: arrayListOf()
@@ -80,7 +80,6 @@ class ProductListHargaSpesialNamaProdukPagingSource(
             )
 
         } catch (e: Exception) {
-            println(e)
             LoadResult.Error(e)
         }
 

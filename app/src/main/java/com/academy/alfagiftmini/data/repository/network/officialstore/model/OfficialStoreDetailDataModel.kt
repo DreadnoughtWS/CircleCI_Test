@@ -8,7 +8,7 @@ data class OfficialStoreDetailDataModel(
     val id: Int?,
     val name: String?,
     val image: String?,
-    @SerializedName("product_images") val productImage:String?,
+    @SerializedName("product_images") val productImage: String?,
     val brands: List<OfficialStoreBrandsDataModel>?,
     val totalFollowers: Int?
 ) {
@@ -33,19 +33,16 @@ data class OfficialStoreDetailDataModel(
         }
 
         private fun transform(model: OfficialStoreDetailDataModel): OfficialStoreDomainItemModel {
-            return OfficialStoreDomainItemModel(
-                id = model.id ?: 0,
+            return OfficialStoreDomainItemModel(id = model.id ?: 0,
                 name = model.name ?: "",
                 image = model.image ?: "",
                 brands = model.brands?.map {
                     OfficialStorebrandsDomainItemModel(
-                        brandId = it.brandId,
-                        brandName = it.brandName
+                        brandId = it.brandId, brandName = it.brandName, brandImage = it.brandImage
                     )
                 } ?: listOf(),
                 totalFollowers = model.totalFollowers ?: 0,
-                productImage = model.productImage ?: ""
-            )
+                productImage = model.productImage ?: "")
         }
     }
 }

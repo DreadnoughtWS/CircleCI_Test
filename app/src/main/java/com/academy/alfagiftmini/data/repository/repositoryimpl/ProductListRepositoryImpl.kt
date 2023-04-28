@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStoreNamaDanTerlarisPagingSource
-import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.detailofficialstore.DetailOfficialStorePromosiPagingSource
+import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStorePromosiPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductNamaProductPagingSource
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.gratisproduct.ProductListGratisProductPagingSource
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialNamaProdukPagingSource

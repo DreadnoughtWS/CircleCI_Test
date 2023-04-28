@@ -1,7 +1,8 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.detailofficialstore
+package com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.academy.alfagiftmini.data.DataUtils
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
@@ -27,12 +28,16 @@ class DetailOfficialStorePromosiPagingSource(
 
             for (data in responseProduct) {
                 if (data.productSpecialPrice!! < data.price) {
-                    println(data)
                     dataProduct.add(data)
+                } else {
+                    data.kodePromo?.forEach {
+                        if (it == DataUtils.TYPE_GRATIS_PRODUK) {
+                            dataProduct.add(data)
+                        }
+                    }
                 }
             }
 
-            println(dataProduct)
 
             val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
                 dataProduct, responseSale, responseStock[0].productDetails ?: arrayListOf()
@@ -55,7 +60,6 @@ class DetailOfficialStorePromosiPagingSource(
         prevKey: Int? = null,
         nextKey: Int? = null
     ): PagingSource.LoadResult<Int, ProductListPromotionProductDomainModel> {
-        println(data)
         return PagingSource.LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )
