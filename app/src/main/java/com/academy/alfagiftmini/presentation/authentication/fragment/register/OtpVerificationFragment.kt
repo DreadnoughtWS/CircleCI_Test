@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,17 +26,6 @@ class OtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //belum di tes
-        (requireActivity() as RegisterActivity).getModel().timer.observe(viewLifecycleOwner, Observer {
-            if (it != 0 ) binding.btnGetOTPCode.text = it.toString()
-            else binding.btnGetOTPCode.text = R.string.send_otp_code.toString()
-        })
-        (requireActivity() as RegisterActivity).getModel().finished.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.btnGetOTPCode.text = R.string.send_otp_code.toString()
-                setOTPGenerator()
-            }
-            else binding.btnGetOTPCode.setOnClickListener(null)
-        })
         setOTPGenerator()
     }
 
@@ -44,9 +34,26 @@ class OtpVerificationFragment : Fragment() {
             //generate code
             (requireActivity() as RegisterActivity).getModel().generateOTP()
             val generatedOTP = (requireActivity() as RegisterActivity).getModel().otp
+            Log.d("OTP", generatedOTP)
+
             //create and send code via sms and broadcast receiver
+
             //set countdown timer in viewmodel to observe
             (requireActivity() as RegisterActivity).getModel().otpCountdownTimer()
+            observer()
         }
+    }
+
+    fun observer(){
+        (requireActivity() as RegisterActivity).getModel().timer.observe(viewLifecycleOwner, Observer {
+            binding.btnGetOTPCode.text = it.toString()
+        })
+        (requireActivity() as RegisterActivity).getModel().finished.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.btnGetOTPCode.text = getString(R.string.send_otp_code)
+                setOTPGenerator()
+            }
+            else binding.btnGetOTPCode.setOnClickListener(null)
+        })
     }
 }
