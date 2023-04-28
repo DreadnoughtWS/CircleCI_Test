@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.di
 
 import com.academy.alfagiftmini.data.DataUtils.BASE_URL
+import com.academy.alfagiftmini.data.repository.network.banner.BannerApiService
 import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
 import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
@@ -53,6 +54,11 @@ class NetworkModule {
     @Provides
     fun productListApiService(): ProductListApiService {
         return retrofitClient().create(ProductListApiService::class.java)
+    }
+
+    @Provides
+    fun bannerListApiService(): BannerApiService {
+        return retrofitClient().create(BannerApiService::class.java)
     }
 
 

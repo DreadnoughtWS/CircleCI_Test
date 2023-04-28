@@ -2,12 +2,14 @@ package com.academy.alfagiftmini.presentation.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.academy.alfagiftmini.domain.banner.BannerDomainUseCase
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import javax.inject.Inject
@@ -16,7 +18,8 @@ class PresentationFactory @Inject constructor(
     private var loginUseCase: LoginDomainUseCase,
     private var registerUseCase: RegisterDomainUseCase,
     private var officialStoreUseCase: OfficialStoreDomainUseCase,
-    private var productListDomainUseCase: ProductListDomainUseCase
+    private var productListDomainUseCase: ProductListDomainUseCase,
+    private var bannerDomainUseCase: BannerDomainUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -33,6 +36,9 @@ class PresentationFactory @Inject constructor(
             ) as T
             modelClass.isAssignableFrom(ProductListViewModel::class.java) -> ProductListViewModel(
                 productListDomainUseCase
+            ) as T
+            modelClass.isAssignableFrom(BannerListViewModel::class.java) -> BannerListViewModel(
+                bannerDomainUseCase
             ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }

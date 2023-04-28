@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.di
 
 import android.content.Context
+import com.academy.alfagiftmini.domain.banner.BannerDomainRepository
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
@@ -23,4 +24,5 @@ interface CoreComponent {
     fun provideOfficialStoreRepository(): OfficialStoreDomainRepository
     fun provideProductListRepository(): ProductListDomainRepository
     fun provideRegisterRepository(): RegisterDomainRepository
+    fun provideBanenrRepository():BannerDomainRepository
 }
