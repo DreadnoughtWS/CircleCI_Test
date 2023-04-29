@@ -22,8 +22,7 @@ class NetworkModule {
     private fun retrofitClient(): Retrofit {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor)
-            .addInterceptor(Interceptor { chain ->
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).addInterceptor(Interceptor { chain ->
                 val request = chain.request()
                 var string = request.url.toString()
                 var string2 = request.url.toString()

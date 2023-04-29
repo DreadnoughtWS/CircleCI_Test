@@ -18,7 +18,7 @@ data class ProductListPromotionProductDataModel(
             products.forEach { product ->
                 val sale = sales.find { it.productId == product.productId }
                 val stock = stocks.find { it.productId == product.productId }
-                    result.add(transform(product, sale, stock))
+                result.add(transform(product, sale, stock))
             }
             return result
         }

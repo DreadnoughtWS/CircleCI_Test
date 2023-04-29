@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStoreNamaDanTerlarisPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStorePromosiPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductNamaProductPagingSource
-import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.gratisproduct.ProductListGratisProductPagingSource
+import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductPagingSource
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialNamaProdukPagingSource
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.*
@@ -40,7 +40,7 @@ class ProductListRepositoryImpl @Inject constructor(
     override suspend fun getProductGratisProduct(
         scope: CoroutineScope, type: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config = PagingConfig(5)) {
+        return Pager(config = PagingConfig(10)) {
             ProductListGratisProductPagingSource(apiService, type)
         }.flow.cachedIn(scope)
     }
@@ -54,22 +54,18 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getDetailOfficialStoreProductPromosi(
-        scope: CoroutineScope,
-        officialStoreId: Int
+        scope: CoroutineScope, officialStoreId: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config =  PagingConfig(10)){
-            DetailOfficialStorePromosiPagingSource(apiService,officialStoreId)
+        return Pager(config = PagingConfig(10)) {
+            DetailOfficialStorePromosiPagingSource(apiService, officialStoreId)
         }.flow.cachedIn(scope)
     }
 
     override suspend fun getDetailOfficialStoreOrder(
-        scope: CoroutineScope,
-        order: String,
-        sort: String,
-        officialStoreId: Int
+        scope: CoroutineScope, order: String, sort: String, officialStoreId: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config = PagingConfig(10)){
-            DetailOfficialStoreNamaDanTerlarisPagingSource(apiService,order,sort,officialStoreId)
+        return Pager(config = PagingConfig(10)) {
+            DetailOfficialStoreNamaDanTerlarisPagingSource(apiService, order, sort, officialStoreId)
         }.flow.cachedIn(scope)
     }
 
