@@ -23,6 +23,9 @@ object PresentationUtils {
     const val TYPE_PAKET = 901
     const val TYPE_TEBUS_MURAH = 502
 
+
+    const val BANNER_ID = "BANNER_ID"
+
     fun String.fromHtml(): Spanned {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     }

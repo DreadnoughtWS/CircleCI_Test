@@ -21,7 +21,9 @@
         android:theme="@style/Theme.AlfagiftMini"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".BannerPromoItemList"
+            android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true">

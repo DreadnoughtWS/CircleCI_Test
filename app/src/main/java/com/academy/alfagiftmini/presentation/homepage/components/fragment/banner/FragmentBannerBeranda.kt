@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentBannerBerandaBinding
 import com.academy.alfagiftmini.databinding.FragmentDetailofficialNamaProductBinding
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 
 class FragmentBannerBeranda : Fragment() {
     private lateinit var binding: FragmentBannerBerandaBinding
     private lateinit var viewModel: BannerListViewModel
+    private lateinit var adapter: BannerBerandaSliderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +30,12 @@ class FragmentBannerBeranda : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
+    fun getData(){
+
+    }
+
+
 
 
 }
