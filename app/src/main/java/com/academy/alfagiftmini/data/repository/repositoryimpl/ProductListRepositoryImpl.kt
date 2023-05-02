@@ -11,11 +11,17 @@ import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialNamaProdukPagingSource
 import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.*
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListTebusMurahDataModel
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class ProductListRepositoryImpl @Inject constructor(
@@ -68,5 +74,44 @@ class ProductListRepositoryImpl @Inject constructor(
             DetailOfficialStoreNamaDanTerlarisPagingSource(apiService, order, sort, officialStoreId)
         }.flow.cachedIn(scope)
     }
+
+    override suspend fun getProductTebusMurah(): Flow<List<ProductListTebusMurahDomainModel>> {
+        return flow<List<ProductListTebusMurahDomainModel>> {
+            try {
+                val responseTebusMurah = apiService.getTebusMurah()
+
+                val dataProductList: ArrayList<Long> = arrayListOf()
+                responseTebusMurah.forEach { data ->
+                    data.promotionProductId.map {
+                        dataProductList.add(it)
+                    }
+                }
+
+                val dataProductId = dataProductList.map {
+                    it
+                }.joinToString("&product_id=", "")
+
+                println("DATA PRODUCT ID $dataProductId")
+                val responseProduct = apiService.getMultipleProducts(id = dataProductId)
+                emit(ProductListTebusMurahDataModel.transforms(responseTebusMurah, responseProduct))
+            } catch (e: java.lang.Exception) {
+                println(e.message)
+                emit(emptyList())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getProductByName(name: String): Flow<List<ProductListDomainItemModel>> {
+        return flow<List<ProductListDomainItemModel>> {
+            try{
+                val responseProduct = apiService.getProductByName(name)
+                emit(ProductListDetailDataModel.transforms(responseProduct, listOf()))
+            }catch (e:java.lang.Exception){
+                println(e.message)
+                emit(emptyList())
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 
 }

@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity">
 
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_tebus_murah"
+        android:id="@+id/rv_product_list_tebus_murah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

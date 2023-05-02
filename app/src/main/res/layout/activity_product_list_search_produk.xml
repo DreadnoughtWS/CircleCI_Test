@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/very_light_gray"
+    android:orientation="vertical"
     android:paddingHorizontal="15dp"
     android:paddingVertical="5dp"
-    android:orientation="vertical"
     tools:context=".presentation.homepage.components.activity.productlist.ProductListSearchProduk">
 
     <LinearLayout
@@ -20,15 +20,42 @@
             android:id="@+id/iv_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:src="@drawable/baseline_arrow_left_24_gray" />
 
-        <EditText
+        <!--        <SearchView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="@drawable/shape_search_view"-->
+        <!--            android:iconifiedByDefault="false"-->
+        <!--            android:padding="15dp"-->
+        <!--            app:queryHint="Cari Produk di Alfagift"-->
+        <!--            app:searchHintIcon="@null"-->
+        <!--            app:searchIcon="@null" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search_view"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/shape_search_view"
-            android:hint="Cari Produk di Alfagift"
-            android:padding="15dp" />
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_search_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_search_view"
+                android:hint="Cari Produk di Alfagift"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="15dp"
+                app:hintEnabled="false" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -41,11 +68,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_kategori_pilihan"
-        app:layout_constraintTop_toBottomOf="@id/divider"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
         <TextView
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -54,33 +81,34 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/divider"
         android:id="@+id/cl_preview_name_product"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/divider">
 
         <androidx.recyclerview.widget.RecyclerView
-            tools:listitem="@layout/item_preview_name_product"
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/rv_preview_name_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_preview_name_product" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:visibility="gone"
+        android:id="@+id/ll_tab"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:visibility="gone">
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_paket"
+            android:id="@+id/tl_search_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="fixed" />
