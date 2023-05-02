@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityLoginBinding
 import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
@@ -50,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
+                    Toast.makeText(this@LoginActivity, it.user.firstName, Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 }
             }

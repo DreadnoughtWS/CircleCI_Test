@@ -8,13 +8,10 @@ import com.academy.alfagiftmini.data.repository.network.produklist.ProductListAp
 import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 @Module
 class NetworkModule {
@@ -22,7 +19,10 @@ class NetworkModule {
     private fun retrofitClient(): Retrofit {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).addInterceptor(Interceptor { chain ->
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor)/*.addInterceptor(Interceptor { chain ->
+
+                Dihapus karena login jadi gagal kalau pake ini
+
                 val request = chain.request()
                 var string = request.url.toString()
                 var string2 = request.url.toString()
@@ -30,7 +30,7 @@ class NetworkModule {
                 string2 = string.replace("%3D", "=")
                 val newRequest = Request.Builder().url(string).url(string2).build()
                 chain.proceed(newRequest)
-            }).build()
+            })*/.build()
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).client(client).build()
     }

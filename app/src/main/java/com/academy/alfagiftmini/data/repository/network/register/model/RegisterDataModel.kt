@@ -1,7 +1,5 @@
-package com.academy.alfagiftmini.data.repository.network.register
+package com.academy.alfagiftmini.data.repository.network.register.model
 
-import com.academy.alfagiftmini.data.repository.network.loginlogout.model.LoginDataModel
-import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.google.gson.annotations.SerializedName
 
@@ -10,13 +8,13 @@ data class RegisterDataModel(
     val email: String,
     @SerializedName("password")
     val password: String,
-    @SerializedName("first_name")
+    @SerializedName("firstName")
     val firstName: String,
-    @SerializedName("last_name")
+    @SerializedName("lastName")
     val lastName: String,
-    @SerializedName("phone_number")
+    @SerializedName("phone")
     val phonenumber: String,
-    @SerializedName("member_id")
+    @SerializedName("memberId")
     val memberId: String
 ) {
     companion object {

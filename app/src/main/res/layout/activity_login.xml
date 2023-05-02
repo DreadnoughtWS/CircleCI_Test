@@ -49,11 +49,13 @@
             android:autofillHints="password" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/login"
+        android:background="@drawable/shape_btn_login_register"
+        android:textColor="@color/white"
         android:layout_below="@id/til_password_layout" />
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 package com.academy.alfagiftmini.data.repository.network.loginlogout.model
 
-import com.academy.alfagiftmini.data.repository.network.register.RegisterDataModel
+import com.academy.alfagiftmini.data.repository.network.register.model.RegisterDataModel
 import com.academy.alfagiftmini.domain.loginlogout.LoginResponseDomain
 import com.google.gson.annotations.SerializedName
 
