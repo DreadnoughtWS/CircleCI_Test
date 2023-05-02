@@ -24,4 +24,6 @@
     <string name="banner_list_title">Promo Alfagift</string>
     <string name="lihat_semua_promo">Lihat Semua Promo</string>
     <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
 </resources>
