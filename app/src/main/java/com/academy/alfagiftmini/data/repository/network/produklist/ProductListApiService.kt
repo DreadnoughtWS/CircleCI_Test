@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.repository.network.produklist
 
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListTebusMurahDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListStockResponseDataModel
 import retrofit2.http.GET
@@ -50,5 +51,19 @@ interface ProductListApiService {
         @Query("_order") order: String,
         @Query("official_store_id") officialStoreIdL:Int
     ): List<ProductListDetailDataModel>
+
+    @GET("promotion_product_502")
+    suspend fun getTebusMurah():List<ProductListTebusMurahDataModel>
+
+    @GET("products")
+    suspend fun getMultipleProducts(
+        @Query(encoded = true, value = "product_id") id: String,
+    ):List<ProductListDetailDataModel>
+
+    @GET("products")
+    suspend fun getProductByName(
+        @Query("q") name:String
+    ):List<ProductListDetailDataModel>
+
 
 }

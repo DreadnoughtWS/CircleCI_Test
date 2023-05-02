@@ -2,25 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:layout_marginVertical="10dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
 
     <TextView
-        android:drawablePadding="20dp"
-        android:textSize="20sp"
-        android:drawableStart="@drawable/baseline_search_24"
+        android:id="@+id/tv_product_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:drawablePadding="20dp"
         android:text="Free Fire Max, auto Booyah "
+        android:textSize="20sp"
+        app:drawableTint="@color/darkGrey"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:drawableTint="@color/darkGrey" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.divider.MaterialDivider
-        android:layout_marginTop="10dp"
-        app:dividerColor="@color/darkGrey"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        app:dividerColor="@color/darkGrey" />
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainIt
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -54,6 +55,14 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
         officialStoreId: Int
     ):Flow<PagingData<ProductListPromotionProductDomainModel>>{
         return useCase.getDetailOfficialStoreOrder(viewModelScope,order,sort,officialStoreId)
+    }
+
+    suspend fun getProductListTebusMurah():Flow<List<ProductListTebusMurahDomainModel>>{
+        return useCase.getProductTebusMurah()
+    }
+
+    suspend fun getPreviewProductName(name:String):Flow<List<ProductListDomainItemModel>>{
+        return useCase.getProductByName(name)
     }
 
 }

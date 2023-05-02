@@ -3,6 +3,7 @@ package com.academy.alfagiftmini.domain.produklist
 import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 
@@ -18,5 +19,6 @@ interface ProductListDomainRepository {
     suspend fun getDetailOfficialStoreProductPromosi(scope: CoroutineScope,officialStoreId:Int): Flow<PagingData<ProductListPromotionProductDomainModel>>
 
     suspend fun getDetailOfficialStoreOrder(scope: CoroutineScope,order:String,sort:String,officialStoreId: Int): Flow<PagingData<ProductListPromotionProductDomainModel>>
-
+    suspend fun getProductTebusMurah():Flow<List<ProductListTebusMurahDomainModel>>
+    suspend fun getProductByName(name:String):Flow<List<ProductListDomainItemModel>>
 }

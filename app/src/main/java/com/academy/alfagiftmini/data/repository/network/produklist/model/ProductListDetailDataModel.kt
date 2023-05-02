@@ -29,15 +29,16 @@ data class ProductListDetailDataModel(
             val result = mutableListOf<ProductListDomainItemModel>()
             products.forEach { product ->
                 val stock = stocks.find { it.productId == product.productId }
-                if (stock != null) {
-                    result.add(transform(product, stock))
-                }
+                result.add(transform(product, stock))
+
+//                if (stock != null) {
+//                }
             }
             return result
         }
 
         private fun transform(
-            product: ProductListDetailDataModel, stock: ProductListStockDetailDataModel
+            product: ProductListDetailDataModel, stock: ProductListStockDetailDataModel?
         ): ProductListDomainItemModel {
             return ProductListDomainItemModel(productId = product.productId ?: 0,
                 id = product.id ?: 0,
@@ -51,7 +52,7 @@ data class ProductListDetailDataModel(
                 productCategory = product.productCategory ?: "",
                 kodeStore = product.kodeStore ?: "",
                 kodePromo = product.kodePromo ?: listOf(),
-                stock = stock.stock ?: 0,
+                stock = stock?.stock ?: 0,
                 salesQuantity = product.salesQuantity ?: 0,
                 officialStoreId = product.officialStoreId ?: 0,
                 imgPreview103 = product.imgPreview103 ?: "")
@@ -62,5 +63,6 @@ data class ProductListDetailDataModel(
                 type = image.type ?: "", url = image.url ?: listOf()
             )
         }
+
     }
 }

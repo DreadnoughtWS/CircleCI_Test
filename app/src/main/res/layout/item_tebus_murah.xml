@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_tebus_murah"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginVertical="5dp"
@@ -23,7 +24,7 @@
             android:padding="6dp"
             android:text="Tebus"
             android:textColor="@color/gold"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,6 +74,7 @@
 
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/rl_expandable_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

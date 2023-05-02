@@ -5,6 +5,7 @@ import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainReposito
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -63,5 +64,12 @@ class ProductListDomainUseCaseImpl @Inject constructor(private val repository: P
         return repository.getDetailOfficialStoreOrder(
             scope,order,sort,officialStoreId
         )
+    }
+    override suspend fun getProductTebusMurah(): Flow<List<ProductListTebusMurahDomainModel>> {
+        return repository.getProductTebusMurah()
+    }
+
+    override suspend fun getProductByName(name: String): Flow<List<ProductListDomainItemModel>> {
+        return repository.getProductByName(name)
     }
 }
