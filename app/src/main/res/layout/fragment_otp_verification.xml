@@ -32,6 +32,7 @@
             android:textSize="16sp" />
 
         <com.chaos.view.PinView
+            android:id="@+id/pv_otp_code"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
             android:inputType="number"
             android:itemBackground="@color/light_white"
             app:cursorColor="@color/black"
+            android:textColor="@color/black"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
             app:itemHeight="50dp"
