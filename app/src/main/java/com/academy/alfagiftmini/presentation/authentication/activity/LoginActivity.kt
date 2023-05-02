@@ -1,15 +1,24 @@
 package com.academy.alfagiftmini.presentation.authentication.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
+import com.academy.alfagiftmini.databinding.ActivityLoginBinding
+import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -20,6 +29,30 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.loginActivityInject(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setViewInteraction()
+    }
+
+    private fun setViewInteraction() {
+        binding.btnSubmit.setOnClickListener{
+            getUserData()
+        }
+    }
+
+    private fun getUserData() {
+        binding.apply {
+            lifecycleScope.launch {
+                loginViewModel.checkUserInputValidity(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString())).collectLatest {
+                    if (it.error.isNotBlank()) {
+                        Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_SHORT).show()
+                        return@collectLatest
+                    }
+                    if (it.accessToken.isBlank()) return@collectLatest
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                }
+            }
+        }
     }
 }

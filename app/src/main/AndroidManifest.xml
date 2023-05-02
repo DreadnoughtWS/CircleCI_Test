@@ -25,11 +25,7 @@
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProduk"
@@ -45,7 +41,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.activity.MainActivity"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity"
             android:exported="false" />
@@ -65,12 +62,11 @@
             android:name=".presentation.authentication.activity.LoginActivity"
             android:exported="true">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
