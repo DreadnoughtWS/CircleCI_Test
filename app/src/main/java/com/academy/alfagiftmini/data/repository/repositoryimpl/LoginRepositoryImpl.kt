@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.data.repository.repositoryimpl
 
 import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
 import com.academy.alfagiftmini.data.repository.network.loginlogout.model.LoginResponseModel
+import com.academy.alfagiftmini.data.repository.network.register.model.RegisterDataModel
 import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import com.academy.alfagiftmini.domain.loginlogout.LoginResponseDomain
@@ -20,7 +21,7 @@ class LoginRepositoryImpl @Inject constructor(
             try {
                 val data = LoginDataDomain.transform(user)
                 val response = loginApiService.login(body = data)
-                emit(LoginResponseModel.transform(response))
+                emit(LoginResponseModel.transform(response.body() ?: LoginResponseModel("", RegisterDataModel("", "", "", "", "", ""), response.errorBody()?.string())))
             }catch (e : Exception) {
                 emit(LoginResponseDomain("", RegisterDataDomain("", "", "", "", "", ""), e.message.toString()))
             }
