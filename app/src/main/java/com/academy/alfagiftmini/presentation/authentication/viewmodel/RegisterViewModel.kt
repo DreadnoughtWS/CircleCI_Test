@@ -24,7 +24,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
     var finished:LiveData<Boolean> = _finished
     fun otpCountdownTimer(){
         _finished.value = false
-        object : CountDownTimer(11000, 1000) {
+        object : CountDownTimer(301000, 1000) {
 
             // Callback function, fired on regular interval
             override fun onTick(millisUntilFinished: Long) {
