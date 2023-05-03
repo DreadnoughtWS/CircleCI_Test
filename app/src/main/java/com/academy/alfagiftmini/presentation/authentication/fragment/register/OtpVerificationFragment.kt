@@ -31,11 +31,11 @@ class OtpVerificationFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-        ): View {
-            // Inflate the layout for this fragment
+    ): View {
+        // Inflate the layout for this fragment
         binding = FragmentOtpVerificationBinding.inflate(inflater, container, false)
         return binding.root
-        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,14 +46,14 @@ class OtpVerificationFragment : Fragment() {
 
         checkPermissions()
         setOTPGenerator()
-        binding.pvOtpCode.addTextChangedListener(object : TextWatcher{
+        binding.pvOtpCode.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.pvOtpCode.removeTextChangedListener(this)
                 Log.d("test", s.toString())
-                if(binding.pvOtpCode.text.toString() == generatedOTP){
+                if (binding.pvOtpCode.text.toString() == generatedOTP) {
                     Toast.makeText(context, "verified", Toast.LENGTH_SHORT).show()
                 }
                 binding.pvOtpCode.setSelection(binding.pvOtpCode.text?.length!!)
@@ -66,8 +66,16 @@ class OtpVerificationFragment : Fragment() {
     }
 
     private fun checkPermissions() {
-        if (ActivityCompat.checkSelfPermission((requireActivity() as RegisterActivity), Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions((requireActivity() as RegisterActivity), arrayOf(Manifest.permission.SEND_SMS), 101)
+        if (ActivityCompat.checkSelfPermission(
+                (requireActivity() as RegisterActivity),
+                Manifest.permission.SEND_SMS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                (requireActivity() as RegisterActivity),
+                arrayOf(Manifest.permission.SEND_SMS),
+                101
+            )
         }
     }
 
@@ -79,35 +87,28 @@ class OtpVerificationFragment : Fragment() {
             Log.d("OTP", generatedOTP)
 
             //create and send code via sms and broadcast receiver, still not working
-            sendSMS(generatedOTP)
+
             //set countdown timer in viewmodel to observe
             (requireActivity() as RegisterActivity).getModel().otpCountdownTimer()
             observer()
         }
     }
 
-    private fun sendSMS(message: String) {
-        try {
-            val sms: SmsManager = (requireActivity() as RegisterActivity).getSystemService(SmsManager::class.java)
-            val sentPI = PendingIntent.getBroadcast(context, 0, Intent("SMS_SENT"), FLAG_IMMUTABLE)
-            sms.sendTextMessage("+6281249400599", null, message, sentPI, null)
-            Toast.makeText(context, "sent", Toast.LENGTH_SHORT).show()
-        }catch (e: Exception){
-            Toast.makeText(context, "fail", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun observer(){
-        (requireActivity() as RegisterActivity).getModel().timer.observe(viewLifecycleOwner, Observer {
-            val timerFormatted = DateUtils.formatElapsedTime(it.toLong())
-            binding.btnGetOTPCode.text = getString(R.string.send_otp_again).plus(timerFormatted.toString())
-        })
-        (requireActivity() as RegisterActivity).getModel().finished.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.btnGetOTPCode.text = getString(R.string.send_otp_code)
-                setOTPGenerator()
-            }
-            else binding.btnGetOTPCode.setOnClickListener(null)
-        })
+    private fun observer() {
+        (requireActivity() as RegisterActivity).getModel().timer.observe(
+            viewLifecycleOwner,
+            Observer {
+                val timerFormatted = DateUtils.formatElapsedTime(it.toLong())
+                binding.btnGetOTPCode.text =
+                    getString(R.string.send_otp_again).plus(timerFormatted.toString())
+            })
+        (requireActivity() as RegisterActivity).getModel().finished.observe(
+            viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    binding.btnGetOTPCode.text = getString(R.string.send_otp_code)
+                    setOTPGenerator()
+                } else binding.btnGetOTPCode.setOnClickListener(null)
+            })
     }
 }

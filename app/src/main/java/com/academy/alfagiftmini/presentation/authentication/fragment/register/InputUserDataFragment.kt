@@ -28,7 +28,16 @@ class InputUserDataFragment : Fragment() {
                     Toast.makeText(activity, "input all field data", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    val data = InputUserDataFragmentDirections.actionInputUserDataFragmentToInputPhoneNumberFragment(RegistrationDataModel(etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(), etPassword.text.toString(), ""))
+                    val data = InputUserDataFragmentDirections
+                        .actionInputUserDataFragmentToInputPhoneNumberFragment(
+                            RegistrationDataModel(
+                                etFirstName.text.toString(),
+                                etLastName.text.toString(),
+                                etEmail.text.toString(),
+                                etPassword.text.toString(),
+                                ""
+                            )
+                        )
                     view.findNavController().navigate(data)
                 }
             }
