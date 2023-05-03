@@ -6,25 +6,27 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ActivityProductListPaketBinding
 import com.academy.alfagiftmini.databinding.ActivityProductListSearchProdukBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPreviewProductNameAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductNamaProduk
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductPromosi
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductListSearchProduk : AppCompatActivity() {
+class ProductListSearchProdukActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductListSearchProdukBinding
     private lateinit var adapter: ProductListPreviewProductNameAdapter
+    var dataName: String = ""
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -40,12 +42,31 @@ class ProductListSearchProduk : AppCompatActivity() {
         setHideToolbar()
         setAdapter()
         setPreviewProductName()
-        initTabs()
-        setupFragment(0)
     }
 
     private fun setupFragment(position: Int) {
+        val fragment = when (position) {
+            0 -> {
+                FragmentProductListSearchProductPromosi()
+            }
+            1 -> {
+                FragmentProductListSearchProductNamaProduk()
+            }
+            else -> {
+                FragmentProductListSearchProductTerlaris()
+            }
+        }
 
+        val tag = when (position) {
+            0 -> FragmentProductListSearchProductPromosi::class.java.simpleName
+            1 -> FragmentProductListSearchProductNamaProduk::class.java.simpleName
+            else -> FragmentProductListSearchProductTerlaris::class.java.simpleName
+        }
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().apply {
+            replace(R.id.container, fragment, tag)
+            commit()
+        }
     }
 
     private fun initTabs() {
@@ -105,17 +126,21 @@ class ProductListSearchProduk : AppCompatActivity() {
     }
 
     private fun setAdapter() {
-        adapter = ProductListPreviewProductNameAdapter()
+        adapter = ProductListPreviewProductNameAdapter().apply {
+            setOnItemClickListener { _, data ->
+                performSearch(data)
+            }
+        }
         binding.rvPreviewNameProduct.adapter = adapter
         binding.rvPreviewNameProduct.layoutManager = LinearLayoutManager(this)
     }
 
     private fun setPreviewProductName() {
         binding.tilSearchView.editText?.doOnTextChanged { text, start, _, _ ->
-            if (start < 2) {
+            if (start == 0) {
                 setLayoutVisibility(kategori = true, previewName = false, tab = false)
             }
-            if (start >= 2) {
+            if (start != 0) {
                 setLayoutVisibility(kategori = false, previewName = true, tab = false)
                 getData(text)
             }
@@ -129,7 +154,15 @@ class ProductListSearchProduk : AppCompatActivity() {
     }
 
     private fun performSearch(name: String) {
-        Toast.makeText(this, name, Toast.LENGTH_SHORT).show()
+        dataName = name
+        clearTabs()
+        setupFragment(0)
+        initTabs()
+        setLayoutVisibility(kategori = false, previewName = false, tab = true)
+    }
+
+    private fun clearTabs() {
+        binding.tlSearchView.removeAllTabs()
     }
 
     private fun getData(text: CharSequence?) {
@@ -148,5 +181,17 @@ class ProductListSearchProduk : AppCompatActivity() {
 
     private fun setHideToolbar() {
         supportActionBar?.hide()
+    }
+
+    fun getProductViewModel(): ProductListViewModel {
+        return viewModel
+    }
+
+    fun getTab(): TabLayout {
+        return binding.tlSearchView
+    }
+
+    fun getNameSearch(): String {
+        return dataName
     }
 }

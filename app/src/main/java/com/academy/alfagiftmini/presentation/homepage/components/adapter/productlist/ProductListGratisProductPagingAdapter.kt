@@ -45,6 +45,7 @@ class ProductListGratisProductPagingAdapter() :
 
         fun bindData(data: ProductListPromotionProductDomainModel) {
             with(binding) {
+
                 tvNamaProduct.text = data.productName
 
                 if (data.stock == null || data.stock <= 0) {

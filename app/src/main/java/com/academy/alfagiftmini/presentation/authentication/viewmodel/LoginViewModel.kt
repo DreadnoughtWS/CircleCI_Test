@@ -10,6 +10,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase) : ViewModel() {
 
     fun checkUserInputValidity (user: LoginDataDomain): Flow<LoginResponseDomain>  {
+        //TODO(check)
         return login(user)
     }
 

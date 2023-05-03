@@ -4,6 +4,7 @@ import android.content.Context
 import com.academy.alfagiftmini.domain.banner.BannerDomainRepository
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
+import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesRepository
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.register.RegisterDomainRepository
 import dagger.BindsInstance
@@ -25,4 +26,6 @@ interface CoreComponent {
     fun provideProductListRepository(): ProductListDomainRepository
     fun provideRegisterRepository(): RegisterDomainRepository
     fun provideBanenrRepository():BannerDomainRepository
+
+    fun provideProductCategoriesRepository(): ProductCategoriesRepository
 }

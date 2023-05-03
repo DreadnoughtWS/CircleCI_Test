@@ -72,4 +72,20 @@ class ProductListDomainUseCaseImpl @Inject constructor(private val repository: P
     override suspend fun getProductByName(name: String): Flow<List<ProductListDomainItemModel>> {
         return repository.getProductByName(name)
     }
+
+    override suspend fun getProductSearchProductOrder(
+        scope: CoroutineScope,
+        name: String,
+        order: String,
+        sort: String
+    ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return repository.getProductSearchProductOrder(scope, name, order, sort)
+    }
+
+    override suspend fun getProductSearchProduct(
+        scope: CoroutineScope,
+        name: String
+    ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return repository.getProductSearchProduct(scope, name)
+    }
 }

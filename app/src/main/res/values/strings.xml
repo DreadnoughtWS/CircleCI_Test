@@ -26,9 +26,6 @@
     <string name="lihat_semua_promo">Lihat Semua Promo</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="e_mail_address">E-mail Address</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
-    <string name="submit">Submit</string>
+    <string name="password">password</string>
+    <string name="no_connection">NO CONNECTION</string>
 </resources>

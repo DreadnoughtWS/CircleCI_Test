@@ -18,20 +18,21 @@ object PresentationUtils {
     const val ORDER_BY_ASCENDING = "asc"
     const val ORDER_BY_DESCENDING = "desc"
 
-    const val TYPE_HARGA_SPESIAL = 203
+    const val TYPE_HARGA_SPESIAL = 201
     const val TYPE_GRATIS_PRODUK = 103
     const val TYPE_PAKET = 901
     const val TYPE_TEBUS_MURAH = 502
 
 
     const val BANNER_ID = "BANNER_ID"
+    const val BANNER_DATA = "BANNER_DATA"
+    const val ALL_BANNER_LIST = "ALL_BANNER_LIST"
 
     fun String.fromHtml(): Spanned {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     }
 
-    fun hargaFormatter(n: Int):String =
-        DecimalFormat("#,###").format(n)
+    fun hargaFormatter(n: Int): String = DecimalFormat("#,###").format(n)
 
 
     fun isNetworkAvailable(context: Context): Boolean {
@@ -55,9 +56,7 @@ object PresentationUtils {
         return AlertDialog.Builder(context).apply {
             setIcon(
                 ResourcesCompat.getDrawable(
-                    context.resources,
-                    R.drawable.baseline_error_24,
-                    null
+                    context.resources, R.drawable.baseline_error_24, null
                 )
             )
             setTitle("Error")
@@ -66,13 +65,13 @@ object PresentationUtils {
         }
     }
 
-    fun showError(error: String?,context:Context) {
+    fun showError(error: String?, context: Context) {
         setupDialogError(context, error ?: "").setPositiveButton("Ok") { dialog, _ ->
             dialog.dismiss()
         }.show()
     }
 
-    fun setLoading(isLoading: Boolean,dialog: Dialog) {
+    fun setLoading(isLoading: Boolean, dialog: Dialog) {
         if (isLoading) {
             dialog.show()
         } else {
@@ -80,7 +79,7 @@ object PresentationUtils {
         }
     }
 
-    fun loadingAlertDialog(context: Context):AlertDialog{
+    fun loadingAlertDialog(context: Context): AlertDialog {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(context)
         return alertDialog.setView(R.layout.progress).create()
     }
