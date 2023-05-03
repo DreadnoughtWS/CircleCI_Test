@@ -6,6 +6,8 @@ import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCaseImpl
+import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCase
+import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCaseImpl
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
@@ -25,5 +27,8 @@ abstract class AppModule {
     abstract fun provideProductListDomainUseCase(useCaseImpl: ProductListDomainUseCaseImpl): ProductListDomainUseCase
     @Binds
     abstract fun provideBannerDomainUseCase(useCaseImpl: BannerDomainUseCaseImpl): BannerDomainUseCase
+
+    @Binds
+    abstract fun provideProductCategoriesUseCase(useCaseImpl: ProductCategoriesUseCaseImpl): ProductCategoriesUseCase
 
 }
