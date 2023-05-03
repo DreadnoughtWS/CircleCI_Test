@@ -73,6 +73,4 @@ class NetworkModule {
     fun productCategoriesApiService(): ProductCategoriesApiService {
         return retrofitClient().create(ProductCategoriesApiService::class.java)
     }
-
-
 }

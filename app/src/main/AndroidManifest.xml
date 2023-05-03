@@ -60,14 +60,19 @@
             android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
-            android:exported="true">
-
+            android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
+            android:exported="false">
+
+
         </activity>
     </application>
 

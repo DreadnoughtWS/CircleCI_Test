@@ -14,7 +14,7 @@ class ProductCategoriesPagingSource (private val apiService: ProductCategoriesAp
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductCategoriesDomainModel> {
         val position = params.key ?: 1
         return try {
-            val response = getOnlineData()
+            val response = getOnlineData(position)
             LoadResult.Page (
                 data = response,
                 nextKey = if (response.isEmpty()) null else position + 1,
@@ -25,8 +25,8 @@ class ProductCategoriesPagingSource (private val apiService: ProductCategoriesAp
         }
     }
 
-    private suspend fun getOnlineData(): List<ProductCategoriesDomainModel> {
-        val data = apiService.getAllCategories()
+    private suspend fun getOnlineData(position: Int): List<ProductCategoriesDomainModel> {
+        val data = apiService.getAllCategories(page = position, limit = 10)
         return ProductCategoriesDataModel.transform(data)
     }
 

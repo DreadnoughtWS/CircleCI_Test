@@ -32,6 +32,5 @@ interface AppComponent {
     fun productListTebusMurahActivityInject(activity: ProductListTebusMurahActivity)
     fun productListSearchProductActivityInject(activity: ProductListSearchProdukActivity)
     fun bannerListActivityInject(activity: AllBannerListActivity)
-
     fun productCategoriesActivityInject(activity: ProductCategoriesActivity)
 }

@@ -3,7 +3,6 @@ package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCase
-import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCaseImpl
 import com.academy.alfagiftmini.domain.productcategories.model.ProductCategoriesDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow

@@ -27,7 +27,6 @@ abstract class AppModule {
     abstract fun provideProductListDomainUseCase(useCaseImpl: ProductListDomainUseCaseImpl): ProductListDomainUseCase
     @Binds
     abstract fun provideBannerDomainUseCase(useCaseImpl: BannerDomainUseCaseImpl): BannerDomainUseCase
-
     @Binds
     abstract fun provideProductCategoriesUseCase(useCaseImpl: ProductCategoriesUseCaseImpl): ProductCategoriesUseCase
 

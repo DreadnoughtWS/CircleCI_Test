@@ -39,9 +39,9 @@ class AllBannerListActivity : AppCompatActivity() {
             getLiveData()
         }
 
-        binding.btnBannerBack.setOnClickListener {
+        /*binding.btnBannerBack.setOnClickListener {
             finish()
-        }
+        }*/
 
     }
 

@@ -23,7 +23,7 @@
         android:layout_height="30dp"
         android:src="@drawable/arrow_back"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rv_item_list"
+        app:layout_constraintBottom_toTopOf="@id/iv_top_toolbar"
         app:layout_constraintStart_toStartOf="parent"
         android:background="?android:selectableItemBackground"
         android:layout_marginTop="@dimen/mrgn_1"
