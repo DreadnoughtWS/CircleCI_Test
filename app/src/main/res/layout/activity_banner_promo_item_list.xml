@@ -4,6 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.homepage.components.activity.banner.BannerPromoItemList">
+    tools:context=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity">
+
+    <ImageView
+        android:id="@+id/iv_top_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/top_drawable_lists"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_banner_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rv_item_list"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="?android:selectableItemBackground"
+        android:layout_marginTop="@dimen/mrgn_1"
+        android:layout_marginHorizontal="@dimen/mrgn_2"
+        android:layout_marginBottom="@dimen/mrgn_2"/>
+
+    <TextView
+        android:id="@+id/tv_promo_name_title"
+        android:text="Promo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginStart="@dimen/mrgn_2"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="@id/btn_banner_back"
+        app:layout_constraintBottom_toBottomOf="@id/btn_banner_back"
+        app:layout_constraintStart_toEndOf="@id/btn_banner_back"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/iv_top_toolbar"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_gratis_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed" />
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

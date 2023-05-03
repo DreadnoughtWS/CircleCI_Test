@@ -2,13 +2,14 @@ package com.academy.alfagiftmini.presentation.homepage.components.adapter.banner
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.academy.alfagiftmini.R
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.academy.alfagiftmini.databinding.ItemBannerSliderBinding
 import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.BannerPromoItemList
+import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.BannerPromoItemListActivity
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderViewAdapter
 
@@ -17,8 +18,14 @@ class BannerBerandaSliderAdapter(
 ): SliderViewAdapter<BannerBerandaSliderAdapter.BannerAdapterViewHolder>() {
 
     class BannerAdapterViewHolder(val binding: ItemBannerSliderBinding) : ViewHolder(binding.root) {
-        fun bindData(data: BannerDomainModel) {
-            Glide.with(itemView.context).load(data.bannerImageFileName).placeholder(R.drawable.banner_placeholder)
+        fun bindData(data: BannerDomainModel, context: Context) {
+            val loadingDrawable1 = CircularProgressDrawable(context)
+            loadingDrawable1.strokeWidth = 5f
+            loadingDrawable1.centerRadius = 30f
+            loadingDrawable1.setColorSchemeColors(Color.RED)
+            loadingDrawable1.start()
+
+            Glide.with(itemView.context).load(data.bannerImageFileName).placeholder(loadingDrawable1)
                 .into(binding.ivImageSlider)
         }
     }
@@ -35,9 +42,9 @@ class BannerBerandaSliderAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: BannerAdapterViewHolder, position: Int) {
-            viewHolder.bindData(listBanner[position])
+            viewHolder.bindData(listBanner[position],context)
             viewHolder.binding.ivImageSlider.setOnClickListener {
-                val intent = Intent(context, BannerPromoItemList::class.java)
+                val intent = Intent(context, BannerPromoItemListActivity::class.java)
                 intent.putExtra(PresentationUtils.BANNER_ID, listBanner[position].id)
                 context.startActivity(intent)
             }
