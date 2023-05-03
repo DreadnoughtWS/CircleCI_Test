@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemList"
+            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
