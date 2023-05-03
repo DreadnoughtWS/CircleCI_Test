@@ -26,4 +26,11 @@ class BannerPromoItemListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
+
+    private fun setToolbar() {
+//        binding.allBannerListToolbar.tvPromoToolbarTitle.text = getString(R.string.banner_list_title)
+//        binding.allBannerListToolbar.btnBannerBack.setOnClickListener {
+//            finish()
+//        }
+    }
 }

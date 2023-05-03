@@ -45,7 +45,7 @@ class BannerBerandaSliderAdapter(
             viewHolder.bindData(listBanner[position],context)
             viewHolder.binding.ivImageSlider.setOnClickListener {
                 val intent = Intent(context, BannerPromoItemListActivity::class.java)
-                intent.putExtra(PresentationUtils.BANNER_ID, listBanner[position].id)
+                intent.putExtra(PresentationUtils.BANNER_DATA, listBanner[position])
                 context.startActivity(intent)
             }
     }
