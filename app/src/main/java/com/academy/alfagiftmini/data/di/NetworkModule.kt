@@ -4,6 +4,7 @@ import com.academy.alfagiftmini.data.DataUtils.BASE_URL
 import com.academy.alfagiftmini.data.repository.network.banner.BannerApiService
 import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
 import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
+import com.academy.alfagiftmini.data.repository.network.produckcategories.ProductCategoriesApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import dagger.Module
@@ -33,9 +34,8 @@ class NetworkModule {
             .addInterceptor(Interceptor { chain ->
                 val request = chain.request()
                 var string = request.url.toString()
-                var string2 = request.url.toString()
                 string = string.replace("%26", "&")
-                string2 = string.replace("%3D", "=")
+                val string2 :String = string.replace("%3D", "=")
                 val newRequest = Request.Builder().url(string).url(string2).build()
                 chain.proceed(newRequest)
             }).build()
@@ -68,5 +68,8 @@ class NetworkModule {
         return retrofitClient().create(BannerApiService::class.java)
     }
 
-
+    @Provides
+    fun productCategoriesApiService(): ProductCategoriesApiService {
+        return retrofitClient().create(ProductCategoriesApiService::class.java)
+    }
 }

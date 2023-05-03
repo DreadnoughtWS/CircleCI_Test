@@ -28,6 +28,8 @@
     <string name="email">Email</string>
     <string name="password">password</string>
     <string name="no_connection">NO CONNECTION</string>
-    <string name="promo_banner_title">Promo Alfagift</string>
-    <string name="syarat_dan_ketentuan">Syarat dan Ketentuan</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last Name</string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="submit">Submit</string>
 </resources>
