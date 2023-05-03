@@ -14,6 +14,7 @@ import com.academy.alfagiftmini.data.repository.network.produklist.*
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListTebusMurahDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.searchproduct.ProductListSearchProductNamaProdukPagingSource
+import com.academy.alfagiftmini.data.repository.network.produklist.searchproduct.ProductListSearchProductPromosiPagingSource
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
@@ -122,6 +123,15 @@ class ProductListRepositoryImpl @Inject constructor(
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
             ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort)
+        }.flow.cachedIn(scope)
+    }
+
+    override suspend fun getProductSearchProduct(
+        scope: CoroutineScope,
+        name: String
+    ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return Pager(config = PagingConfig(10)) {
+            ProductListSearchProductPromosiPagingSource(apiService, name)
         }.flow.cachedIn(scope)
     }
 

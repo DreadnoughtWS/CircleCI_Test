@@ -9,12 +9,9 @@ import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.FragmentProductListPaketPromosiBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListSearchProductNamaProdukBinding
-import com.academy.alfagiftmini.databinding.FragmentProductListSearchProductPromosiBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPaketActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProduk
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
@@ -61,9 +58,9 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     }
 
     private fun setViewModelandData() {
-        viewModel = (requireActivity() as ProductListSearchProduk).getProductViewModel()
-        dataName = (requireActivity() as ProductListSearchProduk).getNameSearch()
-        (requireActivity() as ProductListSearchProduk).getTab().addOnTabSelectedListener(this)
+        viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
+        dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
+        (requireActivity() as ProductListSearchProdukActivity).getTab().addOnTabSelectedListener(this)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}

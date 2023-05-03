@@ -25,7 +25,7 @@
             android:name=".presentation.homepage.components.activity.banner.BannerPromoItemList"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
+            android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true">
 
         </activity>
@@ -36,7 +36,7 @@
             android:name=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListPaketActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"
@@ -48,7 +48,7 @@
             android:name=".presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListPaketActivity"
+            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"
@@ -57,10 +57,10 @@
             android:name=".presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProduk"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.authentication.activity.RegisterActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
             android:exported="true">
 
             <intent-filter>

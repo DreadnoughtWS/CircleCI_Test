@@ -69,4 +69,8 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
         return useCase.getProductSearchProductOrder(viewModelScope,name,order,sort)
     }
 
+    suspend fun getProductSearchProduct(name:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getProductSearchProduct(viewModelScope,name)
+    }
+
 }

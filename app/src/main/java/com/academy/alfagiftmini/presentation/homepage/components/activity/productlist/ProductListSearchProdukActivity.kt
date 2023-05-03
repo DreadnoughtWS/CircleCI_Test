@@ -6,20 +6,15 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ActivityProductListPaketBinding
 import com.academy.alfagiftmini.databinding.ActivityProductListSearchProdukBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPreviewProductNameAdapter
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.paket.FragmentProductListPaketNamaProduk
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.paket.FragmentProductListPaketPromosi
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.paket.FragmentProductListPaketTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductTerlaris
@@ -28,7 +23,7 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductListSearchProduk : AppCompatActivity() {
+class ProductListSearchProdukActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductListSearchProdukBinding
     private lateinit var adapter: ProductListPreviewProductNameAdapter
     var dataName: String = ""
@@ -133,7 +128,6 @@ class ProductListSearchProduk : AppCompatActivity() {
     private fun setAdapter() {
         adapter = ProductListPreviewProductNameAdapter().apply {
             setOnItemClickListener { _, data ->
-                setLayoutVisibility(kategori = false, previewName = false, tab = true)
                 performSearch(data)
             }
         }
@@ -153,7 +147,6 @@ class ProductListSearchProduk : AppCompatActivity() {
         }
         binding.tietSearchView.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                setLayoutVisibility(kategori = false, previewName = false, tab = true)
                 performSearch(binding.tietSearchView.text.toString())
             }
             true
@@ -163,7 +156,9 @@ class ProductListSearchProduk : AppCompatActivity() {
     private fun performSearch(name: String) {
         dataName = name
         clearTabs()
+        setupFragment(0)
         initTabs()
+        setLayoutVisibility(kategori = false, previewName = false, tab = true)
     }
 
     private fun clearTabs() {
