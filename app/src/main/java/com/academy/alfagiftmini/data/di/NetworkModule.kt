@@ -33,9 +33,8 @@ class NetworkModule {
             .addInterceptor(Interceptor { chain ->
                 val request = chain.request()
                 var string = request.url.toString()
-                var string2 = request.url.toString()
                 string = string.replace("%26", "&")
-                string2 = string.replace("%3D", "=")
+                val string2 :String = string.replace("%3D", "=")
                 val newRequest = Request.Builder().url(string).url(string2).build()
                 chain.proceed(newRequest)
             }).build()
