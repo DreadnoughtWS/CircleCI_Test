@@ -40,6 +40,10 @@ class OtpVerificationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //belum di tes
+        val bundle = arguments ?: return
+        val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
+        Log.d("check", args.registrationData.phoneNumber)
+
         checkPermissions()
         setOTPGenerator()
         binding.pvOtpCode.addTextChangedListener(object : TextWatcher{

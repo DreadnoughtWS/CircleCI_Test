@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.academy.alfagiftmini.R
+import androidx.navigation.findNavController
 import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
-import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
 
 class InputUserDataFragment : Fragment() {
     private lateinit var binding: FragmentInputUserDataBinding
@@ -29,6 +28,8 @@ class InputUserDataFragment : Fragment() {
                     Toast.makeText(activity, "input all field data", Toast.LENGTH_SHORT).show()
                 }
                 else{
+                    val data = InputUserDataFragmentDirections.actionInputUserDataFragmentToInputPhoneNumberFragment(RegistrationDataModel(etFirstName.text.toString(), etLastName.text.toString(), etEmail.text.toString(), etPassword.text.toString(), ""))
+                    view.findNavController().navigate(data)
                 }
             }
         }

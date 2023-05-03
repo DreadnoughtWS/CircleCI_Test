@@ -4,19 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.authentication.fragment.register.InputPhoneNumberFragment">
-
+<TextView
+    android:id="@+id/check"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom"
         android:layout_marginBottom="80dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Phone Number to Use"
-            android:textSize="26sp"
-            android:layout_gravity="center"/>
         <EditText
             android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
