@@ -22,34 +22,33 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".BannerPromoItemList"
+            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemList"
             android:exported="false" />
         <activity
-            android:name=".presentation.authentication.activity.RegisterActivity"
+            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
             android:exported="true">
 
         </activity>
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProduk"
+            android:name=".presentation.authentication.activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListPaketActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.activity.MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListPaketActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"
@@ -58,10 +57,10 @@
             android:name=".presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProduk"
             android:exported="false" />
         <activity
-            android:name=".presentation.authentication.activity.LoginActivity"
+            android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true">
 
             <intent-filter>

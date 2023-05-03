@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial
+package com.academy.alfagiftmini.data.repository.network.produklist.hargaspesial
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
