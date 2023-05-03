@@ -5,60 +5,92 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
+import com.academy.alfagiftmini.databinding.FragmentProductListSearchProductNamaProdukBinding
+import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentProductListSearchProductNamaProduk.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FragmentProductListSearchProductNamaProduk : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListener {
+    private lateinit var binding: FragmentProductListSearchProductNamaProdukBinding
+    private lateinit var viewModel: ProductListViewModel
+    private lateinit var adapter: ProductListGratisProductPagingAdapter
+    var dataName: String = ""
+    private var isClicked = true
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
+        binding =
+            FragmentProductListSearchProductNamaProdukBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setViewModelandData()
+        setAdapter()
+        getData(PresentationUtils.ORDER_BY_ASCENDING)
+    }
+
+    private fun getData(order: String = "asc") {
+        lifecycleScope.launch {
+            viewModel.getProductSearchProductOrder(
+                dataName, order, "product_name"
+            ).collectLatest {
+                adapter.submitData(it)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(
-            R.layout.fragment_product_list_search_product_nama_produk,
-            container,
-            false
-        )
+    private fun setAdapter() {
+        adapter = ProductListGratisProductPagingAdapter()
+        binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.rvProductListPromosi.adapter = adapter
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentProductListSearchProductNamaProduk.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentProductListSearchProductNamaProduk().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun setViewModelandData() {
+        viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
+        dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
+        (requireActivity() as ProductListSearchProdukActivity).getTab().addOnTabSelectedListener(this)
     }
+
+    override fun onTabSelected(tab: TabLayout.Tab?) {}
+
+    override fun onTabUnselected(tab: TabLayout.Tab?) {}
+
+    override fun onTabReselected(tab: TabLayout.Tab?) {
+        if (tab?.position == 1) {
+            if (isClicked) {
+                isClicked = false
+
+                tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                    ?.setImageResource(R.drawable.arrow_up_tab_item)
+                tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                    ?.setImageResource(R.drawable.arrow_down_tab_item_blue)
+                getData(PresentationUtils.ORDER_BY_DESCENDING)
+
+            } else {
+                isClicked = true
+
+                tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                    ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
+                tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                    ?.setImageResource(R.drawable.arrow_down_tab_item)
+                getData(PresentationUtils.ORDER_BY_ASCENDING)
+
+            }
+
+        }
+    }
+
+
 }
