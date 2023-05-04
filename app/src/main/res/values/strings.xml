@@ -37,4 +37,5 @@
     <string name="phone_format_error">Phone numbers must be between 11 – 13 digits</string>
     <string name="error_message">error message</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="categories">Categories</string>
 </resources>
