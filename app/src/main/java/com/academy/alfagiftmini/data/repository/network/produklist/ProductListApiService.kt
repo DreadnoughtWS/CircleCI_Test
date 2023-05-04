@@ -39,7 +39,7 @@ interface ProductListApiService {
         @Query("status") status: Int = 1,
         @Query("_page") page: Int,
         @Query("_limit") limit: Int,
-        @Query("official_store_id") officialStoreIdL:Int
+        @Query("official_store_id") officialStoreIdL: Int
     ): List<ProductListDetailDataModel>
 
     @GET("products")
@@ -49,41 +49,40 @@ interface ProductListApiService {
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
         @Query("_order") order: String,
-        @Query("official_store_id") officialStoreIdL:Int
+        @Query("official_store_id") officialStoreIdL: Int
     ): List<ProductListDetailDataModel>
 
     @GET("promotion_product_502")
-    suspend fun getTebusMurah():List<ProductListTebusMurahDataModel>
+    suspend fun getTebusMurah(): List<ProductListTebusMurahDataModel>
 
     @GET("products")
     suspend fun getMultipleProducts(
         @Query(encoded = true, value = "product_id") id: String,
-    ):List<ProductListDetailDataModel>
+    ): List<ProductListDetailDataModel>
 
     @GET("products")
     suspend fun getProductByName(
-        @Query("status") status: Int = 1,
-        @Query("q") name:String
-    ):List<ProductListDetailDataModel>
+        @Query("status") status: Int = 1, @Query("q") name: String
+    ): List<ProductListDetailDataModel>
 
     @GET("products")
     suspend fun getProductsBynameOrder(
         @Query("status") status: Int = 1,
-        @Query("q") name:String,
+        @Query("product_name_like") name: String,
         @Query("_page") page: Int,
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
         @Query("_order") order: String,
-    ):List<ProductListDetailDataModel>
+    ): List<ProductListDetailDataModel>
 
     @GET("products")
     suspend fun getProductsByBannerId(
         @Query("status") status: Int = 1,
-        @Query("banner_id") bannerId:Int,
+        @Query("banner_id") bannerId: Int,
         @Query("_page") page: Int,
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
         @Query("_order") order: String,
-        ):List<ProductListDetailDataModel>
+    ): List<ProductListDetailDataModel>
 
 }
