@@ -12,24 +12,27 @@
         android:id="@+id/iv_detail_back_toolbar"
         android:src="@drawable/baseline_arrow_left_24"
         android:background="@drawable/background_back_button"
-        android:layout_width="30dp"
-        android:layout_height="30dp"/>
+        android:padding="3dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"/>
 
     <ImageView
         android:id="@+id/iv_detail_cart_toolbar"
         android:layout_marginHorizontal="20dp"
         android:layout_gravity="end"
         android:src="@drawable/outline_shopping_basket_24"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:padding="5dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@drawable/background_back_button" />
 
     <ImageView
         android:id="@+id/iv_detail_share_toolbar"
         android:layout_gravity="end"
         android:src="@drawable/share_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:padding="7dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:background="@drawable/background_back_button" />
 
 </androidx.appcompat.widget.Toolbar>
