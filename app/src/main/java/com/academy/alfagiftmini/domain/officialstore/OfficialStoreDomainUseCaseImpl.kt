@@ -14,8 +14,8 @@ class OfficialStoreDomainUseCaseImpl @Inject constructor(private val repository:
         return repository.get14OfficialStore()
     }
 
-    override suspend fun getAllOfficialStore(scope: CoroutineScope): Flow<PagingData<OfficialStoreDomainItemModel>> {
-        return repository.getAllOfficialStore(scope)
+    override suspend fun getAllOfficialStore(scope: CoroutineScope,name:String,type:String): Flow<PagingData<OfficialStoreDomainItemModel>> {
+        return repository.getAllOfficialStore(scope,name,type)
     }
 
     override suspend fun getBrands(

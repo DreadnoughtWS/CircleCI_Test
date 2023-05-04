@@ -1,12 +1,16 @@
 package com.academy.alfagiftmini.data.repository.network.officialstore
 
+import android.provider.ContactsContract.Data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.academy.alfagiftmini.data.DataUtils
 import com.academy.alfagiftmini.data.repository.network.officialstore.model.OfficialStoreDetailDataModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 
 class OfficialStoreListPagingSource(
     private val apiService: OfficialStoreApiService,
+    private val name: String,
+    private val type: String
 ) : PagingSource<Int, OfficialStoreDomainItemModel>() {
     override fun getRefreshKey(state: PagingState<Int, OfficialStoreDomainItemModel>): Int? {
         return null
@@ -15,7 +19,15 @@ class OfficialStoreListPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, OfficialStoreDomainItemModel> {
         val position = params.key ?: 1
         return try {
-            val response = apiService.getAllOfficialStore(position, 10)
+            var response: List<OfficialStoreDetailDataModel> = listOf()
+            when (type) {
+                DataUtils.TYPE_SEARCH_OFFICIAL -> {
+                    response = apiService.getOfficialStoreByName(name, position, 10)
+                }
+                DataUtils.TYPE_GET_ALL_OFFICIAL -> {
+                    response = apiService.getAllOfficialStore(position, 10)
+                }
+            }
             val data = OfficialStoreDetailDataModel.transforms(response)
 
             toLoadResult(

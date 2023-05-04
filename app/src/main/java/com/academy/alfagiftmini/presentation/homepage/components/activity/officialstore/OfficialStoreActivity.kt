@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.ActivityOfficialStoreBinding
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.isNetworkAvailable
@@ -64,7 +65,7 @@ class OfficialStoreActivity : AppCompatActivity() {
         adapter = OfficialStore14Adapter().apply {
             setOnItemClickListener { position, data ->
                 val intent = Intent(this@OfficialStoreActivity, DetailOfficialStoreActivity::class.java)
-                intent.putExtra("data", data)
+                intent.putExtra(PresentationUtils.INTENT_DATA, data)
                 startActivity(intent)
             }
         }

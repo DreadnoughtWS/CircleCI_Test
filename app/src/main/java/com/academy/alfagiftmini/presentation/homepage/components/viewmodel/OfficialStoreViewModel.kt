@@ -28,8 +28,8 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
         }
     }
 
-    suspend fun getAllOfficialStore(): Flow<PagingData<OfficialStoreDomainItemModel>> {
-        return useCase.getAllOfficialStore(viewModelScope)
+    suspend fun getAllOfficialStore(name:String,type:String): Flow<PagingData<OfficialStoreDomainItemModel>> {
+        return useCase.getAllOfficialStore(viewModelScope,name,type)
     }
 
     fun getBrands(id:String){

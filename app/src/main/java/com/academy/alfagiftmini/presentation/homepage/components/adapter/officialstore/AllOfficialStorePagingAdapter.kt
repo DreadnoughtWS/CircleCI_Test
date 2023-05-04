@@ -41,8 +41,6 @@ class AllOfficialStorePagingAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: OfficialStoreDomainItemModel) {
-            println("DATA")
-            println(data)
             with(binding) {
                 tvNamaStore.text = data.name
             }
