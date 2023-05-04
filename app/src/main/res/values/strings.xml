@@ -34,4 +34,6 @@
     <string name="submit">Submit</string>
     <string name="syarat_dan_ketentuan">Syarat dan Ketentuan</string>
     <string name="_081xxxxxxx">Eg: 081XXXXXXX</string>
+    <string name="phone_format_error">Phone numbers must be between 11 – 13 digits</string>
+    <string name="error_message">error message</string>
 </resources>

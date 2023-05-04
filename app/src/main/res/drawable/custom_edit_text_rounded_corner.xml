@@ -4,8 +4,8 @@
     <item android:state_enabled="true" android:state_focused="true">
         <shape android:shape="rectangle">
             <solid android:color="@android:color/white" />
-            <corners android:radius="6dp" />
-            <stroke android:width="2dp" android:color="@color/purple_500" />
+            <corners android:radius="12dp" />
+            <stroke android:width="2dp" android:color="@color/black" />
         </shape>
     </item>
 

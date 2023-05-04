@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentInputPhoneNumberBinding
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 
@@ -27,6 +26,7 @@ class InputPhoneNumberFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = arguments ?: return
+        binding.tvPhoneFormatError.visibility = View.GONE
         binding.etPhoneNumber.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId){
                 EditorInfo.IME_ACTION_DONE -> {
@@ -34,19 +34,19 @@ class InputPhoneNumberFragment : Fragment() {
                     Log.d("v", v.toString())
                     val phoneCheck = (requireActivity() as RegisterActivity).getModel().checkPhoneLength(binding.etPhoneNumber.text.toString())
                     if (phoneCheck){
+                        val phoneNumberFormatted = (requireActivity() as RegisterActivity).getModel().phoneNumberFormatted(binding.etPhoneNumber.text.toString())
                         val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
                         args.apply {
-                            val phoneNumberFormatted = binding.etPhoneNumber.text.toString().replace("0", "+62")
                             val data = RegistrationDataModel(registrationData.fName, registrationData.lName, registrationData.email, registrationData.pass, phoneNumberFormatted)
                             val finalData = InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(data)
                             view.findNavController().navigate(finalData)
                         }
-                        true
                     }
-                    else {
-                        Toast.makeText(activity, "length must be between 11 to 13", Toast.LENGTH_SHORT).show()
-                        false
+                    else{
+                        binding.tvPhoneFormatError.visibility = View.VISIBLE
+                        binding.tvPhoneFormatError.text = getString(R.string.phone_format_error)
                     }
+                    true
                 }
                 else -> false
             }

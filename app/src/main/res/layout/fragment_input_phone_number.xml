@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/red"
     tools:context=".presentation.authentication.fragment.register.InputPhoneNumberFragment">
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="80dp">
+        style="@style/Edit_Text_Container_Style">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Input Phone Number to Send OTP Code via SMS"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/et_phone_number"
+            style="@style/Edit_Text_Default_Style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="10dp"
+            android:autofillHints="@string/_081xxxxxxx"
             android:hint="@string/_081xxxxxxx"
-            android:padding="15dp"
-            android:elevation="5dp"
-            android:layout_margin="40dp"
-            android:background="@drawable/custom_edit_text_rounded_corner"
-            android:autofillHints="@string/_081xxxxxxx" />
+            android:inputType="phone" />
+
+        <TextView
+            android:id="@+id/tv_phone_format_error"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp" />
     </LinearLayout>
 
 
