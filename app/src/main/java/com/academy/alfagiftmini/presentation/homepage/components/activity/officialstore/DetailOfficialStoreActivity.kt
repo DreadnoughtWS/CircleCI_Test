@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import com.academy.alfagiftmini.databinding.ActivityDetailOfficialStoreBinding
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -69,7 +71,6 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
 
     private fun setObserver() {
         officialStoreViewModel.brand.observe(this) {
-            println("OBSERVER $it")
             if (it.size > 8) {
                 setLihatSemua(SHOW_LIHAT_SEMUA, it)
                 adapter.updateData(it.subList(0, 8))
@@ -98,7 +99,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
                     )
 
                 } else {
-                   
+
                     isOpen = false
                     adapter.updateData(data.subList(0, 8))
                     binding.tvLihatSemuaBrandsDetailOfficialStore.text = "Lihat Semua"
@@ -120,15 +121,22 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         binding.detailOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
             finish()
         }
+        binding.detailOfficialStoreToolbar.ivSearchToolbar.setOnClickListener {
+            startActivity(
+                Intent(
+                    this, OfficialStoreSearchActivity::class.java
+                )
+            )
+        }
     }
 
     private fun getDataFromIntent() {
         data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(
-                "data", OfficialStoreDomainItemModel::class.java
+                PresentationUtils.INTENT_DATA, OfficialStoreDomainItemModel::class.java
             ) ?: return
         } else {
-            intent.getParcelableExtra("data") ?: return
+            intent.getParcelableExtra(PresentationUtils.INTENT_DATA) ?: return
         }
         setToolbar(data)
         setData(data)

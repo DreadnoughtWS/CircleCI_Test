@@ -34,9 +34,11 @@ class OfficialStoreRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getAllOfficialStore(scope: CoroutineScope): Flow<PagingData<OfficialStoreDomainItemModel>> {
+    override suspend fun getAllOfficialStore(
+        scope: CoroutineScope, name: String, type: String
+    ): Flow<PagingData<OfficialStoreDomainItemModel>> {
         return Pager(config = PagingConfig(10)) {
-            OfficialStoreListPagingSource(ApiService)
+            OfficialStoreListPagingSource(ApiService, name, type)
         }.flow.cachedIn(scope)
     }
 

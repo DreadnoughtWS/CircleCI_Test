@@ -15,20 +15,6 @@ import javax.inject.Inject
 class ProductListViewModel @Inject constructor(private val useCase: ProductListDomainUseCase) :
     ViewModel() {
 
-    suspend fun getAllProductList(
-        type:Int
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return useCase.getAllProduct(viewModelScope,type)
-    }
-
-    suspend fun getProductOrder(
-        type:Int,
-        order:String,
-        sort:String
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return useCase.getProductOrder(viewModelScope,type,order,sort)
-    }
-
     suspend fun getProductGratisProduct(
         type:Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
@@ -71,6 +57,10 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
 
     suspend fun getProductSearchProduct(name:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
         return useCase.getProductSearchProduct(viewModelScope,name)
+    }
+
+    suspend fun getBannerProduct(bannerId:Int,order: String,sort: String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getBannerProduct(viewModelScope,bannerId,order,sort,type)
     }
 
 }

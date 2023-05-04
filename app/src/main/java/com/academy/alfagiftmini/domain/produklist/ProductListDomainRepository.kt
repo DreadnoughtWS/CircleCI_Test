@@ -9,10 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductListDomainRepository {
 
-    suspend fun getAllProduct(scope: CoroutineScope,type:Int): Flow<PagingData<ProductListDomainItemModel>>
-
-    suspend fun getProductOrder(scope: CoroutineScope,type:Int,order:String,sort:String): Flow<PagingData<ProductListDomainItemModel>>
-
     suspend fun getProductGratisProduct(scope:CoroutineScope, type:Int):Flow<PagingData<ProductListPromotionProductDomainModel>>
     suspend fun getProductGratisProductOrder(scope: CoroutineScope,type:Int,order:String,sort:String): Flow<PagingData<ProductListPromotionProductDomainModel>>
 
@@ -24,5 +20,7 @@ interface ProductListDomainRepository {
     suspend fun getProductSearchProductOrder(scope: CoroutineScope,name:String,order:String,sort:String) : Flow<PagingData<ProductListPromotionProductDomainModel>>
 
     suspend fun getProductSearchProduct(scope: CoroutineScope,name:String) : Flow<PagingData<ProductListPromotionProductDomainModel>>
+
+    suspend fun getBannerProduct(scope:CoroutineScope, bannerId:Int,order:String,sort:String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>
 
 }
