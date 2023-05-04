@@ -3,6 +3,7 @@ package com.academy.alfagiftmini.presentation.di
 import com.academy.alfagiftmini.data.di.CoreComponent
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.AllBannerListActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
@@ -20,6 +21,8 @@ interface AppComponent {
     interface Factory {
         fun create(coreComponent: CoreComponent): AppComponent
     }
+
+    fun mainActivityInject(activity: MainActivity)
 
     fun loginActivityInject(activity: LoginActivity)
     fun registerActivityInject(activity: RegisterActivity)
