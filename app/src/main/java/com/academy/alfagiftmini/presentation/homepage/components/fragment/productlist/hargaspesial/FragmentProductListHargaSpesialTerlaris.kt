@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListTerlarisHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class FragmentProductListHargaSpesialTerlaris : Fragment() {
     private lateinit var binding: FragmentProductListTerlarisHargaSpesialBinding
     private lateinit var viewModel: ProductListViewModel
-    private lateinit var adapter: ProductListPagingAdapter
+    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,7 +38,7 @@ class FragmentProductListHargaSpesialTerlaris : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.getProductOrder(
+            viewModel.getProductGratisProductOrder(
                 PresentationUtils.TYPE_HARGA_SPESIAL,
                 PresentationUtils.ORDER_BY_DESCENDING,
                 "sales_quantity"
@@ -49,7 +49,7 @@ class FragmentProductListHargaSpesialTerlaris : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = ProductListPagingAdapter()
+        adapter = ProductListGratisProductPagingAdapter()
         binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListTerlaris.adapter = adapter
     }

@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductListDomainUseCase {
 
-    suspend fun getAllProduct(scope: CoroutineScope,type:Int): Flow<PagingData<ProductListDomainItemModel>>
-    suspend fun getProductOrder(scope: CoroutineScope,type:Int,order:String,sort:String): Flow<PagingData<ProductListDomainItemModel>>
     suspend fun getProductGratisProduct(scope:CoroutineScope, type:Int):Flow<PagingData<ProductListPromotionProductDomainModel>>
 
     suspend fun getProductGratisProductOrder(scope: CoroutineScope,type:Int,order:String,sort:String): Flow<PagingData<ProductListPromotionProductDomainModel>>

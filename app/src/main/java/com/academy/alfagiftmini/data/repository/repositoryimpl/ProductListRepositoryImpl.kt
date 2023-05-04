@@ -8,8 +8,6 @@ import com.academy.alfagiftmini.data.repository.network.produklist.detailofficia
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStorePromosiPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductNamaProductPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductPagingSource
-import com.academy.alfagiftmini.data.repository.network.produklist.hargaspesial.ProductListHargaSpesialNamaProdukPagingSource
-import com.academy.alfagiftmini.data.repository.netwok.produklist.pagingsource.hargaspesial.ProductListHargaSpesialPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.*
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListTebusMurahDataModel
@@ -29,21 +27,6 @@ import javax.inject.Inject
 class ProductListRepositoryImpl @Inject constructor(
     private val apiService: ProductListApiService,
 ) : ProductListDomainRepository {
-    override suspend fun getAllProduct(
-        scope: CoroutineScope, type: Int
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return Pager(config = PagingConfig(10)) {
-            ProductListHargaSpesialPagingSource(apiService, type)
-        }.flow.cachedIn(scope)
-    }
-
-    override suspend fun getProductOrder(
-        scope: CoroutineScope, type: Int, order: String, sort: String
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return Pager(config = PagingConfig(10)) {
-            ProductListHargaSpesialNamaProdukPagingSource(apiService, type, order, sort)
-        }.flow.cachedIn(scope)
-    }
 
     override suspend fun getProductGratisProduct(
         scope: CoroutineScope, type: Int
@@ -105,10 +88,10 @@ class ProductListRepositoryImpl @Inject constructor(
 
     override suspend fun getProductByName(name: String): Flow<List<ProductListDomainItemModel>> {
         return flow<List<ProductListDomainItemModel>> {
-            try{
+            try {
                 val responseProduct = apiService.getProductByName(name = name)
                 emit(ProductListDetailDataModel.transforms(responseProduct, listOf()))
-            }catch (e:java.lang.Exception){
+            } catch (e: java.lang.Exception) {
                 println(e.message)
                 emit(emptyList())
             }
@@ -116,10 +99,7 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProductSearchProductOrder(
-        scope: CoroutineScope,
-        name: String,
-        order: String,
-        sort: String
+        scope: CoroutineScope, name: String, order: String, sort: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
             ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort)
@@ -127,8 +107,7 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProductSearchProduct(
-        scope: CoroutineScope,
-        name: String
+        scope: CoroutineScope, name: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
             ProductListSearchProductPromosiPagingSource(apiService, name)
