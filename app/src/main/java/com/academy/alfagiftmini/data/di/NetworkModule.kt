@@ -22,7 +22,7 @@ class NetworkModule {
     private fun retrofitClient(): Retrofit {
         val loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = OkHttpClient.Builder().build()
+        val client = OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).client(client).build()
     }
@@ -35,7 +35,7 @@ class NetworkModule {
                 val request = chain.request()
                 var string = request.url.toString()
                 string = string.replace("%26", "&")
-                val string2 :String = string.replace("%3D", "=")
+                val string2: String = string.replace("%3D", "=")
                 val newRequest = Request.Builder().url(string).url(string2).build()
                 chain.proceed(newRequest)
             }).build()

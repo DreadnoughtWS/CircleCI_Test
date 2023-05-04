@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListPromosiHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class FragmentProductListHargaSpesialPromosi : Fragment() {
     private lateinit var binding: FragmentProductListPromosiHargaSpesialBinding
     private lateinit var viewModel: ProductListViewModel
-    private lateinit var adapter: ProductListPagingAdapter
+    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
 
     override fun onCreateView(
@@ -40,14 +40,14 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.getAllProductList(PresentationUtils.TYPE_HARGA_SPESIAL).collectLatest {
+            viewModel.getProductGratisProduct(PresentationUtils.TYPE_HARGA_SPESIAL).collectLatest {
                 adapter.submitData(it)
             }
         }
     }
 
     private fun setAdapter() {
-        adapter = ProductListPagingAdapter()
+        adapter = ProductListGratisProductPagingAdapter()
         binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListPromosi.adapter = adapter
     }

@@ -12,21 +12,6 @@ import javax.inject.Inject
 
 class ProductListDomainUseCaseImpl @Inject constructor(private val repository: ProductListDomainRepository) :
     ProductListDomainUseCase {
-    override suspend fun getAllProduct(
-        scope: CoroutineScope,
-        type: Int
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return repository.getAllProduct(scope,type)
-    }
-
-    override suspend fun getProductOrder(
-        scope: CoroutineScope,
-        type: Int,
-        order: String,
-        sort:String
-    ): Flow<PagingData<ProductListDomainItemModel>> {
-        return repository.getProductOrder(scope,type,order,sort)
-    }
 
     override suspend fun getProductGratisProduct(
         scope: CoroutineScope,

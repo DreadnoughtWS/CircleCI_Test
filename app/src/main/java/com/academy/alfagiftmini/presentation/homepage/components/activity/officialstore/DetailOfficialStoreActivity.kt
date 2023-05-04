@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -98,7 +99,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
                     )
 
                 } else {
-                   
+
                     isOpen = false
                     adapter.updateData(data.subList(0, 8))
                     binding.tvLihatSemuaBrandsDetailOfficialStore.text = "Lihat Semua"
@@ -119,6 +120,13 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         binding.detailOfficialStoreToolbar.tvToolbar.text = data.name
         binding.detailOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
             finish()
+        }
+        binding.detailOfficialStoreToolbar.ivSearchToolbar.setOnClickListener {
+            startActivity(
+                Intent(
+                    this, OfficialStoreSearchActivity::class.java
+                )
+            )
         }
     }
 

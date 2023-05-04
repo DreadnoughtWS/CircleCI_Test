@@ -12,7 +12,7 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListNamaProdukHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -22,8 +22,7 @@ import kotlinx.coroutines.launch
 class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductListNamaProdukHargaSpesialBinding
     private lateinit var viewModel: ProductListViewModel
-    private lateinit var adapter: ProductListPagingAdapter
-    private lateinit var listener: TabLayout.OnTabSelectedListener
+    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     var isClicked = true
 
@@ -53,7 +52,7 @@ class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSel
 
     fun getData(order: String = "asc") {
         lifecycleScope.launch {
-            viewModel.getProductOrder(PresentationUtils.TYPE_HARGA_SPESIAL, order, "product_name")
+            viewModel.getProductGratisProductOrder(PresentationUtils.TYPE_HARGA_SPESIAL, order, "product_name")
                 .collectLatest {
                     adapter.submitData(it)
                 }
@@ -62,7 +61,7 @@ class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSel
 
 
     private fun setAdapter() {
-        adapter = ProductListPagingAdapter()
+        adapter = ProductListGratisProductPagingAdapter()
         binding.rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListNamaProduk.adapter = adapter
     }
