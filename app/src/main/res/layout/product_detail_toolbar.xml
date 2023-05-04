@@ -1,0 +1,35 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="0dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <ImageView
+        android:id="@+id/iv_detail_back_toolbar"
+        android:src="@drawable/baseline_arrow_left_24"
+        android:background="@drawable/background_back_button"
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
+
+    <ImageView
+        android:id="@+id/iv_detail_cart_toolbar"
+        android:layout_marginHorizontal="20dp"
+        android:layout_gravity="end"
+        android:src="@drawable/outline_shopping_basket_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/background_back_button" />
+
+    <ImageView
+        android:id="@+id/iv_detail_share_toolbar"
+        android:layout_gravity="end"
+        android:src="@drawable/share_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/background_back_button" />
+
+</androidx.appcompat.widget.Toolbar>
