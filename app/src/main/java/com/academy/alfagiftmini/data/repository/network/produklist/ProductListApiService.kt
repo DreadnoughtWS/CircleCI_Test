@@ -76,5 +76,14 @@ interface ProductListApiService {
         @Query("_order") order: String,
     ):List<ProductListDetailDataModel>
 
+    @GET("products")
+    suspend fun getProductsByBannerId(
+        @Query("status") status: Int = 1,
+        @Query("banner_id") bannerId:Int,
+        @Query("_page") page: Int,
+        @Query("_limit") limit: Int,
+        @Query("_sort") sort: String,
+        @Query("_order") order: String,
+        ):List<ProductListDetailDataModel>
 
 }

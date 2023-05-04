@@ -5,6 +5,7 @@ import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivi
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.AllBannerListActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.BannerPromoItemListActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreActivity
@@ -37,5 +38,6 @@ interface AppComponent {
     fun productListTebusMurahActivityInject(activity: ProductListTebusMurahActivity)
     fun productListSearchProductActivityInject(activity: ProductListSearchProdukActivity)
     fun bannerListActivityInject(activity: AllBannerListActivity)
+    fun bannerListPromoItemListActivityInject(activity: BannerPromoItemListActivity)
     fun productCategoriesActivityInject(activity: ProductCategoriesActivity)
 }
