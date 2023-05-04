@@ -31,7 +31,13 @@
         </activity>
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity"
             android:exported="false" />
@@ -61,12 +67,8 @@
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
