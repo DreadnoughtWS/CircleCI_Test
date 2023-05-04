@@ -25,11 +25,8 @@ class InputUserDataFragment : Fragment() {
         binding.apply {
             btnSubmitUserData.setOnClickListener {
                 //view model to check edit text content
-
-                if (etEmail.text.isNullOrEmpty() || etFirstName.text.isNullOrEmpty() || etLastName.text.isNullOrEmpty() || etPassword.text.isNullOrEmpty()) {
-                    //view model to show error for each edit text
-                    (requireActivity() as RegisterActivity).getModel().userDataValidate(binding)
-                } else {
+                val checkInput = (requireActivity() as RegisterActivity).getModel().userDataValidate(binding)
+                if (!checkInput) {
                     val data = InputUserDataFragmentDirections
                         .actionInputUserDataFragmentToInputPhoneNumberFragment(
                             RegistrationDataModel(

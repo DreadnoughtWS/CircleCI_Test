@@ -43,8 +43,12 @@ class InputPhoneNumberFragment : Fragment() {
                         }
                     }
                     else{
-                        binding.tvPhoneFormatError.visibility = View.VISIBLE
-                        binding.tvPhoneFormatError.text = getString(R.string.phone_format_error)
+                        binding.apply {
+                            tvPhoneFormatError.visibility = View.VISIBLE
+                            tvPhoneFormatError.text = getString(R.string.phone_format_error)
+                            etPhoneNumber.setBackgroundResource(R.drawable.edit_text_error_border)
+                        }
+
                     }
                     true
                 }
