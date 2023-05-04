@@ -9,9 +9,7 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductNamaProduk
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductTerlaris
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -32,13 +30,10 @@ class ProductCategoriesActivity: AppCompatActivity() {
         binding = ActivityProductCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val data = viewModel.getIntentData(intent) ?: return
-        setObserver()
-        setTabItems(data.subcategories)
-        setTab()
+        setTabItems(data.subcategories, data.text)
     }
 
-    private fun setTabItems(subcategories: List<String>) {
-        var isClicked = false
+    private fun setTabItems(subcategories: List<String>, category: String) {
 
         binding.apply {
             subcategories.forEach {
@@ -51,10 +46,9 @@ class ProductCategoriesActivity: AppCompatActivity() {
 
             tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    setupFragment(tab.position)
+                    setupFragment(tab.position, subcategories, category)
 
                     if (tab.position == 1) {
-                        isClicked = true
                         tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                             ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
 
@@ -63,7 +57,6 @@ class ProductCategoriesActivity: AppCompatActivity() {
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        isClicked = false
                         tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                             ?.setImageResource(R.drawable.arrow_up_tab_item)
                         tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -77,39 +70,13 @@ class ProductCategoriesActivity: AppCompatActivity() {
         }
     }
 
-    private fun setupFragment(position: Int) {
-        val fragment = when (position) {
-            0 -> {
-                FragmentProductListGratisProductPromosi()
-            }
-            1 -> {
-                FragmentProductListGratisProductNamaProduk()
-            }
-            else -> {
-                FragmentProductListGratisProductTerlaris()
-            }
-        }
-
-        val tag = when (position) {
-            0 -> FragmentProductListGratisProductPromosi::class.java.simpleName
-            1 -> FragmentProductListGratisProductNamaProduk::class.java.simpleName
-            else -> FragmentProductListGratisProductTerlaris::class.java.simpleName
-        }
+    private fun setupFragment(position: Int, subcategories: List<String>, category: String) {
+        val fragment = FragmentProductCategoriesDetail(viewModel, subcategories[position], category)
+        val tag = FragmentProductCategoriesDetail::class.java.simpleName
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment, tag)
+            replace(binding.container.id, fragment, tag)
             commit()
         }
     }
-
-    private fun setObserver() {
-        viewModel
-    }
-
-
-    private fun setTab() {
-
-    }
-
-
 }

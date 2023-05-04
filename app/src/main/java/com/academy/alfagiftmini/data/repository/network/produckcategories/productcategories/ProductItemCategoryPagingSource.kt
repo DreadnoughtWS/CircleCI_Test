@@ -2,31 +2,50 @@ package com.academy.alfagiftmini.data.repository.network.produckcategories.produ
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.academy.alfagiftmini.data.repository.network.produckcategories.ProductCategoriesApiService
+import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
+import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 
-class ProductItemCategoryPagingSource(private val apiService: ProductCategoriesApiService, private val subCategory: String, private val category: String): PagingSource<Int, ProductListDomainItemModel>() {
-    override fun getRefreshKey(state: PagingState<Int, ProductListDomainItemModel>): Int? {
+class ProductItemCategoryPagingSource(private val apiService: ProductListApiService, private val subCategory: String, private val category: String): PagingSource<Int, ProductListPromotionProductDomainModel>() {
+    override fun getRefreshKey(state: PagingState<Int, ProductListPromotionProductDomainModel>): Int? {
         return null
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListDomainItemModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListPromotionProductDomainModel> {
         val position = params.key ?: 1
         return try {
-            val data = getOnlineData(position)
-            LoadResult.Page(
-                data = data,
-                nextKey = if (data.isEmpty()) null else position + 1,
-                prevKey = null
+            val responseProduct = apiService.getProductByCategories(
+                page = position,
+                subCategory = subCategory,
+                category = category
             )
-        }catch (e: Exception) {
+            val responseSale = apiService.getPromotionProduct()
+            val responseStock = apiService.getProductStock()
+
+            val dataProduct: ArrayList<ProductListDetailDataModel> = responseProduct
+
+            val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
+                dataProduct, responseSale, responseStock[0].productDetails ?: arrayListOf()
+            )
+
+            toLoadResult(
+                dataSudahDiTransform,
+                nextKey = if (responseProduct.isEmpty()) null else position + 1
+            )
+
+        } catch (e: java.lang.Exception) {
+            println(e.message)
             LoadResult.Error(e)
         }
     }
-
-    private suspend fun getOnlineData(position: Int): List<ProductListDomainItemModel> {
-        val response = apiService.getProductByCategories(category, subCategory, if (position == 1) 1 else position * 10 - 10)
-        return ProductListDetailDataModel.transforms(response, listOf())
+    private fun toLoadResult(
+        data: List<ProductListPromotionProductDomainModel>,
+        prevKey: Int? = null,
+        nextKey: Int? = null
+    ): LoadResult<Int, ProductListPromotionProductDomainModel> {
+        return LoadResult.Page(
+            data = data, prevKey = prevKey, nextKey = nextKey
+        )
     }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCase
 import com.academy.alfagiftmini.domain.productcategories.model.ProductCategoriesDomainModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
+import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ class ProductCategoriesViewModel @Inject constructor(private val useCase: Produc
         } else intent.getParcelableExtra(PresentationUtils.CATEGORIES_KEY)
     }
 
-    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String): Flow<PagingData<ProductListDomainItemModel>> {
+    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return useCase.getProductByCategory(scope, subCategory, category)
     }
 }
