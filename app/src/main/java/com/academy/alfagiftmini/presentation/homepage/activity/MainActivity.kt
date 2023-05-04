@@ -1,16 +1,12 @@
 package com.academy.alfagiftmini.presentation.homepage.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityMainBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.fragment.*
 import javax.inject.Inject
 
