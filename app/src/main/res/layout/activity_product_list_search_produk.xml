@@ -24,16 +24,6 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/baseline_arrow_left_24_gray" />
 
-        <!--        <SearchView-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="50dp"-->
-        <!--            android:background="@drawable/shape_search_view"-->
-        <!--            android:iconifiedByDefault="false"-->
-        <!--            android:padding="15dp"-->
-        <!--            app:queryHint="Cari Produk di Alfagift"-->
-        <!--            app:searchHintIcon="@null"-->
-        <!--            app:searchIcon="@null" />-->
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search_view"
             android:layout_width="match_parent"

@@ -31,7 +31,7 @@
             android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity"
+            android:name=".presentation.authentication.activity.LoginActivity"
             android:exported="true">
 
         </activity>
@@ -43,13 +43,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.homepage.activity.MainActivity"
             android:exported="false" />
@@ -60,7 +54,7 @@
 
         </activity>
         <activity
-            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
+            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"

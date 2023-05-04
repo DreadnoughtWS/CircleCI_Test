@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
@@ -26,8 +28,10 @@ import com.academy.alfagiftmini.presentation.homepage.components.fragment.offici
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
+import kotlin.math.abs
 
 class DetailOfficialStoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailOfficialStoreBinding

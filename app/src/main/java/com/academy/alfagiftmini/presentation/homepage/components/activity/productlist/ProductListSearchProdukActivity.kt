@@ -181,6 +181,9 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
 
     private fun setHideToolbar() {
         supportActionBar?.hide()
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     fun getProductViewModel(): ProductListViewModel {
