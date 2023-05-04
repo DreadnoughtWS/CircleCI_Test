@@ -31,7 +31,7 @@
         </activity>
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -60,7 +60,7 @@
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
+            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity"
@@ -70,11 +70,11 @@
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
-            android:exported="false" >
+            android:exported="false">
 
         </activity>
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
+            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
             android:exported="false">
 
 
