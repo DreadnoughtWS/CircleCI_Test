@@ -55,6 +55,7 @@ class OtpVerificationFragment : Fragment() {
                 Log.d("test", s.toString())
                 if (binding.pvOtpCode.text.toString() == generatedOTP) {
                     Toast.makeText(context, "verified", Toast.LENGTH_SHORT).show()
+                    //post to server and go to home activity
                 }
                 binding.pvOtpCode.setSelection(binding.pvOtpCode.text?.length!!)
                 binding.pvOtpCode.addTextChangedListener(this)
