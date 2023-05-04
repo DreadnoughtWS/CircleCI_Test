@@ -9,7 +9,7 @@
         android:id="@+id/abl_toolbar_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="android.R.color.transparent"
+        android:background="@color/transparant"
         app:elevation="0dp">
 
     <include
