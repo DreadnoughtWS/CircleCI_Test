@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
-    android:layout_height="200dp"
+    android:layout_width="125dp"
+    android:layout_height="150dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/mrgn_1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/shape_product_categories">
@@ -20,10 +21,12 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textSize="20sp"
+            tools:text="Title"
+            android:textSize="15sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@id/iv_category_image"/>
 
 
