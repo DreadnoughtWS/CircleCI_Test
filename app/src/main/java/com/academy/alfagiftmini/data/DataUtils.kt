@@ -13,6 +13,9 @@ object DataUtils {
     const val TYPE_SEARCH_OFFICIAL = "search_official"
     const val TYPE_GET_ALL_OFFICIAL = "get_all_official"
 
+    const val TYPE_PROMOSI = "promosi"
+    const val TYPE_BUKAN_PROMOSI = "bukan_promosi"
+
 
     const val ORDER_BY_ASCENDING = "asc"
     const val ORDER_BY_DESCENDING = "desc"
