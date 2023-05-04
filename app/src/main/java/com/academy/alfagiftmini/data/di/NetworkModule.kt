@@ -4,6 +4,7 @@ import com.academy.alfagiftmini.data.DataUtils.BASE_URL
 import com.academy.alfagiftmini.data.repository.network.banner.BannerApiService
 import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
 import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
+import com.academy.alfagiftmini.data.repository.network.produckcategories.ProductCategoriesApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import dagger.Module
@@ -67,5 +68,8 @@ class NetworkModule {
         return retrofitClient().create(BannerApiService::class.java)
     }
 
-
+    @Provides
+    fun productCategoriesApiService(): ProductCategoriesApiService {
+        return retrofitClient().create(ProductCategoriesApiService::class.java)
+    }
 }

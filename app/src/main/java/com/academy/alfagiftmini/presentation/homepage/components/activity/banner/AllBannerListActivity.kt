@@ -7,8 +7,10 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
+import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityAllBannerListBinding
 import com.academy.alfagiftmini.databinding.ActivityBannerPromoItemListBinding
+import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
@@ -34,15 +36,19 @@ class AllBannerListActivity : AppCompatActivity() {
         binding = ActivityAllBannerListBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setToolbar()
 
         if (PresentationUtils.isNetworkAvailable(this)){
             getLiveData()
         }
 
-        binding.btnBannerBack.setOnClickListener {
+    }
+
+    private fun setToolbar() {
+        binding.allBannerListToolbar.tvPromoToolbarTitle.text = getString(R.string.banner_list_title)
+        binding.allBannerListToolbar.btnBannerBack.setOnClickListener {
             finish()
         }
-
     }
 
     private fun getLiveData() {

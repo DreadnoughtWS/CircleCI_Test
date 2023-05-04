@@ -22,7 +22,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemList"
+            android:name=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
@@ -60,14 +60,19 @@
             android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
-            android:exported="true">
-
+            android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
+            android:exported="false">
+
+
         </activity>
     </application>
 

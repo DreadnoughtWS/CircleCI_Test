@@ -8,3 +8,9 @@ data class RegisterDataDomain(
     val phonenumber: String,
     val memberId: String
 )
+
+data class RegisterResponseDomain (
+    val accessToken: String,
+    val user: RegisterDataDomain,
+    val error: String
+)
