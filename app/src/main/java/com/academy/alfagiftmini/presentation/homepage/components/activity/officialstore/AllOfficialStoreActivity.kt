@@ -48,7 +48,8 @@ class AllOfficialStoreActivity : AppCompatActivity() {
     private fun setAdapter() {
         adapter = AllOfficialStorePagingAdapter().apply {
             setOnItemClickListener { position, data ->
-                val intent = Intent(this@AllOfficialStoreActivity, DetailOfficialStoreActivity::class.java)
+                val intent =
+                    Intent(this@AllOfficialStoreActivity, DetailOfficialStoreActivity::class.java)
                 intent.putExtra("data", data)
                 startActivity(intent)
             }
@@ -61,6 +62,10 @@ class AllOfficialStoreActivity : AppCompatActivity() {
         binding.allOfficialStoreToolbar.tvToolbar.text = getString(R.string.official_store)
         binding.allOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
             finish()
+        }
+        binding.allOfficialStoreToolbar.ivSearchToolbar.setOnClickListener {
+            val intent = Intent(this, OfficialStoreSearchActivity::class.java)
+            startActivity(intent)
         }
     }
 

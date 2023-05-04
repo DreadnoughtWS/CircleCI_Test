@@ -7,6 +7,7 @@ import com.academy.alfagiftmini.presentation.homepage.components.activity.banner
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.*
 import dagger.Component
 
@@ -24,6 +25,7 @@ interface AppComponent {
     fun registerActivityInject(activity: RegisterActivity)
     fun officialStoreActivityInject(activity: OfficialStoreActivity)
     fun allOfficialStoreActivityInject(activity: AllOfficialStoreActivity)
+    fun officialStoreSearchActivityInject(activity: OfficialStoreSearchActivity)
     fun detailOfficialStoreActivityInject(activity: DetailOfficialStoreActivity)
     fun productListHargaSepsialActivityInject(activity: ProductListHargaSpesialActivity)
     fun productListGratisProductActivityInject(activity: ProductListGratisProductActivity)
