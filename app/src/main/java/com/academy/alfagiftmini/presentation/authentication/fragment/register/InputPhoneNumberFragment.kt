@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.academy.alfagiftmini.databinding.FragmentInputPhoneNumberBinding
+import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 
 class InputPhoneNumberFragment : Fragment() {
     private lateinit var binding: FragmentInputPhoneNumberBinding
@@ -17,7 +19,6 @@ class InputPhoneNumberFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentInputPhoneNumberBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -28,6 +29,10 @@ class InputPhoneNumberFragment : Fragment() {
         binding.etPhoneNumber.setOnEditorActionListener { v, actionId, event ->
             return@setOnEditorActionListener when (actionId){
                 EditorInfo.IME_ACTION_DONE -> {
+                    //view model to check phone number length
+                    Log.d("v", v.toString())
+                    /*(requireActivity() as RegisterActivity).getModel().checkPhoneLength()
+                    if ()*/
                     val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
                     args.apply {
                         val data = RegistrationDataModel(registrationData.fName, registrationData.lName, registrationData.email, registrationData.pass, binding.etPhoneNumber.text.toString())

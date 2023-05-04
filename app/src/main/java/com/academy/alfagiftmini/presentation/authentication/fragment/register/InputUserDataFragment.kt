@@ -24,10 +24,11 @@ class InputUserDataFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             btnSubmitUserData.setOnClickListener {
-                if (etEmail.text.isNullOrEmpty() || etFirstName.text.isNullOrEmpty() || etLastName.text.isNullOrEmpty() || etPassword.text.isNullOrEmpty()){
+                //view model to check edit text content
+
+                if (etEmail.text.isNullOrEmpty() || etFirstName.text.isNullOrEmpty() || etLastName.text.isNullOrEmpty() || etPassword.text.isNullOrEmpty()) {
                     Toast.makeText(activity, "input all field data", Toast.LENGTH_SHORT).show()
-                }
-                else{
+                } else {
                     val data = InputUserDataFragmentDirections
                         .actionInputUserDataFragmentToInputPhoneNumberFragment(
                             RegistrationDataModel(
