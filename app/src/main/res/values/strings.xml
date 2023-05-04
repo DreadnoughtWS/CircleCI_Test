@@ -26,7 +26,7 @@
     <string name="lihat_semua_promo">Lihat Semua Promo</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
     <string name="no_connection">NO CONNECTION</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last Name</string>
@@ -36,4 +36,5 @@
     <string name="_081xxxxxxx">Eg: 081XXXXXXX</string>
     <string name="phone_format_error">Phone numbers must be between 11 – 13 digits</string>
     <string name="error_message">error message</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>

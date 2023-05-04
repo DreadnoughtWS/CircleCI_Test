@@ -2,7 +2,6 @@ package com.academy.alfagiftmini.presentation.homepage.components.adapter.produc
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.input.key.Key.Companion.G
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -10,7 +9,7 @@ import com.academy.alfagiftmini.databinding.ItemProductCategoriesBinding
 import com.academy.alfagiftmini.domain.productcategories.model.ProductCategoriesDomainModel
 import com.bumptech.glide.Glide
 
-class CategoriesAdapter: PagingDataAdapter<ProductCategoriesDomainModel, CategoriesAdapter.ProductCategoriesViewHolder>(DiffCallback) {
+class CategoriesAdapter (private val listener: setOnItemClicked): PagingDataAdapter<ProductCategoriesDomainModel, CategoriesAdapter.ProductCategoriesViewHolder>(DiffCallback) {
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<ProductCategoriesDomainModel>() {
             override fun areItemsTheSame(
@@ -27,6 +26,10 @@ class CategoriesAdapter: PagingDataAdapter<ProductCategoriesDomainModel, Categor
         }
     }
 
+    interface setOnItemClicked {
+        fun onCategoryClicked(position: Int)
+    }
+
     class ProductCategoriesViewHolder(val binding: ItemProductCategoriesBinding): ViewHolder(binding.root)
 
     override fun onBindViewHolder(holder: ProductCategoriesViewHolder, position: Int) {
@@ -35,6 +38,13 @@ class CategoriesAdapter: PagingDataAdapter<ProductCategoriesDomainModel, Categor
             Glide.with(holder.itemView).load(data.image).into(ivCategoryImage)
             tvTitle.text = data.text
         }
+        holder.binding.root.setOnClickListener {
+            listener.onCategoryClicked(position)
+        }
+    }
+
+    fun getItemObject(position: Int): ProductCategoriesDomainModel{
+        return getItem(position) ?: ProductCategoriesDomainModel(-1, "", "", listOf())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductCategoriesViewHolder {

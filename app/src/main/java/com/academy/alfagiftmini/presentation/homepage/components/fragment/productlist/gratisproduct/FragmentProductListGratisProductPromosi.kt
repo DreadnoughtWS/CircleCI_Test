@@ -52,7 +52,6 @@ class FragmentProductListGratisProductPromosi : Fragment() {
 
     private fun setViewModel() {
         viewModel = (requireActivity() as ProductListGratisProductActivity).getProductViewModel()
-
     }
 
 
