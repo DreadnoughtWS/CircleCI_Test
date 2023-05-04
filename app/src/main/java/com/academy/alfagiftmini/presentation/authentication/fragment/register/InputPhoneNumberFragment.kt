@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -31,15 +32,21 @@ class InputPhoneNumberFragment : Fragment() {
                 EditorInfo.IME_ACTION_DONE -> {
                     //view model to check phone number length
                     Log.d("v", v.toString())
-                    /*(requireActivity() as RegisterActivity).getModel().checkPhoneLength()
-                    if ()*/
-                    val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
-                    args.apply {
-                        val data = RegistrationDataModel(registrationData.fName, registrationData.lName, registrationData.email, registrationData.pass, binding.etPhoneNumber.text.toString())
-                        val finalData = InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(data)
-                        view.findNavController().navigate(finalData)
+                    val phoneCheck = (requireActivity() as RegisterActivity).getModel().checkPhoneLength(binding.etPhoneNumber.text.toString())
+                    if (phoneCheck){
+                        val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
+                        args.apply {
+                            val phoneNumberFormatted = binding.etPhoneNumber.text.toString().replace("0", "+62")
+                            val data = RegistrationDataModel(registrationData.fName, registrationData.lName, registrationData.email, registrationData.pass, phoneNumberFormatted)
+                            val finalData = InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(data)
+                            view.findNavController().navigate(finalData)
+                        }
+                        true
                     }
-                    true
+                    else {
+                        Toast.makeText(activity, "length must be between 11 to 13", Toast.LENGTH_SHORT).show()
+                        false
+                    }
                 }
                 else -> false
             }

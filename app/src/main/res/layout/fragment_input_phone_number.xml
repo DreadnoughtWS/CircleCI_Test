@@ -4,10 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.authentication.fragment.register.InputPhoneNumberFragment">
-<TextView
-    android:id="@+id/check"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,12 +15,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="@string/_62"
-            android:padding="10dp"
+            android:hint="@string/_081xxxxxxx"
+            android:padding="15dp"
             android:elevation="5dp"
             android:layout_margin="40dp"
             android:background="@drawable/custom_edit_text_rounded_corner"
-            android:autofillHints="@string/_62" />
+            android:autofillHints="@string/_081xxxxxxx" />
     </LinearLayout>
 
 
