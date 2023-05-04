@@ -60,6 +60,9 @@
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity"
             android:exported="false" />
         <activity

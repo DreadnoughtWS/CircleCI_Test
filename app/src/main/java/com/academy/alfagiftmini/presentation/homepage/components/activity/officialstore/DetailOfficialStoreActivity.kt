@@ -14,6 +14,7 @@ import com.academy.alfagiftmini.databinding.ActivityDetailOfficialStoreBinding
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -69,7 +70,6 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
 
     private fun setObserver() {
         officialStoreViewModel.brand.observe(this) {
-            println("OBSERVER $it")
             if (it.size > 8) {
                 setLihatSemua(SHOW_LIHAT_SEMUA, it)
                 adapter.updateData(it.subList(0, 8))
@@ -125,10 +125,10 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     private fun getDataFromIntent() {
         data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(
-                "data", OfficialStoreDomainItemModel::class.java
+                PresentationUtils.INTENT_DATA, OfficialStoreDomainItemModel::class.java
             ) ?: return
         } else {
-            intent.getParcelableExtra("data") ?: return
+            intent.getParcelableExtra(PresentationUtils.INTENT_DATA) ?: return
         }
         setToolbar(data)
         setData(data)

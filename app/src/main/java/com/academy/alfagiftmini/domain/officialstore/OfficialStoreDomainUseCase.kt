@@ -10,7 +10,7 @@ interface OfficialStoreDomainUseCase {
 
     suspend fun get14OfficialStore(): Flow<List<OfficialStoreDomainItemModel>>
 
-    suspend fun getAllOfficialStore(scope: CoroutineScope): Flow<PagingData<OfficialStoreDomainItemModel>>
+    suspend fun getAllOfficialStore(scope: CoroutineScope,name:String,type:String): Flow<PagingData<OfficialStoreDomainItemModel>>
 
     suspend fun getBrands( id:String) : Flow<List<OfficialStorebrandsDomainItemModel>>
 

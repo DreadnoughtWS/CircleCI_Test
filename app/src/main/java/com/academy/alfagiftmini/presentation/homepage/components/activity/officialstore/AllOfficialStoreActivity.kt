@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityAllOfficialStoreBinding
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.AllOfficialStorePagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
@@ -39,9 +40,10 @@ class AllOfficialStoreActivity : AppCompatActivity() {
 
     private fun getDataFromApi() {
         lifecycleScope.launch {
-            viewModel.getAllOfficialStore().collectLatest {
-                adapter.submitData(it)
-            }
+            viewModel.getAllOfficialStore("", PresentationUtils.TYPE_GET_ALL_OFFICIAL)
+                .collectLatest {
+                    adapter.submitData(it)
+                }
         }
     }
 
@@ -50,7 +52,7 @@ class AllOfficialStoreActivity : AppCompatActivity() {
             setOnItemClickListener { position, data ->
                 val intent =
                     Intent(this@AllOfficialStoreActivity, DetailOfficialStoreActivity::class.java)
-                intent.putExtra("data", data)
+                intent.putExtra(PresentationUtils.INTENT_DATA, data)
                 startActivity(intent)
             }
         }

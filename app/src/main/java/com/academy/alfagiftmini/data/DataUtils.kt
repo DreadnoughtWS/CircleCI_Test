@@ -10,6 +10,9 @@ object DataUtils {
     const val TYPE_PAKET = 901
     const val TYPE_TEBUS_MURAH = 502
 
+    const val TYPE_SEARCH_OFFICIAL = "search_official"
+    const val TYPE_GET_ALL_OFFICIAL = "get_all_official"
+
 
     const val ORDER_BY_ASCENDING = "asc"
     const val ORDER_BY_DESCENDING = "desc"

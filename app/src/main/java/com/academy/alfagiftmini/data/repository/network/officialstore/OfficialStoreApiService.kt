@@ -12,10 +12,16 @@ interface OfficialStoreApiService {
         @Query("_page") page: Int, @Query("_limit") limit: Int
     ): List<OfficialStoreDetailDataModel>
 
-//    get brands
+    @GET("officialStores/")
+    suspend fun getOfficialStoreByName(
+        @Query("name_like") name: String, @Query("_page") page: Int, @Query("_limit") limit: Int
+    ): List<OfficialStoreDetailDataModel>
+
+    //    get brands
     @GET("brands")
     suspend fun getBrands(
         @Query(encoded = true, value = "brandid") id: String
-    ):List<OfficialStoreBrandsDataModel>
+    ): List<OfficialStoreBrandsDataModel>
+
 
 }
