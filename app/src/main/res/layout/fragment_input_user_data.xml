@@ -19,6 +19,12 @@
             android:autofillHints="first name"
             android:hint="@string/first_name"
             android:inputType="textPersonName" />
+        <TextView
+            android:id="@+id/tv_fn_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp"/>
 
         <EditText
             android:id="@+id/et_last_name"
@@ -30,6 +36,13 @@
             android:hint="@string/last_name"
             android:inputType="textPersonName" />
 
+        <TextView
+            android:id="@+id/tv_ln_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp"/>
+
         <EditText
             android:id="@+id/et_email"
             style="@style/Edit_Text_Default_Style"
@@ -40,6 +53,13 @@
             android:hint="@string/e_mail_address"
             android:inputType="textEmailAddress" />
 
+        <TextView
+            android:id="@+id/tv_email_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp"/>
+
         <EditText
             android:id="@+id/et_password"
             style="@style/Edit_Text_Default_Style"
@@ -49,6 +69,30 @@
             android:autofillHints="0123456789"
             android:hint="@string/password"
             android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/tv_pass_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp"/>
+
+        <EditText
+            android:id="@+id/et_password_confirm"
+            style="@style/Edit_Text_Default_Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:autofillHints="0123456789"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/tv_pass_confirm_err"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_marginStart="20dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_submit_user_data"

@@ -1,11 +1,11 @@
 package com.academy.alfagiftmini.presentation.authentication.viewmodel
 
 import android.os.CountDownTimer
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
@@ -15,6 +15,12 @@ import kotlin.random.Random
 
 class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainUseCase) :
     ViewModel() {
+    //input data validation
+    fun userDataValidate(binding: FragmentInputUserDataBinding) {
+        binding.apply {
+            if (etPassword.text.isNullOrEmpty()) Log.d("check", "empty in pass")
+        }
+    }
 
     //check phone number length
     fun checkPhoneLength(phoneNumber: String): Boolean {
