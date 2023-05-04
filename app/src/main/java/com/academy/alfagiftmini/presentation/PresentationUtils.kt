@@ -28,6 +28,8 @@ object PresentationUtils {
     const val BANNER_DATA = "BANNER_DATA"
     const val ALL_BANNER_LIST = "ALL_BANNER_LIST"
 
+    const val CATEGORIES_KEY = "PRODUCT_CATEGORY"
+
     fun String.fromHtml(): Spanned {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     }
