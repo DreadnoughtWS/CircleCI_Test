@@ -35,9 +35,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun setViewInteraction() {
-        binding.btnSubmit.setOnClickListener{
-            getUserData()
+        binding.apply {
+            btnSubmit.setOnClickListener{
+                getUserData()
+            }
+            btnRegister.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            }
         }
+
     }
 
     private fun getUserData() {

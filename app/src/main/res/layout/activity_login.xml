@@ -53,11 +53,12 @@
         android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_margin="10dp"
-        android:textSize="15sp"
         android:layout_below="@id/til_password_layout"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp"
+        android:text="Register Account"
+        style="@style/TextAppearance.AppCompat.Button"
+        android:textSize="15sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_submit"

@@ -1,6 +1,9 @@
 package com.academy.alfagiftmini.domain.register
 
+import kotlinx.parcelize.Parcelize
+
 data class RegisterDataDomain(
+    val id: Int?,
     val email: String?,
     val password: String?,
     val firstName: String?,

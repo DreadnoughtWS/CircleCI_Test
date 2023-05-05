@@ -52,6 +52,7 @@ class OtpVerificationFragment : Fragment() {
                     //post to server and go to home activity
                     (requireActivity() as RegisterActivity).getModel().registerNewUser(
                         RegisterDataDomain(
+                            null,
                             args.registrationData.email,
                             args.registrationData.pass,
                             args.registrationData.fName,

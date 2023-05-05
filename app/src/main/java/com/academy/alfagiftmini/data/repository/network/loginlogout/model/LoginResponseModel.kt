@@ -16,7 +16,7 @@ data class LoginResponseModel (
         fun transform(loginResponseModel: LoginResponseModel): LoginResponseDomain {
             return LoginResponseDomain(
                 loginResponseModel.accessToken ?: "",
-                RegisterDataModel.transform(loginResponseModel.user ?: RegisterDataModel("", "", "", "", "", "")),
+                RegisterDataModel.transform(loginResponseModel.user ?: RegisterDataModel(-1, "", "", "", "", "", "")),
                 loginResponseModel.error ?: ""
             )
         }
