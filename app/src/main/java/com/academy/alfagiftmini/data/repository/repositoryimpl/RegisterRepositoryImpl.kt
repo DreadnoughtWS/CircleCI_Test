@@ -17,6 +17,7 @@ class RegisterRepositoryImpl @Inject constructor(private val registerApiService:
         return flow {
             try {
                 val response = registerApiService.register(body = RegisterDataModel.transformToModel(newUser))
+                emit(RegisterResponseDomain(response.body()?.accessToken, RegisterDataModel.transform(response.body()?.user), response.body()?.error))
             }catch (e: Exception){
                 emit(RegisterResponseDomain(null, null, null))
             }
