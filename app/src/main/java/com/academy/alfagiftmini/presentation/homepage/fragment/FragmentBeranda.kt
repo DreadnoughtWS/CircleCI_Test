@@ -61,6 +61,7 @@ class FragmentBeranda() : Fragment() {
         }
     }
 
+
     private fun setFragment(layoutId: Int, fragment: Fragment) {
         val fragmentManager = parentFragmentManager
         fragmentManager.beginTransaction().replace(layoutId, fragment).commit()

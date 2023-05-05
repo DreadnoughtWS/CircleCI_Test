@@ -40,8 +40,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        setToolbar()
         setFragmentNavigation()
+    }
+
+    private fun setToolbar() {
+        supportActionBar?.hide()
     }
 
     private fun setFragmentNavigation(){

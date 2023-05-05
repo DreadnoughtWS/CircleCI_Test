@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import com.academy.alfagiftmini.databinding.FragmentBelanjaBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.belanja.ProductListBelanjaPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -40,6 +42,7 @@ class FragmentBelanja() : Fragment() {
         setViewModel()
         setAdapter()
         getData()
+        setBtnScroll()
     }
 
     private fun getData() {
@@ -74,7 +77,11 @@ class FragmentBelanja() : Fragment() {
 
 
     private fun setToolbar() {
+
         binding.tvToolbar.text = "Belanja"
+        binding.btnSearchProduct.setOnClickListener {
+            startActivity(Intent(requireContext(), ProductListSearchProdukActivity::class.java))
+        }
 
         binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if (scrollY >= 4750) {
@@ -98,6 +105,15 @@ class FragmentBelanja() : Fragment() {
                     clShoppingList.setBackgroundColor(getResources().getColor(R.color.very_light_gray))
                 }
             }
+        }
+    }
+
+    private fun setBtnScroll() {
+        binding.btnLihatShoppingList.setOnClickListener {
+            binding.scrollView.smoothScrollTo(0, 0)
+        }
+        binding.btnProdukRekomendasi.setOnClickListener {
+            binding.scrollView.smoothScrollTo(0, 4750)
         }
     }
 

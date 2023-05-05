@@ -25,7 +25,7 @@ class InputUserDataFragment : Fragment() {
         binding.apply {
             btnSubmitUserData.setOnClickListener {
                 //view model to check edit text content
-                val checkInput = (requireActivity() as RegisterActivity).getModel().userDataValidate(binding)
+                val checkInput = (requireActivity() as RegisterActivity).getModel().userDataValidate(binding, requireContext())
                 if (!checkInput) {
                     val data = InputUserDataFragmentDirections
                         .actionInputUserDataFragmentToInputPhoneNumberFragment(

@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.viewmodel
 
+import android.content.Context
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
@@ -11,26 +12,32 @@ import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
+import com.academy.alfagiftmini.presentation.PresentationUtils.COUNTRY_PHONE_CODE
+import com.academy.alfagiftmini.presentation.PresentationUtils.EMAIL_REGEX
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import kotlin.random.Random
 
 class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainUseCase) :
     ViewModel() {
+    //post data to server
+    fun registerNewUser(newUserData:RegisterDataDomain){
+        useCase.register(newUserData)
+    }
+
     //input data validation
-    fun userDataValidate(binding: FragmentInputUserDataBinding): Boolean {
+    fun userDataValidate(binding: FragmentInputUserDataBinding, context: Context): Boolean {
         var checkErr: Boolean
         binding.apply {
             val fName = etFirstName.text
             val lName = etLastName.text
             val email = etEmail.text
-            val emailReg = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$".toRegex()
-            val pass = etPassword.text
-            val passConfirm = etPasswordConfirm.text
+            val pass = etPassword.text.toString()
+            val passConfirm = etPasswordConfirm.text.toString()
             //first name
             if (fName.isNullOrEmpty()){
                 tvFnErr.visibility = View.VISIBLE
-                tvFnErr.text = "Please fill out this field"
+                tvFnErr.text = context.getString(R.string.empty_field_error)
                 etFirstName.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
@@ -43,7 +50,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
             //last name
             if (lName.isNullOrEmpty()){
                 tvLnErr.visibility = View.VISIBLE
-                tvLnErr.text = "Please fill out this field"
+                tvLnErr.text = context.getString(R.string.empty_field_error)
                 etLastName.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
@@ -56,13 +63,13 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
             //email
             if (email.isNullOrEmpty()){
                 tvEmailErr.visibility = View.VISIBLE
-                tvEmailErr.text = "Please fill out this field"
+                tvEmailErr.text = context.getString(R.string.empty_field_error)
                 etEmail.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
-            else if (!email.contains(emailReg)){
+            else if (!email.contains(EMAIL_REGEX)){
                 tvEmailErr.visibility = View.VISIBLE
-                tvEmailErr.text = "please use the correct email address format"
+                tvEmailErr.text = context.getString(R.string.email_format_error)
                 etEmail.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
@@ -73,15 +80,15 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
             }
 
             //password
-            if (pass.isNullOrEmpty()){
+            if (pass.isEmpty()){
                 tvPassErr.visibility = View.VISIBLE
-                tvPassErr.text = "Please fill out this field"
+                tvPassErr.text = context.getString(R.string.empty_field_error)
                 etPassword.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
             else if (pass.length !in 5..20){
                 tvPassErr.visibility = View.VISIBLE
-                tvPassErr.text = "Password length must be between 5 - 20"
+                tvPassErr.text = context.getString(R.string.password_length_error)
                 etPassword.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
@@ -92,29 +99,29 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
             }
 
             //confirmed password
-            if (passConfirm.isNullOrEmpty()){
+            if (passConfirm.isEmpty()){
                 tvPassConfirmErr.visibility = View.VISIBLE
-                tvPassConfirmErr.text = "Please fill out this field"
+                tvPassConfirmErr.text = context.getString(R.string.empty_field_error)
                 etPasswordConfirm.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
             else if (passConfirm.length !in 5..20){
                 tvPassConfirmErr.visibility = View.VISIBLE
-                tvPassConfirmErr.text = "Password length must be between 5 - 20"
+                tvPassConfirmErr.text = context.getString(R.string.password_length_error)
                 etPasswordConfirm.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
-            else if (passConfirm.toString() != pass.toString()){
+            else if (passConfirm != pass){
                 tvPassConfirmErr.visibility = View.VISIBLE
-                tvPassConfirmErr.text = "Password are not the same"
-                Log.d("pass", pass.toString())
-                Log.d("passConfirm", passConfirm.toString())
+                tvPassConfirmErr.text = context.getString(R.string.confirm_password_error)
+                Log.d("pass", pass)
+                Log.d("passConfirm", passConfirm)
                 etPasswordConfirm.setBackgroundResource(R.drawable.edit_text_error_border)
                 checkErr = true
             }
             else {
-                Log.d("pass2", pass.toString())
-                Log.d("passConfirm2", passConfirm.toString())
+                Log.d("pass2", pass)
+                Log.d("passConfirm2", passConfirm)
                 tvPassConfirmErr.visibility = View.INVISIBLE
                 etPasswordConfirm.setBackgroundResource(R.drawable.custom_edit_text_rounded_corner)
                 checkErr = false
@@ -131,8 +138,8 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
     //reformat phone number
     fun phoneNumberFormatted(phoneNumber: String): String {
         return if (phoneNumber[0] == '0') {
-            phoneNumber.replaceFirst("0", "+62")
-        } else "+62".plus(phoneNumber)
+            phoneNumber.replaceFirst("0", COUNTRY_PHONE_CODE)
+        } else COUNTRY_PHONE_CODE.plus(phoneNumber)
     }
 
     //generate otp code

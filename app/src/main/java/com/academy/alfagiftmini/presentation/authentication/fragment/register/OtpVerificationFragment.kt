@@ -1,13 +1,8 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.Manifest
-import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.app.PendingIntent.FLAG_MUTABLE
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.telephony.SmsManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateUtils
@@ -17,13 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
+import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
-import kotlin.random.Random
 
 class OtpVerificationFragment : Fragment() {
     private lateinit var binding: FragmentOtpVerificationBinding
@@ -55,6 +49,17 @@ class OtpVerificationFragment : Fragment() {
                 Log.d("test", s.toString())
                 if (binding.pvOtpCode.text.toString() == generatedOTP) {
                     Toast.makeText(context, "verified", Toast.LENGTH_SHORT).show()
+                    //post to server and go to home activity
+                    (requireActivity() as RegisterActivity).getModel().registerNewUser(
+                        RegisterDataDomain(
+                            args.registrationData.email,
+                            args.registrationData.pass,
+                            args.registrationData.fName,
+                            args.registrationData.lName,
+                            args.registrationData.phoneNumber,
+                            memberId = null
+                        )
+                    )
                 }
                 binding.pvOtpCode.setSelection(binding.pvOtpCode.text?.length!!)
                 binding.pvOtpCode.addTextChangedListener(this)
