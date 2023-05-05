@@ -21,9 +21,9 @@ class LoginRepositoryImpl @Inject constructor(
             try {
                 val data = LoginDataDomain.transform(user)
                 val response = loginApiService.login(body = data)
-                emit(LoginResponseModel.transform(response.body() ?: LoginResponseModel("", RegisterDataModel("", "", "", "", "", ""), response.errorBody()?.string())))
+                emit(LoginResponseModel.transform(response.body() ?: LoginResponseModel("", RegisterDataModel(-1,"", "", "", "", "", ""), response.errorBody()?.string())))
             }catch (e : Exception) {
-                emit(LoginResponseDomain("", RegisterDataDomain("", "", "", "", "", ""), e.message.toString()))
+                emit(LoginResponseDomain("", RegisterDataDomain(-1, "", "", "", "", "", ""), e.message.toString()))
             }
         }.flowOn(IO)
     }

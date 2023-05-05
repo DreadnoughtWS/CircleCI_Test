@@ -47,4 +47,5 @@
     <string name="password_length_error">Password length must be between 5 - 20</string>
     <string name="email_format_error">please use the correct email address format</string>
     <string name="confirm_password_error">Password are not the same</string>
+    <string name="toolbar_greeting">Hai, %s</string>
 </resources>
