@@ -29,6 +29,9 @@ object PresentationUtils {
     const val TYPE_PAKET = 901
     const val TYPE_TEBUS_MURAH = 502
 
+    const val TYPE_SHOPPING_LIST_BELANJA = 10
+    const val TYPE_REKOMENDASI_BELANJA = 11
+
     const val INTENT_DATA ="data"
 
 

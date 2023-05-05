@@ -37,7 +37,7 @@ class BannerProductPagingSource(
             val dataProduct: ArrayList<ProductListDetailDataModel> = arrayListOf()
 
             when (type) {
-                PresentationUtils.TYPE_PROMOSI -> {
+                DataUtils.TYPE_PROMOSI -> {
                     for (data in responseProduct) {
                         if (data.productSpecialPrice!! < data.price) {
                             dataProduct.add(data)
@@ -51,7 +51,7 @@ class BannerProductPagingSource(
                     }
                 }
 
-                PresentationUtils.TYPE_BUKAN_PROMOSI -> {
+                DataUtils.TYPE_BUKAN_PROMOSI -> {
                     dataProduct.addAll(responseProduct)
                 }
             }
