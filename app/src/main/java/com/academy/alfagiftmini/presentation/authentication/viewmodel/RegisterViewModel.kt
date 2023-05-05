@@ -15,14 +15,15 @@ import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
 import com.academy.alfagiftmini.presentation.PresentationUtils.COUNTRY_PHONE_CODE
 import com.academy.alfagiftmini.presentation.PresentationUtils.EMAIL_REGEX
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 import kotlin.random.Random
 
 class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainUseCase) :
     ViewModel() {
     //post data to server
-    fun registerNewUser(newUserData:RegisterDataDomain){
-        useCase.register(newUserData)
+    fun registerNewUser(newUserData:RegisterDataDomain): Flow<RegisterResponseDomain>{
+        return useCase.register(newUserData)
     }
 
     //input data validation
