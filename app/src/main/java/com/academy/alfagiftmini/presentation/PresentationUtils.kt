@@ -12,6 +12,10 @@ import com.academy.alfagiftmini.R
 import java.text.DecimalFormat
 
 object PresentationUtils {
+    val EMAIL_REGEX = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$".toRegex()
+
+    const val COUNTRY_PHONE_CODE = "+62"
+
     const val SHOW_LIHAT_SEMUA = true
     const val HIDE_LIHAT_SEMUA = false
 

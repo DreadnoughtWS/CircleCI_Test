@@ -13,7 +13,7 @@ data class RegisterDataModel(
     @SerializedName("lastName")
     val lastName: String,
     @SerializedName("phone")
-    val phonenumber: String,
+    val phoneNumber: String,
     @SerializedName("memberId")
     val memberId: String
 ) {
@@ -24,8 +24,28 @@ data class RegisterDataModel(
                 user?.password ?: "",
                 user?.firstName ?: "",
                 user?.lastName ?: "",
-                user?.phonenumber ?: "",
+                user?.phoneNumber ?: "",
                 user?.memberId ?: "")
+        }
+
+        fun transformToModel(user: RegisterDataDomain?): RegisterDataModel{
+            return RegisterDataModel(
+                user?.email ?: "",
+                user?.password ?: "",
+                user?.firstName ?: "",
+                user?.lastName ?: "",
+                user?.phone ?: "",
+                user?.memberId ?: ""
+            )
         }
     }
 }
+
+data class RegisterResponseModel(
+    @SerializedName("accessToken")
+    val accessToken: String?,
+    @SerializedName("user")
+    val user: RegisterDataModel?,
+    @SerializedName("error")
+    val error: String?
+)
