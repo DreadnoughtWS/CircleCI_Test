@@ -13,7 +13,7 @@
     <string name="stock_dari_gudang">Stock dari Gudang</string>
     <string name="stock_dari_toko">Stock dari Toko</string>
     <string name="stok_habis">Stok Habis</string>
-
+    <string name="kirim_ke">Kirim Ke : <b>Rumah</b></string>
     <string name="beranda">Beranda</string>
     <string name="belanja">Belanja</string>
     <string name="promo">Promo</string>
@@ -26,7 +26,7 @@
     <string name="lihat_semua_promo">Lihat Semua Promo</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
     <string name="no_connection">NO CONNECTION</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last Name</string>
@@ -41,4 +41,6 @@
     <string name="bebas_ongkir">Bebas Ongkir</string>
     <string name="sapa_instant_delivery">SAPA Instant Delivery</string>
     <string name="deskripsi">Deskripsi</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="categories">Categories</string>
 </resources>

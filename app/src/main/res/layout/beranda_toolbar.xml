@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/red"
+    android:elevation="0dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+    <TextView
+        android:visibility="visible"
+        android:layout_marginStart="10dp"
+        android:id="@+id/tv_toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:text="Hai, Made" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:textAllCaps="false"
+        android:paddingVertical="5dp"
+        android:paddingEnd="20dp"
+        android:paddingStart="15dp"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/teal"
+        android:drawableStart="@drawable/baseline_search_24"
+        android:backgroundTint="@color/very_light_gray"
+        android:background="@drawable/shape_btn_keranjang"
+        android:layout_gravity="start"
+        android:id="@+id/btn_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Mau belanja apa?" />
+
+    <ImageView
+        android:id="@+id/iv_card_toolbar"
+        android:layout_marginRight="20dp"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_card_giftcard_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/cart_image_view" />
+
+    <ImageView
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/iv_notif_toolbar"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_notifications_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/search_image_view" />
+
+    <ImageView
+        android:id="@+id/iv_chat_toolbar"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_chat_24"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/search_image_view" />
+
+
+
+</androidx.appcompat.widget.Toolbar>
