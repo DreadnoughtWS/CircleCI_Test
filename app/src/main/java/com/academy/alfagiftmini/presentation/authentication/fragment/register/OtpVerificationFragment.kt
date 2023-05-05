@@ -56,6 +56,7 @@ class OtpVerificationFragment : Fragment() {
                     lifecycleScope.launch {
                         (requireActivity() as RegisterActivity).getModel().registerNewUser(
                             RegisterDataDomain(
+                                id = null,
                                 args.registrationData.email,
                                 args.registrationData.pass,
                                 args.registrationData.fName,
