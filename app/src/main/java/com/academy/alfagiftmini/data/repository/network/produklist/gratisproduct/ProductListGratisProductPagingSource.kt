@@ -2,9 +2,12 @@ package com.academy.alfagiftmini.data.repository.network.produklist.gratisproduc
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.academy.alfagiftmini.data.DataUtils
 import com.academy.alfagiftmini.data.DataUtils.TYPE_GRATIS_PRODUK
 import com.academy.alfagiftmini.data.DataUtils.TYPE_HARGA_SPESIAL
 import com.academy.alfagiftmini.data.DataUtils.TYPE_PAKET
+import com.academy.alfagiftmini.data.DataUtils.TYPE_REKOMENDASI_BELANJA
+import com.academy.alfagiftmini.data.DataUtils.TYPE_SHOPPING_LIST_BELANJA
 import com.academy.alfagiftmini.data.DataUtils.TYPE_TEBUS_MURAH
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
@@ -63,6 +66,14 @@ class ProductListGratisProductPagingSource(
                             }
                         }
                     }
+                }
+                TYPE_SHOPPING_LIST_BELANJA -> {
+                    if(position == 1){
+                        dataKodePromo.addAll(responseProduct)
+                    }
+                }
+                TYPE_REKOMENDASI_BELANJA -> {
+                    dataKodePromo.addAll(responseProduct)
                 }
             }
 

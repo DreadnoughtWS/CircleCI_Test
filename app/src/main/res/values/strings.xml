@@ -36,6 +36,11 @@
     <string name="_081xxxxxxx">Eg: 081XXXXXXX</string>
     <string name="phone_format_error">Phone numbers must be between 11 – 13 digits</string>
     <string name="error_message">error message</string>
+    <string name="keranjang_button">+Keranjang</string>
+    <string name="pengiriman">Pengiriman</string>
+    <string name="bebas_ongkir">Bebas Ongkir</string>
+    <string name="sapa_instant_delivery">SAPA Instant Delivery</string>
+    <string name="deskripsi">Deskripsi</string>
     <string name="confirm_password">Confirm password</string>
     <string name="categories">Categories</string>
     <string name="empty_field_error">Please fill out this field</string>

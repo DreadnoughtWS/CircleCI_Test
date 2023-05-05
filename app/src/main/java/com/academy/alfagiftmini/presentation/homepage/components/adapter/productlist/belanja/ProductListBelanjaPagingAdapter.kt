@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist
+package com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.belanja
 
 import android.graphics.Paint
 import android.view.LayoutInflater
@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ItemProductGratisProductBinding
+import com.academy.alfagiftmini.databinding.ItemProdukBelanjaBinding
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
-import com.academy.alfagiftmini.presentation.PresentationUtils.hargaFormatter
+import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.bumptech.glide.Glide
 
-class ProductListGratisProductPagingAdapter :
-    PagingDataAdapter<ProductListPromotionProductDomainModel, ProductListGratisProductPagingAdapter.ProductListViewHolder>(
-        DiffCallback
-    ) {
-
-
+class ProductListBelanjaPagingAdapter : PagingDataAdapter<ProductListPromotionProductDomainModel, ProductListBelanjaPagingAdapter.ProductListViewHolder>(
+    DiffCallback
+) {
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<ProductListPromotionProductDomainModel>() {
             override fun areItemsTheSame(
@@ -39,14 +38,13 @@ class ProductListGratisProductPagingAdapter :
         }
     }
 
-
-    class ProductListViewHolder(private val binding: ItemProductGratisProductBinding) :
+    class ProductListViewHolder(private val binding: ItemProdukBelanjaBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: ProductListPromotionProductDomainModel) {
             with(binding) {
 
-                tvNamaProduct.text = data.productName
+                tvProductName.text = data.productName
 
                 if (data.stock == null || data.stock <= 0) {
                     showStockKosong(data)
@@ -63,10 +61,12 @@ class ProductListGratisProductPagingAdapter :
                 }
 
                 if (data.productSpecialPrice < data.price) {
-                    tvHargaDiskonProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                    tvHargaDiskonProduct.text =
+                        "Rp. ${PresentationUtils.hargaFormatter(data.price)}"
                     tvHargaDiskonProduct.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.productSpecialPrice)}"
+                    tvHargaProduct.text =
+                        "Rp. ${PresentationUtils.hargaFormatter(data.productSpecialPrice)}"
 
                     tvJumlahDiskon.text = buildString {
                         append(hitungDiskon(data))
@@ -75,7 +75,7 @@ class ProductListGratisProductPagingAdapter :
                 } else {
                     tvHargaDiskonProduct.visibility = View.GONE
                     tvJumlahDiskon.visibility = View.GONE
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                    tvHargaProduct.text = "Rp. ${PresentationUtils.hargaFormatter(data.price)}"
                 }
 
 
@@ -87,7 +87,6 @@ class ProductListGratisProductPagingAdapter :
             }
 
         }
-
         private fun hitungDiskon(data: ProductListPromotionProductDomainModel): Int {
             val hargaAsli = data.price
             val hargaDiskon = data.productSpecialPrice ?: 0
@@ -96,7 +95,7 @@ class ProductListGratisProductPagingAdapter :
 
         private fun showImageProduct(data: ProductListPromotionProductDomainModel) {
             Glide.with(itemView.context).load(data.productImages[0].url[0])
-                .placeholder(R.drawable.uniliver_logo).into(binding.ivImage)
+                .placeholder(R.drawable.uniliver_logo).into(binding.ivProductLogo)
             if (data.imgPreview103.isNullOrBlank()) {
                 binding.llProductGratis.visibility = View.GONE
                 return
@@ -115,23 +114,15 @@ class ProductListGratisProductPagingAdapter :
             with(binding) {
                 tvHargaDiskonProduct.visibility = View.GONE
                 tvJumlahDiskon.visibility = View.GONE
-                tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                tvHargaProduct.text = "Rp. ${PresentationUtils.hargaFormatter(data.price)}"
             }
         }
 
         private fun showStockKosong(data: ProductListPromotionProductDomainModel) {
             with(binding) {
-                btnKeranjang.text = itemView.context.getString(R.string.stok_habis)
+                clPlusMinusProduct.visibility = View.GONE
+                btnKeranjang.visibility = View.VISIBLE
                 btnKeranjang.isClickable = false
-                btnKeranjang.setBackgroundDrawable(
-                    AppCompatResources.getDrawable(
-                        itemView.context, R.drawable.shape_btn_keranjang_sky_blue
-                    )
-                )
-                btnKeranjang.setCompoundDrawablesWithIntrinsicBounds(
-                    0, 0, 0, 0
-                )
-
                 tvHargaDiskonProduct.visibility = View.GONE
                 tvJumlahDiskon.visibility = View.GONE
 
@@ -156,17 +147,23 @@ class ProductListGratisProductPagingAdapter :
 
             }
         }
-
-
     }
 
-    override fun onBindViewHolder(holder: ProductListViewHolder, position: Int) {
-        holder.bindData(getItem(position) ?: return)
+    override fun onBindViewHolder(
+        holder: ProductListViewHolder,
+        position: Int
+    ) {
+        holder.bindData(getItem(position) ?:return)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
-        val binding = ItemProductGratisProductBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ProductListBelanjaPagingAdapter.ProductListViewHolder {
+        val binding = ItemProdukBelanjaBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
         return ProductListViewHolder(binding)
     }

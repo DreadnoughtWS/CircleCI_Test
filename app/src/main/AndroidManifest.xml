@@ -76,13 +76,10 @@
         <activity
             android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
             android:exported="false">
-
         </activity>
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
             android:exported="false">
-
-
         </activity>
     </application>
 
