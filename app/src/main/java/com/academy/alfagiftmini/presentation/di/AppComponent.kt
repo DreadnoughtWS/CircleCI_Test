@@ -11,6 +11,7 @@ import com.academy.alfagiftmini.presentation.homepage.components.activity.offici
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories.ProductCategoriesActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productdetail.ProductDetailActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.*
 import dagger.Component
 
@@ -38,6 +39,7 @@ interface AppComponent {
     fun productListTebusMurahActivityInject(activity: ProductListTebusMurahActivity)
     fun productListSearchProductActivityInject(activity: ProductListSearchProdukActivity)
     fun bannerListActivityInject(activity: AllBannerListActivity)
+    fun productDetailActivityInject(activity: ProductDetailActivity)
     fun bannerListPromoItemListActivityInject(activity: BannerPromoItemListActivity)
     fun productCategoriesActivityInject(activity: ProductCategoriesActivity)
 }
