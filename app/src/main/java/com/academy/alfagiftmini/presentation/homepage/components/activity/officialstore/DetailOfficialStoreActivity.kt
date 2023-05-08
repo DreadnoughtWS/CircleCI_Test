@@ -7,16 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityDetailOfficialStoreBinding
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
@@ -28,10 +25,8 @@ import com.academy.alfagiftmini.presentation.homepage.components.fragment.offici
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.bumptech.glide.Glide
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
-import kotlin.math.abs
 
 class DetailOfficialStoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailOfficialStoreBinding
@@ -121,6 +116,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     }
 
     private fun setToolbar(data: OfficialStoreDomainItemModel) {
+        supportActionBar?.hide()
         binding.detailOfficialStoreToolbar.tvToolbar.text = data.name
         binding.detailOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
             finish()
