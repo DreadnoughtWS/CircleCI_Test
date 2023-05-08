@@ -49,4 +49,11 @@
     <string name="confirm_password_error">Password are not the same</string>
     <string name="toolbar_greeting">Hai, %s</string>
     <string name="riwayat_pesanan">Riwayat Pesanan</string>
+    <string name="lihat_sebagian">Lihat Sebagian</string>
+    <string name="total_pengikut">%d Pengikut</string>
+    <string name="promosi">Promosi</string>
+    <string name="nama_product">Nama Product</string>
+    <string name="terlaris">Terlaris</string>
+    <string name="operator_brand_id"><![CDATA[&brandid=]]></string>
+    <string name="cari_official_store">Cari Official Store</string>
 </resources>
