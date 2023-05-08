@@ -47,7 +47,7 @@ class FragmentBeranda() : Fragment() {
     }
 
     private fun setToolbar() {
-        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
             if (scrollY > 215) {
                 binding.berandaToolbar.btnSearch.visibility = View.VISIBLE
                 binding.berandaToolbar.tvToolbar.visibility = View.GONE

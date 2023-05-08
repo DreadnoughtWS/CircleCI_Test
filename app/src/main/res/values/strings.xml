@@ -48,4 +48,5 @@
     <string name="email_format_error">please use the correct email address format</string>
     <string name="confirm_password_error">Password are not the same</string>
     <string name="toolbar_greeting">Hai, %s</string>
+    <string name="riwayat_pesanan">Riwayat Pesanan</string>
 </resources>

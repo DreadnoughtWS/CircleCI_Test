@@ -22,8 +22,7 @@ class FragmentOfficialStore(private val viewModel: OfficialStoreViewModel) : Fra
     private lateinit var adapter: OfficialStore14Adapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentOfficialStoreBinding.inflate(inflater)
         return binding.root
@@ -53,7 +52,8 @@ class FragmentOfficialStore(private val viewModel: OfficialStoreViewModel) : Fra
             if (it.isNullOrEmpty()) {
                 setLihatSemua(PresentationUtils.HIDE_LIHAT_SEMUA)
                 if (PresentationUtils.isNetworkAvailable(requireContext())) {
-                    Toast.makeText(requireContext(), "Tidak ada internet", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Tidak ada internet", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 return@observe
             }

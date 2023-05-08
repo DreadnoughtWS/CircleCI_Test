@@ -15,19 +15,25 @@ import com.academy.alfagiftmini.databinding.FragmentBelanjaBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories.ProductCategoriesActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productcategories.CategoriesAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.belanja.ProductListBelanjaPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentBelanja() : Fragment() {
+class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
     private lateinit var binding: FragmentBelanjaBinding
     private lateinit var productListViewModel: ProductListViewModel
     private lateinit var shoppingListAdapter: ProductListBelanjaPagingAdapter
     private lateinit var rekomendasiListAdapter: ProductListGratisProductPagingAdapter
+    private lateinit var productCategoriesviewModel: ProductCategoriesViewModel
+    private lateinit var categoriesAdapter: CategoriesAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -58,6 +64,11 @@ class FragmentBelanja() : Fragment() {
                     rekomendasiListAdapter.submitData(it)
                 }
         }
+        lifecycleScope.launch {
+            productCategoriesviewModel.getAllCategories(this).collectLatest {
+                categoriesAdapter.submitData(lifecycle, it)
+            }
+        }
     }
 
     private fun setAdapter() {
@@ -69,10 +80,16 @@ class FragmentBelanja() : Fragment() {
         shoppingListAdapter = ProductListBelanjaPagingAdapter()
         binding.rvShoppingList.layoutManager = LinearLayoutManager(requireContext())
         binding.rvShoppingList.adapter = shoppingListAdapter
+
+        categoriesAdapter = CategoriesAdapter(this@FragmentBelanja)
+        binding.rvCategoryBelanja.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvCategoryBelanja.adapter = categoriesAdapter
     }
 
     private fun setViewModel() {
         productListViewModel = (requireActivity() as MainActivity).getViewModelProductList()
+        productCategoriesviewModel =
+            (requireActivity() as MainActivity).getViewModelProductCategories()
     }
 
 
@@ -106,6 +123,14 @@ class FragmentBelanja() : Fragment() {
                 }
             }
         }
+
+        binding.ivWindowToolbar.setOnClickListener {
+            if (binding.clCategoryBelanja.visibility == View.GONE) {
+                binding.clCategoryBelanja.visibility = View.VISIBLE
+            } else {
+                binding.clCategoryBelanja.visibility = View.GONE
+            }
+        }
     }
 
     private fun setBtnScroll() {
@@ -115,6 +140,12 @@ class FragmentBelanja() : Fragment() {
         binding.btnProdukRekomendasi.setOnClickListener {
             binding.scrollView.smoothScrollTo(0, 4750)
         }
+    }
+
+    override fun onCategoryClicked(position: Int) {
+        val intent = Intent(requireContext(), ProductCategoriesActivity::class.java)
+        intent.putExtra(PresentationUtils.CATEGORIES_KEY, categoriesAdapter.getItemObject(position))
+        startActivity(intent)
     }
 
 
