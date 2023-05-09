@@ -47,6 +47,12 @@ object PresentationUtils {
 
     const val CATEGORIES_KEY = "PRODUCT_CATEGORY"
 
+    const val SHARED_PREFERENCE = "USER_DATA"
+    const val SP_USER_ID = "USER_ID"
+    const val SP_FIRST_NAME = "FIRST_NAME"
+    const val SP_LAST_NAME = "LAST_NAME"
+    const val SP_PHONE = "USER_PHONE"
+
     fun String.fromHtml(): Spanned {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     }
