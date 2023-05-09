@@ -103,6 +103,6 @@ object PresentationUtils {
         return alertDialog.setView(R.layout.progress).create()
     }
 
-    fun formatter(n: Long): String =
-        DecimalFormat("#,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
+    fun formatter(n: Int): String =
+        DecimalFormat("Rp #.###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
 }
