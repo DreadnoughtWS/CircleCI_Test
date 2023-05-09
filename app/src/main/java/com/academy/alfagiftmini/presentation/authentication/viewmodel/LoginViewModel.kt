@@ -1,6 +1,9 @@
 package com.academy.alfagiftmini.presentation.authentication.viewmodel
 
+import android.app.Application
+import android.content.Context
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,24 +20,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase) : ViewModel() {
-    private val _userData = MutableLiveData<RegisterDataDomain>()
-    fun getUserLiveData(): LiveData<RegisterDataDomain> = _userData
-
     fun checkUserInputValidity (user: LoginDataDomain): Flow<LoginResponseDomain>  {
         //TODO(check)
         return login(user)
-    }
-
-    private fun getUserData(id: Int): Flow<RegisterDataDomain> {
-        return useCase.getUserData(id)
-    }
-
-    fun getIntentData(intent: Intent) {
-        CoroutineScope(IO).launch {
-            getUserData(intent.getIntExtra(PresentationUtils.USER_ID_KEY, -1)).collectLatest {
-                _userData.postValue(it)
-            }
-        }
     }
 
     private fun login(user: LoginDataDomain): Flow<LoginResponseDomain> {

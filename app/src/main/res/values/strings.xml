@@ -42,7 +42,7 @@
     <string name="sapa_instant_delivery">SAPA Instant Delivery</string>
     <string name="deskripsi">Deskripsi</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="categories">Categories</string>
+    <string name="categories">Kategori Produk</string>
     <string name="empty_field_error">Please fill out this field</string>
     <string name="password_length_error">Password length must be between 5 - 20</string>
     <string name="email_format_error">please use the correct email address format</string>

@@ -48,6 +48,7 @@ class PresentationFactory @Inject constructor(
             modelClass.isAssignableFrom(ProductCategoriesViewModel::class.java) -> ProductCategoriesViewModel(
                 productCategoriesUseCase
             ) as T
+            modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> MainActivityViewModel() as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
