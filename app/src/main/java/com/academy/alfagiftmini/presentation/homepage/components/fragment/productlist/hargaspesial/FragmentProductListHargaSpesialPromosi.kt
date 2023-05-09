@@ -16,9 +16,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListHargaSpesialPromosi : Fragment() {
+class FragmentProductListHargaSpesialPromosi(private val viewModel:ProductListViewModel) : Fragment() {
     private lateinit var binding: FragmentProductListPromosiHargaSpesialBinding
-    private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
 
 
@@ -32,7 +31,6 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setViewModel()
         setAdapter()
         getData()
 
@@ -52,9 +50,7 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
         binding.rvProductListPromosi.adapter = adapter
     }
 
-    private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
-    }
+
 
 
 }

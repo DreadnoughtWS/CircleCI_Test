@@ -66,7 +66,7 @@ class ProductListGratisProductPagingAdapter :
                     tvHargaDiskonProduct.text = "Rp. ${hargaFormatter(data.price)}"
                     tvHargaDiskonProduct.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.productSpecialPrice)}"
+                    tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.productSpecialPrice)}"
 
                     tvJumlahDiskon.text = buildString {
                         append(hitungDiskon(data))
@@ -75,7 +75,7 @@ class ProductListGratisProductPagingAdapter :
                 } else {
                     tvHargaDiskonProduct.visibility = View.GONE
                     tvJumlahDiskon.visibility = View.GONE
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                    tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.price)}"
                 }
 
 
@@ -115,7 +115,7 @@ class ProductListGratisProductPagingAdapter :
             with(binding) {
                 tvHargaDiskonProduct.visibility = View.GONE
                 tvJumlahDiskon.visibility = View.GONE
-                tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.price)}"
             }
         }
 

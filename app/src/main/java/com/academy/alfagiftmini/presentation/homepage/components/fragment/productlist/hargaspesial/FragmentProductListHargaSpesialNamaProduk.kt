@@ -19,9 +19,11 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSelectedListener {
+class FragmentProductListHargaSpesialNamaProduk(private val viewModel: ProductListViewModel) :
+    Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductListNamaProdukHargaSpesialBinding
-    private lateinit var viewModel: ProductListViewModel
+
+    //    private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     var isClicked = true
@@ -38,22 +40,23 @@ class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setViewModel()
+//        setViewModel()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
         (requireActivity() as ProductListHargaSpesialActivity).getTab()
             .addOnTabSelectedListener(this)
     }
 
-    private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
-    }
+//    private fun setViewModel() {
+//        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
+//    }
 
 
     fun getData(order: String = "asc") {
         lifecycleScope.launch {
-            viewModel.getProductGratisProductOrder(PresentationUtils.TYPE_HARGA_SPESIAL, order, "product_name")
-                .collectLatest {
+            viewModel.getProductGratisProductOrder(
+                PresentationUtils.TYPE_HARGA_SPESIAL, order, "product_name"
+            ).collectLatest {
                     adapter.submitData(it)
                 }
         }
