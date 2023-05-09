@@ -12,6 +12,7 @@ import com.academy.alfagiftmini.databinding.FragmentBerandaBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.banner.FragmentBannerBeranda
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.FragmentOfficialStore
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategories
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
@@ -29,6 +30,7 @@ class FragmentBeranda() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModel()
+        setFragment(binding.flBannerSlider.id, FragmentBannerBeranda())
         setFragment(binding.flProductCategories.id, FragmentProductCategories(viewModel))
         setFragment(binding.flOfficialStore.id, FragmentOfficialStore(officialStoreViewModel))
         setToolbar()
