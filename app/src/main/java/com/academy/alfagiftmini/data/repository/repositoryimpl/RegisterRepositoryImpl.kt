@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.data.repository.repositoryimpl
 
+import android.util.Log
 import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import com.academy.alfagiftmini.data.repository.network.register.model.RegisterDataModel
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
@@ -11,14 +12,18 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class RegisterRepositoryImpl @Inject constructor(private val registerApiService: RegisterApiService) :
-    RegisterDomainRepository {
+class RegisterRepositoryImpl @Inject constructor(
+    private val registerApiService: RegisterApiService,
+) : RegisterDomainRepository {
     override fun register(newUser: RegisterDataDomain): Flow<RegisterResponseDomain> {
         return flow {
             try {
-                val response = registerApiService.register(body = RegisterDataModel.transformToModel(newUser))
+                val dataTransform = RegisterDataModel.transformToModel(newUser)
+                Log.d("data", dataTransform.email)
+                val response = registerApiService.register(body = dataTransform)
+                emit(RegisterResponseDomain(response.body()?.accessToken, RegisterDataModel.transform(response.body()?.user), response.body()?.error))
             }catch (e: Exception){
-                emit(RegisterResponseDomain(null, null, null))
+                emit(RegisterResponseDomain(null, null, "error"))
             }
         }.flowOn(IO)
     }

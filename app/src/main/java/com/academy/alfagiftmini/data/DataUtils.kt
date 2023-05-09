@@ -18,6 +18,7 @@ object DataUtils {
 
     const val TYPE_PROMOSI = "promosi"
     const val TYPE_BUKAN_PROMOSI = "bukan_promosi"
+    const val ID_PRODUCT = "ID_PRODUCT"
 
 
     const val ORDER_BY_ASCENDING = "asc"

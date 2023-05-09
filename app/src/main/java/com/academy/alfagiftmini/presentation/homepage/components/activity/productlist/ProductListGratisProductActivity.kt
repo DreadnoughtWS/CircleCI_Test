@@ -5,18 +5,13 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModel
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductListGratisProductBinding
-import com.academy.alfagiftmini.databinding.ActivityProductListHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductTerlaris
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialNamaProduk
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialPromosi
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
@@ -40,59 +35,62 @@ class ProductListGratisProductActivity : AppCompatActivity() {
     }
 
     private fun initTabs() {
-        var isClicked: Boolean? = null
+
+        binding.apply {
+            tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+            })
+
+            tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                    ?.setImageResource(R.drawable.arrow_up_tab_item)
+                customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                    ?.setImageResource(R.drawable.arrow_down_tab_item)
+            })
 
 
-        binding.tlGratisProduct.addTab(binding.tlGratisProduct.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Promosi"
-        })
 
-        binding.tlGratisProduct.addTab(binding.tlGratisProduct.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Nama Product"
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                ?.setImageResource(R.drawable.arrow_up_tab_item)
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                ?.setImageResource(R.drawable.arrow_down_tab_item)
-        })
+            tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+            })
 
-
-
-        binding.tlGratisProduct.addTab(binding.tlGratisProduct.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Terlaris"
-        })
-
-        binding.tlGratisProduct.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                if (tab.position == 1) {
-                    isClicked = null
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                        ?.setImageResource(R.drawable.arrow_up_tab_item)
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                        ?.setImageResource(R.drawable.arrow_down_tab_item)
-
+            tlGratisProduct.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab) {
                 }
-            }
 
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                setupFragment(tab.position)
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    if (tab.position == 1) {
+                        with(tab.customView){
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                                ?.setImageResource(R.drawable.arrow_up_tab_item)
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                                ?.setImageResource(R.drawable.arrow_down_tab_item)
+                        }
 
-                if (tab.position == 1) {
-                    isClicked = true
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                        ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
 
+                    }
                 }
-            }
-        })
+
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    setupFragment(tab.position)
+
+                    if (tab.position == 1) {
+                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                            ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
+
+                    }
+                }
+            })
+        }
+
+
     }
 
     private fun setupFragment(position: Int) {

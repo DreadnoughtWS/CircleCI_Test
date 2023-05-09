@@ -10,6 +10,8 @@ import android.text.Spanned
 import androidx.core.content.res.ResourcesCompat
 import com.academy.alfagiftmini.R
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 object PresentationUtils {
     val EMAIL_REGEX = "^[\\w-]+@([\\w-]+\\.)+[\\w-]{2,4}$".toRegex()
@@ -37,9 +39,7 @@ object PresentationUtils {
     const val TYPE_REKOMENDASI_BELANJA = 11
 
     const val INTENT_DATA ="data"
-
-    const val USER_ID_KEY = "USER_ID"
-
+    const val PRODUCT_ID ="PRODUCT_ID"
 
     const val BANNER_ID = "BANNER_ID"
     const val BANNER_DATA = "BANNER_DATA"
@@ -102,4 +102,7 @@ object PresentationUtils {
         val alertDialog: AlertDialog.Builder = AlertDialog.Builder(context)
         return alertDialog.setView(R.layout.progress).create()
     }
+
+    fun formatter(n: Long): String =
+        DecimalFormat("#,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
 }

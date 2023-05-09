@@ -26,7 +26,7 @@ import javax.inject.Inject
 class ProductListSearchProdukActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductListSearchProdukBinding
     private lateinit var adapter: ProductListPreviewProductNameAdapter
-    var dataName: String = ""
+    private var dataName: String = ""
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -70,59 +70,58 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
     }
 
     private fun initTabs() {
-        var isClicked: Boolean? = null
 
+        binding.apply{
+            tlSearchView.addTab(tlSearchView.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+            })
 
-        binding.tlSearchView.addTab(binding.tlSearchView.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Promosi"
-        })
-
-        binding.tlSearchView.addTab(binding.tlSearchView.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Nama Product"
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                ?.setImageResource(R.drawable.arrow_up_tab_item)
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                ?.setImageResource(R.drawable.arrow_down_tab_item)
-        })
-
-
-
-        binding.tlSearchView.addTab(binding.tlSearchView.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Terlaris"
-        })
-
-        binding.tlSearchView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                if (tab.position == 1) {
-                    isClicked = null
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+            tlSearchView.addTab(tlSearchView.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                with(customView){
+                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                         ?.setImageResource(R.drawable.arrow_up_tab_item)
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_down)
                         ?.setImageResource(R.drawable.arrow_down_tab_item)
-
                 }
-            }
+            })
 
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                setupFragment(tab.position)
+            tlSearchView.addTab(tlSearchView.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+            })
 
-                if (tab.position == 1) {
-                    isClicked = true
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                        ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
-
+            tlSearchView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab) {
                 }
-            }
-        })
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    if (tab.position == 1) {
+                        with(tab.customView){
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                                ?.setImageResource(R.drawable.arrow_up_tab_item)
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                                ?.setImageResource(R.drawable.arrow_down_tab_item)
+                        }
+                    }
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    setupFragment(tab.position)
+
+                    if (tab.position == 1) {
+                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                            ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
+
+                    }
+                }
+            })
+        }
     }
 
     private fun setAdapter() {
@@ -131,26 +130,32 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
                 performSearch(data)
             }
         }
-        binding.rvPreviewNameProduct.adapter = adapter
-        binding.rvPreviewNameProduct.layoutManager = LinearLayoutManager(this)
+        binding.apply {
+            rvPreviewNameProduct.adapter = adapter
+            rvPreviewNameProduct.layoutManager = LinearLayoutManager(this@ProductListSearchProdukActivity)
+        }
+
     }
 
     private fun setPreviewProductName() {
-        binding.tilSearchView.editText?.doOnTextChanged { text, start, _, _ ->
-            if (start == 0) {
-                setLayoutVisibility(kategori = true, previewName = false, tab = false)
+        binding.apply {
+            tilSearchView.editText?.doOnTextChanged { text, start, _, _ ->
+                if (start == 0) {
+                    setLayoutVisibility(kategori = true, previewName = false, tab = false)
+                }
+                if (start != 0) {
+                    setLayoutVisibility(kategori = false, previewName = true, tab = false)
+                    getData(text)
+                }
             }
-            if (start != 0) {
-                setLayoutVisibility(kategori = false, previewName = true, tab = false)
-                getData(text)
+            tietSearchView.setOnEditorActionListener { _, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch(binding.tietSearchView.text.toString())
+                }
+                true
             }
         }
-        binding.tietSearchView.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                performSearch(binding.tietSearchView.text.toString())
-            }
-            true
-        }
+
     }
 
     private fun performSearch(name: String) {
@@ -174,9 +179,12 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
     }
 
     private fun setLayoutVisibility(kategori: Boolean, previewName: Boolean, tab: Boolean) {
-        binding.clKategoriPilihan.visibility = if (kategori) View.VISIBLE else View.GONE
-        binding.clPreviewNameProduct.visibility = if (previewName) View.VISIBLE else View.GONE
-        binding.llTab.visibility = if (tab) View.VISIBLE else View.GONE
+        binding.apply {
+            clKategoriPilihan.visibility = if (kategori) View.VISIBLE else View.GONE
+            clPreviewNameProduct.visibility = if (previewName) View.VISIBLE else View.GONE
+            llTab.visibility = if (tab) View.VISIBLE else View.GONE
+        }
+
     }
 
     private fun setHideToolbar() {

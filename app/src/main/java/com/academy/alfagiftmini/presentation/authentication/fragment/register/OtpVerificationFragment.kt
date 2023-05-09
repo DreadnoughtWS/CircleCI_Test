@@ -14,10 +14,13 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class OtpVerificationFragment : Fragment() {
     private lateinit var binding: FragmentOtpVerificationBinding
@@ -50,17 +53,22 @@ class OtpVerificationFragment : Fragment() {
                 if (binding.pvOtpCode.text.toString() == generatedOTP) {
                     Toast.makeText(context, "verified", Toast.LENGTH_SHORT).show()
                     //post to server and go to home activity
-                    (requireActivity() as RegisterActivity).getModel().registerNewUser(
-                        RegisterDataDomain(
-                            null,
-                            args.registrationData.email,
-                            args.registrationData.pass,
-                            args.registrationData.fName,
-                            args.registrationData.lName,
-                            args.registrationData.phoneNumber,
-                            memberId = null
-                        )
-                    )
+                    lifecycleScope.launch {
+                        (requireActivity() as RegisterActivity).getModel().registerNewUser(
+                            RegisterDataDomain(
+                                id = null,
+                                args.registrationData.email,
+                                args.registrationData.pass,
+                                args.registrationData.fName,
+                                args.registrationData.lName,
+                                args.registrationData.phoneNumber,
+                                memberId = null
+                            )
+                        ).collectLatest {
+                            //collect the response from api including access token and id for PUT update
+                        }
+                    }
+
                 }
                 binding.pvOtpCode.setSelection(binding.pvOtpCode.text?.length!!)
                 binding.pvOtpCode.addTextChangedListener(this)

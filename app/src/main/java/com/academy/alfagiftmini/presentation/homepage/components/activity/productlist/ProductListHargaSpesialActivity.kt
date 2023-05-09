@@ -40,59 +40,65 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
 
 
     private fun initTabs() {
-        var isClicked: Boolean? = null
 
+        binding.apply {
+            tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+            })
 
-        binding.tlHargaSpecial.addTab(binding.tlHargaSpecial.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Promosi"
-        })
-
-        binding.tlHargaSpecial.addTab(binding.tlHargaSpecial.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Nama Product"
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                ?.setImageResource(R.drawable.arrow_up_tab_item)
-            customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                ?.setImageResource(R.drawable.arrow_down_tab_item)
-        })
-
-
-
-        binding.tlHargaSpecial.addTab(binding.tlHargaSpecial.newTab().setCustomView(
-            R.layout.tab_item
-        ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Terlaris"
-        })
-
-        binding.tlHargaSpecial.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabLayout.Tab) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-                if (tab.position == 1) {
-                    isClicked = null
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+            tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                with(customView){
+                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                         ?.setImageResource(R.drawable.arrow_up_tab_item)
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_down)
                         ?.setImageResource(R.drawable.arrow_down_tab_item)
-
                 }
-            }
 
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                setupFragment(tab.position)
+            })
 
-                if (tab.position == 1) {
-                    isClicked = true
-                    tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                        ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
 
+
+            tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
+                R.layout.tab_item
+            ).apply {
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+            })
+
+            tlHargaSpecial.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabReselected(tab: TabLayout.Tab) {
                 }
-            }
-        })
+
+                override fun onTabUnselected(tab: TabLayout.Tab) {
+                    if (tab.position == 1) {
+                        with(tab.customView){
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                                ?.setImageResource(R.drawable.arrow_up_tab_item)
+                            this?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                                ?.setImageResource(R.drawable.arrow_down_tab_item)
+                        }
+
+
+                    }
+                }
+
+                override fun onTabSelected(tab: TabLayout.Tab) {
+                    setupFragment(tab.position)
+
+                    if (tab.position == 1) {
+                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                            ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
+
+                    }
+                }
+            })
+        }
+
+
     }
 
     private fun setupFragment(position: Int) {

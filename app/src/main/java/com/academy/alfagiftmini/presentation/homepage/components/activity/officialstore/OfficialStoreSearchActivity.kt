@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreListPagingSource
 import com.academy.alfagiftmini.databinding.ActivityOfficialStoreSearchBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -42,7 +40,7 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
     }
 
     private fun setDataSearch() {
-        binding.tietSearchView.setOnEditorActionListener { v, actionId, _ ->
+        binding.tietSearchView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 performSearch(binding.tietSearchView.text.toString())
             }
@@ -61,21 +59,27 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
 
     private fun setAdapter() {
         adapter = AllOfficialStorePagingAdapter().apply {
-            setOnItemClickListener { position, data ->
+            setOnItemClickListener { _, data ->
                 val intent = Intent(this@OfficialStoreSearchActivity, DetailOfficialStoreActivity::class.java)
                 intent.putExtra(PresentationUtils.INTENT_DATA, data)
                 startActivity(intent)
             }
         }
-        binding.rvOfficialStoreSearch.layoutManager = GridLayoutManager(this, 3)
-        binding.rvOfficialStoreSearch.adapter = adapter
+        binding.apply {
+            rvOfficialStoreSearch.layoutManager = GridLayoutManager(this@OfficialStoreSearchActivity, 3)
+            rvOfficialStoreSearch.adapter = adapter
+        }
+
     }
 
     private fun setToolbar() {
-        binding.officialStoreSeachToolbar.btnBannerBack.setOnClickListener {
-            finish()
+        binding.apply {
+            officialStoreSeachToolbar.btnBannerBack.setOnClickListener {
+                finish()
+            }
+            officialStoreSeachToolbar.tvPromoToolbarTitle.text = getString(R.string.cari_official_store)
         }
-        binding.officialStoreSeachToolbar.tvPromoToolbarTitle.text = "Cari Official Store"
+
     }
 
     private fun setHideToolbar() {

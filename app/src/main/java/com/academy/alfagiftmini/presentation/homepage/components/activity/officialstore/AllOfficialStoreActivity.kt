@@ -49,26 +49,34 @@ class AllOfficialStoreActivity : AppCompatActivity() {
 
     private fun setAdapter() {
         adapter = AllOfficialStorePagingAdapter().apply {
-            setOnItemClickListener { position, data ->
+            setOnItemClickListener { _, data ->
                 val intent =
                     Intent(this@AllOfficialStoreActivity, DetailOfficialStoreActivity::class.java)
                 intent.putExtra(PresentationUtils.INTENT_DATA, data)
                 startActivity(intent)
             }
         }
-        binding.rvDetailOfficialStore.layoutManager = GridLayoutManager(this, 3)
-        binding.rvDetailOfficialStore.adapter = adapter
+        binding.apply {
+            rvDetailOfficialStore.layoutManager =
+                GridLayoutManager(this@AllOfficialStoreActivity, 3)
+            rvDetailOfficialStore.adapter = adapter
+        }
+
     }
 
     private fun setDetailToolbar() {
-        binding.allOfficialStoreToolbar.tvToolbar.text = getString(R.string.official_store)
-        binding.allOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
-            finish()
+        binding.apply {
+            allOfficialStoreToolbar.tvToolbar.text = getString(R.string.official_store)
+            allOfficialStoreToolbar.ivBackToolbar.setOnClickListener {
+                finish()
+            }
+            allOfficialStoreToolbar.ivSearchToolbar.setOnClickListener {
+                val intent =
+                    Intent(this@AllOfficialStoreActivity, OfficialStoreSearchActivity::class.java)
+                startActivity(intent)
+            }
         }
-        binding.allOfficialStoreToolbar.ivSearchToolbar.setOnClickListener {
-            val intent = Intent(this, OfficialStoreSearchActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 
     private fun setHideToolbar() {
