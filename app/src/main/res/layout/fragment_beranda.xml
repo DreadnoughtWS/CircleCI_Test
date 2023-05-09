@@ -86,13 +86,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_search_product" />
 
             <FrameLayout
                 android:id="@+id/fl_product_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/fl_banner_slider" />
 

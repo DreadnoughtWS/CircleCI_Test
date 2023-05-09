@@ -34,22 +34,31 @@ class BannerPromoItemListActivity : AppCompatActivity() {
         presentationFactory
     }
 
-    private val bannerData = if (Build.VERSION.SDK_INT >= 33) { // TIRAMISU
-        intent.getParcelableExtra (PresentationUtils.BANNER_DATA, BannerDomainModel::class.java)
-    }else{
-        intent.getParcelableExtra(PresentationUtils.BANNER_DATA)
-    }
-
-    private val bannerId = bannerData?.id
+    private var bannerData: BannerDomainModel? = null
+    private var bannerId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.bannerListPromoItemListActivityInject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityBannerPromoItemListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setToolbarBanner()
-        initTabs()
-        setupFragment(0)
+
+        if (intent != null){
+            if (Build.VERSION.SDK_INT >= 33) { // TIRAMISU
+                bannerData = intent.getParcelableExtra (PresentationUtils.BANNER_DATA, BannerDomainModel::class.java)
+            }else{
+                bannerData = intent.getParcelableExtra(PresentationUtils.BANNER_DATA)
+            }
+        }
+
+        bannerId = bannerData?.id
+
+        if (bannerId != null){
+            setToolbarBanner()
+            initTabs()
+            setupFragment(0)
+        }
+
     }
 
     private fun initTabs() {

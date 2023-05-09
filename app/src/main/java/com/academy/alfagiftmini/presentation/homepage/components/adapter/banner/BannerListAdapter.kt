@@ -19,22 +19,23 @@ import com.bumptech.glide.Glide
 
 class BannerListAdapter(
     private val listBanner: List<BannerDomainModel>,
-    val context: Context
 ): RecyclerView.Adapter<BannerListAdapter.BannerListViewHolder>() {
+    lateinit var context: Context
     class BannerListViewHolder(val binding: ItemBannerListBinding): RecyclerView.ViewHolder(binding.root){
         fun bindData(data: BannerDomainModel, context: Context) {
-            val loadingDrawable1 = CircularProgressDrawable(context)
-            loadingDrawable1.strokeWidth = 5f
-            loadingDrawable1.centerRadius = 30f
-            loadingDrawable1.setColorSchemeColors(Color.RED)
-            loadingDrawable1.start()
+            val loadingDrawable2 = CircularProgressDrawable(context)
+            loadingDrawable2.strokeWidth = 5f
+            loadingDrawable2.centerRadius = 30f
+            loadingDrawable2.setColorSchemeColors(Color.RED)
+            loadingDrawable2.start()
 
-            Glide.with(itemView.context).load(data.bannerImageFileName).placeholder(loadingDrawable1)
+            Glide.with(binding.root).load(data.bannerImageFileName).placeholder(loadingDrawable2)
                 .into(binding.ivBannerImage)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerListViewHolder {
+        context = parent.context
         val binding =
             ItemBannerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BannerListViewHolder(binding)

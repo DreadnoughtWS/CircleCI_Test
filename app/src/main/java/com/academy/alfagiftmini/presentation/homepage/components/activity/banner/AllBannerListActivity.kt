@@ -3,20 +3,15 @@ package com.academy.alfagiftmini.presentation.homepage.components.activity.banne
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityAllBannerListBinding
-import com.academy.alfagiftmini.databinding.ActivityBannerPromoItemListBinding
-import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerListAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
-import com.smarteist.autoimageslider.SliderView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,8 +31,8 @@ class AllBannerListActivity : AppCompatActivity() {
         binding = ActivityAllBannerListBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setToolbar()
 
+        setToolbar()
         if (PresentationUtils.isNetworkAvailable(this)){
             getLiveData()
         }
@@ -55,9 +50,10 @@ class AllBannerListActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getAllBannerList()
             viewModel.bannerListData.collectLatest {
-                adapter = BannerListAdapter(it.bannerList,this@AllBannerListActivity)
-                binding.rvBannerList.adapter = adapter
                 binding.rvBannerList.layoutManager = LinearLayoutManager(this@AllBannerListActivity)
+                adapter = BannerListAdapter(it)
+                binding.rvBannerList.adapter = adapter
+
             }
         }
     }

@@ -9,16 +9,22 @@
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/sv_slider_banner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/sv_height1"
-        android:layout_marginHorizontal="@dimen/mrgn_1.5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="205dp"
         app:sliderAnimationDuration="600"
-        app:sliderIndicatorMarginBottom="@dimen/svbtmrgin1"
+        app:sliderAutoCycleDirection="right"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="600"
+        app:sliderScrollTimeInSec="2"
+        app:sliderIndicatorMarginBottom="5dp"
+        app:sliderIndicatorMarginLeft="30dp"
         app:sliderIndicatorGravity="bottom|left"
         app:sliderIndicatorSelectedColor="@color/red"
         app:sliderIndicatorUnselectedColor="@color/darkGrey2"
+        android:layout_marginBottom="10dp"
+        app:sliderStartAutoCycle="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <TextView
@@ -28,21 +34,9 @@
         android:text="@string/lihat_semua_promo"
         android:textColor="@color/teal"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/sv_slider_banner"
-        app:layout_constraintBottom_toBottomOf="@id/sv_slider_banner"/>
-
-<!--    <TextView-->
-<!--        android:id="@+id/tv_no_connect"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/no_connection"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textColor="@color/red"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"/>-->
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
