@@ -27,12 +27,15 @@ class ProductCategoriesRepositoryImpl @Inject constructor(private var productLis
     override suspend fun getProductByCategory(
         scope: CoroutineScope,
         subCategory: String,
-        category: String
+        category: String,
+        sort: String,
+        order: String,
+        type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(
             pageSize = 10
         )) {
-            ProductItemCategoryPagingSource(productListApiService, subCategory, category)
+            ProductItemCategoryPagingSource(productListApiService, subCategory, category, sort, order, type)
         }.flow.cachedIn(scope)
     }
 

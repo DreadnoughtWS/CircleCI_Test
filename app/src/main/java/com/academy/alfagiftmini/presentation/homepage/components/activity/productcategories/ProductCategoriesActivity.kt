@@ -9,7 +9,7 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesList
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -31,6 +31,7 @@ class ProductCategoriesActivity: AppCompatActivity() {
         setContentView(binding.root)
         val data = viewModel.getIntentData(intent) ?: return
         setTabItems(data.subcategories, data.text)
+        setupFragment(data.subcategories[0], data.text)
     }
 
     private fun setTabItems(subcategories: List<String>, category: String) {
@@ -46,7 +47,7 @@ class ProductCategoriesActivity: AppCompatActivity() {
 
             tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab) {
-                    setupFragment(tab.position, subcategories, category)
+                    setupFragment(subcategories[tab.position], category)
 
                     if (tab.position == 1) {
                         tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
@@ -70,9 +71,9 @@ class ProductCategoriesActivity: AppCompatActivity() {
         }
     }
 
-    private fun setupFragment(position: Int, subcategories: List<String>, category: String) {
-        val fragment = FragmentProductCategoriesDetail(viewModel, subcategories[position], category)
-        val tag = FragmentProductCategoriesDetail::class.java.simpleName
+    private fun setupFragment(subcategories: String, category: String) {
+        val fragment = FragmentProductCategoriesList(viewModel, subcategories, category)
+        val tag = FragmentProductCategoriesList::class.java.simpleName
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(binding.container.id, fragment, tag)

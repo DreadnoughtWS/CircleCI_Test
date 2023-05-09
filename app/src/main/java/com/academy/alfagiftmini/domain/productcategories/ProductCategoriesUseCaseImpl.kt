@@ -17,8 +17,11 @@ class ProductCategoriesUseCaseImpl @Inject constructor(private val repository: P
     override suspend fun getProductByCategory(
         scope: CoroutineScope,
         subCategory: String,
-        category: String
+        category: String,
+        sort: String,
+        order: String,
+        type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductByCategory(scope, subCategory, category)
+        return repository.getProductByCategory(scope, subCategory, category, sort, order, type)
     }
 }

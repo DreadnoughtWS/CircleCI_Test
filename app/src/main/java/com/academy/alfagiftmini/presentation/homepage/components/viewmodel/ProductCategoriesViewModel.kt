@@ -23,7 +23,7 @@ class ProductCategoriesViewModel @Inject constructor(private val useCase: Produc
         } else intent.getParcelableExtra(PresentationUtils.CATEGORIES_KEY)
     }
 
-    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return useCase.getProductByCategory(scope, subCategory, category)
+    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return useCase.getProductByCategory(scope, subCategory, category, sort, order, type)
     }
 }
