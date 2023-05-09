@@ -92,7 +92,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         context: Context,
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
-        fragmentInputUserDataBinding.apply{
+        fragmentInputUserDataBinding.apply {
             return if (lName.isEmpty()) {
                 tvLnErr.visibility = View.VISIBLE
                 tvLnErr.text = context.getString(R.string.empty_field_error)
@@ -112,7 +112,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         fragmentInputUserDataBinding: FragmentInputUserDataBinding,
         check: RegisterResponseDomain?
     ): Boolean {
-        fragmentInputUserDataBinding.apply{
+        fragmentInputUserDataBinding.apply {
             if (email.isEmpty()) {
                 tvEmailErr.visibility = View.VISIBLE
                 tvEmailErr.text = context.getString(R.string.empty_field_error)
@@ -141,7 +141,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         context: Context,
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
-        fragmentInputUserDataBinding.apply{
+        fragmentInputUserDataBinding.apply {
             return if (pass.isEmpty()) {
                 tvPassErr.visibility = View.VISIBLE
                 tvPassErr.text = context.getString(R.string.empty_field_error)
@@ -166,7 +166,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         context: Context,
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
-        fragmentInputUserDataBinding.apply{
+        fragmentInputUserDataBinding.apply {
             if (passConfirm.isEmpty()) {
                 tvPassConfirmErr.visibility = View.VISIBLE
                 tvPassConfirmErr.text = context.getString(R.string.empty_field_error)
