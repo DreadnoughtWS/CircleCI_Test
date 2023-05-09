@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.ActivityLoginBinding
 import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
@@ -55,8 +56,10 @@ class LoginActivity : AppCompatActivity() {
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
-                    Toast.makeText(this@LoginActivity, it.user.firstName, Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    //Toast.makeText(this@LoginActivity, it.user.firstName, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    intent.putExtra(PresentationUtils.USER_ID_KEY, it.user.id)
+                    startActivity(intent)
                 }
             }
         }

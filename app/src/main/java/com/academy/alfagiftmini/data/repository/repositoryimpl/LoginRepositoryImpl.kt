@@ -27,4 +27,15 @@ class LoginRepositoryImpl @Inject constructor(
             }
         }.flowOn(IO)
     }
+
+    override fun getUserData(id: Int): Flow<RegisterDataDomain> {
+        return flow {
+            try {
+                val response = loginApiService.getUserData(id)
+                emit(RegisterDataModel.transform(response))
+            }catch (e : Exception) {
+                emit(RegisterDataDomain(-1, "", "", "", "", "", ""))
+            }
+        }.flowOn(IO)
+    }
 }

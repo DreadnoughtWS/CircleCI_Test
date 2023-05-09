@@ -38,6 +38,8 @@ object PresentationUtils {
 
     const val INTENT_DATA ="data"
 
+    const val USER_ID_KEY = "USER_ID"
+
 
     const val BANNER_ID = "BANNER_ID"
     const val BANNER_DATA = "BANNER_DATA"

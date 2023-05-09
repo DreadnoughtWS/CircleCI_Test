@@ -4,14 +4,19 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityMainBinding
+import com.academy.alfagiftmini.domain.register.RegisterDataDomain
+import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.academy.alfagiftmini.presentation.homepage.fragment.*
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +29,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: PresentationFactory
+    private val mainActivityViewModel: LoginViewModel by viewModels{
+        viewModelFactory
+    }
     private val productListViewModel: ProductListViewModel by viewModels {
         viewModelFactory
     }
@@ -42,6 +50,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setToolbar()
         setFragmentNavigation()
+        getUserId()
+    }
+
+    fun getMainViewModel(): LoginViewModel {
+        return mainActivityViewModel
+    }
+
+    private fun getUserId() {
+        mainActivityViewModel.getIntentData(intent)
     }
 
     private fun setToolbar() {
