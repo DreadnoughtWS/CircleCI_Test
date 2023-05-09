@@ -25,7 +25,7 @@ class BannerBerandaSliderAdapter(
             loadingDrawable1.setColorSchemeColors(Color.RED)
             loadingDrawable1.start()
 
-            Glide.with(itemView.context).load(data.bannerImageFileName).placeholder(loadingDrawable1)
+            Glide.with(itemView).load(data.bannerImageFileName).placeholder(loadingDrawable1)
                 .into(binding.ivImageSlider)
         }
     }

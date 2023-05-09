@@ -28,12 +28,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_banner_list"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:paddingTop="10dp"
         android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/apl_banner_list_toolbar"
-        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
