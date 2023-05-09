@@ -11,7 +11,6 @@ import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.academy.alfagiftmini.databinding.ItemBannerListBinding
-import com.academy.alfagiftmini.databinding.ItemBannerSliderBinding
 import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.BannerPromoItemListActivity
@@ -29,8 +28,7 @@ class BannerListAdapter(
             loadingDrawable2.setColorSchemeColors(Color.RED)
             loadingDrawable2.start()
 
-            Glide.with(binding.root).load(data.bannerImageFileName).placeholder(loadingDrawable2)
-                .into(binding.ivBannerImage)
+            Glide.with(itemView).load(data.bannerImageFileName).placeholder(loadingDrawable2).into(binding.ivBannerListImage)
         }
     }
 
@@ -47,7 +45,7 @@ class BannerListAdapter(
 
     override fun onBindViewHolder(holder: BannerListViewHolder, position: Int) {
         holder.bindData(listBanner[position],context)
-        holder.binding.ivBannerImage.setOnClickListener {
+        holder.binding.root.setOnClickListener {
             val intent = Intent(context, BannerPromoItemListActivity::class.java)
             intent.putExtra(PresentationUtils.BANNER_DATA, listBanner[position])
             context.startActivity(intent)
