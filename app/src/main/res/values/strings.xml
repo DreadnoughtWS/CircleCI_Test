@@ -57,4 +57,7 @@
     <string name="operator_brand_id"><![CDATA[&brandid=]]></string>
     <string name="cari_official_store">Cari Official Store</string>
     <string name="email_exists">Email already exists</string>
+    <string name="stok_toko">Stok dari Toko</string>
+    <string name="stok_gudang">Stok dari Gudang</string>
+    <string name="besar_diskon">%d\%</string>
 </resources>

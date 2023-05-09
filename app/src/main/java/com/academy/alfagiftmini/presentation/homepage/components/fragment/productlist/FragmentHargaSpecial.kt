@@ -1,29 +1,35 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentHargaSpecialBinding
+import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
+import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentPromo
 import com.google.android.material.tabs.TabLayout
+import javax.inject.Inject
 
 
-class FragmentHargaSpecial(private val productListViewModel: ProductListViewModel) : Fragment() {
+class FragmentHargaSpecial : Fragment() {
     private lateinit var binding: FragmentHargaSpecialBinding
+
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding= FragmentHargaSpecialBinding.inflate(inflater)
+        binding = FragmentHargaSpecialBinding.inflate(inflater)
         return binding.root
     }
 
@@ -33,25 +39,28 @@ class FragmentHargaSpecial(private val productListViewModel: ProductListViewMode
         setupFragment(0)
     }
 
+
     private fun initTabs() {
 
         binding.apply {
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.promosi)
             })
 
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                with(customView){
-                    this?.findViewById<TextView>(com.academy.alfagiftmini.R.id.tv_tab_item)?.text = getString(
-                        com.academy.alfagiftmini.R.string.nama_product)
-                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_up)
-                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_up_tab_item)
-                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_down)
-                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_down_tab_item)
+                with(customView) {
+                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(
+                        R.string.nama_product
+                    )
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                        ?.setImageResource(R.drawable.arrow_up_tab_item)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                        ?.setImageResource(R.drawable.arrow_down_tab_item)
                 }
 
             })
@@ -61,7 +70,8 @@ class FragmentHargaSpecial(private val productListViewModel: ProductListViewMode
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.terlaris)
             })
 
             tlHargaSpecial.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -70,7 +80,7 @@ class FragmentHargaSpecial(private val productListViewModel: ProductListViewMode
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        with(tab.customView){
+                        with(tab.customView) {
                             this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                                 ?.setImageResource(R.drawable.arrow_up_tab_item)
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -99,10 +109,10 @@ class FragmentHargaSpecial(private val productListViewModel: ProductListViewMode
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductListHargaSpesialPromosi(productListViewModel)
+                FragmentProductListHargaSpesialPromosi()
             }
             1 -> {
-                FragmentProductListHargaSpesialNamaProduk(productListViewModel)
+                FragmentProductListHargaSpesialNamaProduk()
             }
             else -> {
                 FragmentProductListHargaSpesialTerlaris()
@@ -116,7 +126,7 @@ class FragmentHargaSpecial(private val productListViewModel: ProductListViewMode
         }
         val fragmentManager = requireActivity().supportFragmentManager
         fragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment, tag)
+            replace(R.id.container_fragment_special, fragment, tag)
             commit()
         }
     }

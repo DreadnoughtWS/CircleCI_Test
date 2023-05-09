@@ -9,8 +9,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductPromosiBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentGratisProduk
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -30,7 +32,6 @@ class FragmentProductListGratisProductPromosi : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setViewModel()
         setAdapter()
         getData()
@@ -51,7 +52,7 @@ class FragmentProductListGratisProductPromosi : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListGratisProductActivity).getProductViewModel()
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
     }
 
 

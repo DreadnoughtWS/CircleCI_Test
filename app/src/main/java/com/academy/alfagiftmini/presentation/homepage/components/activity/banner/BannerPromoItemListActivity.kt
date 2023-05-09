@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.banner
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -8,12 +9,15 @@ import androidx.activity.viewModels
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityBannerPromoItemListBinding
+import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.bannerproduct.FragmentBannerProductNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.bannerproduct.FragmentBannerProductPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.bannerproduct.FragmentBannerProductTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
@@ -30,20 +34,26 @@ class BannerPromoItemListActivity : AppCompatActivity() {
         presentationFactory
     }
 
-    private val bannerId = 1
+    private val bannerData = if (Build.VERSION.SDK_INT >= 33) { // TIRAMISU
+        intent.getParcelableExtra (PresentationUtils.BANNER_DATA, BannerDomainModel::class.java)
+    }else{
+        intent.getParcelableExtra(PresentationUtils.BANNER_DATA)
+    }
+
+    private val bannerId = bannerData?.id
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.bannerListPromoItemListActivityInject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityBannerPromoItemListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setToolbarBanner()
         initTabs()
         setupFragment(0)
     }
 
     private fun initTabs() {
         var isClicked: Boolean? = null
-
 
         binding.tlBannerProduct.addTab(binding.tlBannerProduct.newTab().setCustomView(
             R.layout.tab_item
@@ -66,7 +76,7 @@ class BannerPromoItemListActivity : AppCompatActivity() {
         binding.tlBannerProduct.addTab(binding.tlBannerProduct.newTab().setCustomView(
             R.layout.tab_item
         ).apply {
-            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = "Terlaris"
+            customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
         })
 
         binding.tlBannerProduct.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -131,13 +141,14 @@ class BannerPromoItemListActivity : AppCompatActivity() {
     }
 
     fun getBannerIdValue(): Int {
-        return bannerId
+        return bannerId ?: 0
     }
 
-    private fun setToolbar() {
-//        binding.allBannerListToolbar.tvPromoToolbarTitle.text = getString(R.string.banner_list_title)
-//        binding.allBannerListToolbar.btnBannerBack.setOnClickListener {
-//            finish()
-//        }
+    private fun setToolbarBanner() {
+        binding.bannerItemListToolbar.tvPromoToolbarTitle.text = bannerData?.bannerName
+        binding.bannerItemListToolbar.btnBannerBack.setOnClickListener {
+            finish()
+        }
+        Glide.with(this).load(bannerData?.bannerImageFileName).into(binding.ivBannerImage)
     }
 }

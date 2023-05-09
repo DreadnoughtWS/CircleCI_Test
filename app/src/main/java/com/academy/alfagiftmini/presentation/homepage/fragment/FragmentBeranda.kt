@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentBerandaBinding
+import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.banner.FragmentBannerBeranda
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.FragmentOfficialStore
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategories
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainActivityViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 
 
 class FragmentBeranda() : Fragment() {
@@ -24,10 +29,12 @@ class FragmentBeranda() : Fragment() {
     private lateinit var viewModel: ProductCategoriesViewModel
     private lateinit var officialStoreViewModel: OfficialStoreViewModel
     private lateinit var mainViewModel: MainActivityViewModel
+    private lateinit var bannerViewModel: BannerListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModel()
+        setFragment(binding.flBannerSlider.id, FragmentBannerBeranda(bannerViewModel))
         setFragment(binding.flProductCategories.id, FragmentProductCategories(viewModel))
         setFragment(binding.flOfficialStore.id, FragmentOfficialStore(officialStoreViewModel))
         setToolbar()
@@ -38,6 +45,7 @@ class FragmentBeranda() : Fragment() {
         viewModel = (requireActivity() as MainActivity).getViewModelProductCategories()
         officialStoreViewModel = (requireActivity() as MainActivity).getViewModelOfficialStore()
         mainViewModel = (requireActivity() as MainActivity).getViewModelMain()
+        bannerViewModel = (requireActivity() as MainActivity).getBannerListsViewModel()
     }
 
     private fun setBtnSearch() {

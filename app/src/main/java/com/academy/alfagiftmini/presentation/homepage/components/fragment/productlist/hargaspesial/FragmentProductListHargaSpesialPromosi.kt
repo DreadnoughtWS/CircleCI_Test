@@ -9,16 +9,19 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListPromosiHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListHargaSpesialPromosi(private val viewModel:ProductListViewModel) : Fragment() {
+class FragmentProductListHargaSpesialPromosi : Fragment() {
     private lateinit var binding: FragmentProductListPromosiHargaSpesialBinding
     private lateinit var adapter: ProductListGratisProductPagingAdapter
+    private lateinit var viewModel: ProductListViewModel
 
 
     override fun onCreateView(
@@ -31,9 +34,14 @@ class FragmentProductListHargaSpesialPromosi(private val viewModel:ProductListVi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setViewModel()
         setAdapter()
         getData()
 
+    }
+
+    private fun setViewModel() {
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
     }
 
     private fun getData() {
@@ -49,8 +57,6 @@ class FragmentProductListHargaSpesialPromosi(private val viewModel:ProductListVi
         binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListPromosi.adapter = adapter
     }
-
-
 
 
 }
