@@ -107,10 +107,10 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductListHargaSpesialPromosi(viewModel)
+                FragmentProductListHargaSpesialPromosi()
             }
             1 -> {
-                FragmentProductListHargaSpesialNamaProduk(viewModel)
+                FragmentProductListHargaSpesialNamaProduk()
             }
             else -> {
                 FragmentProductListHargaSpesialTerlaris()

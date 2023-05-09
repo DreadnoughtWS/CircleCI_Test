@@ -11,6 +11,7 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductPromosiBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListPaketPromosiBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPaketActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
@@ -52,7 +53,7 @@ class FragmentProductListPaketPromosi : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListPaketActivity).getProductListViewModel()
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
     }
 
 

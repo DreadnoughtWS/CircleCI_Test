@@ -48,17 +48,35 @@ class ProductListGratisProductPagingAdapter :
 
                 tvNamaProduct.text = data.productName
 
-                if (data.stock == null || data.stock <= 0) {
-                    showStockKosong(data)
+                if (data.productSpecialPrice == null || data.productSpecialPrice == 0) {
+                    showSpecialPriceNull(data)
                     showTvStockFrom(data)
                     showImageProduct(data)
                     return
                 }
 
-                if (data.productSpecialPrice == null || data.productSpecialPrice == 0) {
-                    showSpecialPriceNull(data)
+                if (data.stock == null || data.stock <= 0) {
+                    showStockKosong(data)
+                    showHargaProduct(data)
                     showTvStockFrom(data)
                     showImageProduct(data)
+                    return
+                }
+
+
+                showHargaProduct(data)
+                showTvStockFrom(data)
+                showImageProduct(data)
+
+
+            }
+
+        }
+
+        private fun showHargaProduct(data: ProductListPromotionProductDomainModel) {
+            with(binding) {
+                if (data.productSpecialPrice == null || data.productSpecialPrice == 0) {
+                    showSpecialPriceNull(data)
                     return
                 }
 
@@ -77,15 +95,7 @@ class ProductListGratisProductPagingAdapter :
                     tvJumlahDiskon.visibility = View.GONE
                     tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.price)}"
                 }
-
-
-
-                showTvStockFrom(data)
-                showImageProduct(data)
-
-
             }
-
         }
 
         private fun hitungDiskon(data: ProductListPromotionProductDomainModel): Int {
@@ -131,11 +141,6 @@ class ProductListGratisProductPagingAdapter :
                 btnKeranjang.setCompoundDrawablesWithIntrinsicBounds(
                     0, 0, 0, 0
                 )
-
-                tvHargaDiskonProduct.visibility = View.GONE
-                tvJumlahDiskon.visibility = View.GONE
-
-
             }
         }
 

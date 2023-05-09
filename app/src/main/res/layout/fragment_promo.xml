@@ -21,7 +21,7 @@
         app:textAllCaps="false" />
 
     <FrameLayout
-        android:id="@+id/container"
+        android:id="@+id/container_fragment_promo"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
