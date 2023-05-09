@@ -61,15 +61,16 @@ class NetworkModule {
 
     @Provides
     fun productListApiService(): ProductListApiService {
-        return retrofitClient().create(ProductListApiService::class.java)
+        return retrofitClientDetailOfficialStore().create(ProductListApiService::class.java)
     }
 
     @Provides
     fun bannerListApiService(): BannerApiService {
         return retrofitClient().create(BannerApiService::class.java)
     }
+
     @Provides
-    fun productDetailApiService():ProductDetailApiService{
+    fun productDetailApiService(): ProductDetailApiService {
         return retrofitClient().create(ProductDetailApiService::class.java)
     }
 

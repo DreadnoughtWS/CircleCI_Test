@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductNamaProdukBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentGratisProduk
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -37,8 +40,7 @@ class FragmentProductListGratisProductNamaProduk : Fragment(), TabLayout.OnTabSe
         setViewModel()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
-        (requireActivity() as ProductListGratisProductActivity).getTab()
-            .addOnTabSelectedListener(this)
+
     }
 
     private fun getData(order: String = "asc") {
@@ -58,7 +60,12 @@ class FragmentProductListGratisProductNamaProduk : Fragment(), TabLayout.OnTabSe
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListGratisProductActivity).getProductViewModel()
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
+
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentGratisProduk =
+            fragmentManager.findFragmentByTag(FragmentGratisProduk::class.java.simpleName) as FragmentGratisProduk
+        fragmentGratisProduk.getTab().addOnTabSelectedListener(this)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}

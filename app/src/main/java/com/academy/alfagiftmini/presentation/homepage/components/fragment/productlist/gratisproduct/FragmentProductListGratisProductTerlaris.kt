@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductTerlarisBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -22,10 +23,10 @@ class FragmentProductListGratisProductTerlaris : Fragment() {
     private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProductListGratisProductTerlarisBinding.inflate(inflater,container,false)
+        binding =
+            FragmentProductListGratisProductTerlarisBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -55,7 +56,7 @@ class FragmentProductListGratisProductTerlaris : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListGratisProductActivity).getProductViewModel()
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
 
     }
 }

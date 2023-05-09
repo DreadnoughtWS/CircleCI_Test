@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListTerlarisHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -55,7 +56,7 @@ class FragmentProductListHargaSpesialTerlaris : Fragment() {
     }
 
     private fun setViewModel() {
-        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
     }
 
 

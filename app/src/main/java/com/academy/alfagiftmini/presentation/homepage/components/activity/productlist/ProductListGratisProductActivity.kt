@@ -40,13 +40,15 @@ class ProductListGratisProductActivity : AppCompatActivity() {
             tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.promosi)
             })
 
             tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.nama_product)
                 customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -58,7 +60,8 @@ class ProductListGratisProductActivity : AppCompatActivity() {
             tlGratisProduct.addTab(tlGratisProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.terlaris)
             })
 
             tlGratisProduct.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -67,7 +70,7 @@ class ProductListGratisProductActivity : AppCompatActivity() {
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        with(tab.customView){
+                        with(tab.customView) {
                             this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                                 ?.setImageResource(R.drawable.arrow_up_tab_item)
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
