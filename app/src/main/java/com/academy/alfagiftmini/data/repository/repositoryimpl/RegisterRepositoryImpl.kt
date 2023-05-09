@@ -1,6 +1,8 @@
 package com.academy.alfagiftmini.data.repository.repositoryimpl
 
 import android.util.Log
+import com.academy.alfagiftmini.data.DataUtils
+import com.academy.alfagiftmini.data.DataUtils.CONTENT_TYPE
 import com.academy.alfagiftmini.data.repository.network.register.RegisterApiService
 import com.academy.alfagiftmini.data.repository.network.register.model.RegisterDataModel
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
@@ -21,9 +23,20 @@ class RegisterRepositoryImpl @Inject constructor(
                 val dataTransform = RegisterDataModel.transformToModel(newUser)
                 Log.d("data", dataTransform.email)
                 val response = registerApiService.register(body = dataTransform)
-                emit(RegisterResponseDomain(response.body()?.accessToken, RegisterDataModel.transform(response.body()?.user), response.body()?.error))
+                emit(RegisterResponseDomain(response.body()?.accessToken, RegisterDataModel.transform(response.body()?.user), response.errorBody()?.string()))
             }catch (e: Exception){
                 emit(RegisterResponseDomain(null, null, "error"))
+            }
+        }.flowOn(IO)
+    }
+
+    override fun checkAvailableEmail(email: String): Flow<RegisterResponseDomain> {
+        return flow {
+            try {
+                val response = registerApiService.checkAvailableEmail(CONTENT_TYPE, email)
+                emit(RegisterResponseDomain("", RegisterDataModel.transform(response.body()!![0]), response.errorBody()?.string()))
+            }catch (e: Exception){
+                emit(RegisterResponseDomain(null, null, e.message.toString()))
             }
         }.flowOn(IO)
     }

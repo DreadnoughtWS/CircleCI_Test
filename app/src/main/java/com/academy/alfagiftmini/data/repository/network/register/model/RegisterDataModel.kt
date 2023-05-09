@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class RegisterDataModel(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("email")
     val email: String,
     @SerializedName("password")
@@ -22,7 +22,7 @@ data class RegisterDataModel(
     companion object {
         fun transform(user: RegisterDataModel?): RegisterDataDomain {
             return RegisterDataDomain(
-                user?.id ?: -1,
+                user?.id,
                 user?.email ?: "",
                 user?.password ?: "",
                 user?.firstName ?: "",
@@ -33,7 +33,7 @@ data class RegisterDataModel(
 
         fun transformToModel(user: RegisterDataDomain?): RegisterDataModel{
             return RegisterDataModel(
-                user?.id ?: -1,
+                user?.id,
                 user?.email ?: "",
                 user?.password ?: "",
                 user?.firstName ?: "",

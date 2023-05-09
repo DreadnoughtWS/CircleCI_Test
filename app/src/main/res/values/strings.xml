@@ -56,4 +56,5 @@
     <string name="terlaris">Terlaris</string>
     <string name="operator_brand_id"><![CDATA[&brandid=]]></string>
     <string name="cari_official_store">Cari Official Store</string>
+    <string name="email_exists">Email already exists</string>
 </resources>
