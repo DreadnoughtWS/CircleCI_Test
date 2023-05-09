@@ -8,6 +8,7 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityMainBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -31,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         viewModelFactory
     }
     private val productCategoriesViewModel: ProductCategoriesViewModel by viewModels {
+        viewModelFactory
+    }
+    private val bannerListViewModel: BannerListViewModel by viewModels {
         viewModelFactory
     }
 
@@ -87,6 +91,10 @@ class MainActivity : AppCompatActivity() {
 
     fun getViewModelProductCategories():ProductCategoriesViewModel{
         return productCategoriesViewModel
+    }
+
+    fun getBannerListsViewModel():BannerListViewModel{
+        return bannerListViewModel
     }
 }
 

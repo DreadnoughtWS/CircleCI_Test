@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.FragmentBannerBerandaBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -19,15 +20,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FragmentBannerBeranda : Fragment() {
+class FragmentBannerBeranda(private var viewModel: BannerListViewModel) : Fragment() {
     private lateinit var binding: FragmentBannerBerandaBinding
     private lateinit var adapter: BannerBerandaSliderAdapter
-
-    @Inject
-    lateinit var presentationFactory: PresentationFactory
-    private val viewModel: BannerListViewModel by viewModels {
-        presentationFactory
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
