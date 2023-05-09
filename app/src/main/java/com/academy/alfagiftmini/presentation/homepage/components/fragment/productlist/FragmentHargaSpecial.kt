@@ -1,43 +1,37 @@
-package com.academy.alfagiftmini.presentation.homepage.components.activity.productlist
+package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils.replace
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.activity.viewModels
-import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ActivityProductListHargaSpesialBinding
-import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.databinding.FragmentHargaSpecialBinding
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
-import javax.inject.Inject
 
-class ProductListHargaSpesialActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProductListHargaSpesialBinding
 
-    @Inject
-    lateinit var presentationFactory: PresentationFactory
-    private val viewModel: ProductListViewModel by viewModels {
-        presentationFactory
+class FragmentHargaSpecial(private val productListViewModel: ProductListViewModel) : Fragment() {
+    private lateinit var binding: FragmentHargaSpecialBinding
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding= FragmentHargaSpecialBinding.inflate(inflater)
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.productListHargaSepsialActivityInject(this)
-        binding = ActivityProductListHargaSpesialBinding.inflate(layoutInflater)
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initTabs()
         setupFragment(0)
     }
-
-    fun getProductListViewModel(): ProductListViewModel {
-        return viewModel
-    }
-
 
     private fun initTabs() {
 
@@ -45,20 +39,19 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
-                    getString(R.string.promosi)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
             })
 
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                with(customView) {
-                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text =
-                        getString(R.string.nama_product)
-                    this?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                        ?.setImageResource(R.drawable.arrow_up_tab_item)
-                    this?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                        ?.setImageResource(R.drawable.arrow_down_tab_item)
+                with(customView){
+                    this?.findViewById<TextView>(com.academy.alfagiftmini.R.id.tv_tab_item)?.text = getString(
+                        com.academy.alfagiftmini.R.string.nama_product)
+                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_up)
+                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_up_tab_item)
+                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_down)
+                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_down_tab_item)
                 }
 
             })
@@ -68,8 +61,7 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
             tlHargaSpecial.addTab(tlHargaSpecial.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
-                    getString(R.string.terlaris)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
             })
 
             tlHargaSpecial.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -78,7 +70,7 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        with(tab.customView) {
+                        with(tab.customView){
                             this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                                 ?.setImageResource(R.drawable.arrow_up_tab_item)
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -107,10 +99,10 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductListHargaSpesialPromosi(viewModel)
+                FragmentProductListHargaSpesialPromosi(productListViewModel)
             }
             1 -> {
-                FragmentProductListHargaSpesialNamaProduk(viewModel)
+                FragmentProductListHargaSpesialNamaProduk(productListViewModel)
             }
             else -> {
                 FragmentProductListHargaSpesialTerlaris()
@@ -122,7 +114,7 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
             1 -> FragmentProductListHargaSpesialNamaProduk::class.java.simpleName
             else -> FragmentProductListHargaSpesialTerlaris::class.java.simpleName
         }
-        val fragmentManager = supportFragmentManager
+        val fragmentManager = requireActivity().supportFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(R.id.container, fragment, tag)
             commit()
@@ -133,5 +125,6 @@ class ProductListHargaSpesialActivity : AppCompatActivity() {
     fun getTab(): TabLayout {
         return binding.tlHargaSpecial
     }
+
 
 }

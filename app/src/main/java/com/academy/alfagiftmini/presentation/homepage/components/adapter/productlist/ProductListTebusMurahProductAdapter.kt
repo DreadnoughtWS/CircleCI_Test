@@ -21,10 +21,10 @@ class ProductListTebusMurahProductAdapter :
     class ProductTebusMurahViewHolder(val binding: ItemProductTebusMurahBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ProductListDetailTebusMurahDomainModel) {
-            with(binding){
+            with(binding) {
                 tvNamaProduct.text = data.productName
 
-                if(data.productSpecialPrice == null || data.productSpecialPrice == 0){
+                if (data.productSpecialPrice == null || data.productSpecialPrice == 0) {
                     showSpecialPriceNull(data)
                     showTvStockFrom(data)
                     showImageProduct(data)
@@ -34,11 +34,11 @@ class ProductListTebusMurahProductAdapter :
                     tvHargaProductDiskon.text = "Rp. ${hargaFormatter(data.price)}"
                     tvHargaProductDiskon.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
 
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.productSpecialPrice)}"
+                    tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.productSpecialPrice)}"
 
                 } else {
                     tvHargaProductDiskon.visibility = View.GONE
-                    tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                    tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.price)}"
                 }
 
 
@@ -74,7 +74,7 @@ class ProductListTebusMurahProductAdapter :
         private fun showSpecialPriceNull(data: ProductListDetailTebusMurahDomainModel) {
             with(binding) {
                 tvHargaProductDiskon.visibility = View.GONE
-                tvHargaProduct.text = "Rp. ${hargaFormatter(data.price)}"
+                tvHargaProductPrimary.text = "Rp. ${hargaFormatter(data.price)}"
             }
         }
     }
