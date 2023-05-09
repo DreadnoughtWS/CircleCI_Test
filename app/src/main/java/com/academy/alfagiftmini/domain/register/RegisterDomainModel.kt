@@ -10,7 +10,11 @@ data class RegisterDataDomain(
     val lastName: String?,
     val phone: String?,
     val memberId: String?
-)
+) {
+    fun getFullName(): String {
+        return "$firstName $lastName"
+    }
+}
 
 data class RegisterResponseDomain (
     val accessToken: String?,

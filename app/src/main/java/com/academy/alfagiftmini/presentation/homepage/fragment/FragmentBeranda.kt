@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentBerandaBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
@@ -15,6 +15,7 @@ import com.academy.alfagiftmini.presentation.homepage.components.activity.produc
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.banner.FragmentBannerBeranda
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.FragmentOfficialStore
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategories
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainActivityViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
@@ -27,6 +28,7 @@ class FragmentBeranda() : Fragment() {
 
     private lateinit var viewModel: ProductCategoriesViewModel
     private lateinit var officialStoreViewModel: OfficialStoreViewModel
+    private lateinit var mainViewModel: MainActivityViewModel
     private lateinit var bannerViewModel: BannerListViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class FragmentBeranda() : Fragment() {
     private fun setViewModel() {
         viewModel = (requireActivity() as MainActivity).getViewModelProductCategories()
         officialStoreViewModel = (requireActivity() as MainActivity).getViewModelOfficialStore()
+        mainViewModel = (requireActivity() as MainActivity).getViewModelMain()
         bannerViewModel = (requireActivity() as MainActivity).getBannerListsViewModel()
     }
 
@@ -64,6 +67,10 @@ class FragmentBeranda() : Fragment() {
         binding.berandaToolbar.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), ProductListSearchProdukActivity::class.java))
         }
+        mainViewModel._getUserData.observe(requireActivity()) {
+            binding.berandaToolbar.tvToolbar.text = getString(R.string.toolbar_greeting, it.getFullName())
+        }
+        mainViewModel.getData((requireActivity() as MainActivity))
     }
 
 

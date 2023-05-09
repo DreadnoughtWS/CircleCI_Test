@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityMainBinding
+import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainActivityViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -25,6 +27,12 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var viewModelFactory: PresentationFactory
+    private val mainViewModel: MainActivityViewModel by viewModels {
+        viewModelFactory
+    }
+    private val loginViewModel: LoginViewModel by viewModels {
+        viewModelFactory
+    }
     private val productListViewModel: ProductListViewModel by viewModels {
         viewModelFactory
     }
@@ -95,6 +103,10 @@ class MainActivity : AppCompatActivity() {
 
     fun getBannerListsViewModel():BannerListViewModel{
         return bannerListViewModel
+    }
+
+    fun getViewModelMain(): MainActivityViewModel{
+        return mainViewModel
     }
 }
 
