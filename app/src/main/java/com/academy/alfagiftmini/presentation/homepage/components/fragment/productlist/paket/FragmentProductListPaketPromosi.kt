@@ -40,7 +40,7 @@ class FragmentProductListPaketPromosi : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.getProductGratisProduct(PresentationUtils.TYPE_PAKET).collectLatest {
+            viewModel.getProductGratisProduct(PresentationUtils.TYPE_PAKET_PROMOSI).collectLatest {
                 adapter.submitData(it)
             }
         }
