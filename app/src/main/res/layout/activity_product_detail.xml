@@ -85,6 +85,7 @@
                     android:layout_marginEnd="5dp"
                     tools:text="Rp 5000"
                     android:textColor="@color/gray"
+
                     android:textSize="16sp" />
 
                 <TextView
@@ -117,8 +118,131 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
-                android:paddingVertical="6dp"
-                android:paddingHorizontal="15dp">
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:id="@+id/tv_title_promo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/promo_pada_produk_ini"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_promo_gratis_produk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title_promo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardCornerRadius="10dp"
+                    android:elevation="15dp"
+                    android:layout_marginHorizontal="15dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_gratis_product_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/gratis_produk"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray"
+                            app:drawableStartCompat="@drawable/gift_icon_red"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:drawablePadding="5dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="10dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_gratis_product_title_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:textStyle="bold"
+                            android:text="@string/dapatkan_gratis_produk"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_gratis_product_title"
+                            app:layout_constraintBottom_toTopOf="@id/tv_gratis_product_content"
+                            app:layout_constraintStart_toEndOf="@+id/iv_discount_detail_icon"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_gratis_product_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:text="@string/dengan_belanja_sesuai_syarat_ketentuan_yang_berlaku"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_gratis_product_title_2"
+                            android:layout_marginTop="3dp"
+                            app:layout_constraintStart_toStartOf="@+id/tv_gratis_product_title_2"
+                            />
+
+                        <ImageView
+                            android:id="@+id/iv_discount_detail_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/discount_icon"
+                            app:layout_constraintTop_toTopOf="@id/tv_gratis_product_title_2"
+                            app:layout_constraintBottom_toBottomOf="@id/tv_gratis_product_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginStart="10dp"/>
+
+                        <View
+                            android:id="@+id/v_border"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:background="@color/light_gray2"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/tv_gratis_product_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/gray3"
+                            android:padding="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            app:layout_constraintTop_toBottomOf="@id/v_border">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:id="@+id/siv_promo_product"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/dancow"
+                                android:layout_marginStart="10dp"
+                                app:strokeWidth="1dp"
+                                app:strokeColor="@color/red"
+                                app:shapeAppearanceOverlay="@style/circleImageView"
+                                android:padding="1dp"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_lihat_semua_barang_gratis"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/lihat_semua"
+                                android:textColor="@color/teal"
+                                android:textStyle="bold"
+                                android:gravity="end"
+                                android:layout_marginRight="15dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/tv_title_pengiriman"
@@ -127,8 +251,9 @@
                     android:text="@string/pengiriman"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/cv_promo_gratis_produk"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_promo"/>
 
                 <ImageView
                     android:id="@+id/iv_delivery_icon"
@@ -137,7 +262,7 @@
                     android:src="@drawable/delivery_motorycyle"
                     android:layout_marginTop="5dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_pengiriman"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_title_pengiriman"
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:rotationY="180"/>
 

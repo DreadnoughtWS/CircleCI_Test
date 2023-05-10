@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.productdetail
 
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -87,6 +88,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
             }
             tvNamaProduct.text = productData.productName
+            tvHargaProductSecondary.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             if (productData.productSpecialPrice < productData.price){
                 tvHargaProductSecondary.visibility = View.VISIBLE
                 tvDiskonPercentage.visibility = View.VISIBLE
