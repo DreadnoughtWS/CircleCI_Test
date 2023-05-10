@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="Unilever"
+                    android:text="@string/unilever"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
@@ -87,7 +87,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:drawableStart="@drawable/baseline_person_24_gray"
-                    android:text="176.141 Pengikut"
+                    android:text="@string/_176_141_pengikut"
                     android:textColor="@color/gray"
                     app:layout_constraintLeft_toRightOf="@id/iv_store_logo"
                     app:layout_constraintTop_toBottomOf="@id/tv_title_official_store" />
@@ -98,7 +98,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_ikuti_official_store"
-                    android:text="Ikuti"
+                    android:text="@string/ikuti"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textStyle="bold"
@@ -110,24 +110,35 @@
                     android:id="@+id/iv_share_official_store"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="10dp"
                     android:src="@drawable/baseline_share_24"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:contentDescription="@string/ikuti" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:id="@+id/iv_banner_official_store"
+
+            <com.smarteist.autoimageslider.SliderView
+                android:id="@+id/sv_slider_banner"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="205dp"
                 android:layout_marginTop="30dp"
-                android:contentDescription="BANNER"
-                android:src="@drawable/dancow"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cl_detail_official_store" />
+                app:layout_constraintTop_toBottomOf="@id/cl_detail_official_store"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="right"
+                app:sliderAutoCycleEnabled="true"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorGravity="bottom|left"
+                app:sliderIndicatorMarginLeft="30dp"
+                app:sliderIndicatorSelectedColor="@color/red"
+                app:sliderIndicatorUnselectedColor="@color/darkGrey2"
+                app:sliderScrollTimeInSec="2"
+                app:sliderStartAutoCycle="true" />
 
             <TextView
                 android:id="@+id/tv_brands_detail_official_store"
@@ -135,12 +146,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="15dp"
-                android:text="Belanja berdasarkan brand"
+                android:text="@string/belanja_berdasarkan_brand"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_banner_official_store" />
+                app:layout_constraintTop_toBottomOf="@id/sv_slider_banner" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_brands_detail_official_store"
@@ -154,7 +165,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:drawableBottom="@drawable/baseline_keyboard_arrow_down_24_blue"
-                android:text="Lihat Semua"
+                android:text="@string/lihat_semua"
                 android:textColor="@color/teal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="Semua Produk"
+                    android:text="@string/semua_produk"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"

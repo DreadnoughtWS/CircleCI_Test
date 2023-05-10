@@ -95,7 +95,7 @@
                     android:layout_toEndOf="@id/tv_harga_product_secondary"
                     android:background="@drawable/card_product_detail"
                     android:paddingHorizontal="8dp"
-                    android:paddingVertical="5dp"
+                    android:paddingVertical="2dp"
                     tools:text="13%"
                     android:textColor="@color/white"
                     android:textSize="12sp" />

@@ -8,30 +8,38 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityDetailOfficialStoreBinding
+import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.HIDE_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.PresentationUtils.SHOW_LIHAT_SEMUA
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.BrandsAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.detail.FragmentDetailofficialStoreNamaProduct
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.detail.FragmentDetailofficialStorePromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.detail.FragmentDetailofficialStoreTerlaris
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailOfficialStoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailOfficialStoreBinding
     private lateinit var data: OfficialStoreDomainItemModel
-    private lateinit var adapter: BrandsAdapter
+    private lateinit var brandsAdapter: BrandsAdapter
+    private lateinit var bannerAdapter: BannerBerandaSliderAdapter
+
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -39,6 +47,9 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         presentationFactory
     }
     private val officialStoreViewModel: OfficialStoreViewModel by viewModels {
+        presentationFactory
+    }
+    private val bannerListViewModel: BannerListViewModel by viewModels {
         presentationFactory
     }
 
@@ -59,15 +70,16 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
 
     private fun getDataFromApi() {
         officialStoreViewModel.getBrands(brandId)
+        bannerListViewModel.getAllBannerList()
     }
 
     private fun setAdapter() {
-        adapter = BrandsAdapter()
+        brandsAdapter = BrandsAdapter()
         binding.apply {
             rvBrandsDetailOfficialStore.layoutManager =
                 GridLayoutManager(this@DetailOfficialStoreActivity, 4)
             rvBrandsDetailOfficialStore.setHasFixedSize(true)
-            rvBrandsDetailOfficialStore.adapter = adapter
+            rvBrandsDetailOfficialStore.adapter = brandsAdapter
         }
 
     }
@@ -76,13 +88,25 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         officialStoreViewModel.brand.observe(this) {
             if (it.size > 8) {
                 setLihatSemua(SHOW_LIHAT_SEMUA, it)
-                adapter.updateData(it.subList(0, 8))
+                brandsAdapter.updateData(it.subList(0, 8))
             } else {
                 setLihatSemua(HIDE_LIHAT_SEMUA, it)
-                adapter.updateData(it)
+                brandsAdapter.updateData(it)
             }
 
         }
+
+        lifecycleScope.launch {
+            bannerListViewModel.bannerListData.collectLatest {
+                setupSlider(it)
+            }
+        }
+    }
+
+    private fun setupSlider(it: List<BannerDomainModel>) {
+        bannerAdapter = BannerBerandaSliderAdapter(it, this)
+        binding.svSliderBanner.setSliderAdapter(bannerAdapter)
+        binding.svSliderBanner.startAutoCycle()
     }
 
     private fun setLihatSemua(
@@ -96,7 +120,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
                     if (isOpen == false) {
 
                         isOpen = true
-                        adapter.updateData(data)
+                        brandsAdapter.updateData(data)
                         tvLihatSemuaBrandsDetailOfficialStore.text =
                             getString(R.string.lihat_sebagian)
                         tvLihatSemuaBrandsDetailOfficialStore.setCompoundDrawablesWithIntrinsicBounds(
@@ -106,7 +130,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
                     } else {
 
                         isOpen = false
-                        adapter.updateData(data.subList(0, 8))
+                        brandsAdapter.updateData(data.subList(0, 8))
                         tvLihatSemuaBrandsDetailOfficialStore.text = getString(R.string.lihat_semua)
                         tvLihatSemuaBrandsDetailOfficialStore.setCompoundDrawablesWithIntrinsicBounds(
                             0, 0, 0, R.drawable.baseline_keyboard_arrow_down_24_blue
