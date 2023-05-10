@@ -37,6 +37,7 @@ object PresentationUtils {
 
     const val TYPE_SHOPPING_LIST_BELANJA = 10
     const val TYPE_REKOMENDASI_BELANJA = 11
+    const val TYPE_PENAWARAN_TERBAIK = 12
 
     const val INTENT_DATA ="data"
     const val PRODUCT_ID ="PRODUCT_ID"
