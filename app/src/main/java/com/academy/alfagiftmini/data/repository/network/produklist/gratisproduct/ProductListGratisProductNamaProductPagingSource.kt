@@ -67,6 +67,24 @@ class ProductListGratisProductNamaProductPagingSource(
                         }
                     }
                 }
+                DataUtils.TYPE_PENAWARAN_TERBAIK -> {
+                    
+                    for (data in responseProduct) {
+                        if (data.productSpecialPrice == null) {
+                            continue
+                        }
+                        if (data.productSpecialPrice < data.price) {
+                            dataKodePromo.add(data)
+                        } else {
+                            data.kodePromo?.forEach {
+                                if (it == DataUtils.TYPE_GRATIS_PRODUK) {
+                                    dataKodePromo.add(data)
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
 
             val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
@@ -87,8 +105,8 @@ class ProductListGratisProductNamaProductPagingSource(
         data: List<ProductListPromotionProductDomainModel>,
         prevKey: Int? = null,
         nextKey: Int? = null
-    ): LoadResult<Int, ProductListPromotionProductDomainModel> {
-        return LoadResult.Page(
+    ): PagingSource.LoadResult<Int, ProductListPromotionProductDomainModel> {
+        return PagingSource.LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )
     }

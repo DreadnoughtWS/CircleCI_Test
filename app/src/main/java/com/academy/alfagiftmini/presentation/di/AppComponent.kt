@@ -38,6 +38,7 @@ interface AppComponent {
     fun productListPaketActivityInject(activity: ProductListPaketActivity)
     fun productListTebusMurahActivityInject(activity: ProductListTebusMurahActivity)
     fun productListSearchProductActivityInject(activity: ProductListSearchProdukActivity)
+    fun productListPenawaranTerbaikActivityInject(activity: ProductListPenawaranTerbaikActivity)
     fun bannerListActivityInject(activity: AllBannerListActivity)
     fun productDetailActivityInject(activity: ProductDetailActivity)
     fun bannerListPromoItemListActivityInject(activity: BannerPromoItemListActivity)
