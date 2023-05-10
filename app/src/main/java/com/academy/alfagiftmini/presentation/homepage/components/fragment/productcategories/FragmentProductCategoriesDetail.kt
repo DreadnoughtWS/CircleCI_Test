@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories
 
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +10,18 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductCategoriesDetailBinding
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories.ProductCategoriesActivity
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 
-class FragmentProductCategoriesDetail(private val viewModel: ProductCategoriesViewModel, private val subCategory: String, private val category: String): Fragment() {
+class FragmentProductCategoriesDetail(private val subCategory: String, private val category: String): Fragment() {
     private lateinit var binding: FragmentProductCategoriesDetailBinding
+    private lateinit var productListViewModel: ProductListViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +33,12 @@ class FragmentProductCategoriesDetail(private val viewModel: ProductCategoriesVi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         initTabs()
+    }
+
+    private fun initViewModel() {
+        productListViewModel = (requireActivity() as ProductCategoriesActivity).getProductListCategoryViewModel()
     }
 
     private fun initTabs() {
@@ -90,13 +100,13 @@ class FragmentProductCategoriesDetail(private val viewModel: ProductCategoriesVi
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductCategoriesListPromosi(viewModel, subCategory, category) //promosi
+                FragmentProductCategoriesListPromosi(productListViewModel, subCategory, category) //promosi
             }
             1 -> {
-                FragmentProductCategoriesListNamaProduk(viewModel, subCategory, category) //nama produk
+                FragmentProductCategoriesListNamaProduk(productListViewModel, subCategory, category) //nama produk
             }
             else -> {
-                FragmentProductCategoriesListTerlaris(viewModel, subCategory, category) //terlaris
+                FragmentProductCategoriesListTerlaris(productListViewModel, subCategory, category) //terlaris
             }
         }
 

@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.academy.alfagiftmini.data.repository.network.produckcategories.productcategories.ProductItemCategoryPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStoreNamaDanTerlarisPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.detailofficialstore.DetailOfficialStorePromosiPagingSource
 import com.academy.alfagiftmini.data.repository.network.produklist.gratisproduct.ProductListGratisProductNamaProductPagingSource
@@ -127,5 +128,19 @@ class ProductListRepositoryImpl @Inject constructor(
         }.flow.cachedIn(scope)
     }
 
+    override suspend fun getProductByCategory(
+        scope: CoroutineScope,
+        subCategory: String,
+        category: String,
+        sort: String,
+        order: String,
+        type: String
+    ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return Pager(config = PagingConfig(
+            pageSize = 10
+        )) {
+            ProductItemCategoryPagingSource(apiService, subCategory, category, sort, order, type)
+        }.flow.cachedIn(scope)
+    }
 
 }

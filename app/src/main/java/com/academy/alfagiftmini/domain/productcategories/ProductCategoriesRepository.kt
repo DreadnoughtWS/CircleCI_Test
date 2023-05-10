@@ -10,5 +10,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface ProductCategoriesRepository {
     suspend fun getAllCategories(scope: CoroutineScope): Flow<PagingData<ProductCategoriesDomainModel>>
-    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>>
 }

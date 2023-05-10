@@ -9,6 +9,7 @@ import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -61,6 +62,10 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
 
     suspend fun getBannerProduct(bannerId:Int,order: String,sort: String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
         return useCase.getBannerProduct(viewModelScope,bannerId,order,sort,type)
+    }
+
+    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        return useCase.getProductByCategory(scope, subCategory, category, sort, order, type)
     }
 
 }

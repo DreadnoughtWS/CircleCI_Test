@@ -22,4 +22,7 @@ interface ProductListDomainUseCase {
     suspend fun getProductSearchProduct(scope: CoroutineScope,name:String) : Flow<PagingData<ProductListPromotionProductDomainModel>>
 
     suspend fun getBannerProduct(scope:CoroutineScope, bannerId:Int,order:String,sort:String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>
+
+    suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>>
+
 }
