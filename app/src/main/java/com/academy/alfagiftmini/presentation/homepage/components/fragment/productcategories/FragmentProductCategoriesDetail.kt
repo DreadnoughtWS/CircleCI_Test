@@ -35,6 +35,7 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         initTabs()
+        setupFragment(0)
     }
 
     private fun initViewModel() {
