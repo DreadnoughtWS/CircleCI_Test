@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 
+import android.app.Presentation
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
@@ -7,23 +8,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.academy.alfagiftmini.domain.loginlogout.LoginResponseDomain
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
+import com.academy.alfagiftmini.presentation.PresentationUtils
 
 class MainActivityViewModel: ViewModel() {
     private val _userData = MutableLiveData<RegisterDataDomain>()
     val _getUserData: LiveData<RegisterDataDomain> = _userData
 
     fun saveData(activity: AppCompatActivity, it: LoginResponseDomain) {
-        val sharedPreference = activity.application.getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
+        val sharedPreference = activity.application.getSharedPreferences(PresentationUtils.SHARED_PREFERENCE, Context.MODE_PRIVATE)
         sharedPreference.edit().apply{
-            putInt("USER_ID", it.user.id ?: -1)
-            putString("FIRST_NAME", it.user.firstName)
-            putString("LAST_NAME", it.user.lastName)
-            putString("USER_PHONE", it.user.phone)
+            putInt(PresentationUtils.SP_USER_ID, it.user.id ?: -1)
+            putString(PresentationUtils.SP_FIRST_NAME, it.user.firstName)
+            putString(PresentationUtils.SP_LAST_NAME, it.user.lastName)
+            putString(PresentationUtils.SP_PHONE, it.user.phone)
         }.apply()
     }
 
     fun getData(activity: AppCompatActivity) {
-        val sharedPreference = activity.application.getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
-        _userData.value = RegisterDataDomain(sharedPreference.getInt("USER_ID", -1), "", "", sharedPreference.getString("FIRST_NAME", ""), sharedPreference.getString("LAST_NAME", ""), "", sharedPreference.getString("USER_PHONE", ""))
+        val sharedPreference = activity.application.getSharedPreferences(PresentationUtils.SHARED_PREFERENCE, Context.MODE_PRIVATE)
+        _userData.value = RegisterDataDomain(sharedPreference.getInt(PresentationUtils.SP_USER_ID, -1), "", "", sharedPreference.getString(PresentationUtils.SP_FIRST_NAME, ""), sharedPreference.getString(PresentationUtils.SP_LAST_NAME, ""), "", sharedPreference.getString(PresentationUtils.SP_PHONE, ""))
     }
 }

@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class ProductCategoriesRepositoryImpl @Inject constructor(private var productListApiService: ProductListApiService, private var apiService: ProductCategoriesApiService): ProductCategoriesRepository {
+class ProductCategoriesRepositoryImpl @Inject constructor(private var apiService: ProductCategoriesApiService): ProductCategoriesRepository {
     override suspend fun getAllCategories(scope: CoroutineScope): Flow<PagingData<ProductCategoriesDomainModel>> {
         return Pager(config = PagingConfig(
             pageSize = 10
@@ -23,17 +23,4 @@ class ProductCategoriesRepositoryImpl @Inject constructor(private var productLis
             ProductCategoriesPagingSource(apiService)
         }.flow.cachedIn(scope)
     }
-
-    override suspend fun getProductByCategory(
-        scope: CoroutineScope,
-        subCategory: String,
-        category: String
-    ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config = PagingConfig(
-            pageSize = 10
-        )) {
-            ProductItemCategoryPagingSource(productListApiService, subCategory, category)
-        }.flow.cachedIn(scope)
-    }
-
 }

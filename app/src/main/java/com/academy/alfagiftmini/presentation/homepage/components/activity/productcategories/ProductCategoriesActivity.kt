@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories
 
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +10,7 @@ import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import javax.inject.Inject
@@ -23,6 +23,9 @@ class ProductCategoriesActivity: AppCompatActivity() {
     private val viewModel: ProductCategoriesViewModel by viewModels{
         viewModelFactory
     }
+    private val productListViewModel: ProductListViewModel by viewModels{
+        viewModelFactory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.productCategoriesActivityInject(this)
@@ -30,7 +33,18 @@ class ProductCategoriesActivity: AppCompatActivity() {
         binding = ActivityProductCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val data = viewModel.getIntentData(intent) ?: return
+        setToolbar(data.text)
         setTabItems(data.subcategories, data.text)
+        setupFragment(data.subcategories[0], data.text)
+    }
+
+    private fun setToolbar(category: String) {
+        binding.apply {
+            productCategoryListToolbar.tvPromoToolbarTitle.text = category
+            productCategoryListToolbar.btnBannerBack.setOnClickListener {
+                finish()
+            }
+        }
     }
 
     private fun setTabItems(subcategories: List<String>, category: String) {
@@ -45,24 +59,9 @@ class ProductCategoriesActivity: AppCompatActivity() {
             }
 
             tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab) {
-                    setupFragment(tab.position, subcategories, category)
-
-                    if (tab.position == 1) {
-                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                            ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
-
-                    }
-                }
+                override fun onTabSelected(tab: TabLayout.Tab) { setupFragment(subcategories[tab.position], category) }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
-                    if (tab.position == 1) {
-                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
-                            ?.setImageResource(R.drawable.arrow_up_tab_item)
-                        tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
-                            ?.setImageResource(R.drawable.arrow_down_tab_item)
-
-                    }
                 }
 
                 override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -70,13 +69,17 @@ class ProductCategoriesActivity: AppCompatActivity() {
         }
     }
 
-    private fun setupFragment(position: Int, subcategories: List<String>, category: String) {
-        val fragment = FragmentProductCategoriesDetail(viewModel, subcategories[position], category)
+    private fun setupFragment(subcategories: String, category: String) {
+        val fragment = FragmentProductCategoriesDetail(subcategories, category)
         val tag = FragmentProductCategoriesDetail::class.java.simpleName
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(binding.container.id, fragment, tag)
             commit()
         }
+    }
+
+    fun getProductListCategoryViewModel(): ProductListViewModel {
+        return productListViewModel
     }
 }

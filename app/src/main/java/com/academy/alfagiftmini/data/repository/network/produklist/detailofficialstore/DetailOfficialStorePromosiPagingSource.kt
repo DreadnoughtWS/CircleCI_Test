@@ -27,7 +27,10 @@ class DetailOfficialStorePromosiPagingSource(
             val dataProduct: ArrayList<ProductListDetailDataModel> = arrayListOf()
 
             for (data in responseProduct) {
-                if (data.productSpecialPrice!! < data.price) {
+                if (data.productSpecialPrice == null) {
+                    continue
+                }
+                if (data.productSpecialPrice < data.price) {
                     dataProduct.add(data)
                 } else {
                     data.kodePromo?.forEach {

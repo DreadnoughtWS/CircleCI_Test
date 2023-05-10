@@ -1,5 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -11,14 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ItemProductGratisProductBinding
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.hargaFormatter
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productdetail.ProductDetailActivity
 import com.bumptech.glide.Glide
 
 class ProductListGratisProductPagingAdapter :
     PagingDataAdapter<ProductListPromotionProductDomainModel, ProductListGratisProductPagingAdapter.ProductListViewHolder>(
         DiffCallback
     ) {
-
+    lateinit var context: Context
 
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<ProductListPromotionProductDomainModel>() {
@@ -68,9 +72,17 @@ class ProductListGratisProductPagingAdapter :
                 showTvStockFrom(data)
                 showImageProduct(data)
 
-
+                root.setOnClickListener {
+                    openProductDetail(data)
+                }
             }
 
+        }
+
+        private fun openProductDetail(data: ProductListPromotionProductDomainModel){
+            val intent = Intent(itemView.context, ProductDetailActivity::class.java)
+            intent.putExtra(PresentationUtils.PRODUCT_ID, data.productId)
+            itemView.context.startActivity(intent)
         }
 
         private fun showHargaProduct(data: ProductListPromotionProductDomainModel) {
@@ -170,6 +182,7 @@ class ProductListGratisProductPagingAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductListViewHolder {
+        context = parent.context
         val binding = ItemProductGratisProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
