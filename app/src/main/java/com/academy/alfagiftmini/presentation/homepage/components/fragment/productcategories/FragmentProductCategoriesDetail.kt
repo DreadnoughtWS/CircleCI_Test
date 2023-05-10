@@ -1,6 +1,5 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories
 
-import android.app.Presentation
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductCategoriesDetailBinding
-import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductNamaProduk
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductTerlaris
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListNamaProduk
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListPromosi
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListTerlaris
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.google.android.material.tabs.TabLayout
 
@@ -92,17 +90,17 @@ class FragmentProductCategoriesDetail(private val viewModel: ProductCategoriesVi
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductCategoriesList() //promosi
+                FragmentProductCategoriesListPromosi(viewModel, subCategory, category) //promosi
             }
             1 -> {
-                FragmentProductCategoriesList() //nama produk
+                FragmentProductCategoriesListNamaProduk(viewModel, subCategory, category) //nama produk
             }
             else -> {
-                FragmentProductCategoriesList() //terlaris
+                FragmentProductCategoriesListTerlaris(viewModel, subCategory, category) //terlaris
             }
         }
 
-        val tag = FragmentProductCategoriesList::class.java.simpleName
+        val tag = FragmentProductCategoriesListNamaProduk::class.java.simpleName
         val fragmentManager = parentFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(binding.subContainer.id, fragment, tag)

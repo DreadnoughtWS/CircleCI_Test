@@ -9,7 +9,7 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesList
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -72,8 +72,8 @@ class ProductCategoriesActivity: AppCompatActivity() {
     }
 
     private fun setupFragment(subcategories: String, category: String) {
-        val fragment = FragmentProductCategoriesList(viewModel, subcategories, category)
-        val tag = FragmentProductCategoriesList::class.java.simpleName
+        val fragment = FragmentProductCategoriesListNamaProduk(viewModel, subcategories, category)
+        val tag = FragmentProductCategoriesListNamaProduk::class.java.simpleName
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(binding.container.id, fragment, tag)

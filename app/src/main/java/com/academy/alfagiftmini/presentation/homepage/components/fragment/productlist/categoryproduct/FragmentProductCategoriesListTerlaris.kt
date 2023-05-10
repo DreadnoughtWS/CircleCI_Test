@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories
+package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.Produ
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentProductCategoriesList (private val viewModel: ProductCategoriesViewModel, private val subCategory: String, private val category: String): Fragment() {
+class FragmentProductCategoriesListTerlaris (private val viewModel: ProductCategoriesViewModel, private val subCategory: String, private val category: String): Fragment() {
     private lateinit var binding: FragmentProductCategoryListBinding
     private lateinit var adapter: ProductListGratisProductPagingAdapter
 
@@ -25,7 +25,7 @@ class FragmentProductCategoriesList (private val viewModel: ProductCategoriesVie
 
     private fun setObserver() {
         lifecycleScope.launch {
-            viewModel.getProductByCategory(this, subCategory, category).collectLatest {
+            viewModel.getProductByCategory(this, subCategory, category, order, sort, type).collectLatest {
                 adapter.submitData(lifecycle, it)
             }
         }
