@@ -104,5 +104,5 @@ object PresentationUtils {
     }
 
     fun formatter(n: Int): String =
-        DecimalFormat("Rp #.###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
+        DecimalFormat("Rp #,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
 }

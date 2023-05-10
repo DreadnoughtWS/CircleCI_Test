@@ -1,5 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.belanja
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
@@ -13,12 +15,15 @@ import com.academy.alfagiftmini.databinding.ItemProductGratisProductBinding
 import com.academy.alfagiftmini.databinding.ItemProdukBelanjaBinding
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.BannerPromoItemListActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productdetail.ProductDetailActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.bumptech.glide.Glide
 
 class ProductListBelanjaPagingAdapter : PagingDataAdapter<ProductListPromotionProductDomainModel, ProductListBelanjaPagingAdapter.ProductListViewHolder>(
     DiffCallback
 ) {
+    lateinit var context: Context
     companion object {
         object DiffCallback : DiffUtil.ItemCallback<ProductListPromotionProductDomainModel>() {
             override fun areItemsTheSame(
@@ -41,7 +46,7 @@ class ProductListBelanjaPagingAdapter : PagingDataAdapter<ProductListPromotionPr
     class ProductListViewHolder(private val binding: ItemProdukBelanjaBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ProductListPromotionProductDomainModel) {
+        fun bindData(data: ProductListPromotionProductDomainModel, context:Context) {
             with(binding) {
 
                 tvProductName.text = data.productName
@@ -83,6 +88,11 @@ class ProductListBelanjaPagingAdapter : PagingDataAdapter<ProductListPromotionPr
                 showTvStockFrom(data)
                 showImageProduct(data)
 
+                root.setOnClickListener {
+                    val intent = Intent(context, ProductDetailActivity::class.java)
+                    intent.putExtra(PresentationUtils.PRODUCT_ID, data.productId)
+                    context.startActivity(intent)
+                }
 
             }
 
@@ -153,13 +163,14 @@ class ProductListBelanjaPagingAdapter : PagingDataAdapter<ProductListPromotionPr
         holder: ProductListViewHolder,
         position: Int
     ) {
-        holder.bindData(getItem(position) ?:return)
+        holder.bindData(getItem(position) ?:return,context)
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ProductListBelanjaPagingAdapter.ProductListViewHolder {
+        context = parent.context
         val binding = ItemProdukBelanjaBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,

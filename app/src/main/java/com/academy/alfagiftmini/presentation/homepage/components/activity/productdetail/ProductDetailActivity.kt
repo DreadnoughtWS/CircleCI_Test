@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductDetailBinding
+import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailDomainModel
 import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailResponseModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.fromHtml
@@ -55,7 +56,7 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun getProductData(productId: Int) {
+    private fun getProductData(productId: Long) {
         lifecycleScope.launch {
             viewModel.getProductDetail(productId)
             viewModel.productDetailData.collectLatest {
@@ -65,14 +66,14 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun getProductId() {
-        val productIdIntent = intent.getIntExtra(PresentationUtils.PRODUCT_ID, 0)
-        if (productIdIntent != 0) {
+        val productIdIntent = intent.getLongExtra(PresentationUtils.PRODUCT_ID, 0L)
+        if (productIdIntent != 0L) {
             getProductData(productIdIntent)
         }
     }
 
-    private fun setDataPresentation(it: ProductDetailResponseModel) {
-        val productData = it.productList[0]
+    private fun setDataPresentation(it: List<ProductDetailDomainModel>) {
+        val productData = it[0]
         setImageSlider(productData.productImages[0].url)
         binding.apply {
             when (productData.productPickupAvailability){
@@ -89,8 +90,9 @@ class ProductDetailActivity : AppCompatActivity() {
             if (productData.productSpecialPrice < productData.price){
                 tvHargaProductSecondary.visibility = View.VISIBLE
                 tvDiskonPercentage.visibility = View.VISIBLE
-                val besarDiskon = (productData.price - productData.productSpecialPrice/productData.price)*100
+                val besarDiskon = (((productData.price - productData.productSpecialPrice)/productData.price.toDouble())*100).toInt()
                 tvDiskonPercentage.text = getString(R.string.besar_diskon,besarDiskon)
+                tvHargaProductSecondary.text = PresentationUtils.formatter(productData.price)
                 tvHargaProductPrimary.text = PresentationUtils.formatter(productData.productSpecialPrice)
             }else{
                 tvHargaProductSecondary.visibility = View.INVISIBLE
