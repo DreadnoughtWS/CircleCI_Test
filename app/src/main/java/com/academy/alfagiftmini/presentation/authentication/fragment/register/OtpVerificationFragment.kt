@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
@@ -19,6 +20,7 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -51,7 +53,6 @@ class OtpVerificationFragment : Fragment() {
                 binding.pvOtpCode.removeTextChangedListener(this)
                 Log.d("test", s.toString())
                 if (binding.pvOtpCode.text.toString() == generatedOTP) {
-                    Toast.makeText(context, "verified", Toast.LENGTH_SHORT).show()
                     //post to server and go to home activity
                     lifecycleScope.launch {
                         (requireActivity() as RegisterActivity).getModel().registerNewUser(
@@ -65,7 +66,18 @@ class OtpVerificationFragment : Fragment() {
                                 memberId = null
                             )
                         ).collectLatest {
-                            //collect the response from api including access token and id for PUT update
+                            //collect the response from api including access token and id for shared preference update
+                            if (it.error.isNullOrBlank()){
+                                (requireActivity() as RegisterActivity)
+                                    .getModel()
+                                    .putDataToSharedPreference((requireActivity() as RegisterActivity), it)
+                                val intent = Intent(activity, MainActivity::class.java)
+                                startActivity(intent)
+                                (requireActivity() as RegisterActivity).finish()
+                            }
+                            else{
+                                Toast.makeText(activity, it.error.toString(), Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
 

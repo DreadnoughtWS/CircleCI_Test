@@ -12,9 +12,12 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductNamaProdukBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListPaketNamaProdukBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPaketActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentGratisProduk
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentPaket
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -57,8 +60,11 @@ class FragmentProductListPaketNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
     }
 
     private fun setViewModelandTab() {
-        viewModel = (requireActivity() as ProductListPaketActivity).getProductListViewModel()
-        (requireActivity() as ProductListPaketActivity).getTab().addOnTabSelectedListener(this)
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentPaket =
+            fragmentManager.findFragmentByTag(FragmentPaket::class.java.simpleName) as FragmentPaket
+        fragmentPaket.getTab().addOnTabSelectedListener(this)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}

@@ -11,19 +11,20 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListNamaProdukHargaSpesialBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListHargaSpesialNamaProduk(private val viewModel: ProductListViewModel) :
-    Fragment(), TabLayout.OnTabSelectedListener {
+class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductListNamaProdukHargaSpesialBinding
 
-    //    private lateinit var viewModel: ProductListViewModel
+    private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     var isClicked = true
@@ -40,25 +41,26 @@ class FragmentProductListHargaSpesialNamaProduk(private val viewModel: ProductLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        setViewModel()
+        setTab()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
-        (requireActivity() as ProductListHargaSpesialActivity).getTab()
-            .addOnTabSelectedListener(this)
     }
 
-//    private fun setViewModel() {
-//        viewModel = (requireActivity() as ProductListHargaSpesialActivity).getProductListViewModel()
-//    }
-
+    private fun setTab() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentHargaSpecial =
+            fragmentManager.findFragmentByTag(FragmentHargaSpecial::class.java.simpleName) as FragmentHargaSpecial
+        fragmentHargaSpecial.getTab().addOnTabSelectedListener(this)
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
+    }
 
     fun getData(order: String = "asc") {
         lifecycleScope.launch {
             viewModel.getProductGratisProductOrder(
                 PresentationUtils.TYPE_HARGA_SPESIAL, order, "product_name"
             ).collectLatest {
-                    adapter.submitData(it)
-                }
+                adapter.submitData(it)
+            }
         }
     }
 
