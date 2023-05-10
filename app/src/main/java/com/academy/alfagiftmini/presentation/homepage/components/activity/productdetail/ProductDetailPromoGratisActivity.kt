@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.presentation.homepage.components.activity.produ
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.academy.alfagiftmini.R
 
 class ProductDetailPromoGratisActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
