@@ -1,6 +1,5 @@
 package com.academy.alfagiftmini.domain.register
 
-import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

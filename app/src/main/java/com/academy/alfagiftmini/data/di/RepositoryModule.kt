@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.di
 
 import com.academy.alfagiftmini.data.repository.repositoryimpl.*
+import com.academy.alfagiftmini.domain.akun.AkunDomainRepository
 import com.academy.alfagiftmini.domain.banner.BannerDomainRepository
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainRepository
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
@@ -25,7 +26,8 @@ abstract class RepositoryModule {
     abstract fun provideBannerRepository(repositoryImpl: BannerRepositoryImpl): BannerDomainRepository
     @Binds
     abstract fun provideProductDetailRepository(repositoryImpl: ProductDetailRepositoryImpl): ProductDetailDomainRepository
-
     @Binds
     abstract fun provideProductCategoriesRepository(productCategoriesRepositoryImpl: ProductCategoriesRepositoryImpl): ProductCategoriesRepository
+    @Binds
+    abstract fun provideAkunRepository(repositoryImpl: AkunRepositoryImpl): AkunDomainRepository
 }

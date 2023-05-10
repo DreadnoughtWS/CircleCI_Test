@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.di
 
 import com.academy.alfagiftmini.data.DataUtils.BASE_URL
+import com.academy.alfagiftmini.data.repository.network.akun.AkunApiService
 import com.academy.alfagiftmini.data.repository.network.banner.BannerApiService
 import com.academy.alfagiftmini.data.repository.network.loginlogout.LoginApiService
 import com.academy.alfagiftmini.data.repository.network.officialstore.OfficialStoreApiService
@@ -16,6 +17,7 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 @Module
 class NetworkModule {
@@ -42,6 +44,11 @@ class NetworkModule {
             }).build()
         return Retrofit.Builder().baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create()).client(client).build()
+    }
+
+    @Provides
+    fun akunApiService():AkunApiService{
+        return retrofitClient().create(AkunApiService::class.java)
     }
 
     @Provides
