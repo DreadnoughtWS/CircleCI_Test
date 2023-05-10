@@ -90,11 +90,19 @@
                 app:layout_constraintTop_toBottomOf="@id/btn_search_product" />
 
             <FrameLayout
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fl_banner_slider"
+                android:id="@+id/fl_product_list_penawaran_terbaik"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <FrameLayout
                 android:id="@+id/fl_product_categories"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/fl_banner_slider" />
+                app:layout_constraintTop_toBottomOf="@id/fl_product_list_penawaran_terbaik" />
 
             <FrameLayout
                 android:id="@+id/fl_official_store"

@@ -6,6 +6,7 @@ import com.academy.alfagiftmini.data.DataUtils
 import com.academy.alfagiftmini.data.DataUtils.TYPE_GRATIS_PRODUK
 import com.academy.alfagiftmini.data.DataUtils.TYPE_HARGA_SPESIAL
 import com.academy.alfagiftmini.data.DataUtils.TYPE_PAKET
+import com.academy.alfagiftmini.data.DataUtils.TYPE_PENAWARAN_TERBAIK
 import com.academy.alfagiftmini.data.DataUtils.TYPE_REKOMENDASI_BELANJA
 import com.academy.alfagiftmini.data.DataUtils.TYPE_SHOPPING_LIST_BELANJA
 import com.academy.alfagiftmini.data.DataUtils.TYPE_TEBUS_MURAH
@@ -68,12 +69,31 @@ class ProductListGratisProductPagingSource(
                     }
                 }
                 TYPE_SHOPPING_LIST_BELANJA -> {
-                    if(position == 1){
+                    if (position == 1) {
                         dataKodePromo.addAll(responseProduct)
                     }
                 }
                 TYPE_REKOMENDASI_BELANJA -> {
                     dataKodePromo.addAll(responseProduct)
+                }
+                TYPE_PENAWARAN_TERBAIK -> {
+                    if (position == 1) {
+                        for (data in responseProduct) {
+                            if (data.productSpecialPrice == null) {
+                                continue
+                            }
+                            if (data.productSpecialPrice < data.price) {
+                                dataKodePromo.add(data)
+                            } else {
+                                data.kodePromo?.forEach {
+                                    if (it == DataUtils.TYPE_GRATIS_PRODUK) {
+                                        dataKodePromo.add(data)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    println("PENAWAN TERBAIK $dataKodePromo")
                 }
             }
 
