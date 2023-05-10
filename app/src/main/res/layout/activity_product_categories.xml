@@ -20,32 +20,23 @@
             app:layout_scrollFlags="scroll|enterAlways" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.amar.library.ui.StickyScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/very_light_gray"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:stickyHeader="@+id/sticky_category">
-
-            <LinearLayout
-                android:id="@+id/sticky_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:layout_anchorGravity="bottom"
-                android:orientation="vertical"
-                app:layout_anchor="@id/toolbar_list">
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_anchor="@id/toolbar_list"
+            android:layout_gravity="bottom"
+            app:layout_anchorGravity="bottom">
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabMode="scrollable"
-                    android:background="@color/red" />
+                    android:background="@color/red"
+                    app:layout_constraintTop_toTopOf="parent"/>
                 <FrameLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-    </com.amar.library.ui.StickyScrollView>
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/tab_layout"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
