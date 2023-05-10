@@ -60,8 +60,6 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
                     ?.setImageResource(R.drawable.arrow_down_tab_item)
             })
 
-
-
             tlSubCategoryProduct.addTab(tlSubCategoryProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {

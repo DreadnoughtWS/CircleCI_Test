@@ -48,7 +48,6 @@ class ProductCategoriesActivity: AppCompatActivity() {
     }
 
     private fun setTabItems(subcategories: List<String>, category: String) {
-
         binding.apply {
             subcategories.forEach {
                 tabLayout.addTab(tabLayout.newTab().setCustomView(
