@@ -118,4 +118,8 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
             commit()
         }
     }
+
+    fun getTab(): TabLayout {
+        return binding.tlSubCategoryProduct
+    }
 }
