@@ -60,4 +60,9 @@
     <string name="stok_toko">Stok dari Toko</string>
     <string name="stok_gudang">Stok dari Gudang</string>
     <string name="besar_diskon">%d\%</string>
+    <string name="unilever">Unilever</string>
+    <string name="_176_141_pengikut">176.141 Pengikut</string>
+    <string name="ikuti">Ikuti</string>
+    <string name="belanja_berdasarkan_brand">Belanja berdasarkan brand</string>
+    <string name="semua_produk">Semua Produk</string>
 </resources>
