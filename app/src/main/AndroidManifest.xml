@@ -22,7 +22,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ProductDetailPromoGratisActivity"
+            android:name="ProductDetailPromoGrat"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"

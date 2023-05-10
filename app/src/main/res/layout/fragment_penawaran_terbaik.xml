@@ -26,7 +26,7 @@
         android:layout_marginHorizontal="15dp"
         android:layout_marginVertical="20sp"
         android:gravity="center_vertical"
-        android:text="made aja"
+        android:text="@string/lihat_semua"
         android:textColor="@color/teal"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
