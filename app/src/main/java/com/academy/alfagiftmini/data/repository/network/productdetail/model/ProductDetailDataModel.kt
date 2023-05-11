@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class ProductDetailDataModel(
     @SerializedName("product_id")
-    val productId: Int?,
+    val productId: Long?,
     @SerializedName("product_sku")
     val productSku: String?,
     @SerializedName("product_name")
@@ -30,7 +30,7 @@ data class ProductDetailDataModel(
         fun transformToListDomainModel(item: List<ProductDetailDataModel?>):List<ProductDetailDomainModel>{
             return item.map {
                 transformToDomainModel(it ?: ProductDetailDataModel(
-                    productId = 0,
+                    productId = 0L,
                     productSku = "",
                     productName = "",
                     productDesc = "",
@@ -49,7 +49,7 @@ data class ProductDetailDataModel(
 
         private fun transformToDomainModel(it: ProductDetailDataModel):ProductDetailDomainModel{
             return ProductDetailDomainModel(
-                it.productId ?: 0,
+                it.productId ?: 0L,
                 it.productSku ?: "",
                 it.productName ?: "",
                 it.productDesc ?: "",

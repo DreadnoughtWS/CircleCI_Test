@@ -1,5 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -15,6 +17,15 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 class ProductDetailViewModel @Inject constructor(private val useCase:ProductDetailUseCase):ViewModel() {
+
+    private val _productDetailDataLive= MutableLiveData<List<ProductDetailDomainModel>>()
+    val  productDetailDataLive : LiveData<List<ProductDetailDomainModel>> =   _productDetailDataLive
+
+    suspend fun getProductDetailLive(productId:Long){
+        useCase.getProductDetail(productId).collectLatest {
+            _productDetailDataLive.postValue(it)
+        }
+    }
 
     private val _productDetailData= MutableStateFlow(listOf<ProductDetailDomainModel>())
     val  productDetailData : StateFlow<List<ProductDetailDomainModel>> =   _productDetailData

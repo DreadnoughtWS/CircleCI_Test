@@ -5,9 +5,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductDetailPromoGratisBinding
+import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailDomainModel
 import com.academy.alfagiftmini.domain.productdetail.model.ProductPromosi103DomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -31,6 +34,7 @@ class ProductDetailPromoGratisActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as MyApplication).appComponent.productGratisActivityInject(this)
         binding = ActivityProductDetailPromoGratisBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (intent != null){
@@ -54,8 +58,20 @@ class ProductDetailPromoGratisActivity : AppCompatActivity() {
     private fun setupLayout(promoData: ProductPromosi103DomainModel) {
         binding.apply {
             tvPromoGratisProductContent.text = promoData.description
-            adapter =
-            rvProdukGratis =
+//            val productGratisList = arrayListOf<ProductDetailDomainModel>()
+            adapter = ProductGratisAdapter(mutableListOf())
+            rvProdukGratis.layoutManager = LinearLayoutManager(this@ProductDetailPromoGratisActivity)
+            rvProdukGratis.adapter = adapter
+            viewModel.productDetailDataLive.observe(this@ProductDetailPromoGratisActivity) {
+//                if(it.isEmpty()) return@observe
+                adapter.addDataToList(it[0])
+            }
+            lifecycleScope.launch {
+                promoData.promoProductId.forEach {
+                    viewModel.getProductDetailLive(it)
+                }
+            }
+
         }
     }
 

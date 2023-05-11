@@ -12,7 +12,6 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductDetailBinding
 import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailDomainModel
-import com.academy.alfagiftmini.domain.productdetail.model.ProductPromosi103DomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.fromHtml
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -20,10 +19,8 @@ import com.academy.alfagiftmini.presentation.homepage.components.adapter.product
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductDetailViewModel
 import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderView
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -200,6 +197,7 @@ class ProductDetailActivity : AppCompatActivity() {
             checkInternet()
         }
         dialogBuilder.setNegativeButton("CLOSE") { dialog, _ ->
+            progressBar.dismiss()
             dialog.cancel()
         }
         val connectionAlertDialog = dialogBuilder.create()
