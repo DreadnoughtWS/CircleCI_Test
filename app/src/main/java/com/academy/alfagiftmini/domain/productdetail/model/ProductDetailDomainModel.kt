@@ -10,6 +10,8 @@ data class ProductDetailDomainModel(
     val price: Int,
     val productSpecialPrice: Int,
     val productImages: List<ImageDomainModel>,
-    val productPickupAvailability: Int
+    val productPickupAvailability: Int,
+    val imagePreview103: String,
+    val kodePromo: List<Int>
 )
 

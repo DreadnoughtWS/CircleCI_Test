@@ -228,6 +228,16 @@
                                 />
 
                             <TextView
+                                android:id="@+id/tv_produk_gratis_plus"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                tools:text="+1"
+                                android:textStyle="bold"
+                                android:gravity="center"
+                                android:background="@drawable/back_product_gratis"
+                                android:layout_marginStart="5dp"/>
+
+                            <TextView
                                 android:id="@+id/tv_lihat_semua_barang_gratis"
                                 android:layout_width="fill_parent"
                                 android:layout_height="wrap_content"
@@ -253,7 +263,8 @@
                     android:textStyle="bold"
                     android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@id/cv_promo_gratis_produk"
-                    app:layout_constraintStart_toStartOf="@id/tv_title_promo"/>
+                    android:layout_marginStart="15dp"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <ImageView
                     android:id="@+id/iv_delivery_icon"
