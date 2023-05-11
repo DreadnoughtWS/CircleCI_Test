@@ -64,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
-                    //Toast.makeText(this@LoginActivity, it.user.firstName, Toast.LENGTH_SHORT).show()
                     mainViewModel.saveData(this@LoginActivity, it)
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)

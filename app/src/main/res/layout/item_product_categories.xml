@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/mrgn_1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/shape_product_categories">
+    android:background="@drawable/shape_product_categories"
+    android:backgroundTint="@color/purple_200">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -19,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             tools:text="Title"
             android:textSize="15sp"

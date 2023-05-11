@@ -17,7 +17,7 @@
 
             <include
                 android:id="@+id/product_category_list_toolbar"
-                layout="@layout/promo_banner_toolbar"
+                layout="@layout/detail_official_store_toolbar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -36,8 +36,11 @@
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:tabBackground="@color/red"
+                    app:tabTextColor="@color/white"
+                    app:tabIndicatorColor="@color/white"
                     app:tabMode="scrollable"
-                    app:tabBackground="@color/red"/>
+                    app:textAllCaps="false"/>
                 <FrameLayout
                     android:id="@+id/container"
                     android:layout_width="match_parent"

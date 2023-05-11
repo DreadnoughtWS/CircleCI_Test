@@ -4,69 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/red"
     tools:context=".presentation.authentication.activity.LoginActivity">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/login"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="50sp" />
+    <LinearLayout style="@style/Edit_Text_Container_Style">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/email"
-        android:layout_below="@id/tv_title">
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="50sp" />
+
+        <EditText
             android:id="@+id/et_email"
+            style="@style/Edit_Text_Default_Style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:autofillHints="emailAddress"
+            android:hint="@string/e_mail_address"
             android:text="tesabi@gmail.com"
-            android:background="@color/white"
-            android:autofillHints="username"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="textEmailAddress" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_password_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
-        app:passwordToggleEnabled="true"
-        android:layout_below="@id/til_email_layout">
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/et_password"
+            style="@style/Edit_Text_Default_Style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:inputType="textPassword"
+            android:layout_height="wrap_content"
+            android:autofillHints="password"
+            android:hint="@string/password"
             android:text="aaaaaaaa"
-            android:autofillHints="password" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/btn_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/til_password_layout"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:text="Register Account"
-        style="@style/TextAppearance.AppCompat.Button"
-        android:textSize="15sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:background="@drawable/shape_btn_login_register"
-        android:textColor="@color/white"
-        android:layout_below="@id/btn_register" />
+        <TextView
+            android:id="@+id/btn_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_gravity="end"
+            android:text="@string/register_account"
+            style="@style/TextAppearance.AppCompat.Button"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:background="@drawable/shape_btn_login_register"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
 
 </RelativeLayout>
