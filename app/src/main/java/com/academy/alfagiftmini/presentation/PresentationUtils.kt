@@ -45,7 +45,7 @@ object PresentationUtils {
     const val INTENT_DATA ="data"
     const val PRODUCT_ID ="PRODUCT_ID"
 
-    const val BANNER_ID = "BANNER_ID"
+    const val PRODUCT_ID_PROMO = "PRODUCT_ID_PROMO"
     const val BANNER_DATA = "BANNER_DATA"
     const val ALL_BANNER_LIST = "ALL_BANNER_LIST"
 

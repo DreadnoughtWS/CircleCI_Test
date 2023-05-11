@@ -1,6 +1,5 @@
 package com.academy.alfagiftmini.presentation.authentication.activity
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,11 +7,9 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.databinding.ActivityLoginBinding
 import com.academy.alfagiftmini.domain.loginlogout.LoginDataDomain
-import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity

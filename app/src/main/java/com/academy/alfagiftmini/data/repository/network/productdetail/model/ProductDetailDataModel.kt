@@ -1,12 +1,10 @@
 package com.academy.alfagiftmini.data.repository.network.productdetail.model
-import com.academy.alfagiftmini.data.repository.network.banner.model.BannerDataModel
-import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
 import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailDomainModel
 import com.google.gson.annotations.SerializedName
 
 data class ProductDetailDataModel(
     @SerializedName("product_id")
-    val productId: Int?,
+    val productId: Long?,
     @SerializedName("product_sku")
     val productSku: String?,
     @SerializedName("product_name")
@@ -22,13 +20,17 @@ data class ProductDetailDataModel(
     @SerializedName("product_images")
     val productImages: List<ImageDataModel?>?,
     @SerializedName("product_pickup_availability")
-    val productPickupAvailability: Int?
+    val productPickupAvailability: Int?,
+    @SerializedName("img_preview_103")
+    val imagePreview103: String?,
+    @SerializedName("kodePromo")
+    val kodePromo: List<Int>?
 ){
     companion object{
         fun transformToListDomainModel(item: List<ProductDetailDataModel?>):List<ProductDetailDomainModel>{
             return item.map {
                 transformToDomainModel(it ?: ProductDetailDataModel(
-                    productId = 0,
+                    productId = 0L,
                     productSku = "",
                     productName = "",
                     productDesc = "",
@@ -36,7 +38,9 @@ data class ProductDetailDataModel(
                     price = 0,
                     productSpecialPrice = 0,
                     productImages = listOf(),
-                    productPickupAvailability = 0
+                    productPickupAvailability = 0,
+                    imagePreview103 = "",
+                    kodePromo = listOf()
                     )
                 )
 
@@ -45,7 +49,7 @@ data class ProductDetailDataModel(
 
         private fun transformToDomainModel(it: ProductDetailDataModel):ProductDetailDomainModel{
             return ProductDetailDomainModel(
-                it.productId ?: 0,
+                it.productId ?: 0L,
                 it.productSku ?: "",
                 it.productName ?: "",
                 it.productDesc ?: "",
@@ -53,7 +57,9 @@ data class ProductDetailDataModel(
                 it.price ?: 0,
                 it.productSpecialPrice ?: 0,
                 ImageDataModel.transformToDomainList(it.productImages ?: listOf()),
-                it.productPickupAvailability ?: 0
+                it.productPickupAvailability ?: 0,
+                it.imagePreview103 ?: "",
+                it.kodePromo ?: listOf()
             )
         }
     }

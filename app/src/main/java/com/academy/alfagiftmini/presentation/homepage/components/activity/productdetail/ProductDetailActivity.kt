@@ -1,5 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.productdetail
 
+import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -10,12 +12,12 @@ import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductDetailBinding
 import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailDomainModel
-import com.academy.alfagiftmini.domain.productdetail.model.ProductDetailResponseModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.fromHtml
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productdetail.ProductDetailSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductDetailViewModel
+import com.bumptech.glide.Glide
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -24,6 +26,9 @@ import javax.inject.Inject
 class ProductDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductDetailBinding
     private lateinit var adapter: ProductDetailSliderAdapter
+    private lateinit var progressBar:AlertDialog
+    private var productId: Long? = null
+    private var sizePromo: Int? = null
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -31,15 +36,20 @@ class ProductDetailActivity : AppCompatActivity() {
         presentationFactory
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.productDetailActivityInject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setToolbar()
+        setProgressBar()
         checkInternet()
+    }
 
+    private fun setProgressBar() {
+        progressBar = AlertDialog.Builder(this, R.style.NetworkAlertDialogTheme).setCancelable(false).setView(R.layout.progress).create()
     }
 
     private fun setToolbar() {
@@ -49,8 +59,12 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     private fun checkInternet() {
+       progressBar.show()
         if (PresentationUtils.isNetworkAvailable(this)) {
             getProductId()
+            if (productId != 0L) {
+                getProductData(productId!!)
+            }
         } else {
             networkDialog()
         }
@@ -65,11 +79,30 @@ class ProductDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun getProductId() {
-        val productIdIntent = intent.getLongExtra(PresentationUtils.PRODUCT_ID, 0L)
-        if (productIdIntent != 0L) {
-            getProductData(productIdIntent)
+    private fun getProductGratis(productId:Long) {
+        lifecycleScope.launch {
+            viewModel.getProductPromoGratis(productId)
+            viewModel.productGratisData.collectLatest {
+                getJumlahGratis(it[0].promoProductId)
+            }
         }
+    }
+
+    private fun getJumlahGratis(it: List<Long>){
+        sizePromo = it.size
+        if (sizePromo != null){
+            if (sizePromo!! >1){
+                binding.tvProdukGratisPlus.visibility = View.VISIBLE
+                binding.tvProdukGratisPlus.text = getString(R.string.plus_pro,sizePromo!!-1)
+            }else{
+                binding.tvProdukGratisPlus.visibility = View.INVISIBLE
+            }
+        }
+
+    }
+
+    private fun getProductId() {
+        productId = intent.getLongExtra(PresentationUtils.PRODUCT_ID, 0L)
     }
 
     private fun setDataPresentation(it: List<ProductDetailDomainModel>) {
@@ -87,6 +120,7 @@ class ProductDetailActivity : AppCompatActivity() {
                 }
             }
             tvNamaProduct.text = productData.productName
+            tvHargaProductSecondary.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
             if (productData.productSpecialPrice < productData.price){
                 tvHargaProductSecondary.visibility = View.VISIBLE
                 tvDiskonPercentage.visibility = View.VISIBLE
@@ -101,9 +135,31 @@ class ProductDetailActivity : AppCompatActivity() {
             }
 
             tvDeskripsiContent.text = productData.productDesc.fromHtml()
+            val promoGratisBarang = productData.kodePromo.filter {
+                it == 103
+            }
+            if (promoGratisBarang.isNotEmpty()){
+
+                setPromoProductVisibility(true)
+
+                Glide.with(this@ProductDetailActivity)
+                    .load(productData.imagePreview103)
+                    .into(sivPromoProduct)
+
+                getProductGratis(productId!!)
+
+                tvLihatSemuaBarangGratis.setOnClickListener {
+                    val produkGratisIntent = Intent(this@ProductDetailActivity,ProductDetailPromoGratisActivity::class.java)
+                    produkGratisIntent.putExtra(PresentationUtils.PRODUCT_ID_PROMO,productData.productId)
+                    startActivity(produkGratisIntent)
+                }
+
+            } else{
+                setPromoProductVisibility(false)
+            }
 
         }
-
+        progressBar.dismiss()
     }
 
     private fun setImageSlider(imageList: List<String>){
@@ -117,6 +173,20 @@ class ProductDetailActivity : AppCompatActivity() {
         binding.productImageSlider.startAutoCycle()
     }
 
+    private fun setPromoProductVisibility(adaProdukGratis: Boolean){
+        if (adaProdukGratis){
+            binding.apply {
+                cvPromoGratisProduk.visibility = View.VISIBLE
+                tvTitlePromo.visibility = View.VISIBLE
+            }
+        } else {
+            binding.apply {
+                cvPromoGratisProduk.visibility = View.GONE
+                tvTitlePromo.visibility = View.GONE
+            }
+        }
+    }
+
     private fun networkDialog() {
         val dialogBuilder = AlertDialog.Builder(this, R.style.NetworkAlertDialogTheme)
         dialogBuilder.setMessage("No Network Connection detected, Please make sure you have a stable connection to the internet, then press retry to refresh the app and try again.")
@@ -127,6 +197,7 @@ class ProductDetailActivity : AppCompatActivity() {
             checkInternet()
         }
         dialogBuilder.setNegativeButton("CLOSE") { dialog, _ ->
+            progressBar.dismiss()
             dialog.cancel()
         }
         val connectionAlertDialog = dialogBuilder.create()

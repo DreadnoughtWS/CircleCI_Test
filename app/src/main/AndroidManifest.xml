@@ -22,17 +22,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.homepage.components.activity.productdetail.ProductDetailPromoGratisActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+        <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productdetail.ProductDetailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -43,7 +57,9 @@
         </activity>
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,40 +68,64 @@
         </activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListPaketActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.banner.BannerPromoItemListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.activity.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListHargaSpesialActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListGratisProductActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productcategories.ProductCategoriesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
     </application>
 
 </manifest>
