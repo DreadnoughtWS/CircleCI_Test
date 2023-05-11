@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.fragment
 
 import android.content.Intent
+import android.icu.text.Normalizer.NO
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,6 +60,7 @@ class FragmentBeranda() : Fragment() {
     }
 
     private fun setToolbar() {
+
         binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
             if (scrollY > 215) {
                 binding.berandaToolbar.btnSearch.visibility = View.VISIBLE
@@ -67,6 +69,7 @@ class FragmentBeranda() : Fragment() {
                 binding.berandaToolbar.btnSearch.visibility = View.GONE
                 binding.berandaToolbar.tvToolbar.visibility = View.VISIBLE
             }
+                binding.scrollView.overScrollMode = View.OVER_SCROLL_NEVER
         }
         binding.berandaToolbar.btnSearch.setOnClickListener {
             startActivity(Intent(requireContext(), ProductListSearchProdukActivity::class.java))
