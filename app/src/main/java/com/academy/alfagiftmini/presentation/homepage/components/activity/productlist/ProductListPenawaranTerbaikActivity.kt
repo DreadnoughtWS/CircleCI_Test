@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductListPenawaranTerbaikBinding
-    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -35,6 +34,13 @@ class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
         setContentView(binding.root)
         initTabs()
         setupFragment(0)
+        setBtn()
+    }
+
+    private fun setBtn() {
+        binding.ivBackToolbar.setOnClickListener {
+            finish()
+        }
     }
 
 
