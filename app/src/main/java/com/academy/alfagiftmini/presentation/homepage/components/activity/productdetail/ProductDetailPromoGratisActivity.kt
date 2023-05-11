@@ -2,6 +2,11 @@ package com.academy.alfagiftmini.presentation.homepage.components.activity.produ
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.transition.Slide
+import android.transition.Transition
+import android.transition.TransitionManager
+import android.view.Gravity
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
@@ -77,7 +82,21 @@ class ProductDetailPromoGratisActivity : AppCompatActivity() {
 
     private fun setButtons() {
         binding.apply {
+
             ivDropdown.setOnClickListener {
+                val transitionBottom: Transition = Slide(Gravity.TOP)
+                transitionBottom.duration = 600
+                transitionBottom.addTarget(this.rvProdukGratis)
+                TransitionManager.beginDelayedTransition(this.root, transitionBottom)
+                this.rvProdukGratis.visibility = if (this.rvProdukGratis.isShown) View.GONE else View.VISIBLE
+
+                if (this.rvProdukGratis.isShown){
+                    this.tvPromoGratisProductContent.maxLines = 10
+                    this.ivDropdown.setImageResource(R.drawable.baseline_keyboard_arrow_up_24_gray)
+                } else {
+                    this.tvPromoGratisProductContent.maxLines = 2
+                    this.ivDropdown.setImageResource(R.drawable.baseline_keyboard_arrow_down_24_gray)
+                }
 
             }
             ibBackButton.setOnClickListener {
