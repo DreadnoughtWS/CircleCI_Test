@@ -7,6 +7,7 @@ import com.academy.alfagiftmini.data.DataUtils.TYPE_GRATIS_PRODUK
 import com.academy.alfagiftmini.data.DataUtils.TYPE_HARGA_SPESIAL
 import com.academy.alfagiftmini.data.DataUtils.TYPE_PAKET
 import com.academy.alfagiftmini.data.DataUtils.TYPE_PENAWARAN_TERBAIK
+import com.academy.alfagiftmini.data.DataUtils.TYPE_PENAWARAN_TERBAIK_PROMOSI
 import com.academy.alfagiftmini.data.DataUtils.TYPE_REKOMENDASI_BELANJA
 import com.academy.alfagiftmini.data.DataUtils.TYPE_SHOPPING_LIST_BELANJA
 import com.academy.alfagiftmini.data.DataUtils.TYPE_TEBUS_MURAH
@@ -93,7 +94,47 @@ class ProductListGratisProductPagingSource(
                             }
                         }
                     }
-                    println("PENAWAN TERBAIK $dataKodePromo")
+                }
+                TYPE_PENAWARAN_TERBAIK_PROMOSI -> {
+                        for (data in responseProduct) {
+                            if (data.productSpecialPrice == null) {
+                                continue
+                            }
+                            if (data.productSpecialPrice < data.price) {
+                                dataKodePromo.add(data)
+                            } else {
+                                data.kodePromo?.forEach {
+                                    if (it == TYPE_GRATIS_PRODUK) {
+                                        dataKodePromo.add(data)
+                                    }
+                                }
+                            }
+                        }
+
+                }
+                DataUtils.TYPE_HARGA_SPESIAL_PROMOSI -> {
+                    for (data in responseProduct) {
+                        if (data.productSpecialPrice == null) continue
+                        for (item in data.kodePromo ?: arrayListOf()) {
+                            if (item == TYPE_HARGA_SPESIAL) {
+                                if (data.productSpecialPrice < data.price) {
+                                    dataKodePromo.add(data)
+                                }
+                            }
+                        }
+                    }
+                }
+                DataUtils.TYPE_PAKET_PROMOSI -> {
+                    for (data in responseProduct) {
+                        if (data.productSpecialPrice == null) continue
+                        for (item in data.kodePromo ?: arrayListOf()) {
+                            if (item == TYPE_PAKET) {
+                                if (data.productSpecialPrice < data.price) {
+                                    dataKodePromo.add(data)
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -117,7 +158,7 @@ class ProductListGratisProductPagingSource(
         data: List<ProductListPromotionProductDomainModel>,
         prevKey: Int? = null,
         nextKey: Int? = null
-    ): LoadResult<Int, ProductListPromotionProductDomainModel> {
+    ): PagingSource.LoadResult<Int, ProductListPromotionProductDomainModel> {
         return LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )

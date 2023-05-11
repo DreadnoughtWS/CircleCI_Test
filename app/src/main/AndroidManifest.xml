@@ -26,9 +26,13 @@
             android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.homepage.components.activity.banner.AllBannerListActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+            android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.productdetail.ProductDetailActivity"
             android:exported="false"
@@ -37,6 +41,10 @@
             android:name=".presentation.authentication.activity.RegisterActivity"
             android:exported="true"
             android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            android:exported="true">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -111,11 +119,13 @@
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+            android:exported="false" />
         <activity
             android:name=".presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             tools:ignore="LockedOrientationActivity" />
+            android:exported="false" />
     </application>
 
 </manifest>

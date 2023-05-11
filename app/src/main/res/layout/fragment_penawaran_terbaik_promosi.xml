@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.homepage.components.fragment.productlist.hargaspesial.FragmentProductListHargaSpesialNamaProduk">
+    tools:context=".presentation.homepage.components.fragment.productlist.penawaranterbaik.FragmentPenawaranTerbaikPromosi">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_product_list_nama_produk"
+        android:id="@+id/rv_product_list_promosi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
