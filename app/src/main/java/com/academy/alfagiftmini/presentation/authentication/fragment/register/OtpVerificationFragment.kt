@@ -38,57 +38,71 @@ class OtpVerificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //belum di tes
-        val bundle = arguments ?: return
-        val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
-        Log.d("check", args.registrationData.phoneNumber)
-
         checkPermissions()
         setOTPGenerator()
-        binding.pvOtpCode.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+        setOTPInput()
+    }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                binding.pvOtpCode.removeTextChangedListener(this)
-                Log.d("test", s.toString())
-                if (binding.pvOtpCode.text.toString() == generatedOTP) {
-                    //post to server and go to home activity
-                    lifecycleScope.launch {
-                        (requireActivity() as RegisterActivity).getModel().registerNewUser(
-                            RegisterDataDomain(
-                                id = null,
-                                args.registrationData.email,
-                                args.registrationData.pass,
-                                args.registrationData.fName,
-                                args.registrationData.lName,
-                                args.registrationData.phoneNumber,
-                                memberId = null
-                            )
-                        ).collectLatest {
-                            //collect the response from api including access token and id for shared preference update
-                            if (it.error.isNullOrBlank()){
-                                (requireActivity() as RegisterActivity)
-                                    .getModel()
-                                    .putDataToSharedPreference((requireActivity() as RegisterActivity), it)
-                                val intent = Intent(activity, MainActivity::class.java)
-                                startActivity(intent)
-                                (requireActivity() as RegisterActivity).finish()
-                            }
-                            else{
-                                Toast.makeText(activity, it.error.toString(), Toast.LENGTH_SHORT).show()
+    private fun setOTPInput() {
+        val bundle = arguments ?: return
+        val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
+        binding.apply {
+            pvOtpCode.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    pvOtpCode.removeTextChangedListener(this)
+                    Log.d("test", s.toString())
+                    if (pvOtpCode.text.toString() == generatedOTP) {
+                        //post to server and go to home activity
+                        lifecycleScope.launch {
+                            (requireActivity() as RegisterActivity).getModel().registerNewUser(
+                                RegisterDataDomain(
+                                    id = null,
+                                    args.registrationData.email,
+                                    args.registrationData.pass,
+                                    args.registrationData.fName,
+                                    args.registrationData.lName,
+                                    args.registrationData.phoneNumber,
+                                    memberId = null
+                                )
+                            ).collectLatest {
+                                //collect the response from api including access token and id for shared preference update
+                                if (it.error.isNullOrBlank()) {
+                                    (requireActivity() as RegisterActivity)
+                                        .getModel()
+                                        .putDataToSharedPreference(
+                                            (requireActivity() as RegisterActivity),
+                                            it
+                                        )
+                                    val intent = Intent(activity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    (requireActivity() as RegisterActivity).finish()
+                                } else {
+                                    Toast.makeText(
+                                        activity,
+                                        it.error.toString(),
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         }
+
                     }
-
+                    pvOtpCode.setSelection(pvOtpCode.text?.length!!)
+                    pvOtpCode.addTextChangedListener(this)
                 }
-                binding.pvOtpCode.setSelection(binding.pvOtpCode.text?.length!!)
-                binding.pvOtpCode.addTextChangedListener(this)
-            }
 
-            override fun afterTextChanged(s: Editable?) {
-            }
-        })
+                override fun afterTextChanged(s: Editable?) {
+                }
+            })
+        }
     }
 
     private fun checkPermissions() {

@@ -25,35 +25,49 @@ class InputPhoneNumberFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUI(view)
+    }
+
+    private fun setUI(view: View) {
         val bundle = arguments ?: return
-        binding.tvPhoneFormatError.visibility = View.GONE
-        binding.etPhoneNumber.setOnEditorActionListener { v, actionId, event ->
-            return@setOnEditorActionListener when (actionId){
-                EditorInfo.IME_ACTION_DONE -> {
-                    //view model to check phone number length
-                    Log.d("v", v.toString())
-                    val phoneCheck = (requireActivity() as RegisterActivity).getModel().checkPhoneLength(binding.etPhoneNumber.text.toString())
-                    if (phoneCheck){
-                        val phoneNumberFormatted = (requireActivity() as RegisterActivity).getModel().phoneNumberFormatted(binding.etPhoneNumber.text.toString())
-                        val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
-                        args.apply {
-                            val data = RegistrationDataModel(registrationData.fName, registrationData.lName, registrationData.email, registrationData.pass, phoneNumberFormatted)
-                            val finalData = InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(data)
-                            view.findNavController().navigate(finalData)
-                        }
-                    }
-                    else{
-                        binding.apply {
+        binding.apply {
+            tvPhoneFormatError.visibility = View.GONE
+            etPhoneNumber.setOnEditorActionListener { v, actionId, event ->
+                return@setOnEditorActionListener when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        //view model to check phone number length
+                        val phoneCheck = (requireActivity() as RegisterActivity).getModel()
+                            .checkPhoneLength(etPhoneNumber.text.toString())
+                        if (phoneCheck) {
+                            val phoneNumberFormatted =
+                                (requireActivity() as RegisterActivity).getModel()
+                                    .phoneNumberFormatted(etPhoneNumber.text.toString())
+                            val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
+                            args.apply {
+                                val data = RegistrationDataModel(
+                                    registrationData.fName,
+                                    registrationData.lName,
+                                    registrationData.email,
+                                    registrationData.pass,
+                                    phoneNumberFormatted
+                                )
+                                val finalData =
+                                    InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(
+                                        data
+                                    )
+                                view.findNavController().navigate(finalData)
+                            }
+                        } else {
                             tvPhoneFormatError.visibility = View.VISIBLE
                             tvPhoneFormatError.text = getString(R.string.phone_format_error)
                             etPhoneNumber.setBackgroundResource(R.drawable.edit_text_error_border)
                         }
-
+                        true
                     }
-                    true
+                    else -> false
                 }
-                else -> false
             }
         }
+
     }
 }

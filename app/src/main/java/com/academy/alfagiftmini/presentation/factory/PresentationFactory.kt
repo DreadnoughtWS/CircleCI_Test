@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.presentation.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.academy.alfagiftmini.domain.akun.AkunDomainUseCase
 import com.academy.alfagiftmini.domain.banner.BannerDomainUseCase
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
@@ -21,7 +22,8 @@ class PresentationFactory @Inject constructor(
     private var productListDomainUseCase: ProductListDomainUseCase,
     private var bannerDomainUseCase: BannerDomainUseCase,
     private var productDetailDomainUseCase: ProductDetailUseCase,
-    private var productCategoriesUseCase: ProductCategoriesUseCase
+    private var productCategoriesUseCase: ProductCategoriesUseCase,
+    private var akunUseCase: AkunDomainUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -49,6 +51,9 @@ class PresentationFactory @Inject constructor(
                 productCategoriesUseCase
             ) as T
             modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> MainActivityViewModel() as T
+            modelClass.isAssignableFrom(AkunViewModel::class.java) -> AkunViewModel(
+                akunUseCase
+            ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

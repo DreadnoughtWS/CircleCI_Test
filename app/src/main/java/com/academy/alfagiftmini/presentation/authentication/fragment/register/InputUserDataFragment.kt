@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,16 +26,22 @@ class InputUserDataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUI(view)
+    }
+
+    private fun setUI(view: View) {
         binding.apply {
             var checkInput = false
             btnSubmitUserData.setOnClickListener {
                 //view model to check edit text content
                 lifecycleScope.launch {
                     var check: RegisterResponseDomain? = null
-                    (requireActivity() as RegisterActivity).getModel().checkAvailableEmail(etEmail.text.toString()).collectLatest {
-                        check = it
-                    }
-                    checkInput = (requireActivity() as RegisterActivity).getModel().userDataValidate(binding, requireContext(), check)
+                    (requireActivity() as RegisterActivity).getModel()
+                        .checkAvailableEmail(etEmail.text.toString()).collectLatest {
+                            check = it
+                        }
+                    checkInput = (requireActivity() as RegisterActivity).getModel()
+                        .userDataValidate(binding, requireContext(), check)
                 }.invokeOnCompletion {
                     if (!checkInput) {
                         val data = InputUserDataFragmentDirections

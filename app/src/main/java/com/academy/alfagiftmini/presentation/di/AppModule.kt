@@ -1,5 +1,8 @@
 package com.academy.alfagiftmini.presentation.di
 
+import com.academy.alfagiftmini.data.repository.repositoryimpl.AkunRepositoryImpl
+import com.academy.alfagiftmini.domain.akun.AkunDomainUseCase
+import com.academy.alfagiftmini.domain.akun.AkunDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.banner.BannerDomainUseCase
 import com.academy.alfagiftmini.domain.banner.BannerDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.loginlogout.LoginDomainUseCase
@@ -39,5 +42,8 @@ abstract class AppModule {
 
     @Binds
     abstract fun provideProductCategoriesUseCase(useCaseImpl: ProductCategoriesUseCaseImpl): ProductCategoriesUseCase
+
+    @Binds
+    abstract fun provideAkunUseCase(useCaseImpl: AkunDomainUseCaseImpl): AkunDomainUseCase
 
 }
