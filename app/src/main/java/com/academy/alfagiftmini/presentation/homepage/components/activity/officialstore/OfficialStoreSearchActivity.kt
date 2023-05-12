@@ -60,13 +60,16 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
     private fun setAdapter() {
         adapter = AllOfficialStorePagingAdapter().apply {
             setOnItemClickListener { _, data ->
-                val intent = Intent(this@OfficialStoreSearchActivity, DetailOfficialStoreActivity::class.java)
+                val intent = Intent(
+                    this@OfficialStoreSearchActivity, DetailOfficialStoreActivity::class.java
+                )
                 intent.putExtra(PresentationUtils.INTENT_DATA, data)
                 startActivity(intent)
             }
         }
         binding.apply {
-            rvOfficialStoreSearch.layoutManager = GridLayoutManager(this@OfficialStoreSearchActivity, 3)
+            rvOfficialStoreSearch.layoutManager =
+                GridLayoutManager(this@OfficialStoreSearchActivity, 3)
             rvOfficialStoreSearch.adapter = adapter
         }
 
@@ -77,7 +80,8 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
             officialStoreSeachToolbar.btnBannerBack.setOnClickListener {
                 finish()
             }
-            officialStoreSeachToolbar.tvPromoToolbarTitle.text = getString(R.string.cari_official_store)
+            officialStoreSeachToolbar.tvPromoToolbarTitle.text =
+                getString(R.string.cari_official_store)
         }
 
     }

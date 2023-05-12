@@ -35,6 +35,14 @@ class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
         setContentView(binding.root)
         initTabs()
         setupFragment(0)
+        setBtn()
+    }
+
+
+    private fun setBtn() {
+        binding.ivBackToolbar.setOnClickListener {
+            finish()
+        }
     }
 
 
