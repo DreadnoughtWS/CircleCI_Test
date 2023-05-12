@@ -42,7 +42,8 @@
                 android:src="@drawable/home_gradient_top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/gradient_color" />
 
             <TextView
                 android:id="@+id/tv_kirim_ke"
@@ -70,7 +71,7 @@
                 android:drawableTint="@color/teal"
                 android:paddingVertical="5dp"
                 android:paddingStart="15dp"
-                android:text="Mau belanja apa?"
+                android:text="@string/mau_belanja_apa"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textColor="@color/gray"

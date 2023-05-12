@@ -9,6 +9,7 @@ import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesReposi
 import com.academy.alfagiftmini.domain.productdetail.ProductDetailDomainRepository
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.register.RegisterDomainRepository
+import com.academy.alfagiftmini.domain.riwayatpencarian.RiwayatPencarianRepository
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -31,4 +32,6 @@ interface CoreComponent {
     fun provideProductDetailRepository():ProductDetailDomainRepository
     fun provideProductCategoriesRepository(): ProductCategoriesRepository
     fun provideAkunRepository(): AkunDomainRepository
+
+    fun provideRiwayatPencarianRepository(): RiwayatPencarianRepository
 }

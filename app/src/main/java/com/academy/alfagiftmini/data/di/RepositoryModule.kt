@@ -9,10 +9,11 @@ import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesReposi
 import com.academy.alfagiftmini.domain.productdetail.ProductDetailDomainRepository
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainRepository
 import com.academy.alfagiftmini.domain.register.RegisterDomainRepository
+import com.academy.alfagiftmini.domain.riwayatpencarian.RiwayatPencarianRepository
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, LocalModule::class])
 abstract class RepositoryModule {
     @Binds
     abstract fun provideLoginRepository(repositoryImpl: LoginRepositoryImpl): LoginDomainRepository
@@ -30,4 +31,7 @@ abstract class RepositoryModule {
     abstract fun provideProductCategoriesRepository(productCategoriesRepositoryImpl: ProductCategoriesRepositoryImpl): ProductCategoriesRepository
     @Binds
     abstract fun provideAkunRepository(repositoryImpl: AkunRepositoryImpl): AkunDomainRepository
+
+    @Binds
+    abstract fun provideRiwayatPencarianRepository(repositoryImpl: RiwayatPencarianRepositoryImpl): RiwayatPencarianRepository
 }

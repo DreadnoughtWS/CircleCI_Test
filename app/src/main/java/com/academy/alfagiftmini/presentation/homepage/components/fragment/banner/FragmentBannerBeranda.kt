@@ -13,6 +13,7 @@ import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.AllBannerListActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -58,6 +59,7 @@ class FragmentBannerBeranda(private var viewModel: BannerListViewModel) : Fragme
     private fun setupSlider(it: List<BannerDomainModel>){
         adapter = BannerBerandaSliderAdapter(it,requireContext())
         binding.svSliderBanner.setSliderAdapter(adapter)
+        binding.svSliderBanner.setIndicatorAnimation(IndicatorAnimationType.SLIDE)
         binding.svSliderBanner.startAutoCycle()
     }
 

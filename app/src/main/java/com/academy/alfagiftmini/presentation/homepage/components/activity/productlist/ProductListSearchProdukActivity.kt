@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
@@ -15,22 +16,34 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductListSearchProdukBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPreviewProductNameAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.riwayatpencarian.RiwayatPencarianAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategorySearchView
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview.FragmentProductListSearchProductTerlaris
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.RiwayatPencarianViewModel
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductListSearchProdukActivity : AppCompatActivity() {
+class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAdapter.SetOnRiwayatClickListener {
     private lateinit var binding: ActivityProductListSearchProdukBinding
     private lateinit var adapter: ProductListPreviewProductNameAdapter
+    private lateinit var riwayatAdapter: RiwayatPencarianAdapter
     private var dataName: String = ""
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
     private val viewModel: ProductListViewModel by viewModels {
+        presentationFactory
+    }
+    private val kategoriPilihanViewModel: ProductCategoriesViewModel by viewModels {
+        presentationFactory
+    }
+    private val riwayatPencarianViewModel: RiwayatPencarianViewModel by viewModels {
         presentationFactory
     }
 
@@ -39,9 +52,42 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
         binding = ActivityProductListSearchProdukBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setInitialView()
         setHideToolbar()
         setAdapter()
         setPreviewProductName()
+    }
+
+    private fun setInitialView() {
+        setRvRiwayatPencarian()
+        setRiwayatObserver()
+        setFragment(binding.containerFragmentRvListKategori.id, FragmentProductCategorySearchView(), FragmentProductCategorySearchView::class.java.simpleName)
+    }
+
+    private fun setRiwayatObserver() {
+        riwayatPencarianViewModel.getRiwayatLiveData.observe(this) {
+            riwayatAdapter.updateList(it)
+        }
+    }
+
+    private fun setRvRiwayatPencarian() {
+        binding.apply {
+            rvRiwayatPencarian.layoutManager = LinearLayoutManager(this@ProductListSearchProdukActivity, LinearLayoutManager.HORIZONTAL, false)
+            riwayatAdapter = RiwayatPencarianAdapter(mutableListOf())
+            rvRiwayatPencarian.adapter = riwayatAdapter
+            riwayatAdapter.listener = this@ProductListSearchProdukActivity
+            tvHapusRiwayat.setOnClickListener {
+                riwayatPencarianViewModel.deleteRiwayatPencarian()
+            }
+        }
+    }
+
+    private fun setFragment(containerId: Int, fragment: Fragment, tag: String) {
+        val fragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().apply {
+            replace(containerId, fragment, tag)
+            commit()
+        }
     }
 
     private fun setupFragment(position: Int) {
@@ -62,11 +108,7 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
             1 -> FragmentProductListSearchProductNamaProduk::class.java.simpleName
             else -> FragmentProductListSearchProductTerlaris::class.java.simpleName
         }
-        val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.container, fragment, tag)
-            commit()
-        }
+        setFragment(binding.container.id, fragment, tag)
     }
 
     private fun initTabs() {
@@ -159,6 +201,7 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
     }
 
     private fun performSearch(name: String) {
+        if (name.isNotBlank()) riwayatPencarianViewModel.insertRiwayatPencarian(name)
         dataName = name
         clearTabs()
         setupFragment(0)
@@ -204,5 +247,17 @@ class ProductListSearchProdukActivity : AppCompatActivity() {
 
     fun getNameSearch(): String {
         return dataName
+    }
+
+    fun getCategoryProductViewModel(): ProductCategoriesViewModel {
+        return kategoriPilihanViewModel
+    }
+
+    override fun onItemClicked(text: String) {
+        binding.tilSearchView.editText?.apply {
+            setText(text)
+            setSelection(text.length)
+            onEditorAction(EditorInfo.IME_ACTION_SEARCH)
+        }
     }
 }

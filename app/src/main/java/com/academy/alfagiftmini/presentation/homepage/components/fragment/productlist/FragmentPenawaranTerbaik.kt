@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentPenawaranTerbaikBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -31,6 +33,13 @@ class FragmentPenawaranTerbaik(private val viewModel: ProductListViewModel) : Fr
         super.onViewCreated(view, savedInstanceState)
         setAdapter()
         getData()
+        setBtn()
+    }
+
+    private fun setBtn() {
+        binding.tvLihatSemuaOfficial.setOnClickListener {
+            startActivity(Intent(requireContext(), ProductListPenawaranTerbaikActivity::class.java))
+        }
     }
 
     private fun getData() {
