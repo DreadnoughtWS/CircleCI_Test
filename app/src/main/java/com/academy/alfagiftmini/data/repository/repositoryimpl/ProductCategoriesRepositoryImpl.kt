@@ -16,11 +16,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ProductCategoriesRepositoryImpl @Inject constructor(private var apiService: ProductCategoriesApiService): ProductCategoriesRepository {
-    override suspend fun getAllCategories(scope: CoroutineScope): Flow<PagingData<ProductCategoriesDomainModel>> {
+    override suspend fun getAllCategories(scope: CoroutineScope, limit: Int?): Flow<PagingData<ProductCategoriesDomainModel>> {
         return Pager(config = PagingConfig(
-            pageSize = 10
+            pageSize = limit ?: 10
         )) {
-            ProductCategoriesPagingSource(apiService)
+            ProductCategoriesPagingSource(apiService, limit)
         }.flow.cachedIn(scope)
     }
 }

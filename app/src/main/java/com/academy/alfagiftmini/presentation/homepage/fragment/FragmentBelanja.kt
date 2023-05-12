@@ -65,7 +65,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
                 }
         }
         lifecycleScope.launch {
-            productCategoriesviewModel.getAllCategories(this).collectLatest {
+            productCategoriesviewModel.getAllCategories(this, null).collectLatest {
                 categoriesAdapter.submitData(lifecycle, it)
             }
         }

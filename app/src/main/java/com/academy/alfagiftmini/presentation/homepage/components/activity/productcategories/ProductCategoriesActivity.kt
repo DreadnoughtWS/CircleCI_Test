@@ -2,16 +2,12 @@ package com.academy.alfagiftmini.presentation.homepage.components.activity.produ
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.academy.alfagiftmini.MyApplication
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
-import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
-import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.OfficialStoreSearchActivity
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -52,7 +48,7 @@ class ProductCategoriesActivity: AppCompatActivity() {
             productCategoryListToolbar.ivSearchToolbar.setOnClickListener {
                 startActivity(
                     Intent(
-                        this@ProductCategoriesActivity, OfficialStoreSearchActivity::class.java
+                        this@ProductCategoriesActivity, ProductListSearchProdukActivity::class.java
                     )
                 )
             }

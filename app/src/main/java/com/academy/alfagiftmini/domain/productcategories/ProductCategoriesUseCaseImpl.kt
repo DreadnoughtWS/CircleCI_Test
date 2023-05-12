@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ProductCategoriesUseCaseImpl @Inject constructor(private val repository: ProductCategoriesRepository): ProductCategoriesUseCase {
-    override suspend fun getAllCategories(scope: CoroutineScope): Flow<PagingData<ProductCategoriesDomainModel>> {
-        return repository.getAllCategories(scope)
+    override suspend fun getAllCategories(scope: CoroutineScope, limit: Int?): Flow<PagingData<ProductCategoriesDomainModel>> {
+        return repository.getAllCategories(scope, limit)
     }
 }

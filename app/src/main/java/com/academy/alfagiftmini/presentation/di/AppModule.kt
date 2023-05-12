@@ -14,6 +14,8 @@ import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCaseImpl
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCaseImpl
+import com.academy.alfagiftmini.domain.riwayatpencarian.RiwayatPencarianUseCase
+import com.academy.alfagiftmini.domain.riwayatpencarian.RiwayatPencarianUseCaseImpl
 import dagger.Binds
 import dagger.Module
 
@@ -39,5 +41,8 @@ abstract class AppModule {
 
     @Binds
     abstract fun provideProductCategoriesUseCase(useCaseImpl: ProductCategoriesUseCaseImpl): ProductCategoriesUseCase
+
+    @Binds
+    abstract fun provideRiwayatPencarianUseCase(useCaseImpl: RiwayatPencarianUseCaseImpl): RiwayatPencarianUseCase
 
 }
