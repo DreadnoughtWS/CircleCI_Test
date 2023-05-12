@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductCategoryListBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -24,8 +27,16 @@ class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductLis
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setTab()
         setRv()
-        getData()
+        getData(PresentationUtils.ORDER_BY_ASCENDING)
+    }
+
+    private fun setTab() {
+        val fragmentManager = requireActivity().supportFragmentManager
+        val fragmentCategoriesDetail =
+            fragmentManager.findFragmentByTag(FragmentProductCategoriesDetail::class.java.simpleName) as FragmentProductCategoriesDetail
+        fragmentCategoriesDetail.getTab().addOnTabSelectedListener(this)
     }
 
     private fun getData(order: String = "asc") {

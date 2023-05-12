@@ -9,6 +9,7 @@ import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesUseCas
 import com.academy.alfagiftmini.domain.productdetail.ProductDetailUseCase
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
+import com.academy.alfagiftmini.domain.riwayatpencarian.RiwayatPencarianUseCase
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.*
@@ -21,7 +22,8 @@ class PresentationFactory @Inject constructor(
     private var productListDomainUseCase: ProductListDomainUseCase,
     private var bannerDomainUseCase: BannerDomainUseCase,
     private var productDetailDomainUseCase: ProductDetailUseCase,
-    private var productCategoriesUseCase: ProductCategoriesUseCase
+    private var productCategoriesUseCase: ProductCategoriesUseCase,
+    private var riwayatPencarianUseCase: RiwayatPencarianUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
@@ -49,6 +51,10 @@ class PresentationFactory @Inject constructor(
                 productCategoriesUseCase
             ) as T
             modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> MainActivityViewModel() as T
+            modelClass.isAssignableFrom(RiwayatPencarianViewModel::class.java) -> RiwayatPencarianViewModel(
+                riwayatPencarianUseCase
+
+            ) as T
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

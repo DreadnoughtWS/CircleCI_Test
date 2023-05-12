@@ -1,13 +1,13 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.academy.alfagiftmini.MyApplication
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
+import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -39,23 +39,27 @@ class ProductCategoriesActivity: AppCompatActivity() {
     }
 
     private fun setToolbar(category: String) {
+        supportActionBar?.hide()
         binding.apply {
-            productCategoryListToolbar.tvPromoToolbarTitle.text = category
-            productCategoryListToolbar.btnBannerBack.setOnClickListener {
+            productCategoryListToolbar.tvToolbar.text = category
+            productCategoryListToolbar.ivBackToolbar.setOnClickListener {
                 finish()
             }
+            productCategoryListToolbar.ivSearchToolbar.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@ProductCategoriesActivity, ProductListSearchProdukActivity::class.java
+                    )
+                )
+            }
         }
+
     }
 
     private fun setTabItems(subcategories: List<String>, category: String) {
-
         binding.apply {
             subcategories.forEach {
-                tabLayout.addTab(tabLayout.newTab().setCustomView(
-                    R.layout.tab_item
-                ).apply {
-                    customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = it
-                })
+                tabLayout.addTab(tabLayout.newTab().setText(it))
             }
 
             tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener {

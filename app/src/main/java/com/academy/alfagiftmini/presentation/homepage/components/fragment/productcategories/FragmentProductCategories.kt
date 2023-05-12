@@ -20,7 +20,6 @@ class FragmentProductCategories (private val viewModel: ProductCategoriesViewMod
     private lateinit var binding: FragmentProductCategoriesBinding
     private lateinit var categoriesAdapter: CategoriesAdapter
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setRvCategories()
@@ -29,7 +28,7 @@ class FragmentProductCategories (private val viewModel: ProductCategoriesViewMod
 
     private fun setObserver() {
         lifecycleScope.launch {
-            viewModel.getAllCategories(this).collectLatest {
+            viewModel.getAllCategories(this, 5).collectLatest {
                 categoriesAdapter.submitData(lifecycle, it)
             }
         }

@@ -65,6 +65,10 @@
     <string name="ikuti">Ikuti</string>
     <string name="belanja_berdasarkan_brand">Belanja berdasarkan brand</string>
     <string name="semua_produk">Semua Produk</string>
+    <string name="register_account">Register Account</string>
+    <string name="hapus_riwayat">Hapus riwayat</string>
+    <string name="kategori_pilihan">Kategori Pilihan</string>
+    <string name="riwayat_pencarian">Riwayat Pencarian</string>
     <string name="promo_pada_produk_ini">Promo Pada Produk Ini</string>
     <string name="gratis_produk">Gratis Produk</string>
     <string name="dapatkan_gratis_produk">Dapatkan Gratis Produk</string>

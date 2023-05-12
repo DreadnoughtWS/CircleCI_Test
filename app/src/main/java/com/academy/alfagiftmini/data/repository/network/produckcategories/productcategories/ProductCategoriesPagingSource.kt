@@ -6,7 +6,7 @@ import com.academy.alfagiftmini.data.repository.network.produckcategories.Produc
 import com.academy.alfagiftmini.data.repository.network.produckcategories.model.ProductCategoriesDataModel
 import com.academy.alfagiftmini.domain.productcategories.model.ProductCategoriesDomainModel
 
-class ProductCategoriesPagingSource (private val apiService: ProductCategoriesApiService): PagingSource<Int, ProductCategoriesDomainModel>() {
+class ProductCategoriesPagingSource (private val apiService: ProductCategoriesApiService, private val limit: Int?): PagingSource<Int, ProductCategoriesDomainModel>() {
     override fun getRefreshKey(state: PagingState<Int, ProductCategoriesDomainModel>): Int? {
         return null
     }
@@ -26,7 +26,7 @@ class ProductCategoriesPagingSource (private val apiService: ProductCategoriesAp
     }
 
     private suspend fun getOnlineData(position: Int): List<ProductCategoriesDomainModel> {
-        val data = apiService.getAllCategories(page = position, limit = 10)
+        val data = apiService.getAllCategories(page = position, limit = limit)
         return ProductCategoriesDataModel.transform(data)
     }
 

@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ProductCategoriesViewModel @Inject constructor(private val useCase: ProductCategoriesUseCase): ViewModel() {
-    suspend fun getAllCategories(scope: CoroutineScope): Flow<PagingData<ProductCategoriesDomainModel>> {
-        return useCase.getAllCategories(scope)
+    suspend fun getAllCategories(scope: CoroutineScope, limit: Int?): Flow<PagingData<ProductCategoriesDomainModel>> {
+        return useCase.getAllCategories(scope, limit)
     }
 
     fun getIntentData(intent: Intent): ProductCategoriesDomainModel? {
