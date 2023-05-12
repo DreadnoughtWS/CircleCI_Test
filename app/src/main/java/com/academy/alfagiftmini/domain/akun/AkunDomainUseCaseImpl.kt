@@ -11,4 +11,8 @@ class AkunDomainUseCaseImpl @Inject constructor(private val repository: AkunDoma
     override fun deleteAkun(id: Int) {
         return repository.deleteAkun(id)
     }
+
+    override fun updateAkun(id: Int) {
+        return repository.updateAkun(id)
+    }
 }

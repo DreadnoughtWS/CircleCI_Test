@@ -9,4 +9,6 @@
     <dimen name="mrgn_5">10dp</dimen>
     <dimen name="sv_height1">180dp</dimen>
     <dimen name="svbtmrgin1">1.5dp</dimen>
+    <dimen name="boxStrokeRadii">2dp</dimen>
+    <dimen name="boxStrokeRadiiNormal">1dp</dimen>
 </resources>

@@ -36,4 +36,12 @@ class AkunRepositoryImpl @Inject constructor(private val akunApiService: AkunApi
             e.printStackTrace()
         }
     }
+
+    override fun updateAkun(id: Int) {
+        try {
+            akunApiService.updateAkun(id = id)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

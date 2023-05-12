@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RegistrationDataModel (
+data class RegistrationDataModel(
     val fName: String,
     val lName: String,
     val email: String,
