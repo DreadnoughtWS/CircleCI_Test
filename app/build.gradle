@@ -39,6 +39,10 @@ android {
 }
 
 dependencies {
+
+    // loading gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+
     // skeleton loading
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
