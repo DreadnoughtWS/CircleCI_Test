@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/red"
@@ -38,11 +37,11 @@
         android:textColor="@color/gray"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Mau belanja apa?" />
+        android:text="@string/mau_belanja_apa" />
 
     <ImageView
         android:id="@+id/iv_card_toolbar"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_gravity="end"
         android:src="@drawable/baseline_card_giftcard_24"
         android:layout_width="30dp"

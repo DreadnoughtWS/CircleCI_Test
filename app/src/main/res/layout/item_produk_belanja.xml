@@ -30,7 +30,8 @@
             android:layout_marginStart="20dp"
             app:layout_constraintStart_toEndOf="@id/cb_item_produk_belanja"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/uniliver_logo" />
+            tools:src="@drawable/uniliver_logo"
+            android:contentDescription="@string/logo_official_store" />
 
         <TextView
             android:textSize="18sp"
@@ -42,7 +43,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:maxLines="2"
             app:layout_constraintStart_toEndOf="@id/iv_product_logo"
-            android:text="Official sisa detail, productlist belum 2. Promo 502 (Tebus Murah) "
+            android:text="@string/judul_barang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         
@@ -55,7 +56,7 @@
             android:layout_marginHorizontal="10dp"
             app:layout_constraintTop_toBottomOf="@id/tv_product_name"
             app:layout_constraintStart_toEndOf="@id/iv_product_logo"
-            android:text="Rp.37.500"
+            android:text="@string/rp_37_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -109,7 +110,7 @@
                 android:background="@drawable/shape_gratis"
                 android:drawableStart="@drawable/baseline_card_giftcard_24"
                 android:textColor="@color/white"
-                android:text="Gratis"
+                android:text="@string/gratis"
                 android:textSize="16sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -173,19 +174,22 @@
                 android:src="@drawable/baseline_remove_24_blue"
                 app:layout_constraintBaseline_toBottomOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/et_jumlah_barang" />
+                app:layout_constraintEnd_toStartOf="@id/et_jumlah_barang"
+                android:contentDescription="@string/min" />
 
             <EditText
                 android:layout_marginHorizontal="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_min_product"
                 android:id="@+id/et_jumlah_barang"
-                android:text="1"
+                android:text="@string/_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:inputType="numberDecimal" />
 
             <ImageView
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:id="@+id/iv_add_product"
                 app:layout_constraintStart_toEndOf="@id/et_jumlah_barang"
                 app:layout_constraintBaseline_toBottomOf="parent"
@@ -194,7 +198,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/shape_plus_minus_product"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/plus" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,7 +212,7 @@
             android:paddingHorizontal="20dp"
             android:background="@drawable/shape_btn_keranjang"
             android:backgroundTint="@color/sky_blue"
-            android:text="Stok Habis"
+            android:text="@string/stok_habis"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="18sp"
