@@ -69,4 +69,12 @@
     <string name="hapus_riwayat">Hapus riwayat</string>
     <string name="kategori_pilihan">Kategori Pilihan</string>
     <string name="riwayat_pencarian">Riwayat Pencarian</string>
+    <string name="promo_pada_produk_ini">Promo Pada Produk Ini</string>
+    <string name="gratis_produk">Gratis Produk</string>
+    <string name="dapatkan_gratis_produk">Dapatkan Gratis Produk</string>
+    <string name="dengan_belanja_sesuai_syarat_ketentuan_yang_berlaku"><![CDATA[Dengan Belanja sesuai syarat & ketentuan yang berlaku]]></string>
+    <string name="gratis">Gratis</string>
+    <string name="tutup">Tutup</string>
+    <string name="plus_pro">+%d</string>
+    <string name="rp_0">Rp 0</string>
 </resources>

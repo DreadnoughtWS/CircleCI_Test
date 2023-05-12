@@ -25,11 +25,7 @@ class BannerProductPagingSource(
         val position = params.key ?: 1
         return try {
             val responseProduct = apiService.getProductsByBannerId(
-                page = position,
-                limit = 10,
-                bannerId = bannerId,
-                sort = sort,
-                order = order
+                page = position, limit = 10, bannerId = bannerId, sort = sort, order = order
             )
             val responseSale = apiService.getPromotionProduct()
             val responseStock = apiService.getProductStock()
@@ -39,7 +35,10 @@ class BannerProductPagingSource(
             when (type) {
                 DataUtils.TYPE_PROMOSI -> {
                     for (data in responseProduct) {
-                        if (data.productSpecialPrice!! < data.price) {
+                        if (data.productSpecialPrice == null) {
+                            continue
+                        }
+                        if (data.productSpecialPrice < data.price) {
                             dataProduct.add(data)
                         } else {
                             data.kodePromo?.forEach {

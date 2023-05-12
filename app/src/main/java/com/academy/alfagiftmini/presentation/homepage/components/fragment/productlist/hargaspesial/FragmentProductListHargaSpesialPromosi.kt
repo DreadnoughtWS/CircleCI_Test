@@ -46,7 +46,7 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
 
     private fun getData() {
         lifecycleScope.launch {
-            viewModel.getProductGratisProduct(PresentationUtils.TYPE_HARGA_SPESIAL).collectLatest {
+            viewModel.getProductGratisProduct(PresentationUtils.TYPE_HARGA_SPESIAL_PROMOSI).collectLatest {
                 adapter.submitData(it)
             }
         }
