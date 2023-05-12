@@ -11,11 +11,11 @@
         android:id="@+id/tl_harga_special"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed" />
+        app:tabMode="auto" />
 
     <FrameLayout
         android:id="@+id/container_fragment_special"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
