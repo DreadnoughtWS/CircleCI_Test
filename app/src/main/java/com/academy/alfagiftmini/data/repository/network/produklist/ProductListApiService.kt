@@ -68,7 +68,7 @@ interface ProductListApiService {
     @GET("products")
     suspend fun getProductsBynameOrder(
         @Query("status") status: Int = 1,
-        @Query("product_name_like") name: String,
+        @Query("product_name") name: String,
         @Query("_page") page: Int,
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
