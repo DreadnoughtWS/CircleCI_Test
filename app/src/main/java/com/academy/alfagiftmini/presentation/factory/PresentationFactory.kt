@@ -24,8 +24,7 @@ class PresentationFactory @Inject constructor(
     private var bannerDomainUseCase: BannerDomainUseCase,
     private var productDetailDomainUseCase: ProductDetailUseCase,
     private var productCategoriesUseCase: ProductCategoriesUseCase,
-    private var akunUseCase: AkunDomainUseCase
-    private var productCategoriesUseCase: ProductCategoriesUseCase,
+    private var akunUseCase: AkunDomainUseCase,
     private var riwayatPencarianUseCase: RiwayatPencarianUseCase
 ) : ViewModelProvider.NewInstanceFactory() {
 
