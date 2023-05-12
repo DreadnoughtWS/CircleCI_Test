@@ -59,7 +59,7 @@ class FragmentBannerBeranda(private var viewModel: BannerListViewModel) : Fragme
     private fun setupSlider(it: List<BannerDomainModel>){
         adapter = BannerBerandaSliderAdapter(it,requireContext())
         binding.svSliderBanner.setSliderAdapter(adapter)
-        binding.svSliderBanner.setIndicatorAnimation(IndicatorAnimationType.SLIDE)
+        binding.svSliderBanner.setIndicatorAnimation(IndicatorAnimationType.WORM)
         binding.svSliderBanner.startAutoCycle()
     }
 
