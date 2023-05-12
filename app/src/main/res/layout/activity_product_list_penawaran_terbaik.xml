@@ -75,7 +75,7 @@
             <LinearLayout
                 android:id="@+id/ll_sticky_banner_product_list"
                 android:layout_width="match_parent"
-                android:layout_height="800dp"
+                android:layout_height="700dp"
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@id/iv_banner_image">
 
@@ -90,6 +90,7 @@
                     android:id="@+id/tl_penawaran"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@+id/divider_banner_product_list"
                     app:tabMode="fixed" />
 
@@ -97,7 +98,6 @@
                     android:id="@+id/container_fragment_penawaran"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="70dp"
                     app:layout_constraintTop_toBottomOf="@id/tl_official_store" />
 
             </LinearLayout>
