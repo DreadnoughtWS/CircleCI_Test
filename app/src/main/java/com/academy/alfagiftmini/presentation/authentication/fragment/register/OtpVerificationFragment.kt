@@ -11,10 +11,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
@@ -84,12 +82,6 @@ class OtpVerificationFragment : Fragment() {
                                     val intent = Intent(activity, MainActivity::class.java)
                                     startActivity(intent)
                                     (requireActivity() as RegisterActivity).finish()
-                                } else {
-                                    Toast.makeText(
-                                        activity,
-                                        it.error.toString(),
-                                        Toast.LENGTH_SHORT
-                                    ).show()
                                 }
                             }
                         }
@@ -136,19 +128,19 @@ class OtpVerificationFragment : Fragment() {
 
     private fun observer() {
         (requireActivity() as RegisterActivity).getModel().timer.observe(
-            viewLifecycleOwner,
-            Observer {
-                val timerFormatted = DateUtils.formatElapsedTime(it.toLong())
-                binding.btnGetOTPCode.text =
-                    getString(R.string.send_otp_again).plus(timerFormatted.toString())
-            })
+            viewLifecycleOwner
+        ) {
+            val timerFormatted = DateUtils.formatElapsedTime(it.toLong())
+            binding.btnGetOTPCode.text =
+                getString(R.string.send_otp_again).plus(timerFormatted.toString())
+        }
         (requireActivity() as RegisterActivity).getModel().finished.observe(
-            viewLifecycleOwner,
-            Observer {
-                if (it) {
-                    binding.btnGetOTPCode.text = getString(R.string.send_otp_code)
-                    setOTPGenerator()
-                } else binding.btnGetOTPCode.setOnClickListener(null)
-            })
+            viewLifecycleOwner
+        ) {
+            if (it) {
+                binding.btnGetOTPCode.text = getString(R.string.send_otp_code)
+                setOTPGenerator()
+            } else binding.btnGetOTPCode.setOnClickListener(null)
+        }
     }
 }
