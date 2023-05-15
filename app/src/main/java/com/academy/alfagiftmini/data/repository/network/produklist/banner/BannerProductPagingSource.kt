@@ -49,9 +49,11 @@ class BannerProductPagingSource(
                         }
                     }
                 }
-
                 DataUtils.TYPE_BUKAN_PROMOSI -> {
-                    dataProduct.addAll(responseProduct)
+//                    dataProduct.addAll(responseProduct)
+                    responseProduct.forEach {
+                        dataProduct.add(it)
+                    }
                 }
             }
 
