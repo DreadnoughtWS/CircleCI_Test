@@ -62,7 +62,7 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
     }
 
     suspend fun getBannerProduct(bannerId:Int,order: String,sort: String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
-        return useCase.getBannerProduct(viewModelScope,bannerId,order,sort,type)
+        return useCase.getBannerProduct(scope = viewModelScope,bannerId = bannerId,order = order,sort = sort,type = type)
     }
 
     suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {

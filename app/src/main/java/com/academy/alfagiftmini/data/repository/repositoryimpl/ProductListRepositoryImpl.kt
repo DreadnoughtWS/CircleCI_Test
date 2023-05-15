@@ -117,14 +117,16 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getBannerProduct(
-        scope: CoroutineScope,
-        bannerId: Int,
-        order: String,
-        sort: String,
-        type: String
+        scope: CoroutineScope, bannerId: Int, order: String, sort: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config = PagingConfig(10)){
-            BannerProductPagingSource(apiService, bannerId, order, sort, type)
+        return Pager(config = PagingConfig(10)) {
+            BannerProductPagingSource(
+                apiService = apiService,
+                bannerId = bannerId,
+                order = order,
+                sort = sort,
+                type = type
+            )
         }.flow.cachedIn(scope)
     }
 
@@ -136,9 +138,11 @@ class ProductListRepositoryImpl @Inject constructor(
         order: String,
         type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return Pager(config = PagingConfig(
-            pageSize = 10
-        )) {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10
+            )
+        ) {
             ProductItemCategoryPagingSource(apiService, subCategory, category, sort, order, type)
         }.flow.cachedIn(scope)
     }

@@ -68,7 +68,7 @@ interface ProductListApiService {
     @GET("products")
     suspend fun getProductsBynameOrder(
         @Query("status") status: Int = 1,
-        @Query("product_name") name: String,
+        @Query("product_name_like") name: String,
         @Query("_page") page: Int,
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
@@ -83,14 +83,16 @@ interface ProductListApiService {
         @Query("_limit") limit: Int,
         @Query("_sort") sort: String,
         @Query("_order") order: String,
+//        _sort=product_name&_order=desc
     ): List<ProductListDetailDataModel>
 
     @GET("products")
-    suspend fun getProductByCategories (
+    suspend fun getProductByCategories(
         @Query("product_category") category: String,
         @Query("product_sub_category") subCategory: String,
         @Query("_page") page: Int,
         @Query("_sort") sort: String,
-        @Query("_order") order: String): ArrayList<ProductListDetailDataModel>
+        @Query("_order") order: String
+    ): ArrayList<ProductListDetailDataModel>
 
 }
