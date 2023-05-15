@@ -9,7 +9,7 @@
         android:id="@+id/tv_tab_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Promosi"
+        android:text="@string/promosi"
         android:textColor="@drawable/tab_item_selected"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,7 +18,7 @@
         android:id="@+id/iv_tab_item_up"
         android:layout_width="10dp"
         android:layout_height="20dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/up"
         app:layout_constraintLeft_toRightOf="@id/tv_tab_item"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/arrow_up_tab_item" />
@@ -27,7 +27,7 @@
         android:id="@+id/iv_tab_item_down"
         android:layout_width="10dp"
         android:layout_height="20dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/down"
         app:layout_constraintLeft_toRightOf="@id/iv_tab_item_up"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/arrow_down_tab_item" />

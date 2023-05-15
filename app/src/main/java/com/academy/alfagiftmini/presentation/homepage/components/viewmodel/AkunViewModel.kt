@@ -10,4 +10,12 @@ class AkunViewModel @Inject constructor(private val useCase: AkunDomainUseCase):
     fun getAkunData(id: Int): Flow<AkunResponseDomain> {
         return useCase.getAkunDetail(id)
     }
+
+    fun deleteAkunData(id: Int){
+        useCase.deleteAkun(id)
+    }
+
+    fun updateAkunData(id: Int){
+        useCase.updateAkun(id)
+    }
 }

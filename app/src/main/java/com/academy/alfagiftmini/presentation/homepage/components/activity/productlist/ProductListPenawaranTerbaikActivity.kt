@@ -20,7 +20,6 @@ import javax.inject.Inject
 
 class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProductListPenawaranTerbaikBinding
-    private lateinit var adapter: ProductListGratisProductPagingAdapter
 
     @Inject
     lateinit var presentationFactory: PresentationFactory

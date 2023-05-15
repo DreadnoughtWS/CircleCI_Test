@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.di
 
 import com.academy.alfagiftmini.data.di.CoreComponent
+import com.academy.alfagiftmini.presentation.akun.EditAkunActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
@@ -27,7 +28,6 @@ interface AppComponent {
     }
 
     fun mainActivityInject(activity: MainActivity)
-
     fun loginActivityInject(activity: LoginActivity)
     fun registerActivityInject(activity: RegisterActivity)
     fun officialStoreActivityInject(activity: OfficialStoreActivity)
@@ -45,4 +45,5 @@ interface AppComponent {
     fun productGratisActivityInject(activity: ProductDetailPromoGratisActivity)
     fun bannerListPromoItemListActivityInject(activity: BannerPromoItemListActivity)
     fun productCategoriesActivityInject(activity: ProductCategoriesActivity)
+    fun akunActivityInject(activity: EditAkunActivity)
 }

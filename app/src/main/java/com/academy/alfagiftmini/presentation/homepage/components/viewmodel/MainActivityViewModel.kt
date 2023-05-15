@@ -26,6 +26,6 @@ class MainActivityViewModel: ViewModel() {
 
     fun getData(activity: AppCompatActivity) {
         val sharedPreference = activity.application.getSharedPreferences(PresentationUtils.SHARED_PREFERENCE, Context.MODE_PRIVATE)
-        _userData.value = RegisterDataDomain(sharedPreference.getInt(PresentationUtils.SP_USER_ID, -1), "", "", sharedPreference.getString(PresentationUtils.SP_FIRST_NAME, ""), sharedPreference.getString(PresentationUtils.SP_LAST_NAME, ""), "", sharedPreference.getString(PresentationUtils.SP_PHONE, ""))
+        _userData.value = RegisterDataDomain(sharedPreference.getInt(PresentationUtils.SP_USER_ID, -1), "", "", sharedPreference.getString(PresentationUtils.SP_FIRST_NAME, ""), sharedPreference.getString(PresentationUtils.SP_LAST_NAME, ""), sharedPreference.getString(PresentationUtils.SP_PHONE, ""), sharedPreference.getString(PresentationUtils.SP_PHONE, ""))
     }
 }

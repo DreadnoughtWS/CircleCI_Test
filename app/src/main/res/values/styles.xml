@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    android:layout_marginTop="20dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
+    <style name="ThemeOverlay.AppTheme.TextInputEditText.Outlined" parent="">
+        <item name="colorControlActivated">@color/teal</item>
+    </style>
+
     <style name="Edit_Text_Default_Style">
         <item name="android:textColor">@color/black</item>
         <item name="android:textColorHint">@color/black</item>

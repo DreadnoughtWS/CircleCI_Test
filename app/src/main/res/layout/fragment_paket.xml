@@ -11,7 +11,7 @@
         android:id="@+id/tl_paket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed" />
+        app:tabMode="auto" />
 
     <FrameLayout
         android:id="@+id/container_fragment_paket"
