@@ -22,11 +22,10 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
     private lateinit var binding: FragmentBannerProductNamaProdukBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
-    var isClicked = true
-    private var bannerId:Int = -1
+    private var isClicked = true
+    private var bannerId: Int = -1
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentBannerProductNamaProdukBinding.inflate(inflater, container, false)
         return binding.root
@@ -43,7 +42,10 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
     private fun getData(order: String = "asc") {
         lifecycleScope.launch {
             viewModel.getBannerProduct(
-                bannerId,order,"product_name",PresentationUtils.TYPE_BUKAN_PROMOSI
+                bannerId = bannerId,
+                order = order,
+                sort = "product_name",
+                type = PresentationUtils.TYPE_BUKAN_PROMOSI
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -59,8 +61,7 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
     private fun setViewModelTabandBannerId() {
         viewModel = (requireActivity() as BannerPromoItemListActivity).getProductViewModel()
         bannerId = (requireActivity() as BannerPromoItemListActivity).getBannerIdValue()
-        (requireActivity() as BannerPromoItemListActivity).getTab()
-            .addOnTabSelectedListener(this)
+        (requireActivity() as BannerPromoItemListActivity).getTab().addOnTabSelectedListener(this)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}
@@ -76,6 +77,7 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item_blue)
+                setAdapter()
                 getData(PresentationUtils.ORDER_BY_DESCENDING)
 
             } else {
@@ -85,6 +87,7 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item)
+                setAdapter()
                 getData(PresentationUtils.ORDER_BY_ASCENDING)
 
             }
