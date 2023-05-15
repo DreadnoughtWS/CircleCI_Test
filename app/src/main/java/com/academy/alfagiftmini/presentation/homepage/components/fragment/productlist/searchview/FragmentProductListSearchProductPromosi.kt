@@ -37,6 +37,7 @@ class FragmentProductListSearchProductPromosi : Fragment() {
 
     private fun getDataFromApi() {
         println("daata nama = $dataName")
+        println("MULAI")
         lifecycleScope.launch {
             viewModel.getProductSearchProduct(name = dataName).collectLatest {
                 adapter.submitData(it)

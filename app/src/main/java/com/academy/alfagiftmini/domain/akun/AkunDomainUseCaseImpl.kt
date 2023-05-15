@@ -8,11 +8,7 @@ class AkunDomainUseCaseImpl @Inject constructor(private val repository: AkunDoma
         return repository.getAkunDetail(id)
     }
 
-    override fun deleteAkun(id: Int) {
-        return repository.deleteAkun(id)
-    }
-
-    override fun updateAkun(id: Int) {
-        return repository.updateAkun(id)
+    override suspend fun updateAkun(editedAkunData: AkunDomainEditDataModel, id: Int) {
+        return repository.updateAkun(editedAkunData, id)
     }
 }
