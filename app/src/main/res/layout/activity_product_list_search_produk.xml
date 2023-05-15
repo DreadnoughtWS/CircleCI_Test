@@ -92,6 +92,7 @@
             android:id="@+id/rv_riwayat_pencarian"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clipToPadding="false"
             android:layout_marginHorizontal="@dimen/mrgn_1"
             app:layout_constraintTop_toBottomOf="@id/tv_title_riwayat_pencarian"/>
 
