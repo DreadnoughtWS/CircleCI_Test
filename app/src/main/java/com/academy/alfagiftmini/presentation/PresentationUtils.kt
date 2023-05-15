@@ -56,6 +56,7 @@ object PresentationUtils {
     const val SP_FIRST_NAME = "FIRST_NAME"
     const val SP_LAST_NAME = "LAST_NAME"
     const val SP_PHONE = "USER_PHONE"
+    const val SP_PASS = "PASSWORD"
 
     fun String.fromHtml(): Spanned {
         return Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)

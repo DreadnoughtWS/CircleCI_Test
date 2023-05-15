@@ -10,6 +10,11 @@ data class AkunDomainDataModel(
     val memberId: String
 )
 
+data class AkunDomainEditDataModel(
+    val firstName: String,
+    val lastName: String,
+)
+
 data class AkunResponseDomain (
     val accessToken: String?,
     val userData: AkunDomainDataModel?,

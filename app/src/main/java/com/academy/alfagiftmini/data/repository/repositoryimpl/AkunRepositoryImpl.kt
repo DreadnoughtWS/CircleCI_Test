@@ -1,7 +1,11 @@
 package com.academy.alfagiftmini.data.repository.repositoryimpl
 
+import android.util.Log
 import com.academy.alfagiftmini.data.repository.network.akun.AkunApiService
 import com.academy.alfagiftmini.data.repository.network.akun.AkunDataModel
+import com.academy.alfagiftmini.data.repository.network.akun.AkunEditModel
+import com.academy.alfagiftmini.domain.akun.AkunDomainDataModel
+import com.academy.alfagiftmini.domain.akun.AkunDomainEditDataModel
 import com.academy.alfagiftmini.domain.akun.AkunDomainRepository
 import com.academy.alfagiftmini.domain.akun.AkunResponseDomain
 import kotlinx.coroutines.Dispatchers
@@ -29,17 +33,12 @@ class AkunRepositoryImpl @Inject constructor(private val akunApiService: AkunApi
         }.flowOn(Dispatchers.IO)
     }
 
-    override fun deleteAkun(id: Int) {
+    override suspend fun updateAkun(editedAkunData: AkunDomainEditDataModel, id: Int) {
         try {
-            akunApiService.deleteAkun(id = id)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    override fun updateAkun(id: Int) {
-        try {
-            akunApiService.updateAkun(id = id)
+            Log.d("id", id.toString())
+            Log.d("edit data", editedAkunData.toString())
+            val transform = AkunEditModel.transform(editedAkunData)
+            akunApiService.updateAkun(id = id, body = transform)
         } catch (e: Exception) {
             e.printStackTrace()
         }

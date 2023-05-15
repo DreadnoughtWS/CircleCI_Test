@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.data.repository.network.akun
 
 import com.academy.alfagiftmini.domain.akun.AkunDomainDataModel
+import com.academy.alfagiftmini.domain.akun.AkunDomainEditDataModel
 import com.google.gson.annotations.SerializedName
 
 data class AkunDataModel(
@@ -40,6 +41,22 @@ data class AkunDataModel(
                 user?.lastName ?: "",
                 user?.phoneNumber ?: "",
                 user?.memberId ?: ""
+            )
+        }
+    }
+}
+
+data class AkunEditModel(
+    @SerializedName("firstName")
+    val firstName: String,
+    @SerializedName("lastName")
+    val lastName: String,
+){
+    companion object{
+        fun transform(editData: AkunDomainEditDataModel): AkunEditModel{
+            return AkunEditModel(
+                editData.firstName,
+                editData.lastName
             )
         }
     }
