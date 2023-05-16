@@ -86,13 +86,6 @@ interface ProductListApiService {
 //        _sort=product_name&_order=desc
     ): List<ProductListDetailDataModel>
 
-    @GET("products")
-    suspend fun getProductByCategories(
-        @Query(encoded = true, value = "product_category") category: String,
-        @Query(encoded = true, value = "product_sub_category") subCategory: String,
-        @Query("_page") page: Int,
-        @Query("_sort") sort: String,
-        @Query("_order") order: String
-    ): ArrayList<ProductListDetailDataModel>
+
 
 }
