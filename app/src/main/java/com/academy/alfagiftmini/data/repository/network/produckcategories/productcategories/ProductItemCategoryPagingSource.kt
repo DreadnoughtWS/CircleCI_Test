@@ -1,20 +1,25 @@
 package com.academy.alfagiftmini.data.repository.network.produckcategories.productcategories
 
+import android.net.Uri
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.academy.alfagiftmini.data.DataUtils
+import com.academy.alfagiftmini.data.repository.network.produckcategories.ProductCategoriesApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
+import com.academy.alfagiftmini.domain.productcategories.ProductCategoriesRepository
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 
 class ProductItemCategoryPagingSource(
     private val apiService: ProductListApiService,
+    private val categoriesApiService: ProductCategoriesApiService,
     private val subCategory: String,
     private val category: String,
     private val sort: String,
     private val order: String,
-    private val type: String): PagingSource<Int, ProductListPromotionProductDomainModel>() {
+    private val type: String
+) : PagingSource<Int, ProductListPromotionProductDomainModel>() {
     override fun getRefreshKey(state: PagingState<Int, ProductListPromotionProductDomainModel>): Int? {
         return null
     }
@@ -22,7 +27,8 @@ class ProductItemCategoryPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListPromotionProductDomainModel> {
         val position = params.key ?: 1
         return try {
-            val responseProduct = apiService.getProductByCategories(
+
+            val responseProduct = categoriesApiService.getProductByCategories(
                 page = position,
                 subCategory = subCategory,
                 category = category,
@@ -37,7 +43,10 @@ class ProductItemCategoryPagingSource(
             when (type) {
                 DataUtils.TYPE_PROMOSI -> {
                     for (data in responseProduct) {
-                        if (data.productSpecialPrice!! < data.price) {
+                        if (data.productSpecialPrice == null) {
+                            continue
+                        }
+                        if (data.productSpecialPrice < data.price) {
                             dataProduct.add(data)
                         } else {
                             data.kodePromo?.forEach {
@@ -54,6 +63,7 @@ class ProductItemCategoryPagingSource(
                 }
             }
 
+
             val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
                 dataProduct, responseSale, responseStock[0].productDetails ?: arrayListOf()
             )
@@ -64,10 +74,10 @@ class ProductItemCategoryPagingSource(
             )
 
         } catch (e: java.lang.Exception) {
-            println(e.message)
             LoadResult.Error(e)
         }
     }
+
     private fun toLoadResult(
         data: List<ProductListPromotionProductDomainModel>,
         prevKey: Int? = null,
