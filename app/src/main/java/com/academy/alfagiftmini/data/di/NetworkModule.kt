@@ -47,7 +47,7 @@ class NetworkModule {
     }
 
     @Provides
-    fun akunApiService():AkunApiService{
+    fun akunApiService(): AkunApiService {
         return retrofitClient().create(AkunApiService::class.java)
     }
 
