@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
     tools:context=".presentation.authentication.activity.LoginActivity">
 
-    <LinearLayout style="@style/Edit_Text_Container_Style">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/top_drawable_lists"
+        android:elevation="0dp"
+        android:paddingBottom="10dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
@@ -19,26 +38,59 @@
             android:textStyle="bold"
             android:textSize="50sp" />
 
-        <EditText
-            android:id="@+id/et_email"
-            style="@style/Edit_Text_Default_Style"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_email_edit_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="emailAddress"
-            android:hint="@string/e_mail_address"
-            android:text="tesabi@gmail.com"
-            android:inputType="textEmailAddress" />
+            android:layout_marginTop="20dp"
+            android:hint="E-mail"
+            android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+            app:boxStrokeColor="@color/teal"
+            app:hintTextColor="@color/teal">
 
-        <EditText
-            android:id="@+id/et_password"
-            style="@style/Edit_Text_Default_Style"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="emailAddress"
+                android:hint="@string/e_mail_address"
+                android:text="tesabi@gmail.com"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_email_err"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/et_password_edit_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="password"
-            android:hint="@string/password"
-            android:text="aaaaaaaa"
-            android:inputType="textPassword" />
+            android:layout_marginTop="20dp"
+            android:hint="Password"
+            android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+            app:boxStrokeColor="@color/teal"
+            app:hintTextColor="@color/teal">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="password"
+                android:hint="@string/password"
+                android:text="aaaaaaaa"
+                android:inputType="textPassword"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tv_pass_err"
+            style="@style/Text_View_Error_Message_Style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/btn_register"
@@ -51,13 +103,15 @@
             android:textSize="15sp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit"
+            android:id="@+id/btn_submit_user_data"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:background="@drawable/shape_btn_login_register"
-            android:textColor="@color/white" />
-
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
