@@ -2,14 +2,11 @@ package com.academy.alfagiftmini.presentation.homepage.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.ActivityRegisterBinding
+import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.databinding.FragmentAkunBinding
-import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.presentation.akun.AboutAppActivity
 import com.academy.alfagiftmini.presentation.akun.EditAkunActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
@@ -19,6 +16,7 @@ import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainA
 class FragmentAkun : Fragment() {
     private lateinit var binding: FragmentAkunBinding
     private lateinit var mainViewModel: MainActivityViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +46,7 @@ class FragmentAkun : Fragment() {
                 }
                 intent.putExtra("ID", id)
                 startActivity(intent)
+                //(requireActivity() as MainActivity).startForResult.launch(intent)
             }
 
             llAboutApp.setOnClickListener {
@@ -58,4 +57,5 @@ class FragmentAkun : Fragment() {
             //logout and delete akun
         }
     }
+
 }

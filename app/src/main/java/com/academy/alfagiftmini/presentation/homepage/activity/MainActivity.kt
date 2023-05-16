@@ -1,12 +1,18 @@
 package com.academy.alfagiftmini.presentation.homepage.activity
 
+import android.app.Activity
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityMainBinding
+import com.academy.alfagiftmini.domain.register.RegisterDataDomain
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.LoginViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
@@ -30,9 +36,6 @@ class MainActivity : AppCompatActivity() {
     private val mainViewModel: MainActivityViewModel by viewModels {
         viewModelFactory
     }
-    private val loginViewModel: LoginViewModel by viewModels {
-        viewModelFactory
-    }
     private val productListViewModel: ProductListViewModel by viewModels {
         viewModelFactory
     }
@@ -52,8 +55,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setToolbar()
         setFragmentNavigation()
+        setToolbar()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.getData(application as MyApplication)
     }
 
     private fun setToolbar() {
@@ -108,5 +116,6 @@ class MainActivity : AppCompatActivity() {
     fun getViewModelMain(): MainActivityViewModel{
         return mainViewModel
     }
+
 }
 

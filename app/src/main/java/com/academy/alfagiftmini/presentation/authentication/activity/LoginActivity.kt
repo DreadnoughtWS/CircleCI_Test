@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
-                    mainViewModel.saveData(this@LoginActivity, it)
+                    mainViewModel.saveData(this@LoginActivity, it.user)
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                 }
