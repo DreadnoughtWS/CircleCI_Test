@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentBerandaBinding
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
@@ -75,9 +77,8 @@ class FragmentBeranda() : Fragment() {
         }
         mainViewModel._getUserData.observe(requireActivity()) {
             binding.berandaToolbar.tvToolbar.text =
-                getString(R.string.toolbar_greeting, it.getFullName())
+                activity?.getString(R.string.toolbar_greeting, it.getFullName())
         }
-        mainViewModel.getData((requireActivity() as MainActivity))
     }
 
 

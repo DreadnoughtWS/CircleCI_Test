@@ -1,5 +1,9 @@
 package com.academy.alfagiftmini.domain.register
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class RegisterDataDomain(
     val id: Int?,
     val email: String?,
@@ -8,7 +12,7 @@ data class RegisterDataDomain(
     val lastName: String?,
     val phone: String?,
     val memberId: String?
-) {
+): Parcelable {
     fun getFullName(): String {
         return "$firstName $lastName"
     }

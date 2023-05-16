@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.akun
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,6 +11,8 @@ import com.academy.alfagiftmini.databinding.ActivityEditAkunBinding
 import com.academy.alfagiftmini.domain.akun.AkunDomainDataModel
 import com.academy.alfagiftmini.domain.akun.AkunDomainEditDataModel
 import com.academy.alfagiftmini.domain.akun.AkunResponseDomain
+import com.academy.alfagiftmini.domain.loginlogout.LoginResponseDomain
+import com.academy.alfagiftmini.domain.register.RegisterDataDomain
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.PresentationUtils.SP_FIRST_NAME
 import com.academy.alfagiftmini.presentation.PresentationUtils.SP_LAST_NAME
@@ -18,6 +21,7 @@ import com.academy.alfagiftmini.presentation.PresentationUtils.SP_PHONE
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.AkunViewModel
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainActivityViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -29,6 +33,9 @@ class EditAkunActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: PresentationFactory
     private val akunViewModel: AkunViewModel by viewModels {
+        viewModelFactory
+    }
+    private val vm: MainActivityViewModel by viewModels {
         viewModelFactory
     }
     private var id: Int = 0
@@ -59,7 +66,7 @@ class EditAkunActivity : AppCompatActivity() {
                 finish()
             }
             btnSubmitUserData.setOnClickListener {
-                val sharedPreference = getSharedPreferences(
+                val sharedPreference = application.getSharedPreferences(
                     PresentationUtils.SHARED_PREFERENCE,
                     Context.MODE_PRIVATE
                 )
@@ -78,6 +85,7 @@ class EditAkunActivity : AppCompatActivity() {
                         putString(SP_FIRST_NAME, etFirstNameEdit.text.toString())
                         putString(SP_LAST_NAME, etLastNameEdit.text.toString())
                     }.apply()
+                    finish()
                 }
             }
         }
