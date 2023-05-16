@@ -58,7 +58,11 @@ class EditAkunActivity : AppCompatActivity() {
                 etFirstNameEdit.setText(data?.userData?.firstName.toString())
                 etLastNameEdit.setText(data?.userData?.lastName.toString())
                 etPhoneNumberEdit.setText(data?.userData?.phoneNumber.toString())
+                etPhoneNumberEdit.isFocusable = false
+                etPhoneNumberEdit.isCursorVisible = false
                 etEmailEdit.setText(data?.userData?.email.toString())
+                etEmailEdit.isFocusable = false
+                etEmailEdit.isCursorVisible  =false
             }
         }
         binding.apply {
