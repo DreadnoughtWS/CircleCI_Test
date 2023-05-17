@@ -91,7 +91,6 @@ class OtpVerificationFragment : Fragment() {
                                     val intent = Intent(activity, MainActivity::class.java)
                                     startActivity(intent)
                                     activity().finish()
-                                    (requireActivity() as LoginActivity).finish()
                                 }
                             }
                         }
