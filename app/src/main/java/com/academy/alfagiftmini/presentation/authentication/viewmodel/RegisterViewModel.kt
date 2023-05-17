@@ -23,6 +23,17 @@ import kotlin.random.Random
 
 class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainUseCase) :
     ViewModel() {
+    //input data
+    private var _firstName: MutableLiveData<String> = MutableLiveData("")
+    private var _lastName: MutableLiveData<String> = MutableLiveData("")
+    private var _email: MutableLiveData<String> = MutableLiveData("")
+    private var _phoneNumber: MutableLiveData<String> = MutableLiveData("")
+
+    val firstName = _firstName
+    val lastName = _lastName
+    val eMail = _email
+    val phoneNumber = _phoneNumber
+
     //put data to sharedPreference
     fun putDataToSharedPreference(activity: AppCompatActivity, it: RegisterResponseDomain) {
         val sharedPreference =
@@ -85,6 +96,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
                 tvFnErr.visibility = View.INVISIBLE
                 etFirstNameEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_normal))
                 etFirstNameEditLayout.setBoxStrokeWidthResource(R.dimen.boxStrokeRadiiNormal)
+                _firstName.value = fName.toString()
                 false
             }
         }
@@ -106,6 +118,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
                 tvLnErr.visibility = View.INVISIBLE
                 etLastNameEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_normal))
                 etLastNameEditLayout.setBoxStrokeWidthResource(R.dimen.boxStrokeRadiiNormal)
+                _lastName.value = lName.toString()
                 false
             }
         }
@@ -140,6 +153,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
                 tvEmailErr.visibility = View.INVISIBLE
                 etEmailEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_normal))
                 etEmailEditLayout.setBoxStrokeWidthResource(R.dimen.boxStrokeRadiiNormal)
+                _email.value = email.toString()
                 return false
             }
         }
@@ -217,6 +231,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
 
     //reformat phone number
     fun phoneNumberFormatted(phoneNumber: String): String {
+        _phoneNumber.value = phoneNumber
         return if (phoneNumber[0] == '0') {
             phoneNumber.replaceFirst("0", COUNTRY_PHONE_CODE)
         } else COUNTRY_PHONE_CODE.plus(phoneNumber)

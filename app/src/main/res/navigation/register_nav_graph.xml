@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_input_phone_number">
         <action
             android:id="@+id/action_inputPhoneNumberFragment_to_inputUserDataFragment"
-            app:destination="@id/inputUserDataFragment" />
+            app:destination="@id/inputUserDataFragment"
+            app:popUpTo="@id/inputUserDataFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_inputPhoneNumberFragment_to_otpVerificationFragment"
             app:destination="@id/otpVerificationFragment" />
@@ -37,8 +39,10 @@
         android:label="fragment_otp_verification"
         tools:layout="@layout/fragment_otp_verification">
         <action
-            android:id="@+id/action_otpVerificationFragment2_to_inputPhoneNumberFragment"
-            app:destination="@id/inputPhoneNumberFragment" />
+            android:id="@+id/action_otpVerificationFragment_to_inputPhoneNumberFragment"
+            app:destination="@id/inputPhoneNumberFragment"
+            app:popUpTo="@id/inputPhoneNumberFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="registrationData"
             app:argType="com.academy.alfagiftmini.presentation.authentication.fragment.register.RegistrationDataModel" />
