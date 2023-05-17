@@ -42,145 +42,148 @@
                 android:textColor="@color/white"
                 android:textSize="24sp" />
         </androidx.appcompat.widget.Toolbar>
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="40dp"
-            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_first_name_edit_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="First Name"
-                android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-                app:boxStrokeColor="@color/teal"
-                app:hintTextColor="@color/teal">
+                android:layout_margin="40dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_first_name"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_first_name_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:hint="First Name"
+                    android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+                    app:boxStrokeColor="@color/teal"
+                    app:hintTextColor="@color/teal">
 
-            <TextView
-                android:id="@+id/tv_fn_err"
-                style="@style/Text_View_Error_Message_Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_last_name_edit_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Last Name"
-                android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-                app:boxStrokeColor="@color/teal"
-                app:hintTextColor="@color/teal">
+                <TextView
+                    android:id="@+id/tv_fn_err"
+                    style="@style/Text_View_Error_Message_Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_last_name"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_last_name_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPersonName" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    android:hint="Last Name"
+                    android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+                    app:boxStrokeColor="@color/teal"
+                    app:hintTextColor="@color/teal">
 
-            <TextView
-                android:id="@+id/tv_ln_err"
-                style="@style/Text_View_Error_Message_Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPersonName" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_email_edit_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="E-mail"
-                android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-                app:boxStrokeColor="@color/teal"
-                app:hintTextColor="@color/teal">
+                <TextView
+                    android:id="@+id/tv_ln_err"
+                    style="@style/Text_View_Error_Message_Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_email"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_email_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    android:hint="E-mail"
+                    android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+                    app:boxStrokeColor="@color/teal"
+                    app:hintTextColor="@color/teal">
 
-            <TextView
-                android:id="@+id/tv_email_err"
-                style="@style/Text_View_Error_Message_Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_password_edit_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Password"
-                android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-                app:boxStrokeColor="@color/teal"
-                app:hintTextColor="@color/teal">
+                <TextView
+                    android:id="@+id/tv_email_err"
+                    style="@style/Text_View_Error_Message_Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_password"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_password_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    android:hint="Password"
+                    android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+                    app:boxStrokeColor="@color/teal"
+                    app:hintTextColor="@color/teal">
 
-            <TextView
-                android:id="@+id/tv_pass_err"
-                style="@style/Text_View_Error_Message_Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/et_password_confirm_edit_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/confirm_password_hint"
-                android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
-                app:boxStrokeColor="@color/teal"
-                app:hintTextColor="@color/teal">
+                <TextView
+                    android:id="@+id/tv_pass_err"
+                    style="@style/Text_View_Error_Message_Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_password_confirm"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/et_password_confirm_edit_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="20dp"
+                    android:hint="@string/confirm_password_hint"
+                    android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+                    app:boxStrokeColor="@color/teal"
+                    app:hintTextColor="@color/teal">
 
-            <TextView
-                android:id="@+id/tv_pass_confirm_err"
-                style="@style/Text_View_Error_Message_Style"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_password_confirm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_submit_user_data"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_margin="40dp"
-            android:background="@drawable/shape_btn_login_register"
-            android:text="@string/submit"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+                <TextView
+                    android:id="@+id/tv_pass_confirm_err"
+                    style="@style/Text_View_Error_Message_Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_submit_user_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_btn_login_register"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="150dp"/>
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

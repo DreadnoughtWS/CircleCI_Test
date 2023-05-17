@@ -43,9 +43,11 @@ class LoginActivity : AppCompatActivity() {
         binding.apply {
             btnSubmitUserData.setOnClickListener{
                 getUserData()
+                finish()
             }
             btnRegister.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+                finish()
             }
         }
 

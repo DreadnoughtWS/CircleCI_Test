@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
+import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -79,6 +81,8 @@ class InputUserDataFragment : Fragment() {
 
             //btn back
             btnRegisterBack.setOnClickListener{
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
                 activity().finish()
             }
             // end of binding apply

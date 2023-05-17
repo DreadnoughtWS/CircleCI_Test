@@ -148,6 +148,45 @@
                     app:layout_constraintEnd_toEndOf="@id/ll_about_app"
                     app:layout_constraintTop_toTopOf="@id/ll_about_app" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ll_logout_app"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/custom_edit_text_rounded_corner"
+                android:elevation="10dp"
+                android:padding="20dp">
+
+                <ImageView
+                    android:id="@+id/iv_logo_3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/baseline_logout_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ll_logout_app"
+                    app:layout_constraintTop_toTopOf="@id/ll_logout_app" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Log Out"
+                    android:textSize="20sp"
+                    android:layout_marginStart="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_logo_3"
+                    app:layout_constraintTop_toTopOf="@id/ll_logout_app"
+                    app:layout_constraintVertical_bias="0.384" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/baseline_keyboard_arrow_right_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/ll_logout_app"
+                    app:layout_constraintTop_toTopOf="@id/ll_logout_app" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </com.google.android.material.appbar.AppBarLayout>
 </FrameLayout>
