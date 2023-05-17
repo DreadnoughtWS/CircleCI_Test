@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.fragment
 
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,14 +8,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
+import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentAkunBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.akun.AboutAppActivity
 import com.academy.alfagiftmini.presentation.akun.EditAkunActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
+import com.academy.alfagiftmini.presentation.homepage.components.fragment.customdialog.LogoutCustomDialog
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.MainActivityViewModel
 
 
@@ -23,8 +28,7 @@ class FragmentAkun : Fragment() {
     private lateinit var mainViewModel: MainActivityViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentAkunBinding.inflate(inflater, container, false)
         return binding.root
@@ -61,36 +65,13 @@ class FragmentAkun : Fragment() {
 
             //logout akun
             llLogoutApp.setOnClickListener {
-                buildDialogAlert()
+                LogoutCustomDialog().show(
+                    requireActivity().supportFragmentManager, "LogoutCustomDialog"
+                )
             }
 
             //binding apply end
         }
-    }
-
-    private fun buildDialogAlert() {
-        val dialogBuilder = AlertDialog.Builder(requireContext())
-        dialogBuilder.setMessage("Logout from this App?")
-            .setCancelable(false)
-            .setPositiveButton("Confirm") { dialog, which ->
-                val sharedPreference =
-                    (requireActivity() as MainActivity).application.getSharedPreferences(
-                        PresentationUtils.SHARED_PREFERENCE,
-                        Context.MODE_PRIVATE
-                    )
-                sharedPreference.edit().clear().apply()
-                val intent = Intent(activity, LoginActivity::class.java)
-                startActivity(intent)
-                (requireActivity() as MainActivity).finish()
-            }
-            .setNegativeButton("Cancel") { dialog, which ->
-                dialog.cancel()
-            }
-        val alert = dialogBuilder.create()
-        // set title for alert dialog box
-        alert.setTitle("Log Out")
-        // show alert dialog
-        alert.show()
     }
 
 }

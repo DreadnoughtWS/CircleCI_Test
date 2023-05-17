@@ -114,4 +114,7 @@
     <string name="cari">Cari</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="otp_error_msg">OTP code is wrong, please try again</string>
+    <string name="anda_yakin_ingin_keluar">Anda yakin ingin keluar?</string>
+    <string name="keluar">Keluar</string>
+    <string name="ya">Ya</string>
 </resources>
