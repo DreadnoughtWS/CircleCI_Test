@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
+import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -32,17 +33,34 @@ class InputUserDataFragment : Fragment() {
     private fun setUI(view: View) {
         binding.apply {
             var checkInput = false
+            //fill edit text from viewmodel
+            activity().getModel().firstName.observe(viewLifecycleOwner){
+                etFirstName.setText(it)
+            }
+            activity().getModel().lastName.observe(viewLifecycleOwner){
+                etLastName.setText(it)
+            }
+            activity().getModel().eMail.observe(viewLifecycleOwner){
+                etEmail.setText(it)
+            }
+
+            //btn submit
             btnSubmitUserData.setOnClickListener {
                 //view model to check edit text content
                 lifecycleScope.launch {
                     var check: RegisterResponseDomain? = null
-                    (requireActivity() as RegisterActivity).getModel()
+
+                    //check if email inputted already exists
+                    activity().getModel()
                         .checkAvailableEmail(etEmail.text.toString()).collectLatest {
                             check = it
                         }
-                    checkInput = (requireActivity() as RegisterActivity).getModel()
+
+                    //input validation
+                    checkInput = activity().getModel()
                         .userDataValidate(binding, requireContext(), check)
                 }.invokeOnCompletion {
+                    //check if there any invalid input
                     if (!checkInput) {
                         val data = InputUserDataFragmentDirections
                             .actionInputUserDataFragmentToInputPhoneNumberFragment(
@@ -58,6 +76,17 @@ class InputUserDataFragment : Fragment() {
                     }
                 }
             }
+
+            //btn back
+            btnRegisterBack.setOnClickListener{
+                activity().finish()
+            }
+            // end of binding apply
         }
+
+    }
+
+    private fun activity(): RegisterActivity {
+        return (requireActivity() as RegisterActivity)
     }
 }

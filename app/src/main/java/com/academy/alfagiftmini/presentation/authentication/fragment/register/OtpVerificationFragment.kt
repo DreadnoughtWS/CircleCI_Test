@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.Manifest
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -11,12 +12,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
+import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -45,6 +50,8 @@ class OtpVerificationFragment : Fragment() {
         val bundle = arguments ?: return
         val args = InputPhoneNumberFragmentArgs.fromBundle(bundle)
         binding.apply {
+            //otp input field
+            pvOtpCode.isCursorVisible = false
             pvOtpCode.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -57,10 +64,12 @@ class OtpVerificationFragment : Fragment() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     pvOtpCode.removeTextChangedListener(this)
                     Log.d("test", s.toString())
+                    //success
                     if (pvOtpCode.text.toString() == generatedOTP) {
+                        tvOtpError.visibility = View.INVISIBLE
                         //post to server and go to home activity
                         lifecycleScope.launch {
-                            (requireActivity() as RegisterActivity).getModel().registerNewUser(
+                            activity().getModel().registerNewUser(
                                 RegisterDataDomain(
                                     id = null,
                                     args.registrationData.email,
@@ -73,19 +82,31 @@ class OtpVerificationFragment : Fragment() {
                             ).collectLatest {
                                 //collect the response from api including access token and id for shared preference update
                                 if (it.error.isNullOrBlank()) {
-                                    (requireActivity() as RegisterActivity)
+                                    activity()
                                         .getModel()
                                         .putDataToSharedPreference(
-                                            (requireActivity() as RegisterActivity),
+                                            activity(),
                                             it
                                         )
                                     val intent = Intent(activity, MainActivity::class.java)
                                     startActivity(intent)
-                                    (requireActivity() as RegisterActivity).finish()
+                                    activity().finish()
+                                    (requireActivity() as LoginActivity).finish()
                                 }
                             }
                         }
 
+                    }
+
+                    //fail
+                    else if (pvOtpCode.text.toString() != generatedOTP && pvOtpCode.text?.length == pvOtpCode.itemCount) {
+                        tvOtpError.visibility = View.VISIBLE
+                        tvOtpError.text = getString(R.string.otp_error_msg)
+                        pvOtpCode.setText("")
+
+                        // on below line hiding our keyboard
+                        val inputMethodManager = activity().getInputManager()
+                        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
                     }
                     pvOtpCode.setSelection(pvOtpCode.text?.length!!)
                     pvOtpCode.addTextChangedListener(this)
@@ -94,17 +115,23 @@ class OtpVerificationFragment : Fragment() {
                 override fun afterTextChanged(s: Editable?) {
                 }
             })
+
+            //btn back
+            btnOtpBack.setOnClickListener {
+                findNavController().navigate(R.id.action_otpVerificationFragment_to_inputPhoneNumberFragment)
+            }
+            //binding apply end
         }
     }
 
     private fun checkPermissions() {
         if (ActivityCompat.checkSelfPermission(
-                (requireActivity() as RegisterActivity),
+                activity(),
                 Manifest.permission.SEND_SMS
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                (requireActivity() as RegisterActivity),
+                activity(),
                 arrayOf(Manifest.permission.SEND_SMS),
                 101
             )
@@ -114,27 +141,27 @@ class OtpVerificationFragment : Fragment() {
     private fun setOTPGenerator() {
         binding.btnGetOTPCode.setOnClickListener {
             //generate code
-            (requireActivity() as RegisterActivity).getModel().generateOTP()
-            generatedOTP = (requireActivity() as RegisterActivity).getModel().otp
+            activity().getModel().generateOTP()
+            generatedOTP = activity().getModel().otp
             Log.d("OTP", generatedOTP)
 
             //create and send code via sms and broadcast receiver, still not working
 
             //set countdown timer in viewmodel to observe
-            (requireActivity() as RegisterActivity).getModel().otpCountdownTimer()
+            activity().getModel().otpCountdownTimer()
             observer()
         }
     }
 
     private fun observer() {
-        (requireActivity() as RegisterActivity).getModel().timer.observe(
+        activity().getModel().timer.observe(
             viewLifecycleOwner
         ) {
             val timerFormatted = DateUtils.formatElapsedTime(it.toLong())
             binding.btnGetOTPCode.text =
                 getString(R.string.send_otp_again).plus(timerFormatted.toString())
         }
-        (requireActivity() as RegisterActivity).getModel().finished.observe(
+        activity().getModel().finished.observe(
             viewLifecycleOwner
         ) {
             if (it) {
@@ -142,5 +169,9 @@ class OtpVerificationFragment : Fragment() {
                 setOTPGenerator()
             } else binding.btnGetOTPCode.setOnClickListener(null)
         }
+    }
+
+    private fun activity(): RegisterActivity {
+        return (requireActivity() as RegisterActivity)
     }
 }

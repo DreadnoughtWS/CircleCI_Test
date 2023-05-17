@@ -113,4 +113,5 @@
     <string name="paket">Paket</string>
     <string name="cari">Cari</string>
     <string name="confirm_password_hint">Confirm Password</string>
+    <string name="otp_error_msg">OTP code is wrong, please try again</string>
 </resources>
