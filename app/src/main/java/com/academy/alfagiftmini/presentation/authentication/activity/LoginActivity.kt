@@ -43,7 +43,6 @@ class LoginActivity : AppCompatActivity() {
         binding.apply {
             btnSubmitUserData.setOnClickListener{
                 getUserData()
-                finish()
             }
             btnRegister.setOnClickListener {
                 startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
@@ -66,6 +65,7 @@ class LoginActivity : AppCompatActivity() {
                     mainViewModel.saveData(this@LoginActivity, it.user)
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
             }
         }
