@@ -3,7 +3,6 @@ package com.academy.alfagiftmini.presentation.authentication.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
@@ -42,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setViewInteraction() {
         binding.apply {
-            btnSubmit.setOnClickListener{
+            btnSubmitUserData.setOnClickListener{
                 getUserData()
             }
             btnRegister.setOnClickListener {
@@ -54,10 +53,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getUserData() {
         binding.apply {
+            if (!loginViewModel.checkUserInputValidity(this@LoginActivity, binding, LoginDataDomain(etEmail.text.toString(), etPassword.text.toString()))) { return }
             lifecycleScope.launch {
-                loginViewModel.checkUserInputValidity(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString())).collectLatest {
+                loginViewModel.login(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString())).collectLatest {
                     if (it.error.isNotBlank()) {
-                        Toast.makeText(this@LoginActivity, it.error, Toast.LENGTH_SHORT).show()
+                        loginViewModel.setBackendError(binding, it.error)
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
