@@ -16,7 +16,8 @@ import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.Produ
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentProductCategories (private val viewModel: ProductCategoriesViewModel): Fragment(), CategoriesAdapter.setOnItemClicked {
+class FragmentProductCategories(private val viewModel: ProductCategoriesViewModel) : Fragment(),
+    CategoriesAdapter.setOnItemClicked {
     private lateinit var binding: FragmentProductCategoriesBinding
     private lateinit var categoriesAdapter: CategoriesAdapter
 
@@ -35,17 +36,16 @@ class FragmentProductCategories (private val viewModel: ProductCategoriesViewMod
     }
 
     private fun setRvCategories() {
-        binding.apply{
-            rvListCategories.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
+        binding.apply {
+            rvListCategories.layoutManager =
+                GridLayoutManager(requireContext(), 2, GridLayoutManager.HORIZONTAL, false)
             categoriesAdapter = CategoriesAdapter(this@FragmentProductCategories)
             rvListCategories.adapter = categoriesAdapter
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductCategoriesBinding.inflate(inflater)
         return binding.root
