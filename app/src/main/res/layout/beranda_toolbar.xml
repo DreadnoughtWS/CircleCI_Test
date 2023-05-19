@@ -8,63 +8,89 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <TextView
-        android:visibility="visible"
-        android:layout_marginStart="10dp"
-        android:id="@+id/tv_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:text="@string/toolbar_greeting" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:visibility="gone"
-        android:textAllCaps="false"
-        android:paddingVertical="5dp"
-        android:paddingEnd="20dp"
-        android:paddingStart="15dp"
-        android:drawablePadding="10dp"
-        android:drawableTint="@color/teal"
-        android:drawableStart="@drawable/baseline_search_24"
-        android:backgroundTint="@color/very_light_gray"
-        android:background="@drawable/shape_btn_keranjang"
-        android:layout_gravity="start"
-        android:id="@+id/btn_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:text="@string/mau_belanja_apa" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/shape_btn_keranjang"
+            android:backgroundTint="@color/very_light_gray"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/teal"
+            android:paddingVertical="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="20dp"
+            android:text="@string/mau_belanja_apa"
+            android:textAllCaps="false"
+            android:textColor="@color/gray"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_chat_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_card_toolbar"
-        android:layout_marginEnd="20dp"
-        android:layout_gravity="end"
-        android:src="@drawable/baseline_card_giftcard_24"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/cart_image_view" />
+        <TextView
+            android:id="@+id/tv_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/toolbar_greeting"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_chat_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_marginHorizontal="20dp"
-        android:id="@+id/iv_notif_toolbar"
-        android:layout_gravity="end"
-        android:src="@drawable/baseline_notifications_24"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/search_image_view" />
+        <ImageView
+            android:id="@+id/iv_card_toolbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:contentDescription="@string/cart_image_view"
+            android:src="@drawable/baseline_card_giftcard_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/iv_chat_toolbar"
-        android:layout_gravity="end"
-        android:src="@drawable/baseline_chat_24"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:contentDescription="@string/search_image_view" />
+        <ImageView
+            android:id="@+id/iv_notif_toolbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:contentDescription="@string/search_image_view"
+            android:src="@drawable/baseline_notifications_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_card_toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/iv_chat_toolbar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginHorizontal="20dp"
+            android:contentDescription="@string/search_image_view"
+            android:src="@drawable/baseline_chat_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_notif_toolbar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.appcompat.widget.Toolbar>
