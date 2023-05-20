@@ -117,4 +117,16 @@
     <string name="anda_yakin_ingin_keluar">Anda yakin ingin keluar?</string>
     <string name="keluar">Keluar</string>
     <string name="ya">Ya</string>
+    <string name="tentang_alfagift">Tentang Alfagift</string>
+    <string name="media_sosial">Media Sosial</string>
+    <string name="_4_17_0_4170014">4.17.0 (4170014)</string>
+    <string name="versi_aplikasi">Versi aplikasi</string>
+    <string name="penjelasan_tentang_aplikasi_ini">Melalui Alfagift kamu bisa:\n
+1. Berbelanja &amp; Melakukan pembayaran online\n
+2. Barang belanjaanmu bisa diambil di toko atau dikirim ke rumah\n
+3. Cek katalog promo terbaru setiap harinya\n
+4. Program dan Penawaran spesial khusus member\n
+5. Update informasi terkait member dan menukarkan point dengan mudah\n
+6. Mengetahui lokasi Alfamart terdekat di sekitarmu</string>
+    <string name="e_mail">E-mail</string>
 </resources>

@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="E-mail"
+            android:hint="@string/e_mail"
             android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
             app:boxStrokeColor="@color/teal"
             app:hintTextColor="@color/teal">
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="emailAddress"
                 android:hint="@string/e_mail_address"
-                android:text="tesabi@gmail.com"
+                android:text="tesalonikaabi@gmail.com"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="Password"
+            android:hint="@string/password"
             android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
             app:boxStrokeColor="@color/teal"
             app:hintTextColor="@color/teal">

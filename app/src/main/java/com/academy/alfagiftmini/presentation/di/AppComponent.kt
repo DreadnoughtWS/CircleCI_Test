@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.di
 
 import com.academy.alfagiftmini.data.di.CoreComponent
+import com.academy.alfagiftmini.presentation.akun.AboutAppActivity
 import com.academy.alfagiftmini.presentation.akun.EditAkunActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
@@ -46,4 +47,5 @@ interface AppComponent {
     fun bannerListPromoItemListActivityInject(activity: BannerPromoItemListActivity)
     fun productCategoriesActivityInject(activity: ProductCategoriesActivity)
     fun akunActivityInject(activity: EditAkunActivity)
+    fun tentangAplikasiActivityInject(activity: AboutAppActivity)
 }
