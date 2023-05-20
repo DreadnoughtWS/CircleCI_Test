@@ -10,6 +10,7 @@
         android:id="@+id/iv_gambar_kategori"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:padding="@dimen/mrgn_1"
         android:background="@drawable/shape_product_categories"
         android:src="@drawable/pv_invisible_image"/>
     <TextView

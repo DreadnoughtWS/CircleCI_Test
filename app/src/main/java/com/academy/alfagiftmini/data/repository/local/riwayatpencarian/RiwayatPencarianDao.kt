@@ -8,7 +8,7 @@ interface RiwayatPencarianDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPencarian(data: RiwayatPencarianDataModel)
 
-    @Query("SELECT * FROM riwayat_pencarian_db")
+    @Query("SELECT * FROM riwayat_pencarian_db ORDER BY id DESC")
     fun getData(): List<RiwayatPencarianDataModel>
 
     @Query("DELETE FROM riwayat_pencarian_db")

@@ -30,10 +30,11 @@ class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase
     }
 
     private fun setGone(textView: TextView) {
-        textView.visibility = View.GONE
+        textView.visibility = View.INVISIBLE
     }
 
-    fun setBackendError(binding: ActivityLoginBinding, msg: String) {
+    fun setBackendError(binding: ActivityLoginBinding, text: String) {
+        val msg = text.trim('\"')
         binding.apply {
             if (msg.contains("password", ignoreCase = true)) setError(tvPassErr, msg) else setError(tvEmailErr, msg)
         }

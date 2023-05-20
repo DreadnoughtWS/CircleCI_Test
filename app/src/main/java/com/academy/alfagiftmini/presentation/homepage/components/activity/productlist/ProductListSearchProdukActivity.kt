@@ -25,7 +25,6 @@ import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.Produ
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.RiwayatPencarianViewModel
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
