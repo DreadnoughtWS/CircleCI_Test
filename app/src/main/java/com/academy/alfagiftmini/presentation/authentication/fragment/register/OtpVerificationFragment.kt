@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.fragment.register
 
 import android.Manifest
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -12,16 +11,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOtpVerificationBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
-import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -77,7 +73,8 @@ class OtpVerificationFragment : Fragment() {
                                     args.registrationData.fName,
                                     args.registrationData.lName,
                                     args.registrationData.phoneNumber,
-                                    memberId = null
+                                    memberId = null,
+                                    RegistrationDataModel.transforms(args.registrationData.alamat)
                                 )
                             ).collectLatest {
                                 //collect the response from api including access token and id for shared preference update
@@ -146,7 +143,7 @@ class OtpVerificationFragment : Fragment() {
 
             //create and send code via sms and broadcast receiver, still not working
 
-            //set countdown timer in viewmodel to observe
+            //set countdown timer in view model to observe
             activity().getModel().otpCountdownTimer()
             observer()
         }

@@ -1,13 +1,10 @@
 package com.academy.alfagiftmini.presentation.authentication.activity
 
-import android.app.Application
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
 import com.academy.alfagiftmini.MyApplication
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityRegisterBinding
 import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
@@ -30,9 +27,7 @@ class RegisterActivity : AppCompatActivity() {
     fun getModel(): RegisterViewModel {
         return registerViewModel
     }
-    fun getApp(): Application {
-        return application
-    }
+
     fun getInputManager(): InputMethodManager {
         return getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
     }

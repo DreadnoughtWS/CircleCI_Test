@@ -21,9 +21,9 @@ class LoginRepositoryImpl @Inject constructor(
             try {
                 val data = LoginDataDomain.transform(user)
                 val response = loginApiService.login(body = data)
-                emit(LoginResponseModel.transform(response.body() ?: LoginResponseModel("", RegisterDataModel(-1,"", "", "", "", "", ""), response.errorBody()?.string())))
+                emit(LoginResponseModel.transform(response.body() ?: LoginResponseModel("", RegisterDataModel(-1,"", "", "", "", "", "", listOf()), response.errorBody()?.string())))
             }catch (e : Exception) {
-                emit(LoginResponseDomain("", RegisterDataDomain(-1, "", "", "", "", "", ""), e.message.toString()))
+                emit(LoginResponseDomain("", RegisterDataDomain(-1, "", "", "", "", "", "", listOf()), e.message.toString()))
             }
         }.flowOn(IO)
     }
@@ -34,7 +34,7 @@ class LoginRepositoryImpl @Inject constructor(
                 val response = loginApiService.getUserData(id)
                 emit(RegisterDataModel.transform(response))
             }catch (e : Exception) {
-                emit(RegisterDataDomain(-1, "", "", "", "", "", ""))
+                emit(RegisterDataDomain(-1, "", "", "", "", "", "", listOf()))
             }
         }.flowOn(IO)
     }

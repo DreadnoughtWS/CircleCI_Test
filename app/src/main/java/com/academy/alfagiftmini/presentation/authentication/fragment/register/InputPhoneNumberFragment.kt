@@ -52,7 +52,8 @@ class InputPhoneNumberFragment : Fragment() {
                                     registrationData.lName,
                                     registrationData.email,
                                     registrationData.pass,
-                                    phoneNumberFormatted
+                                    phoneNumberFormatted,
+                                    registrationData.alamat
                                 )
                                 val finalData =
                                     InputPhoneNumberFragmentDirections.actionInputPhoneNumberFragmentToOtpVerificationFragment(
