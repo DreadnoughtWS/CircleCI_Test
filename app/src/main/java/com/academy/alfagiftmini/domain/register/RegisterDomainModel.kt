@@ -11,7 +11,8 @@ data class RegisterDataDomain(
     val firstName: String?,
     val lastName: String?,
     val phone: String?,
-    val memberId: String?
+    val memberId: String?,
+    val alamat: List<AlamatDataDomain>?
 ): Parcelable {
     fun getFullName(): String {
         return "$firstName $lastName"
@@ -23,3 +24,15 @@ data class RegisterResponseDomain (
     val user: RegisterDataDomain?,
     val error: String?
 )
+
+@Parcelize
+data class AlamatDataDomain(
+    val namaAlamat: String,
+    val desc: String,
+    val kelurahan: String,
+    val kecamatan: String,
+    val kota: String,
+    val provinsi: String,
+    val kodePos: String,
+    val active: Int
+) : Parcelable

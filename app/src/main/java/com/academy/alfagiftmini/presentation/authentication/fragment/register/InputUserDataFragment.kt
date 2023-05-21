@@ -12,7 +12,6 @@ import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
 import com.academy.alfagiftmini.presentation.authentication.activity.LoginActivity
 import com.academy.alfagiftmini.presentation.authentication.activity.RegisterActivity
-import com.academy.alfagiftmini.presentation.authentication.viewmodel.RegisterViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -35,7 +34,7 @@ class InputUserDataFragment : Fragment() {
     private fun setUI(view: View) {
         binding.apply {
             var checkInput = false
-            //fill edit text from viewmodel
+            //fill edit text from view model
             activity().getModel().firstName.observe(viewLifecycleOwner){
                 etFirstName.setText(it)
             }
@@ -71,7 +70,8 @@ class InputUserDataFragment : Fragment() {
                                     etLastName.text.toString(),
                                     etEmail.text.toString(),
                                     etPassword.text.toString(),
-                                    ""
+                                    "",
+                                    listOf(),
                                 )
                             )
                         view.findNavController().navigate(data)
