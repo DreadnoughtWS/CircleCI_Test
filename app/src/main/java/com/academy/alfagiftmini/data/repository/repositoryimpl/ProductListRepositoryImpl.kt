@@ -103,18 +103,18 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProductSearchProductOrder(
-        scope: CoroutineScope, name: String, order: String, sort: String
+        scope: CoroutineScope, name: String, order: String, sort: String,type:String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
-            ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort)
+            ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort,type)
         }.flow.cachedIn(scope)
     }
 
     override suspend fun getProductSearchProduct(
-        scope: CoroutineScope, name: String
+        scope: CoroutineScope, name: String,type:String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
-            ProductListSearchProductPromosiPagingSource(apiService, name)
+            ProductListSearchProductPromosiPagingSource(apiService, name,type)
         }.flow.cachedIn(scope)
     }
 

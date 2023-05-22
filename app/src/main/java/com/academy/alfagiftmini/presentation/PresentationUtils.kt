@@ -18,6 +18,9 @@ object PresentationUtils {
 
     const val COUNTRY_PHONE_CODE = "+62"
 
+    const val TYPE_PRODUCT_NAME = "TYPE_PRODUCT_NAME"
+    const val TYPE_PRODUCT_NAME_LIKE = "TYPE_PRODUCT_NAME_LIKE"
+
     const val SHOW_LIHAT_SEMUA = true
     const val HIDE_LIHAT_SEMUA = false
 

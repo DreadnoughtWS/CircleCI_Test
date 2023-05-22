@@ -1,8 +1,6 @@
 package com.academy.alfagiftmini.domain.produklist
 
 import androidx.paging.PagingData
-import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainRepository
-import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
@@ -62,16 +60,18 @@ class ProductListDomainUseCaseImpl @Inject constructor(private val repository: P
         scope: CoroutineScope,
         name: String,
         order: String,
-        sort: String
+        sort: String,
+        type:String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductSearchProductOrder(scope, name, order, sort)
+        return repository.getProductSearchProductOrder(scope, name, order, sort,type)
     }
 
     override suspend fun getProductSearchProduct(
         scope: CoroutineScope,
-        name: String
+        name: String,
+        type:String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductSearchProduct(scope, name)
+        return repository.getProductSearchProduct(scope, name,type)
     }
 
     override suspend fun getBannerProduct(

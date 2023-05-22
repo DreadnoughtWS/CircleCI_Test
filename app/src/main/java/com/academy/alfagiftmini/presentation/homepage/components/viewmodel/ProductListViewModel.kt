@@ -3,13 +3,10 @@ package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
-import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.ProductListDomainUseCase
 import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListTebusMurahDomainModel
-import com.academy.alfagiftmini.domain.riwayatpencarian.model.RiwayatPencarianDomainModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -53,12 +50,12 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
         return useCase.getProductByName(name)
     }
 
-    suspend fun getProductSearchProductOrder(name:String, order:String, sort:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
-        return useCase.getProductSearchProductOrder(viewModelScope,name,order,sort)
+    suspend fun getProductSearchProductOrder(name:String, order:String, sort:String,type: String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getProductSearchProductOrder(viewModelScope,name,order,sort,type)
     }
 
-    suspend fun getProductSearchProduct(name:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
-        return useCase.getProductSearchProduct(viewModelScope,name)
+    suspend fun getProductSearchProduct(name:String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{
+        return useCase.getProductSearchProduct(viewModelScope,name,type)
     }
 
     suspend fun getBannerProduct(bannerId:Int,order: String,sort: String,type:String):Flow<PagingData<ProductListPromotionProductDomainModel>>{

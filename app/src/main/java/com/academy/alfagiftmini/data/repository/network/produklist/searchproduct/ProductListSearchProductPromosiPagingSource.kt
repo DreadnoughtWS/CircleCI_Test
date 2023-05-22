@@ -9,7 +9,9 @@ import com.academy.alfagiftmini.data.repository.network.produklist.model.Product
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 
 class ProductListSearchProductPromosiPagingSource(
-    private val apiService: ProductListApiService, private val name: String
+    private val apiService: ProductListApiService,
+    private val name: String,
+    private val type: String
 ) : PagingSource<Int, ProductListPromotionProductDomainModel>() {
     override fun getRefreshKey(state: PagingState<Int, ProductListPromotionProductDomainModel>): Int? {
         return null
@@ -18,13 +20,36 @@ class ProductListSearchProductPromosiPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ProductListPromotionProductDomainModel> {
         val position = params.key ?: 1
         return try {
-            val responseProduct = apiService.getProductsBynameOrder(
-                page = position, limit = 10, name = name, sort = "asc", order = "product_name"
-            )
+
+            val responseProduct: List<ProductListDetailDataModel>
+            println("ENFAGROW")
+
+            when (type) {
+                DataUtils.TYPE_PRODUCT_NAME -> {
+                    responseProduct = apiService.getProductTypeProductName(
+                        page = position,
+                        limit = 10,
+                        name = name,
+                        sort = "asc",
+                        order = "product_name"
+                    )
+                }
+                else -> {
+                    responseProduct = apiService.getProductsBynameOrder(
+                        page = position,
+                        limit = 10,
+                        name = name,
+                        sort = "asc",
+                        order = "product_name"
+                    )
+                }
+            }
+
             val responseSale = apiService.getPromotionProduct()
             val responseStock = apiService.getProductStock()
 
             val dataProduct: ArrayList<ProductListDetailDataModel> = arrayListOf()
+
 
             for (data in responseProduct) {
                 if ((data.productSpecialPrice ?: (data.price + 1)) < data.price) {
@@ -55,8 +80,8 @@ class ProductListSearchProductPromosiPagingSource(
         data: List<ProductListPromotionProductDomainModel>,
         prevKey: Int? = null,
         nextKey: Int? = null
-    ): PagingSource.LoadResult<Int, ProductListPromotionProductDomainModel> {
-        return PagingSource.LoadResult.Page(
+    ):LoadResult<Int, ProductListPromotionProductDomainModel> {
+        return LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )
     }

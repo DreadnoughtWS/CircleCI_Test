@@ -19,6 +19,7 @@ class FragmentProductListSearchProductPromosi : Fragment() {
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     var dataName: String = ""
+    var type: String = ""
 
 
     override fun onCreateView(
@@ -36,10 +37,8 @@ class FragmentProductListSearchProductPromosi : Fragment() {
     }
 
     private fun getDataFromApi() {
-        println("daata nama = $dataName")
-        println("MULAI")
         lifecycleScope.launch {
-            viewModel.getProductSearchProduct(name = dataName).collectLatest {
+            viewModel.getProductSearchProduct(name = dataName,type).collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -54,6 +53,7 @@ class FragmentProductListSearchProductPromosi : Fragment() {
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
+        type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 
 

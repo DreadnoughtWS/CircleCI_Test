@@ -2,17 +2,17 @@ package com.academy.alfagiftmini.data.repository.network.produklist.searchproduc
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.academy.alfagiftmini.data.DataUtils
 import com.academy.alfagiftmini.data.repository.network.produklist.ProductListApiService
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListDomainItemModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
 
 class ProductListSearchProductNamaProdukPagingSource(
     private val apiService: ProductListApiService,
     private val name: String,
     private val orderBy: String,
-    private val sort: String
+    private val sort: String,private val type:String
 ) : PagingSource<Int, ProductListPromotionProductDomainModel>() {
     override fun getRefreshKey(state: PagingState<Int, ProductListPromotionProductDomainModel>): Int? {
         return null
@@ -23,10 +23,23 @@ class ProductListSearchProductNamaProdukPagingSource(
         return try {
             val responseStock = apiService.getProductStock()
             val responseSale = apiService.getPromotionProduct()
+            val responseProduct: List<ProductListDetailDataModel>
 
-            val responseProduct = apiService.getProductsBynameOrder(
-                name = name, page = position, limit = 10, order = orderBy, sort = sort
-            )
+
+            when(type){
+                DataUtils.TYPE_PRODUCT_NAME->{
+                    responseProduct = apiService.getProductTypeProductName(page = position, limit = 10, name = name, order = orderBy, sort = sort)
+                }
+                else ->{
+                     responseProduct = apiService.getProductsBynameOrder(
+                        name = name, page = position, limit = 10, order = orderBy, sort = sort
+                    )
+                }
+            }
+
+
+
+
 
             val dataSudahDiTransform = ProductListPromotionProductDataModel.transforms(
                 responseProduct as ArrayList<ProductListDetailDataModel>,

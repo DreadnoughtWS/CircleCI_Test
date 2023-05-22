@@ -24,6 +24,7 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     var dataName: String = ""
+    var type: String = ""
     private var isClicked = true
 
     override fun onCreateView(
@@ -44,7 +45,7 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private fun getData(order: String = "asc") {
         lifecycleScope.launch {
             viewModel.getProductSearchProductOrder(
-                dataName, order, "product_name"
+                dataName, order, "product_name",type
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -61,6 +62,7 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
         (requireActivity() as ProductListSearchProdukActivity).getTab().addOnTabSelectedListener(this)
+        type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}
