@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.banner
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -55,10 +56,18 @@ class BannerPromoItemListActivity : AppCompatActivity() {
 
         if (bannerId != null){
             setToolbarBanner()
+            setButton()
             initTabs()
             setupFragment(0)
         }
 
+    }
+
+    private fun setButton() {
+        binding.ivBannerImage.setOnClickListener {
+            val intentSyarat = Intent(this,SyaratKetentuanActivity::class.java)
+            startActivity(intentSyarat)
+        }
     }
 
     private fun initTabs() {

@@ -16,7 +16,9 @@ data class BannerDataModel(
     @SerializedName("endDate")
     val endDate: String?,
     @SerializedName("deeplink")
-    val deepLink: String?
+    val deepLink: String?,
+    @SerializedName("syarat_ketentuan")
+    val syaratKetentuan: String?
 ){
     companion object{
         fun transformToListDomainModel(item: List<BannerDataModel?>):List<BannerDomainModel>{
@@ -27,7 +29,8 @@ data class BannerDataModel(
                         bannerImageFileName =  "",
                         startDate = "",
                         endDate = "",
-                        deepLink = ""
+                        deepLink = "",
+                        syaratKetentuan = ""
                     )
                 )
             }
@@ -40,7 +43,8 @@ data class BannerDataModel(
                 bannerImageFileName = it.bannerImageFileName ?: "",
                 startDate = it.startDate ?: "",
                 endDate = it.endDate ?: "",
-                deepLink = it.deepLink ?: ""
+                deepLink = it.deepLink ?: "",
+                syaratKetentuan = it.syaratKetentuan ?: ""
             )
         }
 
