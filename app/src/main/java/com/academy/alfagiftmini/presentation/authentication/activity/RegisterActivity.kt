@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.authentication.activity
 
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -30,5 +31,10 @@ class RegisterActivity : AppCompatActivity() {
 
     fun getInputManager(): InputMethodManager {
         return getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
+    fun hideKeyboard(view: View){
+        val inputMethodManager = this.getInputManager()
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
