@@ -16,6 +16,11 @@ import com.academy.alfagiftmini.domain.register.RegisterDomainUseCase
 import com.academy.alfagiftmini.domain.register.RegisterResponseDomain
 import com.academy.alfagiftmini.presentation.PresentationUtils.COUNTRY_PHONE_CODE
 import com.academy.alfagiftmini.presentation.PresentationUtils.EMAIL_REGEX
+import com.academy.alfagiftmini.presentation.PresentationUtils.SP_ACC_TOKEN
+import com.academy.alfagiftmini.presentation.PresentationUtils.SP_FIRST_NAME
+import com.academy.alfagiftmini.presentation.PresentationUtils.SP_LAST_NAME
+import com.academy.alfagiftmini.presentation.PresentationUtils.SP_PHONE
+import com.academy.alfagiftmini.presentation.PresentationUtils.SP_USER_ID
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import kotlin.random.Random
@@ -38,10 +43,11 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         val sharedPreference =
             activity.application.getSharedPreferences("USER_DATA", Context.MODE_PRIVATE)
         sharedPreference.edit().apply {
-            putInt("USER_ID", it.user?.id ?: -1)
-            putString("FIRST_NAME", it.user?.firstName)
-            putString("LAST_NAME", it.user?.lastName)
-            putString("USER_PHONE", it.user?.phone)
+            putInt(SP_USER_ID, it.user?.id ?: -1)
+            putString(SP_FIRST_NAME, it.user?.firstName)
+            putString(SP_LAST_NAME, it.user?.lastName)
+            putString(SP_PHONE, it.user?.phone)
+            putString(SP_ACC_TOKEN, it.accessToken)
         }.apply()
     }
 
