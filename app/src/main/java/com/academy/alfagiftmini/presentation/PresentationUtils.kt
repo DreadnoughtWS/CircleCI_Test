@@ -47,6 +47,7 @@ object PresentationUtils {
 
     const val PRODUCT_ID_PROMO = "PRODUCT_ID_PROMO"
     const val BANNER_DATA = "BANNER_DATA"
+    const val BANNER_RULE = "BANNER_RULE"
     const val ALL_BANNER_LIST = "ALL_BANNER_LIST"
 
     const val CATEGORIES_KEY = "PRODUCT_CATEGORY"

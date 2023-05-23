@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -64,10 +65,25 @@ class BannerPromoItemListActivity : AppCompatActivity() {
     }
 
     private fun setButton() {
-        binding.ivBannerImage.setOnClickListener {
-            val intentSyarat = Intent(this,SyaratKetentuanActivity::class.java)
-            startActivity(intentSyarat)
+        if (!(bannerData!!.syaratKetentuan.isNullOrEmpty())){
+            binding.apply {
+                ivArrowBlue.visibility = View.VISIBLE
+                ivLogoSyarat.visibility = View.VISIBLE
+                tvSyaratDkt.visibility = View.VISIBLE
+                ivArrowBlue.setOnClickListener {
+                    val intentSyarat = Intent(this@BannerPromoItemListActivity,SyaratKetentuanActivity::class.java)
+                    intentSyarat.putExtra(PresentationUtils.BANNER_RULE,bannerData!!.syaratKetentuan)
+                    startActivity(intentSyarat)
+                }
+            }
+        }else{
+            binding.apply {
+                ivArrowBlue.visibility = View.INVISIBLE
+                ivLogoSyarat.visibility = View.INVISIBLE
+                tvSyaratDkt.visibility = View.INVISIBLE
+            }
         }
+
     }
 
     private fun initTabs() {
