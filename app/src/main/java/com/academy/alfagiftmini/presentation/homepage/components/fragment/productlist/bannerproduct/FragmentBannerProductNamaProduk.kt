@@ -77,7 +77,6 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item_blue)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_DESCENDING)
 
             } else {
@@ -87,7 +86,6 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_ASCENDING)
 
             }

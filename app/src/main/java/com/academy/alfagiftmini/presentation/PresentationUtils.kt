@@ -8,7 +8,9 @@ import android.net.NetworkCapabilities
 import android.text.Html
 import android.text.Spanned
 import androidx.core.content.res.ResourcesCompat
+import androidx.paging.LoadState
 import com.academy.alfagiftmini.R
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -19,6 +21,9 @@ object PresentationUtils {
     const val COUNTRY_PHONE_CODE = "+62"
 
     const val SP_ACC_TOKEN = "acc_token"
+
+    const val TYPE_PRODUCT_NAME = "TYPE_PRODUCT_NAME"
+    const val TYPE_PRODUCT_NAME_LIKE = "TYPE_PRODUCT_NAME_LIKE"
 
     const val SHOW_LIHAT_SEMUA = true
     const val HIDE_LIHAT_SEMUA = false
@@ -119,4 +124,29 @@ object PresentationUtils {
 
     fun formatter(n: Int): String =
         DecimalFormat("Rp #,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
+
+    fun adapterAddLoadStateListenerProduct(adapter: ProductListGratisProductPagingAdapter, dialog: Dialog, context: Context){
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                setLoading(true, dialog)
+            } else {
+                setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) {
+                    showError("Tidak ada koneksi internet", context)
+                } else {
+                    showError("Product tidak ditemukan", context)
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) showError(
+                    "Tidak ada koneksi internet", context
+                )
+            }
+        }
+    }
 }

@@ -5,6 +5,8 @@ object DataUtils {
 
     const val CONTENT_TYPE = "application/json"
 
+    const val TYPE_PRODUCT_NAME = "TYPE_PRODUCT_NAME"
+
     const val TYPE_HARGA_SPESIAL = 201
     const val TYPE_HARGA_SPESIAL_PROMOSI = 202
     const val TYPE_GRATIS_PRODUK = 103

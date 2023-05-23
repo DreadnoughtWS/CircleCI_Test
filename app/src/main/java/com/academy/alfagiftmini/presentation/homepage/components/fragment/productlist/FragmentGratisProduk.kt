@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +12,6 @@ import com.academy.alfagiftmini.databinding.FragmentGratisProdukBinding
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct.FragmentProductListGratisProductTerlaris
-import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
-import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentPromo
 import com.google.android.material.tabs.TabLayout
 
 
@@ -47,14 +44,14 @@ class FragmentGratisProduk : Fragment() {
                 R.layout.tab_item
             ).apply {
                 with(customView) {
-                    this?.findViewById<TextView>(com.academy.alfagiftmini.R.id.tv_tab_item)?.text =
+                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text =
                         getString(
-                            com.academy.alfagiftmini.R.string.nama_product
+                            R.string.nama_product
                         )
-                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_up)
-                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_up_tab_item)
-                    this?.findViewById<ImageView>(com.academy.alfagiftmini.R.id.iv_tab_item_down)
-                        ?.setImageResource(com.academy.alfagiftmini.R.drawable.arrow_down_tab_item)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_up)
+                        ?.setImageResource(R.drawable.arrow_up_tab_item)
+                    this?.findViewById<ImageView>(R.id.iv_tab_item_down)
+                        ?.setImageResource(R.drawable.arrow_down_tab_item)
                 }
 
             })
@@ -70,7 +67,6 @@ class FragmentGratisProduk : Fragment() {
 
             tlGratisProduk.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
                 override fun onTabReselected(tab: TabLayout.Tab) {
-                    setupFragment(tab.position)
                 }
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -106,7 +102,7 @@ class FragmentGratisProduk : Fragment() {
                 FragmentProductListGratisProductPromosi()
             }
             1 -> {
-                FragmentProductListGratisProductNamaProduk()
+                FragmentProductListGratisProductNamaProduk(binding.tlGratisProduk)
             }
             else -> {
                 FragmentProductListGratisProductTerlaris()

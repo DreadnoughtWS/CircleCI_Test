@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,18 +13,17 @@ import com.academy.alfagiftmini.presentation.homepage.components.activity.produc
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListNamaProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListPromosi
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct.FragmentProductCategoriesListTerlaris
-import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
-import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 
-class FragmentProductCategoriesDetail(private val subCategory: String, private val category: String): Fragment() {
+class FragmentProductCategoriesDetail(
+    private val subCategory: String, private val category: String
+) : Fragment() {
     private lateinit var binding: FragmentProductCategoriesDetailBinding
     private lateinit var productListViewModel: ProductListViewModel
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductCategoriesDetailBinding.inflate(inflater)
         return binding.root
@@ -39,7 +37,8 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
     }
 
     private fun initViewModel() {
-        productListViewModel = (requireActivity() as ProductCategoriesActivity).getProductListCategoryViewModel()
+        productListViewModel =
+            (requireActivity() as ProductCategoriesActivity).getProductListCategoryViewModel()
     }
 
     private fun initTabs() {
@@ -47,13 +46,15 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
             tlSubCategoryProduct.addTab(tlSubCategoryProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.promosi)
             })
 
             tlSubCategoryProduct.addTab(tlSubCategoryProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.nama_product)
                 customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -63,7 +64,8 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
             tlSubCategoryProduct.addTab(tlSubCategoryProduct.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.terlaris)
             })
 
             tlSubCategoryProduct.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -72,7 +74,7 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        with(tab.customView){
+                        with(tab.customView) {
                             this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                                 ?.setImageResource(R.drawable.arrow_up_tab_item)
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -99,13 +101,19 @@ class FragmentProductCategoriesDetail(private val subCategory: String, private v
     private fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
-                FragmentProductCategoriesListPromosi(productListViewModel, subCategory, category) //promosi
+                FragmentProductCategoriesListPromosi(
+                    productListViewModel, subCategory, category
+                ) //promosi
             }
             1 -> {
-                FragmentProductCategoriesListNamaProduk(productListViewModel, subCategory, category) //nama produk
+                FragmentProductCategoriesListNamaProduk(
+                    productListViewModel, subCategory, category
+                ) //nama produk
             }
             else -> {
-                FragmentProductCategoriesListTerlaris(productListViewModel, subCategory, category) //terlaris
+                FragmentProductCategoriesListTerlaris(
+                    productListViewModel, subCategory, category
+                ) //terlaris
             }
         }
 

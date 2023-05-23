@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListSearchProductTerlarisBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
@@ -22,6 +21,7 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     var dataName: String = ""
+    var type:String = ""
 
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
     private fun getData() {
         lifecycleScope.launch {
             viewModel.getProductSearchProductOrder(
-                dataName, PresentationUtils.ORDER_BY_DESCENDING, "sales_quantity"
+                dataName, PresentationUtils.ORDER_BY_DESCENDING, "sales_quantity", type
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -58,6 +58,7 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
+        type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 
 }
