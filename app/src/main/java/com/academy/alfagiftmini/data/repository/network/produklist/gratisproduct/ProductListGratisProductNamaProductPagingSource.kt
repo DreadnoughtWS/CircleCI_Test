@@ -7,6 +7,7 @@ import com.academy.alfagiftmini.data.repository.network.produklist.ProductListAp
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListDetailDataModel
 import com.academy.alfagiftmini.data.repository.network.produklist.model.ProductListPromotionProductDataModel
 import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
+import com.academy.alfagiftmini.presentation.PresentationUtils
 
 class ProductListGratisProductNamaProductPagingSource(
     private val apiService: ProductListApiService,
@@ -29,6 +30,7 @@ class ProductListGratisProductNamaProductPagingSource(
             )
 
             val dataKodePromo: ArrayList<ProductListDetailDataModel> = arrayListOf()
+            println("MULAI : $orderBy")
 
             when (type) {
                 DataUtils.TYPE_HARGA_SPESIAL -> {
@@ -49,11 +51,19 @@ class ProductListGratisProductNamaProductPagingSource(
                         }
                     }
                 }
-                DataUtils.TYPE_GRATIS_PRODUK -> {
-                    responseProduct.forEach {
-                        it.kodePromo?.forEach { kode ->
-                            if (kode == DataUtils.TYPE_GRATIS_PRODUK) {
-                                dataKodePromo.add(it)
+                PresentationUtils.TYPE_GRATIS_PRODUK -> {
+                    for (data in responseProduct) {
+                        for (kode in data.kodePromo ?: listOf()) {
+                            if (kode == PresentationUtils.TYPE_GRATIS_PRODUK) {
+                                println(
+                                    """
+                                    *********************************
+                                    $data
+                                """.trimIndent()
+                                )
+                                dataKodePromo.add(data)
+                            } else {
+                                continue
                             }
                         }
                     }
@@ -68,7 +78,7 @@ class ProductListGratisProductNamaProductPagingSource(
                     }
                 }
                 DataUtils.TYPE_PENAWARAN_TERBAIK -> {
-                    
+
                     for (data in responseProduct) {
                         if (data.productSpecialPrice == null) {
                             continue
@@ -105,8 +115,8 @@ class ProductListGratisProductNamaProductPagingSource(
         data: List<ProductListPromotionProductDomainModel>,
         prevKey: Int? = null,
         nextKey: Int? = null
-    ): PagingSource.LoadResult<Int, ProductListPromotionProductDomainModel> {
-        return PagingSource.LoadResult.Page(
+    ): LoadResult<Int, ProductListPromotionProductDomainModel> {
+        return LoadResult.Page(
             data = data, prevKey = prevKey, nextKey = nextKey
         )
     }

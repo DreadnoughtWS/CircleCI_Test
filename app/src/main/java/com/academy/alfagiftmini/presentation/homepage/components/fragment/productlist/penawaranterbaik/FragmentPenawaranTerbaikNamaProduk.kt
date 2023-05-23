@@ -11,10 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentPenawaranTerbaikNamaProdukBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -75,7 +73,6 @@ class FragmentPenawaranTerbaikNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item_blue)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_DESCENDING)
 
             } else {
@@ -85,7 +82,6 @@ class FragmentPenawaranTerbaikNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
                     ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_ASCENDING)
 
             }

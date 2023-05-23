@@ -44,7 +44,9 @@ class ProductListRepositoryImpl @Inject constructor(
         scope: CoroutineScope, type: Int, order: String, sort: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
-            ProductListGratisProductNamaProductPagingSource(apiService, type, order, sort)
+            ProductListGratisProductNamaProductPagingSource(
+                apiService = apiService, type = type, orderBy = order, sort = sort
+            )
         }.flow.cachedIn(scope)
     }
 
@@ -103,18 +105,18 @@ class ProductListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getProductSearchProductOrder(
-        scope: CoroutineScope, name: String, order: String, sort: String,type:String
+        scope: CoroutineScope, name: String, order: String, sort: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
-            ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort,type)
+            ProductListSearchProductNamaProdukPagingSource(apiService, name, order, sort, type)
         }.flow.cachedIn(scope)
     }
 
     override suspend fun getProductSearchProduct(
-        scope: CoroutineScope, name: String,type:String
+        scope: CoroutineScope, name: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return Pager(config = PagingConfig(10)) {
-            ProductListSearchProductPromosiPagingSource(apiService, name,type)
+            ProductListSearchProductPromosiPagingSource(apiService, name, type)
         }.flow.cachedIn(scope)
     }
 
@@ -145,7 +147,9 @@ class ProductListRepositoryImpl @Inject constructor(
                 pageSize = 10
             )
         ) {
-            ProductItemCategoryPagingSource(apiService,categoriesApiService, subCategory, category, sort, order, type)
+            ProductItemCategoryPagingSource(
+                apiService, categoriesApiService, subCategory, category, sort, order, type
+            )
         }.flow.cachedIn(scope)
     }
 

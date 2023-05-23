@@ -12,42 +12,36 @@ class ProductListDomainUseCaseImpl @Inject constructor(private val repository: P
     ProductListDomainUseCase {
 
     override suspend fun getProductGratisProduct(
-        scope: CoroutineScope,
-        type: Int
+        scope: CoroutineScope, type: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductGratisProduct(scope,type)
+        return repository.getProductGratisProduct(scope, type)
     }
 
     override suspend fun getProductGratisProductOrder(
-        scope: CoroutineScope,
-        type: Int,
-        order: String,
-        sort: String
+        scope: CoroutineScope, type: Int, order: String, sort: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
+        println("USECASEIMPL : $order")
         return repository.getProductGratisProductOrder(
-            scope,type,order,sort
+            scope = scope, type = type, order = order, sort = sort
         )
     }
 
     override suspend fun getDetailOfficialStoreProductPromosi(
-        scope: CoroutineScope,
-        officialStoreId: Int
+        scope: CoroutineScope, officialStoreId: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return repository.getDetailOfficialStoreProductPromosi(
-            scope,officialStoreId
+            scope, officialStoreId
         )
     }
 
     override suspend fun getDetailOfficialStoreOrder(
-        scope: CoroutineScope,
-        order: String,
-        sort: String,
-        officialStoreId: Int
+        scope: CoroutineScope, order: String, sort: String, officialStoreId: Int
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return repository.getDetailOfficialStoreOrder(
-            scope,order,sort,officialStoreId
+            scope, order, sort, officialStoreId
         )
     }
+
     override suspend fun getProductTebusMurah(): Flow<List<ProductListTebusMurahDomainModel>> {
         return repository.getProductTebusMurah()
     }
@@ -57,31 +51,23 @@ class ProductListDomainUseCaseImpl @Inject constructor(private val repository: P
     }
 
     override suspend fun getProductSearchProductOrder(
-        scope: CoroutineScope,
-        name: String,
-        order: String,
-        sort: String,
-        type:String
+        scope: CoroutineScope, name: String, order: String, sort: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductSearchProductOrder(scope, name, order, sort,type)
+        return repository.getProductSearchProductOrder(scope, name, order, sort, type)
     }
 
     override suspend fun getProductSearchProduct(
-        scope: CoroutineScope,
-        name: String,
-        type:String
+        scope: CoroutineScope, name: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getProductSearchProduct(scope, name,type)
+        return repository.getProductSearchProduct(scope, name, type)
     }
 
     override suspend fun getBannerProduct(
-        scope: CoroutineScope,
-        bannerId: Int,
-        order: String,
-        sort: String,
-        type: String
+        scope: CoroutineScope, bannerId: Int, order: String, sort: String, type: String
     ): Flow<PagingData<ProductListPromotionProductDomainModel>> {
-        return repository.getBannerProduct(scope= scope,bannerId = bannerId,order = order,sort = sort,type = type)
+        return repository.getBannerProduct(
+            scope = scope, bannerId = bannerId, order = order, sort = sort, type = type
+        )
     }
 
     override suspend fun getProductByCategory(

@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.gratisproduct
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductPromosiBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentGratisProduk
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -21,6 +20,7 @@ class FragmentProductListGratisProductPromosi : Fragment() {
     private lateinit var binding: FragmentProductListGratisProductPromosiBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,9 +32,14 @@ class FragmentProductListGratisProductPromosi : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModel()
         setAdapter()
         getData()
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireActivity())
     }
 
     private fun getData() {
@@ -47,8 +52,12 @@ class FragmentProductListGratisProductPromosi : Fragment() {
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListPromosi.adapter = adapter
+        binding.apply {
+            rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListPromosi.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext())
+
     }
 
     private fun setViewModel() {
