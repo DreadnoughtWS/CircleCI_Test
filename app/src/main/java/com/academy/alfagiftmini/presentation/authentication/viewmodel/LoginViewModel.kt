@@ -14,19 +14,21 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase) : ViewModel() {
     fun checkUserInputValidity (context: Context, binding: ActivityLoginBinding, user: LoginDataDomain): Boolean {
+        var isValidEmail = true
+        var isValidPass = true
         binding.apply {
             if (user.email.isBlank()) {
                 setError(tvEmailErr, context.getString(R.string.empty_field_error))
-                return false
+                isValidEmail = false
             }
             setGone(tvEmailErr)
             if (user.password.isBlank()) {
                 setError(tvPassErr, context.getString(R.string.empty_field_error))
-                return false
+                isValidPass = false
             }
             setGone(tvPassErr)
         }
-        return true
+        return isValidEmail && isValidPass
     }
 
     private fun setGone(textView: TextView) {

@@ -63,6 +63,12 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tv_first_name_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            style="@style/Text_View_Error_Message_Style"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_last_name_edit_layout"
@@ -78,6 +84,12 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tv_last_name_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            style="@style/Text_View_Error_Message_Style"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/et_phone_number_edit_layout"
