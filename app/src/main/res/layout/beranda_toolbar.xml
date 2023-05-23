@@ -27,6 +27,8 @@
             android:paddingStart="15dp"
             android:paddingEnd="20dp"
             android:text="@string/mau_belanja_apa"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textAllCaps="false"
             android:textColor="@color/gray"
             android:textSize="18sp"

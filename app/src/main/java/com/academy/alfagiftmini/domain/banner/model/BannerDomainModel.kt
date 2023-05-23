@@ -10,5 +10,6 @@ data class BannerDomainModel(
     val bannerImageFileName: String,
     val startDate: String,
     val endDate: String,
-    val deepLink: String
+    val deepLink: String,
+    val syaratKetentuan: String
 ) : Parcelable

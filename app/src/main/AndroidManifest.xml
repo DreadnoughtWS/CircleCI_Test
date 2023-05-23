@@ -22,11 +22,31 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.homepage.components.activity.banner.SyaratKetentuanActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
+            android:name=".presentation.homepage.activity.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".presentation.akun.AboutAppActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.akun.EditAkunActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.homepage.components.activity.productdetail.ProductDetailPromoGratisActivity"
             android:exported="false"
@@ -47,19 +67,12 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".presentation.authentication.activity.RegisterActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.authentication.activity.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            tools:ignore="LockedOrientationActivity"></activity>
         <activity
             android:name=".presentation.homepage.components.activity.productlist.ProductListTebusMurahActivity"
             android:exported="false"

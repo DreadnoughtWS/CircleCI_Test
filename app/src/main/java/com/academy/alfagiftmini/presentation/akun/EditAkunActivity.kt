@@ -66,6 +66,8 @@ class EditAkunActivity : AppCompatActivity() {
                 //check internet
 
                 //update data
+                if (!akunViewModel.checkEmpty(this@EditAkunActivity, binding)) return@setOnClickListener
+
                 lifecycleScope.launch {
                     akunViewModel.updateAkunData(
                         AkunDomainEditDataModel(

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.compose.animation.slideOutVertically
 import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R

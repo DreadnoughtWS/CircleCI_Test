@@ -18,6 +18,8 @@ object PresentationUtils {
 
     const val COUNTRY_PHONE_CODE = "+62"
 
+    const val SP_ACC_TOKEN = "acc_token"
+
     const val TYPE_PRODUCT_NAME = "TYPE_PRODUCT_NAME"
     const val TYPE_PRODUCT_NAME_LIKE = "TYPE_PRODUCT_NAME_LIKE"
 
@@ -50,6 +52,7 @@ object PresentationUtils {
 
     const val PRODUCT_ID_PROMO = "PRODUCT_ID_PROMO"
     const val BANNER_DATA = "BANNER_DATA"
+    const val BANNER_RULE = "BANNER_RULE"
     const val ALL_BANNER_LIST = "ALL_BANNER_LIST"
 
     const val CATEGORIES_KEY = "PRODUCT_CATEGORY"
