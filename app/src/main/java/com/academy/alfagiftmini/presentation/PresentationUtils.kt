@@ -18,6 +18,8 @@ object PresentationUtils {
 
     const val COUNTRY_PHONE_CODE = "+62"
 
+    const val SP_ACC_TOKEN = "acc_token"
+
     const val SHOW_LIHAT_SEMUA = true
     const val HIDE_LIHAT_SEMUA = false
 

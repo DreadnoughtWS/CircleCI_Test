@@ -35,8 +35,14 @@ class LoginActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        if (getAccessToken().isNotBlank()) {
+            toMainActivity()
+        }
         setViewInteraction()
+    }
+
+    private fun getAccessToken(): String {
+        return mainViewModel.getAccessToken(this)
     }
 
     private fun setViewInteraction() {
@@ -62,12 +68,16 @@ class LoginActivity : AppCompatActivity() {
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
-                    mainViewModel.saveData(this@LoginActivity, it.user)
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    mainViewModel.saveData(this@LoginActivity, it)
+                    toMainActivity()
                 }
             }
         }
+    }
+
+    private fun toMainActivity() {
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
