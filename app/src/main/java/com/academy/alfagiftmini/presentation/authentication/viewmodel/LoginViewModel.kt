@@ -20,13 +20,15 @@ class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase
             if (user.email.isBlank()) {
                 setError(tvEmailErr, context.getString(R.string.empty_field_error))
                 isValidEmail = false
+            }else {
+                setGone(tvEmailErr)
             }
-            setGone(tvEmailErr)
             if (user.password.isBlank()) {
                 setError(tvPassErr, context.getString(R.string.empty_field_error))
                 isValidPass = false
+            }else{
+                setGone(tvPassErr)
             }
-            setGone(tvPassErr)
         }
         return isValidEmail && isValidPass
     }
