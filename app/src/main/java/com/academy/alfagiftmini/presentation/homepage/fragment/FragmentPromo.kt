@@ -33,8 +33,13 @@ class FragmentPromo : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setToolbar()
         initTabs()
         setupFragment(0)
+    }
+
+    private fun setToolbar() {
+        binding.tvToolbar.text = getString(R.string.promo)
     }
 
 
