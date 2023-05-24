@@ -76,7 +76,7 @@ class FragmentProductListHargaSpesialNamaProduk : Fragment(), TabLayout.OnTabSel
             rvProductListNamaProduk.adapter = adapter
         }
 
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext())
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext(),::getData)
 
     }
 

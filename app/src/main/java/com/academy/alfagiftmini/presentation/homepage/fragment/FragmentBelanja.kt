@@ -1,19 +1,19 @@
 package com.academy.alfagiftmini.presentation.homepage.fragment
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentBelanjaBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories.ProductCategoriesActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
@@ -33,6 +33,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
     private lateinit var rekomendasiListAdapter: ProductListGratisProductPagingAdapter
     private lateinit var productCategoriesviewModel: ProductCategoriesViewModel
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var dialog: Dialog
 
 
     override fun onCreateView(
@@ -44,6 +45,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setDialog()
         setToolbar()
         setViewModel()
         setAdapter()
@@ -51,39 +53,129 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
         setBtnScroll()
     }
 
+    private fun setDialog() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
+    }
+
     private fun getData() {
+        PresentationUtils.setLoading(true, dialog)
         lifecycleScope.launch {
             productListViewModel.getProductGratisProduct(PresentationUtils.TYPE_SHOPPING_LIST_BELANJA)
                 .collectLatest {
                     shoppingListAdapter.submitData(it)
+                    PresentationUtils.setLoading(false, dialog)
                 }
         }
         lifecycleScope.launch {
             productListViewModel.getProductGratisProduct(PresentationUtils.TYPE_REKOMENDASI_BELANJA)
                 .collectLatest {
                     rekomendasiListAdapter.submitData(it)
+                    PresentationUtils.setLoading(false, dialog)
+
                 }
         }
         lifecycleScope.launch {
             productCategoriesviewModel.getAllCategories(this, null).collectLatest {
                 categoriesAdapter.submitData(lifecycle, it)
+                PresentationUtils.setLoading(false, dialog)
             }
         }
     }
 
     private fun setAdapter() {
         rekomendasiListAdapter = ProductListGratisProductPagingAdapter()
-        binding.rvRekomendasiProduct.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvRekomendasiProduct.isNestedScrollingEnabled = false
-        binding.rvRekomendasiProduct.adapter = rekomendasiListAdapter
-
-        shoppingListAdapter = ProductListBelanjaPagingAdapter()
-        binding.rvShoppingList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvShoppingList.adapter = shoppingListAdapter
-
         categoriesAdapter = CategoriesAdapter(this@FragmentBelanja)
-        binding.rvCategoryBelanja.layoutManager = GridLayoutManager(requireContext(), 3)
-        binding.rvCategoryBelanja.adapter = categoriesAdapter
+        shoppingListAdapter = ProductListBelanjaPagingAdapter()
+        binding.apply {
+            rvRekomendasiProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvRekomendasiProduct.isNestedScrollingEnabled = false
+            rvRekomendasiProduct.adapter = rekomendasiListAdapter
+
+            rvShoppingList.layoutManager = LinearLayoutManager(requireContext())
+            rvShoppingList.adapter = shoppingListAdapter
+
+            rvCategoryBelanja.layoutManager = GridLayoutManager(requireContext(), 3)
+            rvCategoryBelanja.adapter = categoriesAdapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            rekomendasiListAdapter, dialog, requireContext(), ::getData
+        )
+
+
+        categoriesAdapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                PresentationUtils.setLoading(true, dialog)
+            } else {
+                PresentationUtils.setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                PresentationUtils.setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
+                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        getData()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                } else {
+                    PresentationUtils.showError("Categories tidak ditemukan", requireContext())
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                PresentationUtils.setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
+                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        getData()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                }
+            }
+        }
+        shoppingListAdapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                PresentationUtils.setLoading(true, dialog)
+            } else {
+                PresentationUtils.setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                PresentationUtils.setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
+                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        getData()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                } else {
+                    PresentationUtils.showError("Product tidak ditemukan", requireContext())
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                PresentationUtils.setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
+                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        getData()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                }
+
+            }
+        }
+
     }
 
     private fun setViewModel() {
@@ -95,19 +187,19 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
 
     private fun setToolbar() {
 
-        binding.tvToolbar.text = "Belanja"
+        binding.tvToolbar.text = getString(R.string.belanja)
         binding.btnSearchProduct.setOnClickListener {
             startActivity(Intent(requireContext(), ProductListSearchProdukActivity::class.java))
         }
 
-        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        binding.scrollView.setOnScrollChangeListener { _, _, scrollY, _, _ ->
             if (scrollY >= 4750) {
                 with(binding) {
                     tvShoppingList.visibility = View.GONE
                     cbShoppingList.visibility = View.GONE
                     tvPilihSemuaProduk.visibility = View.GONE
                     tvSilahkanCekListProduk.visibility = View.GONE
-                    clShoppingList.setBackgroundColor(getResources().getColor(R.color.transparant))
+                    clShoppingList.setBackgroundColor(resources.getColor(R.color.transparant))
                     btnLihatShoppingList.visibility = View.VISIBLE
                     btnProdukRekomendasi.visibility = View.GONE
                 }
@@ -119,7 +211,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
                     cbShoppingList.visibility = View.VISIBLE
                     tvPilihSemuaProduk.visibility = View.VISIBLE
                     tvSilahkanCekListProduk.visibility = View.VISIBLE
-                    clShoppingList.setBackgroundColor(getResources().getColor(R.color.very_light_gray))
+                    clShoppingList.setBackgroundColor(resources.getColor(R.color.very_light_gray))
                 }
             }
         }

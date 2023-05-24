@@ -14,6 +14,12 @@ class AboutAppActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setTextTentangAlfagift()
+        setToolbar()
+    }
+
+    private fun setToolbar() {
+        binding.tvPromoToolbarTitle.text = getString(R.string.tentang_alfagift)
+        binding.btnBannerBack.setOnClickListener { finish() }
     }
 
     private fun setTextTentangAlfagift() {

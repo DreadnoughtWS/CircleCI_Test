@@ -65,7 +65,7 @@ class FragmentProductListHargaSpesialPromosi : Fragment() {
             rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProductListPromosi.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext())
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext(),::getData)
 
 
     }

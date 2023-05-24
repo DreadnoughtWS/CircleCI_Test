@@ -54,6 +54,7 @@ class FragmentProductListPaketPromosi : Fragment() {
         adapter = ProductListGratisProductPagingAdapter()
         binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvProductListPromosi.adapter = adapter
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
     }
 
     private fun setViewModel() {

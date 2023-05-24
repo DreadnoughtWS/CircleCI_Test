@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,8 +21,9 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
     private lateinit var binding: FragmentProductListSearchProductTerlarisBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
-    var dataName: String = ""
-    var type:String = ""
+    private var dataName: String = ""
+    var type: String = ""
+    private lateinit var dialog: Dialog
 
 
     override fun onCreateView(
@@ -34,9 +36,14 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelandData()
         setAdapter()
         getData()
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
     }
 
     private fun getData() {
@@ -51,14 +58,25 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListTerlaris.adapter = adapter
+        binding.apply {
+            rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListTerlaris.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData
+        )
+
     }
 
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
         type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dialog.dismiss()
     }
 
 }
