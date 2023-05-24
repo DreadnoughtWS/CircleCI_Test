@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore
 
+import android.app.Dialog
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -39,7 +40,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     private lateinit var data: OfficialStoreDomainItemModel
     private lateinit var brandsAdapter: BrandsAdapter
     private lateinit var bannerAdapter: BannerBerandaSliderAdapter
-
+    private lateinit var dialog: Dialog
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -60,12 +61,17 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         binding = ActivityDetailOfficialStoreBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setProgress()
         setAdapter()
         setObserver()
         getDataFromIntent()
         getDataFromApi()
         initTabs()
         setupFragment(0)
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(this)
     }
 
     private fun getDataFromApi() {
@@ -85,13 +91,16 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
+        PresentationUtils.setLoading(true, dialog)
         officialStoreViewModel.brand.observe(this) {
             if (it.size > 8) {
                 setLihatSemua(SHOW_LIHAT_SEMUA, it)
                 brandsAdapter.updateData(it.subList(0, 8))
+                PresentationUtils.setLoading(false, dialog)
             } else {
                 setLihatSemua(HIDE_LIHAT_SEMUA, it)
                 brandsAdapter.updateData(it)
+                PresentationUtils.setLoading(false, dialog)
             }
 
         }
@@ -99,6 +108,7 @@ class DetailOfficialStoreActivity : AppCompatActivity() {
         lifecycleScope.launch {
             bannerListViewModel.bannerListData.collectLatest {
                 setupSlider(it)
+                PresentationUtils.setLoading(false, dialog)
             }
         }
     }

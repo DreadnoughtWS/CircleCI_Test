@@ -61,7 +61,7 @@ class FragmentProductListGratisProductTerlaris : Fragment() {
             rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProductListTerlaris.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext())
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext(),::getData)
     }
 
     private fun setViewModel() {

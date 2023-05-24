@@ -49,8 +49,8 @@ object PresentationUtils {
     const val TYPE_PENAWARAN_TERBAIK = 12
     const val TYPE_PENAWARAN_TERBAIK_PROMOSI = 13
 
-    const val INTENT_DATA ="data"
-    const val PRODUCT_ID ="PRODUCT_ID"
+    const val INTENT_DATA = "data"
+    const val PRODUCT_ID = "PRODUCT_ID"
 
     const val PRODUCT_ID_PROMO = "PRODUCT_ID_PROMO"
     const val BANNER_DATA = "BANNER_DATA"
@@ -125,7 +125,9 @@ object PresentationUtils {
     fun formatter(n: Int): String =
         DecimalFormat("Rp #,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
 
-    fun adapterAddLoadStateListenerProduct(adapter: ProductListGratisProductPagingAdapter, dialog: Dialog, context: Context){
+    fun adapterAddLoadStateListenerProductt(
+        adapter: ProductListGratisProductPagingAdapter, dialog: Dialog, context: Context
+    ) {
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading) {
                 setLoading(true, dialog)
@@ -148,5 +150,67 @@ object PresentationUtils {
                 )
             }
         }
+    }
+
+    fun adapterAddLoadStateListenerProduct(
+        adapter: ProductListGratisProductPagingAdapter,
+        dialog: Dialog,
+        context: Context,
+        function: ()->Unit
+    ) {
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                setLoading(true, dialog)
+            } else {
+                setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) {
+                    val dialogg = noInternetDialog(context)
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        function()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    shownoInternetDialog(dialogg)
+                } else {
+                    showError("Product tidak ditemukan", context)
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) {
+                    val dialogg = noInternetDialog(context)
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        function()
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    shownoInternetDialog(dialogg)
+                }
+            }
+        }
+    }
+
+    fun noInternetDialog(context: Context): androidx.appcompat.app.AlertDialog.Builder {
+        val dialogBuilder =
+            androidx.appcompat.app.AlertDialog.Builder(context, R.style.NetworkAlertDialogTheme)
+        dialogBuilder.setMessage("No Network Connection detected, Please make sure you have a stable connection to the internet, then press retry to refresh the app and try again.")
+        dialogBuilder.setCancelable(false)
+        dialogBuilder.setIcon(R.drawable.no_internet_logo)
+        dialogBuilder.setTitle("No Network Connection")
+        return dialogBuilder
+
+
+    }
+
+    fun shownoInternetDialog(dialogBuilder: androidx.appcompat.app.AlertDialog.Builder) {
+        val connectionAlertDialog = dialogBuilder.create()
+        connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
+        connectionAlertDialog.show()
     }
 }
