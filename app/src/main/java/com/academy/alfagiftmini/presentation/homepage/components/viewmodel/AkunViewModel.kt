@@ -29,14 +29,14 @@ class AkunViewModel @Inject constructor(private val useCase: AkunDomainUseCase):
     fun checkEmpty(context: Context, binding: ActivityEditAkunBinding): Boolean {
         var firstNameValid = true
         var lastNameValid = true
-        if (binding.etFirstNameEdit.text.isNullOrEmpty()) {
+        if (binding.etFirstNameEdit.text.isNullOrBlank()) {
             setError(binding.tvFirstNameError, context.getString(R.string.empty_field_error))
             firstNameValid = false
         }else {
             setGone(binding.tvFirstNameError)
         }
 
-        if (binding.etLastNameEdit.text.isNullOrEmpty()) {
+        if (binding.etLastNameEdit.text.isNullOrBlank()) {
             setError(binding.tvLastNameError, context.getString(R.string.empty_field_error))
             lastNameValid = false
         }else{
