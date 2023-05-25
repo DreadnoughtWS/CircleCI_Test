@@ -66,7 +66,9 @@ class FragmentDetailofficialStoreNamaProduct : Fragment(), TabLayout.OnTabSelect
             rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProductListNamaProduk.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData, false, requireActivity()
+        )
     }
 
     private fun setViewModeTabandData() {

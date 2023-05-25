@@ -19,7 +19,11 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductListViewModel, private val subCategory: String, private val category: String): Fragment(), TabLayout.OnTabSelectedListener {
+class FragmentProductCategoriesListNamaProduk(
+    private val viewModel: ProductListViewModel,
+    private val subCategory: String,
+    private val category: String
+) : Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductCategoryListBinding
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private var isClicked = true
@@ -46,7 +50,14 @@ class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductLis
 
     private fun getData(order: String = "asc") {
         lifecycleScope.launch {
-            viewModel.getProductByCategory(this, subCategory, category, "product_name", order, PresentationUtils.TYPE_BUKAN_PROMOSI).collectLatest {
+            viewModel.getProductByCategory(
+                this,
+                subCategory,
+                category,
+                "product_name",
+                order,
+                PresentationUtils.TYPE_BUKAN_PROMOSI
+            ).collectLatest {
                 adapter.submitData(lifecycle, it)
             }
         }
@@ -59,13 +70,13 @@ class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductLis
             adapter = ProductListGratisProductPagingAdapter()
             rvProductListNamaProduk.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData, false, requireActivity()
+        )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductCategoryListBinding.inflate(inflater)
         return binding.root

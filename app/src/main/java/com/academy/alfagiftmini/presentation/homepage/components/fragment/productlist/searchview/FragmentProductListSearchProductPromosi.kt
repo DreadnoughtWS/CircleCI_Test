@@ -60,7 +60,7 @@ class FragmentProductListSearchProductPromosi : Fragment() {
             rvProductListPromosi.adapter = adapter
         }
         PresentationUtils.adapterAddLoadStateListenerProduct(
-            adapter, dialog, requireContext(), ::getDataFromApi
+            adapter, dialog, requireContext(), ::getDataFromApi, false, requireActivity()
         )
     }
 
@@ -69,6 +69,7 @@ class FragmentProductListSearchProductPromosi : Fragment() {
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
         type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         dialog.dismiss()

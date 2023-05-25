@@ -22,7 +22,7 @@ class FragmentDetailofficialStorePromosi : Fragment() {
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private lateinit var dialog: Dialog
-        private var data: OfficialStoreDomainItemModel? = null
+    private var data: OfficialStoreDomainItemModel? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -53,9 +53,10 @@ class FragmentDetailofficialStorePromosi : Fragment() {
     private fun getDataFromApi() {
         lifecycleScope.launch {
             data?.let {
-                viewModel.getDetailOfficialStorePromosiProduct(officialStoreId = it.id).collectLatest {
-                    adapter.submitData(it)
-                }
+                viewModel.getDetailOfficialStorePromosiProduct(officialStoreId = it.id)
+                    .collectLatest {
+                        adapter.submitData(it)
+                    }
             }
         }
     }
@@ -66,7 +67,9 @@ class FragmentDetailofficialStorePromosi : Fragment() {
             rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProductListPromosi.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getDataFromApi)
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getDataFromApi, false, requireActivity()
+        )
     }
 
     private fun setViewModel() {

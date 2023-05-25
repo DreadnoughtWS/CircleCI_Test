@@ -63,7 +63,7 @@ class FragmentPenawaranTerbaikNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
             rvProductListNamaProduk.adapter = adapter
         }
         PresentationUtils.adapterAddLoadStateListenerProduct(
-            adapter, dialog, requireContext(), ::getData
+            adapter, dialog, requireContext(), ::getData,false,requireActivity()
         )
     }
 

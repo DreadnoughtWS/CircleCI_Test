@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -129,7 +130,9 @@ object PresentationUtils {
         adapter: ProductListGratisProductPagingAdapter,
         dialog: Dialog,
         context: Context,
-        function: () -> Unit
+        function: () -> Unit,
+        isClose: Boolean = false,
+        activity: Activity,
     ) {
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading) {
@@ -146,6 +149,7 @@ object PresentationUtils {
                     }
                     dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
                         dialog.cancel()
+                        activity.finish()
                     }
                     shownoInternetDialog(dialogg)
                 } else {
@@ -162,6 +166,7 @@ object PresentationUtils {
                     }
                     dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
                         dialog.cancel()
+                        activity.finish()
                     }
                     shownoInternetDialog(dialogg)
                 }

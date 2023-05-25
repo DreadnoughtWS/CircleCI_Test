@@ -98,7 +98,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
             rvCategoryBelanja.adapter = categoriesAdapter
         }
         PresentationUtils.adapterAddLoadStateListenerProduct(
-            rekomendasiListAdapter, dialog, requireContext(), ::getData
+            rekomendasiListAdapter, dialog, requireContext(), ::getData,true, requireActivity()
         )
 
 
