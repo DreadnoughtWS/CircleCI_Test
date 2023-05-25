@@ -110,31 +110,10 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
             }
             if (loadState.refresh is LoadState.Error) {
                 PresentationUtils.setLoading(false, dialog)
-                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
-                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
-                        getData()
-                    }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    PresentationUtils.shownoInternetDialog(dialogg)
-                } else {
-                    PresentationUtils.showError("Categories tidak ditemukan", requireContext())
-                }
-            }
-
-            if (loadState.append is LoadState.Error) {
-                PresentationUtils.setLoading(false, dialog)
-                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
-                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
-                        getData()
-                    }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    PresentationUtils.shownoInternetDialog(dialogg)
+                if (PresentationUtils.isNetworkAvailable(requireContext())) {
+                    PresentationUtils.showError(
+                        getString(R.string.categories_tidak_ditemukan), requireContext()
+                    )
                 }
             }
         }
@@ -146,34 +125,16 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
             }
             if (loadState.refresh is LoadState.Error) {
                 PresentationUtils.setLoading(false, dialog)
-                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
-                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
-                        getData()
-                    }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    PresentationUtils.shownoInternetDialog(dialogg)
-                } else {
-                    PresentationUtils.showError("Product tidak ditemukan", requireContext())
-                }
-            }
-
-            if (loadState.append is LoadState.Error) {
-                PresentationUtils.setLoading(false, dialog)
-                if (!PresentationUtils.isNetworkAvailable(requireContext())) {
-                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
-                        getData()
-                    }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
-                        dialog.cancel()
-                    }
-                    PresentationUtils.shownoInternetDialog(dialogg)
+                if (PresentationUtils.isNetworkAvailable(requireContext())) {
+                    PresentationUtils.showError(
+                        getString(R.string.product_tidak_ditemukan), requireContext()
+                    )
                 }
 
+
             }
+
+
         }
 
     }
@@ -226,12 +187,15 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
     }
 
     private fun setBtnScroll() {
-        binding.btnLihatShoppingList.setOnClickListener {
-            binding.scrollView.smoothScrollTo(0, 0)
+        binding.apply {
+            btnLihatShoppingList.setOnClickListener {
+                scrollView.smoothScrollTo(0, 0)
+            }
+            btnProdukRekomendasi.setOnClickListener {
+                scrollView.smoothScrollTo(0, 4750)
+            }
         }
-        binding.btnProdukRekomendasi.setOnClickListener {
-            binding.scrollView.smoothScrollTo(0, 4750)
-        }
+
     }
 
     override fun onCategoryClicked(position: Int) {
