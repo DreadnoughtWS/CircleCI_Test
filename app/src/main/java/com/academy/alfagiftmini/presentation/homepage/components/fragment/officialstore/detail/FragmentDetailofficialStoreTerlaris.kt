@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.detail
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class FragmentDetailofficialStoreTerlaris : Fragment() {
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private var data: OfficialStoreDomainItemModel? = null
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -32,9 +34,14 @@ class FragmentDetailofficialStoreTerlaris : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelandData()
         setAdapter()
         getData()
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
     }
 
     private fun getData() {
@@ -52,8 +59,14 @@ class FragmentDetailofficialStoreTerlaris : Fragment() {
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListTerlaris.adapter = adapter
+        binding.apply {
+            rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListTerlaris.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData
+        )
+
     }
 
     private fun setViewModelandData() {
