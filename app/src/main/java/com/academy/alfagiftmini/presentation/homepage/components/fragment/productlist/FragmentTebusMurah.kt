@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentTebusMurahBinding
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListTebusMurahAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
@@ -38,6 +39,16 @@ class FragmentTebusMurah : Fragment() {
         lifecycleScope.launch {
             productListViewModel.getProductListTebusMurah().collect {
                 tebusMurahAdapter.updateDaata(it)
+                if (it.isEmpty()) {
+                    val dialogg = PresentationUtils.noInternetDialog(requireContext())
+                    dialogg.setPositiveButton(getString(R.string.retry)) { _, _ ->
+                        getData()
+                    }
+                    dialogg.setNegativeButton(getString(R.string.close)) { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                }
             }
         }
     }
