@@ -58,7 +58,7 @@ class FragmentProductCategoriesListTerlaris(
             rvProductListNamaProduk.adapter = adapter
         }
         PresentationUtils.adapterAddLoadStateListenerProduct(
-            adapter, dialog, requireContext(), ::setObserver
+            adapter, dialog, requireContext(), ::setObserver,false,requireActivity()
         )
 
 

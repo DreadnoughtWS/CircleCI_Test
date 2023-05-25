@@ -46,6 +46,7 @@ class FragmentTebusMurah : Fragment() {
                     }
                     dialogg.setNegativeButton(getString(R.string.close)) { dialog, _ ->
                         dialog.cancel()
+                        requireActivity().finish()
                     }
                     PresentationUtils.shownoInternetDialog(dialogg)
                 }

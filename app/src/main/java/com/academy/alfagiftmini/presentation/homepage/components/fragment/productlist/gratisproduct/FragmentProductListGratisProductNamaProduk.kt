@@ -65,7 +65,14 @@ class FragmentProductListGratisProductNamaProduk(private val tlGratisProduk: Tab
             rvProductListNamaProduk.layoutManager = GridLayoutManager(requireActivity(), 2)
             rvProductListNamaProduk.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext(),::getData)
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter,
+            dialog,
+            requireContext(),
+            ::getData,
+            true,
+            requireActivity()
+        )
 
     }
 

@@ -52,7 +52,7 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private fun getData(order: String = "asc") {
         lifecycleScope.launch {
             viewModel.getProductSearchProductOrder(
-                dataName, order, "product_name",type
+                dataName, order, "product_name", type
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -65,7 +65,9 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
             rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
             rvProductListPromosi.adapter = adapter
         }
-        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData, false, requireActivity()
+        )
 
 
     }
@@ -73,7 +75,8 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
-        (requireActivity() as ProductListSearchProdukActivity).getTab().addOnTabSelectedListener(this)
+        (requireActivity() as ProductListSearchProdukActivity).getTab()
+            .addOnTabSelectedListener(this)
         type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 
