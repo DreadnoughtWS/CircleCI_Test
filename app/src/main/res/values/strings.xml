@@ -129,4 +129,8 @@
 5. Update informasi terkait member dan menukarkan point dengan mudah\n
 6. Mengetahui lokasi Alfamart terdekat di sekitarmu</string>
     <string name="e_mail">E-mail</string>
+    <string name="close">CLOSE</string>
+    <string name="retry">RETRY</string>
+    <string name="product_tidak_ditemukan">Product tidak ditemukan</string>
+    <string name="categories_tidak_ditemukan">Categories tidak ditemukan</string>
 </resources>

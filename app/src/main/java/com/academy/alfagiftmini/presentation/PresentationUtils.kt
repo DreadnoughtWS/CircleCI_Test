@@ -125,38 +125,11 @@ object PresentationUtils {
     fun formatter(n: Int): String =
         DecimalFormat("Rp #,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
 
-    fun adapterAddLoadStateListenerProductt(
-        adapter: ProductListGratisProductPagingAdapter, dialog: Dialog, context: Context
-    ) {
-        adapter.addLoadStateListener { loadState ->
-            if (loadState.refresh is LoadState.Loading) {
-                setLoading(true, dialog)
-            } else {
-                setLoading(false, dialog)
-            }
-            if (loadState.refresh is LoadState.Error) {
-                setLoading(false, dialog)
-                if (!isNetworkAvailable(context)) {
-                    showError("Tidak ada koneksi internet", context)
-                } else {
-                    showError("Product tidak ditemukan", context)
-                }
-            }
-
-            if (loadState.append is LoadState.Error) {
-                setLoading(false, dialog)
-                if (!isNetworkAvailable(context)) showError(
-                    "Tidak ada koneksi internet", context
-                )
-            }
-        }
-    }
-
     fun adapterAddLoadStateListenerProduct(
         adapter: ProductListGratisProductPagingAdapter,
         dialog: Dialog,
         context: Context,
-        function: ()->Unit
+        function: () -> Unit
     ) {
         adapter.addLoadStateListener { loadState ->
             if (loadState.refresh is LoadState.Loading) {
@@ -168,15 +141,15 @@ object PresentationUtils {
                 setLoading(false, dialog)
                 if (!isNetworkAvailable(context)) {
                     val dialogg = noInternetDialog(context)
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                    dialogg.setPositiveButton(context.getString(R.string.retry)) { _, _ ->
                         function()
                     }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                    dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
                         dialog.cancel()
                     }
                     shownoInternetDialog(dialogg)
                 } else {
-                    showError("Product tidak ditemukan", context)
+                    showError(context.getString(R.string.product_tidak_ditemukan), context)
                 }
             }
 
@@ -184,10 +157,10 @@ object PresentationUtils {
                 setLoading(false, dialog)
                 if (!isNetworkAvailable(context)) {
                     val dialogg = noInternetDialog(context)
-                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                    dialogg.setPositiveButton(context.getString(R.string.retry)) { _, _ ->
                         function()
                     }
-                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                    dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
                         dialog.cancel()
                     }
                     shownoInternetDialog(dialogg)
