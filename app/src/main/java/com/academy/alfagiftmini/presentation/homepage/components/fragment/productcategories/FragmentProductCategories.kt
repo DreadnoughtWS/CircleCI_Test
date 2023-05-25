@@ -10,19 +10,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.databinding.FragmentProductCategoriesBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories.ProductCategoriesActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productcategories.CategoriesAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentBeranda
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentProductCategories(private val viewModel: ProductCategoriesViewModel) : Fragment(),
+class FragmentProductCategories() : Fragment(),
     CategoriesAdapter.setOnItemClicked {
     private lateinit var binding: FragmentProductCategoriesBinding
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var viewModel: ProductCategoriesViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (requireActivity() as MainActivity).getViewModelProductCategories()
         setRvCategories()
         setObserver()
     }

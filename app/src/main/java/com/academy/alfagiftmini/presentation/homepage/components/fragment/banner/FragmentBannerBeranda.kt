@@ -10,16 +10,19 @@ import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.databinding.FragmentBannerBerandaBinding
 import com.academy.alfagiftmini.domain.banner.model.BannerDomainModel
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.banner.AllBannerListActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.banner.BannerBerandaSliderAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.BannerListViewModel
+import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentBeranda
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentBannerBeranda(private var viewModel: BannerListViewModel) : Fragment() {
+class FragmentBannerBeranda() : Fragment() {
     private lateinit var binding: FragmentBannerBerandaBinding
     private lateinit var adapter: BannerBerandaSliderAdapter
+    private lateinit var viewModel: BannerListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +35,7 @@ class FragmentBannerBeranda(private var viewModel: BannerListViewModel) : Fragme
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (requireActivity() as MainActivity).getBannerListsViewModel()
         if (PresentationUtils.isNetworkAvailable(requireContext())){
 //            yesConnection()
             getLiveData()

@@ -38,10 +38,10 @@ class FragmentBeranda() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewModel()
-        setFragment(binding.flBannerSlider.id, FragmentBannerBeranda(bannerViewModel))
-        setFragment(binding.flProductCategories.id, FragmentProductCategories(viewModel))
-        setFragment(binding.flOfficialStore.id, FragmentOfficialStore(officialStoreViewModel))
-        setFragment(binding.flProductListPenawaranTerbaik.id, FragmentPenawaranTerbaik(productListViewModel))
+        setFragment(binding.flBannerSlider.id, FragmentBannerBeranda())
+        setFragment(binding.flProductCategories.id, FragmentProductCategories())
+        setFragment(binding.flOfficialStore.id, FragmentOfficialStore())
+        setFragment(binding.flProductListPenawaranTerbaik.id, FragmentPenawaranTerbaik())
         setToolbar()
         setBtnSearch()
     }
@@ -95,4 +95,16 @@ class FragmentBeranda() : Fragment() {
     }
 
 
+    fun provideProductCategoryViewModel(): ProductCategoriesViewModel {
+        return viewModel
+    }
+    fun provideOfficialStoreViewModel(): OfficialStoreViewModel {
+        return officialStoreViewModel
+    }
+    fun provideBannerViewModel(): BannerListViewModel {
+        return bannerViewModel
+    }
+    fun provideProductListViewModel(): ProductListViewModel {
+        return productListViewModel
+    }
 }

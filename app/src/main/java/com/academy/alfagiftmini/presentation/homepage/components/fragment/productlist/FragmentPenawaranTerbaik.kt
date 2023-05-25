@@ -16,12 +16,14 @@ import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPenawaranTerbaikActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
+import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentBeranda
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class FragmentPenawaranTerbaik(private val viewModel: ProductListViewModel) : Fragment() {
+class FragmentPenawaranTerbaik() : Fragment() {
     private lateinit var binding: FragmentPenawaranTerbaikBinding
     private lateinit var adapter: ProductListGratisProductPagingAdapter
+    private lateinit var viewModel: ProductListViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -31,6 +33,7 @@ class FragmentPenawaranTerbaik(private val viewModel: ProductListViewModel) : Fr
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (requireActivity() as MainActivity).getViewModelProductList()
         setAdapter()
         getData()
         setBtn()
