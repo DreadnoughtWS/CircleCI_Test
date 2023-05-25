@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.categoryproduct
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductCategoryListBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
-import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productcategories.FragmentProductCategoriesDetail
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentHargaSpecial
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.flow.collectLatest
@@ -23,13 +22,19 @@ import kotlinx.coroutines.launch
 class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductListViewModel, private val subCategory: String, private val category: String): Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductCategoryListBinding
     private lateinit var adapter: ProductListGratisProductPagingAdapter
-    var isClicked = true
+    private var isClicked = true
+    private lateinit var dialog: Dialog
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setTab()
         setRv()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
     }
 
     private fun setTab() {
@@ -54,6 +59,7 @@ class FragmentProductCategoriesListNamaProduk (private val viewModel: ProductLis
             adapter = ProductListGratisProductPagingAdapter()
             rvProductListNamaProduk.adapter = adapter
         }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
     }
 
     override fun onCreateView(
