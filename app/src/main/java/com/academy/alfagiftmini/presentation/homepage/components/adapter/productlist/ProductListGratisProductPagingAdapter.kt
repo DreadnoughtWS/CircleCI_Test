@@ -48,6 +48,7 @@ class ProductListGratisProductPagingAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: ProductListPromotionProductDomainModel) {
+
             with(binding) {
 
                 tvNamaProduct.text = data.productName
@@ -79,7 +80,7 @@ class ProductListGratisProductPagingAdapter :
 
         }
 
-        private fun openProductDetail(data: ProductListPromotionProductDomainModel){
+        private fun openProductDetail(data: ProductListPromotionProductDomainModel) {
             val intent = Intent(itemView.context, ProductDetailActivity::class.java)
             intent.putExtra(PresentationUtils.PRODUCT_ID, data.productId)
             itemView.context.startActivity(intent)

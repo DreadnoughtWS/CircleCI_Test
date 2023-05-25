@@ -1,22 +1,16 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.officialstore.detail
 
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentDetailofficialStorePromosiBinding
-import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductPromosiBinding
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
-import com.academy.alfagiftmini.domain.produklist.model.ProductListPromotionProductDomainModel
-import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -51,7 +45,6 @@ class FragmentDetailofficialStorePromosi : Fragment() {
 
 
     private fun getDataFromApi() {
-        println("TEST")
         lifecycleScope.launch {
             data?.let {
                 viewModel.getDetailOfficialStorePromosiProduct(officialStoreId = it.id).collectLatest {

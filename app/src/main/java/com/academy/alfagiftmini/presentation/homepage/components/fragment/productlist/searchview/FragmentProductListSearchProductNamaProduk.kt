@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,8 +24,10 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private lateinit var binding: FragmentProductListSearchProductNamaProdukBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
-    var dataName: String = ""
+    private var dataName: String = ""
+    var type: String = ""
     private var isClicked = true
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -36,15 +39,20 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelandData()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
     }
 
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
+    }
+
     private fun getData(order: String = "asc") {
         lifecycleScope.launch {
             viewModel.getProductSearchProductOrder(
-                dataName, order, "product_name"
+                dataName, order, "product_name",type
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -53,14 +61,20 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListPromosi.adapter = adapter
+        binding.apply {
+            rvProductListPromosi.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListPromosi.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
+
+
     }
 
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
         (requireActivity() as ProductListSearchProdukActivity).getTab().addOnTabSelectedListener(this)
+        type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {}
@@ -92,5 +106,8 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
         }
     }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dialog.dismiss()
+    }
 }

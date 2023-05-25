@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.paket
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,13 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductTerlarisBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListPaketTerlarisBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPaketActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -21,6 +18,7 @@ import kotlinx.coroutines.launch
 
 
 class FragmentProductListPaketTerlaris : Fragment() {
+    private lateinit var dialog: Dialog
     private lateinit var binding: FragmentProductListPaketTerlarisBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
@@ -34,9 +32,14 @@ class FragmentProductListPaketTerlaris : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgressbar()
         setViewModel()
         setAdapter()
         getData()
+    }
+
+    private fun setProgressbar() {
+        dialog = PresentationUtils.loadingAlertDialog(requireActivity())
     }
 
     private fun getData() {
@@ -53,8 +56,11 @@ class FragmentProductListPaketTerlaris : Fragment() {
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListTerlaris.adapter = adapter
+        binding.apply {
+            rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListTerlaris.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
     }
 
     private fun setViewModel() {

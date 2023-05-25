@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.ActivityProductListSearchProdukBinding
+import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.factory.PresentationFactory
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListPreviewProductNameAdapter
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.riwayatpencarian.RiwayatPencarianAdapter
@@ -28,11 +29,13 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAdapter.SetOnRiwayatClickListener {
+class ProductListSearchProdukActivity : AppCompatActivity(),
+    RiwayatPencarianAdapter.SetOnRiwayatClickListener {
     private lateinit var binding: ActivityProductListSearchProdukBinding
     private lateinit var adapter: ProductListPreviewProductNameAdapter
     private lateinit var riwayatAdapter: RiwayatPencarianAdapter
     private var dataName: String = ""
+    private var type: String = ""
 
     @Inject
     lateinit var presentationFactory: PresentationFactory
@@ -60,7 +63,11 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
     private fun setInitialView() {
         setRvRiwayatPencarian()
         setRiwayatObserver()
-        setFragment(binding.containerFragmentRvListKategori.id, FragmentProductCategorySearchView(), FragmentProductCategorySearchView::class.java.simpleName)
+        setFragment(
+            binding.containerFragmentRvListKategori.id,
+            FragmentProductCategorySearchView(),
+            FragmentProductCategorySearchView::class.java.simpleName
+        )
     }
 
     private fun setRiwayatObserver() {
@@ -71,7 +78,9 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
 
     private fun setRvRiwayatPencarian() {
         binding.apply {
-            rvRiwayatPencarian.layoutManager = LinearLayoutManager(this@ProductListSearchProdukActivity, LinearLayoutManager.HORIZONTAL, false)
+            rvRiwayatPencarian.layoutManager = LinearLayoutManager(
+                this@ProductListSearchProdukActivity, LinearLayoutManager.HORIZONTAL, false
+            )
             riwayatAdapter = RiwayatPencarianAdapter(mutableListOf())
             rvRiwayatPencarian.adapter = riwayatAdapter
             riwayatAdapter.listener = this@ProductListSearchProdukActivity
@@ -112,18 +121,20 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
 
     private fun initTabs() {
 
-        binding.apply{
+        binding.apply {
             tlSearchView.addTab(tlSearchView.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.promosi)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.promosi)
             })
 
             tlSearchView.addTab(tlSearchView.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                with(customView){
-                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.nama_product)
+                with(customView) {
+                    this?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                        getString(R.string.nama_product)
                     this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                         ?.setImageResource(R.drawable.arrow_up_tab_item)
                     this?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -134,7 +145,8 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
             tlSearchView.addTab(tlSearchView.newTab().setCustomView(
                 R.layout.tab_item
             ).apply {
-                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text = getString(R.string.terlaris)
+                customView?.findViewById<TextView>(R.id.tv_tab_item)?.text =
+                    getString(R.string.terlaris)
             })
 
             tlSearchView.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -143,7 +155,7 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
 
                 override fun onTabUnselected(tab: TabLayout.Tab) {
                     if (tab.position == 1) {
-                        with(tab.customView){
+                        with(tab.customView) {
                             this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                                 ?.setImageResource(R.drawable.arrow_up_tab_item)
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -168,12 +180,13 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
     private fun setAdapter() {
         adapter = ProductListPreviewProductNameAdapter().apply {
             setOnItemClickListener { _, data ->
-                performSearch(data)
+                performSearch(data, PresentationUtils.TYPE_PRODUCT_NAME)
             }
         }
         binding.apply {
             rvPreviewNameProduct.adapter = adapter
-            rvPreviewNameProduct.layoutManager = LinearLayoutManager(this@ProductListSearchProdukActivity)
+            rvPreviewNameProduct.layoutManager =
+                LinearLayoutManager(this@ProductListSearchProdukActivity)
         }
 
     }
@@ -191,7 +204,10 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
             }
             tietSearchView.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    performSearch(binding.tietSearchView.text.toString())
+                    performSearch(
+                        binding.tietSearchView.text.toString(),
+                        PresentationUtils.TYPE_PRODUCT_NAME_LIKE
+                    )
                 }
                 true
             }
@@ -199,9 +215,10 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
 
     }
 
-    private fun performSearch(name: String) {
+    private fun performSearch(name: String, type: String) {
         if (name.isNotBlank()) riwayatPencarianViewModel.insertRiwayatPencarian(name)
         dataName = name
+        this.type = type
         clearTabs()
         setupFragment(0)
         initTabs()
@@ -250,6 +267,10 @@ class ProductListSearchProdukActivity : AppCompatActivity(), RiwayatPencarianAda
 
     fun getCategoryProductViewModel(): ProductCategoriesViewModel {
         return kategoriPilihanViewModel
+    }
+
+    fun getDataType(): String {
+        return type
     }
 
     override fun onItemClicked(text: String) {

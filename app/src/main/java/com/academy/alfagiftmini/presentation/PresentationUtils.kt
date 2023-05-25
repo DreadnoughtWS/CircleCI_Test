@@ -8,7 +8,9 @@ import android.net.NetworkCapabilities
 import android.text.Html
 import android.text.Spanned
 import androidx.core.content.res.ResourcesCompat
+import androidx.paging.LoadState
 import com.academy.alfagiftmini.R
+import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -19,6 +21,9 @@ object PresentationUtils {
     const val COUNTRY_PHONE_CODE = "+62"
 
     const val SP_ACC_TOKEN = "acc_token"
+
+    const val TYPE_PRODUCT_NAME = "TYPE_PRODUCT_NAME"
+    const val TYPE_PRODUCT_NAME_LIKE = "TYPE_PRODUCT_NAME_LIKE"
 
     const val SHOW_LIHAT_SEMUA = true
     const val HIDE_LIHAT_SEMUA = false
@@ -44,8 +49,8 @@ object PresentationUtils {
     const val TYPE_PENAWARAN_TERBAIK = 12
     const val TYPE_PENAWARAN_TERBAIK_PROMOSI = 13
 
-    const val INTENT_DATA ="data"
-    const val PRODUCT_ID ="PRODUCT_ID"
+    const val INTENT_DATA = "data"
+    const val PRODUCT_ID = "PRODUCT_ID"
 
     const val PRODUCT_ID_PROMO = "PRODUCT_ID_PROMO"
     const val BANNER_DATA = "BANNER_DATA"
@@ -119,4 +124,66 @@ object PresentationUtils {
 
     fun formatter(n: Int): String =
         DecimalFormat("Rp #,###", DecimalFormatSymbols(Locale.GERMANY)).format(n)
+
+    fun adapterAddLoadStateListenerProduct(
+        adapter: ProductListGratisProductPagingAdapter,
+        dialog: Dialog,
+        context: Context,
+        function: () -> Unit
+    ) {
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.refresh is LoadState.Loading) {
+                setLoading(true, dialog)
+            } else {
+                setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) {
+                    val dialogg = noInternetDialog(context)
+                    dialogg.setPositiveButton(context.getString(R.string.retry)) { _, _ ->
+                        function()
+                    }
+                    dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    shownoInternetDialog(dialogg)
+                } else {
+                    showError(context.getString(R.string.product_tidak_ditemukan), context)
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!isNetworkAvailable(context)) {
+                    val dialogg = noInternetDialog(context)
+                    dialogg.setPositiveButton(context.getString(R.string.retry)) { _, _ ->
+                        function()
+                    }
+                    dialogg.setNegativeButton(context.getString(R.string.close)) { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    shownoInternetDialog(dialogg)
+                }
+            }
+        }
+    }
+
+    fun noInternetDialog(context: Context): androidx.appcompat.app.AlertDialog.Builder {
+        val dialogBuilder =
+            androidx.appcompat.app.AlertDialog.Builder(context, R.style.NetworkAlertDialogTheme)
+        dialogBuilder.setMessage("No Network Connection detected, Please make sure you have a stable connection to the internet, then press retry to refresh the app and try again.")
+        dialogBuilder.setCancelable(false)
+        dialogBuilder.setIcon(R.drawable.no_internet_logo)
+        dialogBuilder.setTitle("No Network Connection")
+        return dialogBuilder
+
+
+    }
+
+    fun shownoInternetDialog(dialogBuilder: androidx.appcompat.app.AlertDialog.Builder) {
+        val connectionAlertDialog = dialogBuilder.create()
+        connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
+        connectionAlertDialog.show()
+    }
 }

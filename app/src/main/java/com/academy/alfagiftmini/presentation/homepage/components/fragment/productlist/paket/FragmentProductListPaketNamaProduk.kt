@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.paket
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,14 +10,10 @@ import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
-import com.academy.alfagiftmini.databinding.FragmentProductListGratisProductNamaProdukBinding
 import com.academy.alfagiftmini.databinding.FragmentProductListPaketNamaProdukBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListGratisProductActivity
-import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListPaketActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.productlist.ProductListGratisProductPagingAdapter
-import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentGratisProduk
 import com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.FragmentPaket
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductListViewModel
 import com.google.android.material.tabs.TabLayout
@@ -28,6 +25,8 @@ class FragmentProductListPaketNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private var isClicked = true
+    private lateinit var dialog: Dialog
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -38,9 +37,14 @@ class FragmentProductListPaketNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelandTab()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireActivity())
     }
 
     private fun getData(order: String = "asc") {
@@ -55,8 +59,11 @@ class FragmentProductListPaketNamaProduk : Fragment(), TabLayout.OnTabSelectedLi
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListNamaProduk.adapter = adapter
+        binding.apply {
+            rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListNamaProduk.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter, dialog, requireContext(),::getData)
     }
 
     private fun setViewModelandTab() {

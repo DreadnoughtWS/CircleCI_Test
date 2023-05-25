@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.searchview
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentProductListSearchProductTerlarisBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
 import com.academy.alfagiftmini.presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity
@@ -21,7 +21,9 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
     private lateinit var binding: FragmentProductListSearchProductTerlarisBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
-    var dataName: String = ""
+    private var dataName: String = ""
+    var type: String = ""
+    private lateinit var dialog: Dialog
 
 
     override fun onCreateView(
@@ -34,15 +36,20 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelandData()
         setAdapter()
         getData()
     }
 
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
+    }
+
     private fun getData() {
         lifecycleScope.launch {
             viewModel.getProductSearchProductOrder(
-                dataName, PresentationUtils.ORDER_BY_DESCENDING, "sales_quantity"
+                dataName, PresentationUtils.ORDER_BY_DESCENDING, "sales_quantity", type
             ).collectLatest {
                 adapter.submitData(it)
             }
@@ -51,13 +58,25 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListTerlaris.adapter = adapter
+        binding.apply {
+            rvProductListTerlaris.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListTerlaris.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(
+            adapter, dialog, requireContext(), ::getData
+        )
+
     }
 
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
+        type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        dialog.dismiss()
     }
 
 }

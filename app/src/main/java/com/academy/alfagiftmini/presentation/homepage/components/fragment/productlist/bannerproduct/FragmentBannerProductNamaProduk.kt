@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.fragment.productlist.bannerproduct
 
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private var isClicked = true
     private var bannerId: Int = -1
+    private lateinit var dialog: Dialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -33,10 +35,15 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setProgress()
         setViewModelTabandBannerId()
         setAdapter()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
 
+    }
+
+    private fun setProgress() {
+        dialog = PresentationUtils.loadingAlertDialog(requireContext())
     }
 
     private fun getData(order: String = "asc") {
@@ -54,8 +61,11 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
 
     private fun setAdapter() {
         adapter = ProductListGratisProductPagingAdapter()
-        binding.rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.rvProductListNamaProduk.adapter = adapter
+        binding.apply {
+            rvProductListNamaProduk.layoutManager = GridLayoutManager(requireContext(), 2)
+            rvProductListNamaProduk.adapter = adapter
+        }
+        PresentationUtils.adapterAddLoadStateListenerProduct(adapter,dialog,requireContext(),::getData)
     }
 
     private fun setViewModelTabandBannerId() {
@@ -77,7 +87,6 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item_blue)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_DESCENDING)
 
             } else {
@@ -87,7 +96,6 @@ class FragmentBannerProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListe
                     ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
                     ?.setImageResource(R.drawable.arrow_down_tab_item)
-                setAdapter()
                 getData(PresentationUtils.ORDER_BY_ASCENDING)
 
             }

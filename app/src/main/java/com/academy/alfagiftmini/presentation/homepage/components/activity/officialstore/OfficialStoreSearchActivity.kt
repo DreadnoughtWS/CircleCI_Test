@@ -26,7 +26,7 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOfficialStoreSearchBinding
     private lateinit var adapter: AllOfficialStorePagingAdapter
     private lateinit var dialog: Dialog
-
+    private var nameOfficialStore:String = ""
     @Inject
     lateinit var presentationFactory: PresentationFactory
     private val viewModel: OfficialStoreViewModel by viewModels {
@@ -52,6 +52,7 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
     private fun setDataSearch() {
         binding.tietSearchView.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                nameOfficialStore = binding.tietSearchView.text.toString()
                 performSearch(binding.tietSearchView.text.toString())
             }
             true
@@ -82,6 +83,35 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
                 setLoading(true, dialog)
             } else {
                 setLoading(false, dialog)
+            }
+            if (loadState.refresh is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(this)) {
+                    val dialogg = PresentationUtils.noInternetDialog(this)
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        performSearch(nameOfficialStore)
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                } else {
+                    PresentationUtils.showError("Product tidak ditemukan", this)
+                }
+            }
+
+            if (loadState.append is LoadState.Error) {
+                setLoading(false, dialog)
+                if (!PresentationUtils.isNetworkAvailable(this)) {
+                    val dialogg = PresentationUtils.noInternetDialog(this)
+                    dialogg.setPositiveButton("RETRY") { _, _ ->
+                        performSearch(nameOfficialStore)
+                    }
+                    dialogg.setNegativeButton("CLOSE") { dialog, _ ->
+                        dialog.cancel()
+                    }
+                    PresentationUtils.shownoInternetDialog(dialogg)
+                }
             }
         }
         binding.apply {

@@ -148,7 +148,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
                 etEmailEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
                 etEmailEditLayout.setBoxStrokeWidthResource(R.dimen.boxStrokeRadii)
                 return true
-            } else if (!check?.user?.email.isNullOrEmpty()) {
+            } else if (!check?.user?.email.isNullOrBlank()) {
                 tvEmailErr.visibility = View.VISIBLE
                 tvEmailErr.text = context.getString(R.string.email_exists)
                 etEmailEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
