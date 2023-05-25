@@ -42,6 +42,7 @@
         app:tabIndicatorColor="@color/teal"
         app:tabIndicatorGravity="stretch"
         app:tabMode="scrollable"
+        android:background="@color/appBackground"
         app:tabSelectedTextColor="@color/white"
         app:textAllCaps="false" />
 
