@@ -11,15 +11,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentOfficialStoreBinding
 import com.academy.alfagiftmini.presentation.PresentationUtils
+import com.academy.alfagiftmini.presentation.homepage.activity.MainActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.AllOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.activity.officialstore.DetailOfficialStoreActivity
 import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.OfficialStore14Adapter
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.OfficialStoreViewModel
 import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.ProductCategoriesViewModel
+import com.academy.alfagiftmini.presentation.homepage.fragment.FragmentBeranda
 
-class FragmentOfficialStore(private val viewModel: OfficialStoreViewModel) : Fragment() {
+class FragmentOfficialStore() : Fragment() {
     private lateinit var binding: FragmentOfficialStoreBinding
     private lateinit var adapter: OfficialStore14Adapter
+    private lateinit var viewModel: OfficialStoreViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -30,6 +33,7 @@ class FragmentOfficialStore(private val viewModel: OfficialStoreViewModel) : Fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = (requireActivity() as MainActivity).getViewModelOfficialStore()
         setAdapter()
         setObserver()
         getDataFromApi()
@@ -51,10 +55,7 @@ class FragmentOfficialStore(private val viewModel: OfficialStoreViewModel) : Fra
         viewModel.officialStore14.observe(requireActivity()) {
             if (it.isNullOrEmpty()) {
                 setLihatSemua(PresentationUtils.HIDE_LIHAT_SEMUA)
-                if (PresentationUtils.isNetworkAvailable(requireContext())) {
-                    Toast.makeText(requireContext(), "Tidak ada internet", Toast.LENGTH_SHORT)
-                        .show()
-                }
+
                 return@observe
             }
             if (it.size < 14) {
