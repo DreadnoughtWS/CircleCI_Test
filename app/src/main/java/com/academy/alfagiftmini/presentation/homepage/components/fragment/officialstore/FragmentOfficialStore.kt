@@ -23,7 +23,6 @@ class FragmentOfficialStore() : Fragment() {
     private lateinit var binding: FragmentOfficialStoreBinding
     private lateinit var adapter: OfficialStore14Adapter
     private lateinit var viewModel: OfficialStoreViewModel
-    private val context = requireContext()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -56,10 +55,7 @@ class FragmentOfficialStore() : Fragment() {
         viewModel.officialStore14.observe(requireActivity()) {
             if (it.isNullOrEmpty()) {
                 setLihatSemua(PresentationUtils.HIDE_LIHAT_SEMUA)
-                if (PresentationUtils.isNetworkAvailable(context)) {
-                    Toast.makeText(context, "Tidak ada internet", Toast.LENGTH_SHORT)
-                        .show()
-                }
+
                 return@observe
             }
             if (it.size < 14) {
