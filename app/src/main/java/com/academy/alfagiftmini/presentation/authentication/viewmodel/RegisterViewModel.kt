@@ -91,7 +91,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
         fragmentInputUserDataBinding.apply {
-            return if (fName.isEmpty()) {
+            return if (fName.isBlank()) {
                 tvFnErr.visibility = View.VISIBLE
                 tvFnErr.text = context.getString(R.string.empty_field_error)
                 etFirstNameEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
@@ -113,7 +113,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
         fragmentInputUserDataBinding.apply {
-            return if (lName.isEmpty()) {
+            return if (lName.isBlank()) {
                 tvLnErr.visibility = View.VISIBLE
                 tvLnErr.text = context.getString(R.string.empty_field_error)
                 etLastNameEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
@@ -136,7 +136,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         check: RegisterResponseDomain?
     ): Boolean {
         fragmentInputUserDataBinding.apply {
-            if (email.isEmpty()) {
+            if (email.isBlank()) {
                 tvEmailErr.visibility = View.VISIBLE
                 tvEmailErr.text = context.getString(R.string.empty_field_error)
                 etEmailEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
@@ -170,7 +170,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
         fragmentInputUserDataBinding.apply {
-            return if (pass.isEmpty()) {
+            return if (pass.isBlank()) {
                 tvPassErr.visibility = View.VISIBLE
                 tvPassErr.text = context.getString(R.string.empty_field_error)
                 etPasswordEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
@@ -198,7 +198,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
         fragmentInputUserDataBinding: FragmentInputUserDataBinding
     ): Boolean {
         fragmentInputUserDataBinding.apply {
-            if (passConfirm.isEmpty()) {
+            if (passConfirm.isBlank()) {
                 tvPassConfirmErr.visibility = View.VISIBLE
                 tvPassConfirmErr.text = context.getString(R.string.empty_field_error)
                 etPasswordConfirmEditLayout.setBoxStrokeColorStateList(context.getColorStateList(R.color.edit_text_err))
