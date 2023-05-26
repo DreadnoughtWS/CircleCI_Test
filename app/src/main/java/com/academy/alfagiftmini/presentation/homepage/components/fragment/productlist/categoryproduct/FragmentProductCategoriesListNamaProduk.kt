@@ -34,7 +34,29 @@ class FragmentProductCategoriesListNamaProduk(
         setProgress()
         setTab()
         setRv()
+        setLifeCycleOwner()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
+        setHide()
+    }
+
+    private fun setHide() {
+        viewModel.itemCount.observe(requireActivity()){
+            if (it == 0) {
+                binding.clProdukGaAda.visibility = View.VISIBLE
+                binding.rvProductListNamaProduk.visibility = View.GONE
+            } else {
+                binding.clProdukGaAda.visibility = View.GONE
+                binding.rvProductListNamaProduk.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun setLifeCycleOwner() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { combinedLoadStates ->
+                viewModel.setItemAmount(adapter.itemCount)
+            }
+        }
     }
 
     private fun setProgress() {
@@ -59,9 +81,16 @@ class FragmentProductCategoriesListNamaProduk(
                 PresentationUtils.TYPE_BUKAN_PROMOSI
             ).collectLatest {
                 adapter.submitData(lifecycle, it)
+                setItemCount()
             }
         }
 
+    }
+
+    private fun setItemCount() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            viewModel.setItemAmount(adapter.itemCount)
+        }
     }
 
     private fun setRv() {

@@ -20,7 +20,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSelectedListener {
+class FragmentProductListSearchProductNamaProduk(private val tlGratisProduk: TabLayout) :
+    Fragment(), TabLayout.OnTabSelectedListener {
     private lateinit var binding: FragmentProductListSearchProductNamaProdukBinding
     private lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
@@ -42,7 +43,33 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
         setProgress()
         setViewModelandData()
         setAdapter()
+        setLifeCycleOwner()
         getData(PresentationUtils.ORDER_BY_ASCENDING)
+        setHide()
+    }
+
+    private fun setLifeCycleOwner() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { combinedLoadStates ->
+                viewModel.setItemAmount(adapter.itemCount)
+            }
+        }
+    }
+
+    private fun setHide() {
+        viewModel.itemCount.observe(requireActivity()) {
+            if (it == 0) {
+                binding.apply {
+                    clProdukGaAda.visibility = View.VISIBLE
+                    rvProductListPromosi.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    clProdukGaAda.visibility = View.GONE
+                    rvProductListPromosi.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     private fun setProgress() {
@@ -55,7 +82,14 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
                 dataName, order, "product_name", type
             ).collectLatest {
                 adapter.submitData(it)
+                setItemCount()
             }
+        }
+    }
+
+    private fun setItemCount() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            viewModel.setItemAmount(adapter.itemCount)
         }
     }
 
@@ -75,8 +109,7 @@ class FragmentProductListSearchProductNamaProduk : Fragment(), TabLayout.OnTabSe
     private fun setViewModelandData() {
         viewModel = (requireActivity() as ProductListSearchProdukActivity).getProductViewModel()
         dataName = (requireActivity() as ProductListSearchProdukActivity).getNameSearch()
-        (requireActivity() as ProductListSearchProdukActivity).getTab()
-            .addOnTabSelectedListener(this)
+        tlGratisProduk.addOnTabSelectedListener(this)
         type = (requireActivity() as ProductListSearchProdukActivity).getDataType()
     }
 

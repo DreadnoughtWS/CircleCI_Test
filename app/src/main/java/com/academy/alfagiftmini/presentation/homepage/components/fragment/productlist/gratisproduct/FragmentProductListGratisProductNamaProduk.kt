@@ -94,7 +94,6 @@ class FragmentProductListGratisProductNamaProduk(private val tlGratisProduk: Tab
             if (isClicked) {
                 isClicked = false
                 order = "desc"
-                println("TAB DESC")
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                     ?.setImageResource(R.drawable.arrow_up_tab_item)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)
@@ -105,7 +104,6 @@ class FragmentProductListGratisProductNamaProduk(private val tlGratisProduk: Tab
             } else {
                 isClicked = true
                 order = "asc"
-                println("TAB ASC")
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_up)
                     ?.setImageResource(R.drawable.arrow_up_tab_item_blue)
                 tab.customView?.findViewById<ImageView>(R.id.iv_tab_item_down)

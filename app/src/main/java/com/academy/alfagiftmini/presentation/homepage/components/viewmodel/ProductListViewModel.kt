@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -64,5 +65,12 @@ class ProductListViewModel @Inject constructor(private val useCase: ProductListD
 
     suspend fun getProductByCategory(scope: CoroutineScope, subCategory: String, category: String, sort: String, order: String, type: String): Flow<PagingData<ProductListPromotionProductDomainModel>> {
         return useCase.getProductByCategory(scope, subCategory, category, sort, order, type)
+    }
+
+    private val _itemCount = MutableLiveData<Int>()
+    val itemCount: MutableLiveData<Int> = _itemCount
+
+    fun setItemAmount(itemCount: Int) {
+        _itemCount.value = itemCount
     }
 }

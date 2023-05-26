@@ -37,18 +37,52 @@ class FragmentProductListSearchProductPromosi : Fragment() {
         setProgress()
         setViewModelandData()
         setAdapter()
+        setLifeCycleOwner()
         getDataFromApi()
+        setHide()
+    }
+
+    private fun setHide() {
+        viewModel.itemCount.observe(requireActivity()){
+            if(it == 0){
+                binding.apply {
+                    clProdukGaAda.visibility = View.VISIBLE
+                    rvProductListPromosi.visibility = View.GONE
+                }
+            }else{
+                binding.apply {
+                    clProdukGaAda.visibility = View.GONE
+                    rvProductListPromosi.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setLifeCycleOwner() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { combinedLoadStates ->
+                viewModel.setItemAmount(adapter.itemCount)
+            }
+        }
+    }
+
+    private fun setItemCount() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            viewModel.setItemAmount(adapter.itemCount)
+        }
     }
 
     private fun setProgress() {
         dialog = PresentationUtils.loadingAlertDialog(requireContext())
     }
 
+
     private fun getDataFromApi() {
         lifecycleScope.launch {
             viewModel.getProductSearchProduct(name = dataName, type).collectLatest {
                 PresentationUtils.setLoading(false, dialog)
                 adapter.submitData(it)
+                setItemCount()
             }
         }
     }
