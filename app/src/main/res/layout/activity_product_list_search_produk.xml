@@ -9,6 +9,7 @@
     android:paddingVertical="5dp"
     tools:context=".presentation.homepage.components.activity.productlist.ProductListSearchProdukActivity">
 
+
     <LinearLayout
         android:id="@+id/ll_search_view"
         android:layout_width="match_parent"

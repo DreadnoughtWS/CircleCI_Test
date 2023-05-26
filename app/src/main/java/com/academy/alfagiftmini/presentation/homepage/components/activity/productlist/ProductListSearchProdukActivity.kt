@@ -104,7 +104,7 @@ class ProductListSearchProdukActivity : AppCompatActivity(),
                 FragmentProductListSearchProductPromosi()
             }
             1 -> {
-                FragmentProductListSearchProductNamaProduk()
+                FragmentProductListSearchProductNamaProduk(binding.tlSearchView)
             }
             else -> {
                 FragmentProductListSearchProductTerlaris()
@@ -134,13 +134,18 @@ class ProductListSearchProdukActivity : AppCompatActivity(),
             ).apply {
                 with(customView) {
                     this?.findViewById<TextView>(R.id.tv_tab_item)?.text =
-                        getString(R.string.nama_product)
+                        getString(
+                            R.string.nama_product
+                        )
                     this?.findViewById<ImageView>(R.id.iv_tab_item_up)
                         ?.setImageResource(R.drawable.arrow_up_tab_item)
                     this?.findViewById<ImageView>(R.id.iv_tab_item_down)
                         ?.setImageResource(R.drawable.arrow_down_tab_item)
                 }
+
             })
+
+
 
             tlSearchView.addTab(tlSearchView.newTab().setCustomView(
                 R.layout.tab_item
@@ -161,6 +166,8 @@ class ProductListSearchProdukActivity : AppCompatActivity(),
                             this?.findViewById<ImageView>(R.id.iv_tab_item_down)
                                 ?.setImageResource(R.drawable.arrow_down_tab_item)
                         }
+
+
                     }
                 }
 
@@ -220,9 +227,12 @@ class ProductListSearchProdukActivity : AppCompatActivity(),
         dataName = name
         this.type = type
         clearTabs()
-        setupFragment(0)
         initTabs()
-        setLayoutVisibility(kategori = false, previewName = false, tab = true)
+        setupFragment(0)
+        setLayoutVisibility(
+            kategori = false, previewName = false, tab = true
+        )
+
     }
 
     private fun clearTabs() {
@@ -237,7 +247,9 @@ class ProductListSearchProdukActivity : AppCompatActivity(),
         }
     }
 
-    private fun setLayoutVisibility(kategori: Boolean, previewName: Boolean, tab: Boolean) {
+    private fun setLayoutVisibility(
+        kategori: Boolean, previewName: Boolean, tab: Boolean
+    ) {
         binding.apply {
             clKategoriPilihan.visibility = if (kategori) View.VISIBLE else View.GONE
             clPreviewNameProduct.visibility = if (previewName) View.VISIBLE else View.GONE

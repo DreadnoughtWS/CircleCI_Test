@@ -98,7 +98,7 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
             rvCategoryBelanja.adapter = categoriesAdapter
         }
         PresentationUtils.adapterAddLoadStateListenerProduct(
-            rekomendasiListAdapter, dialog, requireContext(), ::getData,true, requireActivity()
+            rekomendasiListAdapter, dialog, requireContext(), ::getData, true, requireActivity()
         )
 
 
@@ -116,25 +116,6 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
                     )
                 }
             }
-        }
-        shoppingListAdapter.addLoadStateListener { loadState ->
-            if (loadState.refresh is LoadState.Loading) {
-                PresentationUtils.setLoading(true, dialog)
-            } else {
-                PresentationUtils.setLoading(false, dialog)
-            }
-            if (loadState.refresh is LoadState.Error) {
-                PresentationUtils.setLoading(false, dialog)
-                if (PresentationUtils.isNetworkAvailable(requireContext())) {
-                    PresentationUtils.showError(
-                        getString(R.string.product_tidak_ditemukan), requireContext()
-                    )
-                }
-
-
-            }
-
-
         }
 
     }

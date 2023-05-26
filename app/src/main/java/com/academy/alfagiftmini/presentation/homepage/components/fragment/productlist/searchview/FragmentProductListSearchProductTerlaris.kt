@@ -39,7 +39,39 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
         setProgress()
         setViewModelandData()
         setAdapter()
+        setLifeCycleOwner()
         getData()
+        setHide()
+    }
+
+    private fun setLifeCycleOwner() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { combinedLoadStates ->
+                viewModel.setItemAmount(adapter.itemCount)
+            }
+        }
+    }
+
+    private fun setHide() {
+        viewModel.itemCount.observe(requireActivity()) {
+            if (it == 0) {
+                binding.apply {
+                    clProdukGaAda.visibility = View.VISIBLE
+                    rvProductListTerlaris.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    clProdukGaAda.visibility = View.GONE
+                    rvProductListTerlaris.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setItemCount() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            viewModel.setItemAmount(adapter.itemCount)
+        }
     }
 
     private fun setProgress() {
@@ -52,6 +84,7 @@ class FragmentProductListSearchProductTerlaris : Fragment() {
                 dataName, PresentationUtils.ORDER_BY_DESCENDING, "sales_quantity", type
             ).collectLatest {
                 adapter.submitData(it)
+                setItemCount()
             }
         }
     }
