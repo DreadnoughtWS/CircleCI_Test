@@ -1,5 +1,6 @@
 package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +9,6 @@ import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,6 +40,12 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
         }
     }
 
+    val _itemCount = MutableLiveData<Int>()
+    val itemCount: LiveData<Int> = _itemCount
+
+    fun setItemCount(itemCount:Int){
+        _itemCount.value = itemCount
+    }
 
 
 }
