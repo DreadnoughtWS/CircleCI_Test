@@ -55,12 +55,6 @@ class ProductListGratisProductNamaProductPagingSource(
                     for (data in responseProduct) {
                         for (kode in data.kodePromo ?: listOf()) {
                             if (kode == PresentationUtils.TYPE_GRATIS_PRODUK) {
-                                println(
-                                    """
-                                    *********************************
-                                    $data
-                                """.trimIndent()
-                                )
                                 dataKodePromo.add(data)
                             } else {
                                 continue
