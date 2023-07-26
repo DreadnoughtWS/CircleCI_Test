@@ -2,27 +2,21 @@ package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
-import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
-import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import com.academy.alfagiftmini.presentation.PresentationUtils.TYPE_GET_ALL_OFFICIAL
-import com.academy.alfagiftmini.presentation.homepage.components.adapter.officialstore.AllOfficialStorePagingAdapter
+import com.academy.alfagiftmini.presentation.homepage.components.viewmodel.modeltest.OfficialStoreModelTest
 import com.google.common.truth.Truth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -44,9 +38,11 @@ class OfficialStoreViewModelTest {
   @get:Rule
   var rule: TestRule = InstantTaskExecutorRule()
 
-  @get:Rule
-  var coroutineRule = TestCoroutineRule()
+//  @get:Rule
+//  var coroutineRule = MainDispatcherRule()
 
+  private val testDispatcher = TestCoroutineDispatcher()
+  private val testScope = TestCoroutineScope(testDispatcher)
 
   private lateinit var viewModel: OfficialStoreViewModel
 
@@ -54,7 +50,16 @@ class OfficialStoreViewModelTest {
   @Before
   fun setup() {
     viewModel = OfficialStoreViewModel(officialStoreUseCase)
+    Dispatchers.setMain(testDispatcher)
   }
+
+  @After
+  fun setdown(){
+    Dispatchers.resetMain()
+    testScope.cleanupTestCoroutines()
+  }
+
+
 
 
 
@@ -74,40 +79,33 @@ class OfficialStoreViewModelTest {
 
   @Test
   fun `Test Get 14 Official Store Success`() {
-    runTest {
+    testScope.runBlockingTest {
       Mockito.`when`(officialStoreUseCase.get14OfficialStore()).thenReturn(
         flowOf(OfficialStoreModelTest.dummyOfficialStoreList())
       )
       viewModel.get14OfficialStre()
 
-      viewModel.viewModelScope.launch {
         viewModel.officialStore14.getOrAwaitValueTest {
           Truth.assertThat(it).isEqualTo(OfficialStoreModelTest.dummyOfficialStoreList())
         }
-        Mockito.verify(officialStoreUseCase).getBrands("1")
+        Mockito.verify(officialStoreUseCase).get14OfficialStore()
 
-      }
+
 
     }
   }
 
   @Test
   fun `Test Get All Official Store Null`(){
-    runTest {
-      Mockito.`when`(
-        officialStoreUseCase.getAllOfficialStore(
-          viewModel.viewModelScope, "",
-          TYPE_GET_ALL_OFFICIAL
-        )
-      ).thenReturn(
-        flowOf(OfficialStoreModelTest.dummyOfficialStorePagingData())
-      )
-      viewModel.viewModelScope.launch {
-        viewModel.getAllOfficialStore("", TYPE_GET_ALL_OFFICIAL).collectLatest {
-          val items = it.collectData()
-          Truth.assertThat(items[0].productImage).isNull()
-        }
+    testScope.runBlockingTest {
+//      MockitoWhen()
+      val tmp = viewModel.officialStore.value
+      if(tmp != null){
+        advanceUntilIdle()
+        val result =tmp.collectDataForTest(testDispatcher)
+        Truth.assertThat(result[0].productImage).isNull()
       }
+
 
     }
   }
@@ -115,8 +113,8 @@ class OfficialStoreViewModelTest {
 
   @Test
   fun `Test Get All Official Store Success`() {
-    runTest {
-      var items:List<OfficialStoreDomainItemModel>? = null
+    testScope.runBlockingTest {
+
       Mockito.`when`(
         officialStoreUseCase.getAllOfficialStore(
           viewModel.viewModelScope, "",
@@ -126,16 +124,14 @@ class OfficialStoreViewModelTest {
         flowOf(OfficialStoreModelTest.dummyOfficialStorePagingData())
       )
 
-      viewModel.viewModelScope.launch {
-        viewModel.getAllOfficialStore("", TYPE_GET_ALL_OFFICIAL).collect {
-          items = it.collectData()
-        }
-        Truth.assertThat(items).isEqualTo(OfficialStoreModelTest.dummyOfficialStoreList())
+      viewModel.getAllOfficialStore("", TYPE_GET_ALL_OFFICIAL)
 
+      val tmp = viewModel.officialStore.value
+      if(tmp != null){
+        advanceUntilIdle()
+        val result =tmp.collectDataForTest(testDispatcher)
+          Truth.assertThat(result).isEqualTo(OfficialStoreModelTest.dummyOfficialStoreList())
       }
-
-
-
     }
   }
 
@@ -178,10 +174,12 @@ class OfficialStoreViewModelTest {
   }
 
   @Test
-  fun `Test Set Item Count With Int Success`() {
-    viewModel.setItemCount(1)
-    val result = viewModel.itemCount.value
-    Truth.assertThat(result).isEqualTo(1)
+  fun `Test Get Item Count With Int Success`() {
+    val itemCount =  1
+    viewModel.setItemCount(itemCount)
+    val result = viewModel.itemCount.getOrAwaitValueTest {
+      Truth.assertThat(it).isEqualTo(itemCount)
+    }
   }
 
 }

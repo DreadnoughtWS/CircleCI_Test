@@ -19,8 +19,8 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
     private var _14OfficialStore = MutableLiveData<List<OfficialStoreDomainItemModel>>()
     val officialStore14: MutableLiveData<List<OfficialStoreDomainItemModel>> = _14OfficialStore
 
-    private var _officialStore = MutableLiveData<Flow<PagingData<OfficialStoreDomainItemModel>>>()
-    val officialStore: MutableLiveData<Flow<PagingData<OfficialStoreDomainItemModel>>> = _officialStore
+    private var _officialStore = MutableLiveData<PagingData<OfficialStoreDomainItemModel>>()
+    val officialStore: MutableLiveData<PagingData<OfficialStoreDomainItemModel>> = _officialStore
 
     var _brand = MutableLiveData<List<OfficialStorebrandsDomainItemModel>>()
     val brand: MutableLiveData<List<OfficialStorebrandsDomainItemModel>> = _brand
@@ -36,7 +36,11 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
     suspend fun getAllOfficialStore(
         name: String, type: String
     ): Flow<PagingData<OfficialStoreDomainItemModel>> {
-        officialStore.postValue(useCase.getAllOfficialStore(viewModelScope, name, type))
+        viewModelScope.launch {
+            useCase.getAllOfficialStore(viewModelScope, name, type).collectLatest {
+                _officialStore.postValue(it)
+            }
+        }
         return useCase.getAllOfficialStore(viewModelScope, name, type)
     }
 
