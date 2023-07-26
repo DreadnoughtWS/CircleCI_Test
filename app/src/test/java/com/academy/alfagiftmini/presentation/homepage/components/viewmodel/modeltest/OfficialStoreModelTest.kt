@@ -1,4 +1,4 @@
-package com.academy.alfagiftmini.presentation.homepage.components.viewmodel
+package com.academy.alfagiftmini.presentation.homepage.components.viewmodel.modeltest
 
 import androidx.paging.PagingData
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
