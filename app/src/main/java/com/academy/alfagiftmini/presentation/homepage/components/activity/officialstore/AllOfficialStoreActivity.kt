@@ -66,9 +66,9 @@ class AllOfficialStoreActivity : AppCompatActivity() {
             }
         }
         binding.apply {
-            rvDetailOfficialStore.layoutManager =
+            rvAllOfficialStore.layoutManager =
                 GridLayoutManager(this@AllOfficialStoreActivity, 3)
-            rvDetailOfficialStore.adapter = adapter
+            rvAllOfficialStore.adapter = adapter
         }
 
         adapter.addLoadStateListener { loadState ->

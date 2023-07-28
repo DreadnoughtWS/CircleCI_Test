@@ -26,14 +26,14 @@ class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
     private val viewModel: ProductListViewModel by viewModels {
         presentationFactory
     }
-
+    var positionTab:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as MyApplication).appComponent.productListPenawaranTerbaikActivityInject(this)
         binding = ActivityProductListPenawaranTerbaikBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initTabs()
-        setupFragment(0)
+        setupFragment(positionTab)
         setBtn()
     }
 
@@ -108,7 +108,7 @@ class ProductListPenawaranTerbaikActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupFragment(position: Int) {
+     fun setupFragment(position: Int) {
         val fragment = when (position) {
             0 -> {
                 FragmentPenawaranTerbaikPromosi()

@@ -8,6 +8,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.text.Html
 import android.text.Spanned
+import androidx.annotation.IntDef
 import androidx.core.content.res.ResourcesCompat
 import androidx.paging.LoadState
 import com.academy.alfagiftmini.R

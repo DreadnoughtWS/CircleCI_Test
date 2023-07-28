@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
@@ -99,11 +100,14 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getUserData() {
         binding.apply {
-            if (!loginViewModel.checkUserInputValidity(this@LoginActivity, binding, LoginDataDomain(etEmail.text.toString(), etPassword.text.toString()))) { return }
+            if (!loginViewModel.checkUserInputValidity(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString()))) { return }
             lifecycleScope.launch {
                 loginViewModel.login(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString())).collectLatest {
                     if (it.error.isNotBlank()) {
-                        loginViewModel.setBackendError(binding, it.error)
+                        val msg = it.error.trim('\"')
+                        binding.apply {
+                            if (msg.contains("password", ignoreCase = true)) setError(tvPassErr, msg) else setError(tvEmailErr, msg)
+                        }
                         return@collectLatest
                     }
                     if (it.accessToken.isBlank()) return@collectLatest
@@ -112,6 +116,15 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun setError(textView: TextView, msg: String) {
+        textView.visibility = View.VISIBLE
+        textView.text = msg
+    }
+
+    private fun setGone(textView: TextView) {
+        textView.visibility = View.INVISIBLE
     }
 
     private fun toMainActivity() {
