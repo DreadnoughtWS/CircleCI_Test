@@ -40,7 +40,7 @@ class FragmentPenawaranTerbaik() : Fragment() {
     }
 
     private fun setBtn() {
-        binding.tvLihatSemuaOfficial.setOnClickListener {
+        binding.tvLihatSemuaPenawaranTerbaik.setOnClickListener {
             startActivity(Intent(requireContext(), ProductListPenawaranTerbaikActivity::class.java))
         }
     }

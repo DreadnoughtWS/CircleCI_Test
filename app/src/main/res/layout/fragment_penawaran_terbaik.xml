@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cl_container_penawaran_terbaik"
     tools:context=".presentation.homepage.components.fragment.productlist.FragmentPenawaranTerbaik">
 
     <TextView
+        android:id="@+id/tv_penawaran_terbaik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -20,7 +22,7 @@
 
 
     <TextView
-        android:id="@+id/tv_lihat_semua_official"
+        android:id="@+id/tv_lihat_semua_penawaran_terbaik"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -41,7 +43,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_lihat_semua_official"
+        app:layout_constraintTop_toBottomOf="@id/tv_lihat_semua_penawaran_terbaik"
         tools:listitem="@layout/item_product_gratis_product" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

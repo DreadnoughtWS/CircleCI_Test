@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class FragmentDetailofficialStorePromosi : Fragment() {
     private lateinit var binding: FragmentDetailofficialStorePromosiBinding
-    private lateinit var viewModel: ProductListViewModel
+    lateinit var viewModel: ProductListViewModel
     private lateinit var adapter: ProductListGratisProductPagingAdapter
     private lateinit var dialog: Dialog
     private var data: OfficialStoreDomainItemModel? = null
