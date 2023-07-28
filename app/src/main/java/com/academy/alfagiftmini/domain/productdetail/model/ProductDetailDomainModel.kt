@@ -1,7 +1,7 @@
 package com.academy.alfagiftmini.domain.productdetail.model
 
 
-data class ProductDetailDomainModel(
+data class  ProductDetailDomainModel(
     val productId: Long,
     val productSku: String,
     val productName: String,

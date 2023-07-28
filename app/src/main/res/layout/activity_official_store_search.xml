@@ -49,6 +49,32 @@
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_produk_ga_ada"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
+            android:src="@drawable/produk_ga_ada"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Maaf, kami tidak dapat menemukan apa yang anda cari"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_official_store_search"
@@ -56,6 +82,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="30dp"
         android:paddingBottom="80dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/official_store_seach_toolbar"

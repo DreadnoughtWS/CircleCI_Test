@@ -38,7 +38,7 @@ data class OfficialStoreDetailDataModel(
                 image = model.image ?: "",
                 brands = model.brands?.map {
                     OfficialStorebrandsDomainItemModel(
-                        brandId = it.brandId, brandName = it.brandName, brandImage = it.brandImage
+                        brandId = it.brandId ?: 0, brandName = it.brandName ?: "", brandImage = it.brandImage?:""
                     )
                 } ?: listOf(),
                 totalFollowers = model.totalFollowers ?: 0,

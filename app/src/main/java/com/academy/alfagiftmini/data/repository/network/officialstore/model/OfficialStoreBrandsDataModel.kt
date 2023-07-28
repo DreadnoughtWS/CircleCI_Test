@@ -17,9 +17,9 @@ data class OfficialStoreBrandsDataModel(
 
         private fun transform(model: OfficialStoreBrandsDataModel):OfficialStorebrandsDomainItemModel{
             return OfficialStorebrandsDomainItemModel(
-                brandId = model.brandId,
-                brandName = model.brandName,
-                brandImage = model.brandImage
+                brandId = model.brandId ?: 0,
+                brandName = model.brandName ?: "",
+                brandImage = model.brandImage?: ""
             )
         }
     }

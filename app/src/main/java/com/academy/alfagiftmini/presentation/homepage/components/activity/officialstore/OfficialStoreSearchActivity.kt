@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +27,8 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOfficialStoreSearchBinding
     private lateinit var adapter: AllOfficialStorePagingAdapter
     private lateinit var dialog: Dialog
-    private var nameOfficialStore:String = ""
+    private var nameOfficialStore: String = ""
+
     @Inject
     lateinit var presentationFactory: PresentationFactory
     private val viewModel: OfficialStoreViewModel by viewModels {
@@ -42,7 +44,33 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
         setHideToolbar()
         setToolbar()
         setAdapter()
+        setLifecycle()
         setDataSearch()
+        setHide()
+    }
+
+    private fun setHide() {
+        viewModel.itemCount.observe(this) {
+            if (it == 0) {
+                binding.apply {
+                    clProdukGaAda.visibility = View.VISIBLE
+                    rvOfficialStoreSearch.visibility = View.GONE
+                }
+            } else {
+                binding.apply {
+                    clProdukGaAda.visibility = View.GONE
+                    rvOfficialStoreSearch.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun setLifecycle() {
+        this.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { combinedLoadStates ->
+                viewModel.setItemCount(adapter.itemCount)
+            }
+        }
     }
 
     private fun setDialog() {
@@ -64,7 +92,14 @@ class OfficialStoreSearchActivity : AppCompatActivity() {
             viewModel.getAllOfficialStore(name, PresentationUtils.TYPE_SEARCH_OFFICIAL)
                 .collectLatest {
                     adapter.submitData(it)
+                    setItemCount()
                 }
+        }
+    }
+
+    private fun setItemCount() {
+        adapter.addLoadStateListener { combinedLoadStates ->
+            viewModel.setItemCount(adapter.itemCount)
         }
     }
 
