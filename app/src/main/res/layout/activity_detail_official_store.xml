@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/cl_container_detail_official_store"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -35,6 +36,7 @@
             tools:context=".presentation.homepage.activity.officialstore.AllOfficialStoreActivity">
 
             <View
+                android:id="@+id/view_bg_red_detail_official_store"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/shape_detail_official_store"
@@ -93,6 +95,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_title_official_store" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ikuti_detail_official_store"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="10dp"
