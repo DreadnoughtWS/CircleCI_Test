@@ -18,7 +18,7 @@ class ProductListPenawaranTerbaikActivityTest{
 
   @Test
   fun testCheckVisibility(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_all_penawaran_terbaik).checkIsDisplayed()
     onViewId(R.id.al_productlist_penawaran_terbaik).checkIsDisplayed()
     onViewId(R.id.iv_banner_image).checkIsDisplayed()
@@ -29,32 +29,32 @@ class ProductListPenawaranTerbaikActivityTest{
   }
 
   @Test fun testCheckText(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.tv_toolbar).checkText("Penawaran Terbaik")
   }
 
   @Test fun testRVPromosi(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.rv_product_list_promosi).checkIsDisplayed()
   }
 
   @Test fun testRVNamaProduct(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     scenario.scenario.onActivity {
       it.positionTab=1
       it.setupFragment(it.positionTab)
     }
-    Thread.sleep(4000)
+    Thread.sleep(5000)
     onViewId(R.id.rv_product_list_nama_produk).checkIsDisplayed()
   }
 
   @Test fun testRVTerlaris(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     scenario.scenario.onActivity {
       it.positionTab=2
       it.setupFragment(it.positionTab)
     }
-    Thread.sleep(4000)
+    Thread.sleep(5000)
     onViewId(R.id.rv_product_list_terlaris).checkIsDisplayed()
   }
 

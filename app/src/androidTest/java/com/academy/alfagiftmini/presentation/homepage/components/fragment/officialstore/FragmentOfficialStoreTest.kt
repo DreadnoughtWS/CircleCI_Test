@@ -34,19 +34,20 @@ class FragmentOfficialStoreTest{
 
 
   @Test fun testCheckText(){
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.tv_official_store)).check(matches(withText("Official Store")))
     Espresso.onView(withId(R.id.tv_lihat_semua_official_beranda)).check(matches(withText("Lihat Semua")))
   }
 
   @Test fun testTvLihatSemuaOnClick(){
-    Thread.sleep(4000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.tv_lihat_semua_official_beranda)).perform(scrollTo()).perform(click())
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.cl_container_all_official_store)).check(matches(isDisplayed()))
   }
 
   @Test fun testCheckVisibility(){
-    Thread.sleep(3000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_official_store).perform(scrollTo()).checkIsDisplayed()
     onViewId(R.id.cl_container_official_store).checkIsDisplayed()
     onViewId(R.id.tv_official_store).checkIsDisplayed()
@@ -55,14 +56,14 @@ class FragmentOfficialStoreTest{
   }
 
   @Test fun testCheckRecycleView(){
-    Thread.sleep(3000)
+    Thread.sleep(5000)
     onViewId(R.id.rv_offical_store_beranda).perform(scrollTo()).perform(
       RecyclerViewActions.actionOnItemAtPosition<OfficialStore14Adapter.OfficialStoreViewHolder>(
         0, click()
       )
     )
 
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_detail_official_store).checkIsDisplayed()
   }
 

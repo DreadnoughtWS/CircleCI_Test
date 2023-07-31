@@ -21,7 +21,7 @@ class FragmentPenawaranTerbaikTest{
   val scenario = activityScenarioRule<MainActivity>()
 
   @Test fun testCheckVisibility(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_penawaran_terbaik).checkIsDisplayed()
     onViewId(R.id.tv_penawaran_terbaik).checkIsDisplayed()
     onViewId(R.id.tv_lihat_semua_penawaran_terbaik).checkIsDisplayed()
@@ -29,26 +29,26 @@ class FragmentPenawaranTerbaikTest{
   }
 
   @Test fun testCheckText(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.tv_penawaran_terbaik).checkText("Penawaran Terbaik")
     onViewId(R.id.tv_lihat_semua_penawaran_terbaik).checkText("Lihat Semua")
   }
 
   @Test fun testCheckRecycleView(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.rv_penawaran_terbaik).perform(
       RecyclerViewActions.actionOnItemAtPosition<ProductListGratisProductPagingAdapter.ProductListViewHolder>(
         0, click()
       )
     )
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_detail_product_list).checkIsDisplayed()
   }
 
   @Test fun testLihatSemuaOnClick(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.tv_lihat_semua_penawaran_terbaik).perform(click())
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.cl_container_all_penawaran_terbaik).checkIsDisplayed()
   }
 

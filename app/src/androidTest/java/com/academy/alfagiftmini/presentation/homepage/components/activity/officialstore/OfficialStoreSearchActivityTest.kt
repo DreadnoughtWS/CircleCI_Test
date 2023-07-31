@@ -40,6 +40,7 @@ class OfficialStoreSearchActivityTest {
 
   @Test
   fun testCheckVisibility() {
+    Thread.sleep(5000)
     onViewId(R.id.official_store_seach_toolbar).checkIsDisplayed()
     onViewId(R.id.til_search_view).checkIsDisplayed()
     onViewId(R.id.tiet_search_view).checkIsDisplayed()
@@ -47,6 +48,7 @@ class OfficialStoreSearchActivityTest {
 
   @Test
   fun testSearchSuccess() {
+    Thread.sleep(5000)
     onViewId(R.id.tiet_search_view).perform(typeText("Alfa"))
     onViewId(R.id.tiet_search_view).perform(ViewActions.pressImeActionButton())
     Thread.sleep(2000)
@@ -63,6 +65,7 @@ class OfficialStoreSearchActivityTest {
 
   @Test
   fun testSearchEmpty() {
+    Thread.sleep(5000)
     onViewId(R.id.tiet_search_view).perform(typeText("test test"))
     onViewId(R.id.tiet_search_view).perform(ViewActions.pressImeActionButton())
     Thread.sleep(2000)
@@ -71,6 +74,7 @@ class OfficialStoreSearchActivityTest {
 
   @Test
   fun testCheckTest() {
+    Thread.sleep(5000)
     onViewId(R.id.tv_promo_toolbar_title).checkText("Cari Official Store")
   }
 }
