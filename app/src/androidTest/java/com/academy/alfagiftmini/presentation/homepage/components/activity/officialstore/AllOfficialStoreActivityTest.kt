@@ -44,30 +44,30 @@ class AllOfficialStoreActivityTest {
 
   @Test
   fun testCheckDisplay() {
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.cl_container_all_official_store)).check(matches(isDisplayed()))
     Espresso.onView(withId(R.id.tv_official_store_popular)).check(matches(isDisplayed()))
   }
 
   @Test
   fun testCheckText() {
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.tv_official_store_popular))
       .check(matches(withText("Official Store Popular")))
   }
 
   @Test
   fun testRecycleView() {
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.rv_all_official_store)).check(matches(isDisplayed()))
   }
 
   @Test
   fun testClickItemRecycleView() {
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.rv_all_official_store))
       .perform(RecyclerViewActions.actionOnItemAtPosition<AllOfficialStorePagingAdapter.DetailOfficialStoreViewHolder>(0, click()));
-    Thread.sleep(3000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.cl_container_detail_official_store)).check(matches(isDisplayed()))
   }
 

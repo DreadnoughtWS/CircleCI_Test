@@ -59,18 +59,19 @@ class DetailOfficialStoreActivityTest {
 
   @Test
   fun testCheckText() {
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     onViewId(R.id.tv_semua_produk).checkText("Semua Produk")
    onViewId(R.id.tv_brands_detail_official_store).checkText("Belanja berdasarkan brand")
   }
 
   @Test
   fun testCheckRecycleView() {
+    Thread.sleep(5000)
     scenario.scenario.onActivity {
       it.brandId = "&brandid=11588"
       it.getDataFromApi()
     }
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     Espresso.onView(withId(R.id.rv_brands_detail_official_store)).check(matches(isDisplayed()))
   }
 

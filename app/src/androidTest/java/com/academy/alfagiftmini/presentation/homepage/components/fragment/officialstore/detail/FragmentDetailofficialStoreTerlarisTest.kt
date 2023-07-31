@@ -31,12 +31,12 @@ class FragmentDetailofficialStoreTerlarisTest{
 
   @Test
   fun testVisibility(){
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     scenario.scenario.onActivity {
       it.positionTab = 2
       it.setupFragment(it.positionTab)
     }
-    Thread.sleep(2000)
+    Thread.sleep(5000)
     EspressoIdlingResource.onViewId(id.cl_container_detail_official_store_terlaris).checkIsDisplayed()
     EspressoIdlingResource.onViewId(id.rv_product_list_terlaris).checkIsDisplayed()
   }
