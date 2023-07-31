@@ -8,7 +8,24 @@ on:
   workflow_dispatch:
 
 jobs:
+
+  unit-test:
+    runs-on: ubuntu-latest,
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Run test
+        uses: ./gradlew test
+
+      - name: Upload the report
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_test_report
+          path: app/build/reports/tests/testDebugUnitTest/
+
   build:
+    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
