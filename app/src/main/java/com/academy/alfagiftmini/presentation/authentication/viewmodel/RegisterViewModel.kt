@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.viewmodel
 
 import android.content.Context
-import android.os.CountDownTimer
 import android.text.Editable
 import android.util.Log
 import android.view.View
@@ -9,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.academy.alfagiftmini.R
 import com.academy.alfagiftmini.databinding.FragmentInputUserDataBinding
 import com.academy.alfagiftmini.domain.register.RegisterDataDomain
@@ -21,7 +21,14 @@ import com.academy.alfagiftmini.presentation.PresentationUtils.SP_FIRST_NAME
 import com.academy.alfagiftmini.presentation.PresentationUtils.SP_LAST_NAME
 import com.academy.alfagiftmini.presentation.PresentationUtils.SP_PHONE
 import com.academy.alfagiftmini.presentation.PresentationUtils.SP_USER_ID
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -256,20 +263,35 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
     private val _finished: MutableLiveData<Boolean> = MutableLiveData(false)
     var timer: LiveData<Int> = _timer
     var finished: LiveData<Boolean> = _finished
-    fun otpCountdownTimer() {
-        _finished.value = false
-        object : CountDownTimer(301000, 1000) {
-            // Callback function, fired on regular interval
-            override fun onTick(millisUntilFinished: Long) {
-                val time = millisUntilFinished / 1000
-                _timer.value = time.toInt()
-            }
 
-            // Callback function, fired
-            // when the time is up
-            override fun onFinish() {
-                _finished.value = true
+    //    fun otpCountdownTimer() {
+//        Log.d("RegisterViewModel", "otpCountdownTimer() called")
+//        _finished.value = false
+//        val countDownTimer = object : CountDownTimer(301000, 1000) {
+//            // Callback function, fired on regular interval
+//            override fun onTick(millisUntilFinished: Long) {
+//                val time = millisUntilFinished / 1000
+//                _timer.value = time.toInt()
+//                Log.d("RegisterViewModel", "onTick() - timer value: ${_timer.value}")
+//            }
+//
+//            // Callback function, fired
+//            // when the time is up
+//            override fun onFinish() {
+//                _finished.value = true
+//                _timer.value = 0 // Reset the timer to 0
+//                Log.d("RegisterViewModel", "onFinish() - finished value: ${_finished.value}")
+//            }
+//        }
+//        countDownTimer.start()
+//    }
+    fun otpCountdownTimer() {
+        _finished.postValue(false)
+        for (i in 60 downTo 0) {
+            Thread.sleep(1000)
+            if (i == 0) {
+                _finished.postValue(true)
             }
-        }.start()
+        }
     }
 }
