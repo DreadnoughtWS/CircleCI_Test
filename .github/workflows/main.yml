@@ -41,6 +41,6 @@ jobs:
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
           api-level: 28
-          target: emulator-5556
+          target: default
           arch: x86_64
           script: ./gradlew connectedCheck
