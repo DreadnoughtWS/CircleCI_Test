@@ -33,15 +33,19 @@ class FragmentOfficialStore() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (requireActivity() as MainActivity).getViewModelOfficialStore()
+        setViewModel((requireActivity() as MainActivity).getViewModelOfficialStore())
         setAdapter()
         setObserver()
         getDataFromApi()
         setButtonLihatSemua()
     }
 
+    private fun setViewModel(viewmodelL:OfficialStoreViewModel) {
+        viewModel = viewmodelL
+    }
+
     private fun setButtonLihatSemua() {
-        binding.tvLihatSemuaOfficial.setOnClickListener {
+        binding.tvLihatSemuaOfficialBeranda.setOnClickListener {
             val intent = Intent(requireContext(), AllOfficialStoreActivity::class.java)
             startActivity(intent)
         }
@@ -71,9 +75,9 @@ class FragmentOfficialStore() : Fragment() {
 
     private fun setLihatSemua(banyakDataOfficialStore: Boolean) {
         if (banyakDataOfficialStore == PresentationUtils.HIDE_LIHAT_SEMUA) {
-            binding.tvLihatSemuaOfficial.visibility = View.INVISIBLE
+            binding.tvLihatSemuaOfficialBeranda.visibility = View.INVISIBLE
         } else {
-            binding.tvLihatSemuaOfficial.visibility = View.VISIBLE
+            binding.tvLihatSemuaOfficialBeranda.visibility = View.VISIBLE
         }
     }
 
@@ -87,11 +91,11 @@ class FragmentOfficialStore() : Fragment() {
         }
 
         binding.apply {
-            rvOfficalStore.setHasFixedSize(true)
-            rvOfficalStore.layoutManager = GridLayoutManager(
+            rvOfficalStoreBeranda.setHasFixedSize(true)
+            rvOfficalStoreBeranda.layoutManager = GridLayoutManager(
                 requireContext(), 2, GridLayoutManager.HORIZONTAL, false
             )
-            rvOfficalStore.adapter = adapter
+            rvOfficalStoreBeranda.adapter = adapter
         }
     }
 

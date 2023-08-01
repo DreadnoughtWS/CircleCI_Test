@@ -5,9 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/red2"
+    android:id="@+id/cl_splash_screen"
     tools:context=".presentation.homepage.activity.SplashActivity">
 
     <ImageView
+        android:id="@+id/iv_splash_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/splashc"

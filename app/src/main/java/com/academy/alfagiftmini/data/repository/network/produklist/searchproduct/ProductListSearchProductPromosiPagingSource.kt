@@ -22,7 +22,6 @@ class ProductListSearchProductPromosiPagingSource(
         return try {
 
             val responseProduct: List<ProductListDetailDataModel>
-            println("ENFAGROW")
 
             when (type) {
                 DataUtils.TYPE_PRODUCT_NAME -> {

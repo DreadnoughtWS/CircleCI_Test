@@ -9,6 +9,8 @@ import com.academy.alfagiftmini.domain.officialstore.OfficialStoreDomainUseCase
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStoreDomainItemModel
 import com.academy.alfagiftmini.domain.officialstore.model.OfficialStorebrandsDomainItemModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +19,10 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
     private var _14OfficialStore = MutableLiveData<List<OfficialStoreDomainItemModel>>()
     val officialStore14: MutableLiveData<List<OfficialStoreDomainItemModel>> = _14OfficialStore
 
-    private var _brand = MutableLiveData<List<OfficialStorebrandsDomainItemModel>>()
+    private var _officialStore = MutableLiveData<PagingData<OfficialStoreDomainItemModel>>()
+    val officialStore: MutableLiveData<PagingData<OfficialStoreDomainItemModel>> = _officialStore
+
+    var _brand = MutableLiveData<List<OfficialStorebrandsDomainItemModel>>()
     val brand: MutableLiveData<List<OfficialStorebrandsDomainItemModel>> = _brand
 
     fun get14OfficialStre() {
@@ -28,13 +33,20 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
         }
     }
 
-    suspend fun getAllOfficialStore(name:String,type:String): Flow<PagingData<OfficialStoreDomainItemModel>> {
-        return useCase.getAllOfficialStore(viewModelScope,name,type)
+    suspend fun getAllOfficialStore(
+        name: String, type: String
+    ): Flow<PagingData<OfficialStoreDomainItemModel>> {
+        viewModelScope.launch {
+            useCase.getAllOfficialStore(viewModelScope, name, type).collectLatest {
+                _officialStore.postValue(it)
+            }
+        }
+        return useCase.getAllOfficialStore(viewModelScope, name, type)
     }
 
-    fun getBrands(id:String){
+    fun getBrands(id: String) {
         viewModelScope.launch {
-            useCase.getBrands(id).collect{
+            useCase.getBrands(id).collect {
                 _brand.postValue(it)
             }
         }
@@ -43,7 +55,7 @@ class OfficialStoreViewModel @Inject constructor(private val useCase: OfficialSt
     val _itemCount = MutableLiveData<Int>()
     val itemCount: LiveData<Int> = _itemCount
 
-    fun setItemCount(itemCount:Int){
+    fun setItemCount(itemCount: Int) {
         _itemCount.value = itemCount
     }
 
