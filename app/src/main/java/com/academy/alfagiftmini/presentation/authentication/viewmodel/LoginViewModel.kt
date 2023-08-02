@@ -13,22 +13,14 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(private val useCase: LoginDomainUseCase) : ViewModel() {
-    fun checkUserInputValidity (user: LoginDataDomain): Boolean {
-        var isValidEmail = true
-        var isValidPass = true
+    fun checkUserInputValidity (user: LoginDataDomain): Pair<String, Boolean> {
         if (user.email.isBlank()) {
-                //setError(tvEmailErr, context.getString(R.string.empty_field_error))
-            isValidEmail = false
-        }else {
-        //setGone(tvEmailErr)
+            return Pair("email", false)
         }
         if (user.password.isBlank()) {
-            //setError(tvPassErr, context.getString(R.string.empty_field_error))
-            isValidPass = false
-        }else{
-        //setGone(tvPassErr)
+            return Pair("pass", false)
         }
-        return isValidEmail && isValidPass
+        return Pair("email pass", true)
     }
 
     fun login(user: LoginDataDomain): Flow<LoginResponseDomain> {
