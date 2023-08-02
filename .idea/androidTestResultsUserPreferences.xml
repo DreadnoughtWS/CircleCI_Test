@@ -516,9 +516,11 @@
             <AndroidTestResultsTableState>
               <option name="preferredColumnWidths">
                 <map>
+                  <entry key="127.0.0.1:5555" value="120" />
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
                   <entry key="emulator-5554" value="120" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
                   <entry key="samsung&#10; SM-N971N" value="120" />
                 </map>
               </option>
