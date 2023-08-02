@@ -3,7 +3,7 @@ pipeline {
 
     environment {
       ANDROID_HOME = 'D:\\AndroidSdk\\Android\\Sdk'
-      LOCATION_PROJECT = 'E:\\Jenkins_home\\workspace\\abc'
+      LOCATION_PROJECT = 'E:\\Jenkins_home\\workspace\\Mini Alfagift'
     }
     stages {
         stage('Clean Gradle Cache') {
