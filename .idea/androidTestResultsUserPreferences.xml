@@ -115,6 +115,20 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-1722796771">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="127.0.0.1:5555" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-1709507011">
           <value>
             <AndroidTestResultsTableState>
@@ -166,6 +180,8 @@
                 <map>
                   <entry key="Duration" value="90" />
                   <entry key="Tests" value="360" />
+                  <entry key="Xiaomi&#10; M2003J15SC" value="120" />
+                  <entry key="c101ce910408" value="120" />
                   <entry key="emulator-5554" value="120" />
                   <entry key="samsung&#10; SM-N971N" value="120" />
                 </map>
@@ -217,6 +233,38 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-773982274">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="Xiaomi&#10; M2003J15SC" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-772135232">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="127.0.0.1:5555" value="120" />
+                  <entry key="3709ec0c" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="Xiaomi" value="120" />
+                  <entry key="Xiaomi&#10; M2003J15SC" value="120" />
+                  <entry key="Xiaomi&#10; Mi 9T Pro" value="120" />
+                  <entry key="c101ce910408" value="120" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-650837393">
           <value>
             <AndroidTestResultsTableState>
@@ -261,6 +309,20 @@
             </AndroidTestResultsTableState>
           </value>
         </entry>
+        <entry key="-383031336">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="Xiaomi&#10; M2003J15SC" value="120" />
+                  <entry key="c101ce910408" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
         <entry key="-234330489">
           <value>
             <AndroidTestResultsTableState>
@@ -272,6 +334,22 @@
                   <entry key="emulator-5554" value="120" />
                   <entry key="samsung&#10; SM-M536B" value="120" />
                   <entry key="samsung&#10; SM-N971N" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="-224250875">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="127.0.0.1:5555" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="Xiaomi&#10; M2003J15SC" value="120" />
+                  <entry key="c101ce910408" value="120" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -356,6 +434,20 @@
                   <entry key="Tests" value="360" />
                   <entry key="emulator-5554" value="120" />
                   <entry key="samsung&#10; SM-N971N" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="291286104">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="127.0.0.1:5555" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>
@@ -456,6 +548,20 @@
                   <entry key="Tests" value="360" />
                   <entry key="emulator-5554" value="120" />
                   <entry key="samsung&#10; SM-N971N" value="120" />
+                </map>
+              </option>
+            </AndroidTestResultsTableState>
+          </value>
+        </entry>
+        <entry key="1222204060">
+          <value>
+            <AndroidTestResultsTableState>
+              <option name="preferredColumnWidths">
+                <map>
+                  <entry key="127.0.0.1:5555" value="120" />
+                  <entry key="Duration" value="90" />
+                  <entry key="Tests" value="360" />
+                  <entry key="samsung&#10; SM-G977N" value="120" />
                 </map>
               </option>
             </AndroidTestResultsTableState>

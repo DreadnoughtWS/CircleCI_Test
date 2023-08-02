@@ -3,6 +3,7 @@ package com.academy.alfagiftmini.presentation.authentication.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.lifecycleScope
 import com.academy.alfagiftmini.MyApplication
 import com.academy.alfagiftmini.R
@@ -100,7 +102,16 @@ class LoginActivity : AppCompatActivity() {
 
     private fun getUserData() {
         binding.apply {
-            if (!loginViewModel.checkUserInputValidity(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString()))) { return }
+            val test = loginViewModel.checkUserInputValidity(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString()))
+            if (!test.second) {
+                Log.d("TAG", test.toString())
+                tvEmailErr.visibility = if (test.first == "email") View.VISIBLE else View.INVISIBLE
+                tvPassErr.visibility = if (test.first == "pass") View.VISIBLE else View.INVISIBLE
+                return
+            }else {
+                tvEmailErr.visibility = View.INVISIBLE
+                tvPassErr.visibility = View.INVISIBLE
+            }
             lifecycleScope.launch {
                 loginViewModel.login(LoginDataDomain(etEmail.text.toString(), etPassword.text.toString())).collectLatest {
                     if (it.error.isNotBlank()) {
