@@ -1,0 +1,17 @@
+default_platform(:android)
+
+platform :android do
+
+  lane :runUnitTest do
+    gradle(task:"test")
+  end
+
+  lane :runClean do
+    gradle(task:"clean")
+  end
+
+  lane :runBuildApk do
+    gradle(task:"assembleDebug")
+  end
+
+end
