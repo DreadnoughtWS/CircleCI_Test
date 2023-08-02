@@ -1,0 +1,11 @@
+for_lane 'runUnitTest' do
+  package_name("com.academy.alfagiftmini")
+end
+
+for_lane 'runClean' do
+  package_name("com.academy.alfagiftmini")
+end
+
+for_lane 'runBuildApk' do
+  package_name("com.academy.alfagiftmini")
+end
