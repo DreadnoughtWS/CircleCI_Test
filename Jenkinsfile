@@ -34,14 +34,13 @@ pipeline {
             }
         }
 
-        stage('Compile & Build APK') {
+        stage('Upload to Firebase') {
             steps {
                 dir(env.LOCATION_PROJECT) {
                     bat 'fastlane distribute'
                 }
             }
         }
-
 
     }
 }
