@@ -14,4 +14,17 @@ platform :android do
     gradle(task:"assembleDebug")
   end
 
+  ######## FIREBASE DISTRIBUTION  ########
+    desc "Submit a new Google Test Build to Firebase App Distribution"
+    lane :distribute do
+            build_android_app(task:"clean assembleDebug")
+            # build_android_app is a built-in fastlane action.
+            release = firebase_app_distribution(
+                app: "1:494322602035:android:66a12a4f12882fc5b51346",
+                testers: "tester1@company.com",
+                service_credentials_file: "fastlane/firebase_credentials.json",
+                release_notes: "Lots of amazing new features to test out!"
+            )
+    end
+
 end

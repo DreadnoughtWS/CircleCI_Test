@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494322602035",
+    "project_id": "groupproject-63d60",
+    "storage_bucket": "groupproject-63d60.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494322602035:android:66a12a4f12882fc5b51346",
+        "android_client_info": {
+          "package_name": "com.academy.alfagiftmini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494322602035-u3tok2l67jfq5qolnh0s1hlbe0kefn8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0WUsnX90sN-P8mD-CYy5KOcEYyeGAKMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494322602035-u3tok2l67jfq5qolnh0s1hlbe0kefn8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

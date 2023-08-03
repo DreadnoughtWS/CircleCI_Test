@@ -34,6 +34,14 @@ pipeline {
             }
         }
 
+        stage('Compile & Build APK') {
+            steps {
+                dir(env.LOCATION_PROJECT) {
+                    bat 'fastlane distribute'
+                }
+            }
+        }
+
 
     }
 }
