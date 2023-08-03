@@ -9,3 +9,8 @@ end
 for_lane 'runBuildApk' do
   package_name("com.academy.alfagiftmini")
 end
+
+for_lane 'distribute' do
+  package_name("com.academy.alfagiftmini")
+end
+
