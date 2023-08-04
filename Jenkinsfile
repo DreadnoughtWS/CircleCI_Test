@@ -11,18 +11,20 @@ pipeline {
         // PATH = "/Users/avendisianipar/.rbenv/shims:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
     }
 
-    stage('Configure Environment') {
-        steps {
-            // sh "echo plutil -replace ReleaseName -string '${params.BASE_URL}' alfagift-ios-cicd/Info.plist"
-            sh "gem install bundler"
-            sh "bundle install"
-            sh "bundle exec fastlane pod_install"
-            sh "ruby -r dotenv/load -e \"Dotenv.load('.env.debug')\""
-            // sh "ruby -r dotenv/load -e \"Dotenv.load('.env.${params.ENV_CONFIG}')\""
-        }
-    }
+
 
     stages {
+        stage('Configure Environment') {
+            steps {
+                // sh "echo plutil -replace ReleaseName -string '${params.BASE_URL}' alfagift-ios-cicd/Info.plist"
+                sh "gem install bundler"
+                sh "bundle install"
+                sh "bundle exec fastlane pod_install"
+                sh "ruby -r dotenv/load -e \"Dotenv.load('.env.debug')\""
+                // sh "ruby -r dotenv/load -e \"Dotenv.load('.env.${params.ENV_CONFIG}')\""
+            }
+        }
+
         stage('Clean Gradle Cache') {
             steps {
               sh 'gem -v'
