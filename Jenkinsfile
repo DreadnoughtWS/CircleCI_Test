@@ -4,7 +4,7 @@ pipeline {
     environment {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
-      FASTLANE = "C:\\Ruby32-x64\\lib\\ruby\\gems\\3.2.0\\gems\\fastlane-2.214.0\\bin\\fastlane"
+      ADB = "C:\\Users\\davis\\AppData\\Local\\Android\\Sdk\\platform-tools"
     }
     stages {
         stage('Clean Gradle Cache') {
