@@ -37,6 +37,22 @@ android {
     buildFeatures {
         viewBinding true
     }
+//
+//    flavorDimensions FLAVOR_DIMENSION
+//    productFlavors{
+//        development{
+//            dimension FLAVOR_DIMENSION
+//            buildConfigField 'String', 'API_URL', DEV_API_URL
+//            applicationIdSuffix ".dev"
+//            manifestPlaceholders = [appLabel: DEV_APP_LABEL, icon: DEV_APP_ICON]
+//        }
+//        production{
+//            dimension FLAVOR_DIMENSION
+//            buildConfigField 'String', 'API_URL', PROD_API_URL
+//            applicationIdSuffix ".prod"
+//            manifestPlaceholders = [appLabel: PROD_APP_LABEL, icon: PROD_APP_ICON]
+//        }
+//    }
 }
 
 dependencies {
