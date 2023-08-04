@@ -4,7 +4,9 @@ pipeline {
 
       stage('test'){
         steps{
-          echo "${env.WORKSPACE}"
+          dir(env.WORKSPACE){
+            sh 'fastlane runClean'
+          }
         }
       }
 
