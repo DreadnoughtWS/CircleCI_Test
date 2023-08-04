@@ -5,8 +5,9 @@ pipeline {
       stage('test'){
         steps{
           dir(env.WORKSPACE){
-            sh 'fastlane runClean'
+            echo "${env.WORKSPACE}"
           }
+            sh './gradlew clean'
         }
       }
 
