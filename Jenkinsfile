@@ -1,46 +1,55 @@
 pipeline {
     agent any
 
-    environment {
-      ANDROID_HOME = 'D:\\AndroidSdk\\Android\\Sdk'
-      LOCATION_PROJECT = 'E:\\Jenkins_home\\workspace\\Mini Alfagift'
+    tools{
+      gradle 'gradle_for_android'
     }
+
+    environment {
+      LANG = 'en_US.UTF-8'
+      LC_ALL = 'en_US.UTF-8'
+      // // Rbenv VM Path Configuration
+      PATH = "/Users/gli-mac/.rbenv/shims:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
+      ANDROID_HOME = '/Users/gli-mac/Library/Android/sdk'
+    }
+
+
+
     stages {
+        stage('Configure Environment') {
+            steps {
+                // sh "echo plutil -replace ReleaseName -string '${params.BASE_URL}' alfagift-ios-cicd/Info.plist"
+                sh "gem install bundler"
+                sh "bundle install"
+                sh 'java -version'
+                // sh "ruby -r dotenv/load -e \"Dotenv.load('.env.${params.ENV_CONFIG}')\""
+            }
+        }
+
         stage('Clean Gradle Cache') {
             steps {
-                script {
-                  dir(env.LOCATION_PROJECT) {
-                    bat "fastlane runClean"
-                  }
-                }
+              sh 'gem -v'
+              sh "chmod +x gradlew"
+              sh "bundle exec fastlane runClean"
             }
         }
-
+//
         stage('Unit Tests') {
             steps {
-                dir(env.LOCATION_PROJECT) {
-                    bat 'gem -v'
-                    bat "fastlane runUnitTest"
-                }
+              sh "bundle exec fastlane runUnitTest"
             }
         }
-
+//
         stage('Compile & Build APK') {
             steps {
-                dir(env.LOCATION_PROJECT) {
-                    bat 'java -version'
-                    bat 'fastlane runBuildApk'
-                }
+              sh 'bundle exec fastlane runBuildApk'
             }
         }
-
+//
         stage('Upload to Firebase') {
             steps {
-                dir(env.LOCATION_PROJECT) {
-                    bat 'fastlane distribute'
-                }
+              sh 'bundle exec fastlane distribute'
             }
         }
-
     }
 }
