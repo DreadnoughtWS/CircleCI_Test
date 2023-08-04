@@ -4,7 +4,7 @@ pipeline {
     environment {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
-      ADB = "C:\\Users\\davis\\AppData\\Local\\Android\\Sdk\\platform-tools"
+      ADB = "C:\\Users\\davis\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb"
     }
     stages {
         stage('Clean Gradle Cache') {
@@ -31,8 +31,9 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    bat env.ADB + '/adb devices'
-                    gradle(tasks:"connectedAndroidTest")
+                    gradle(tasks:"installDebug installDebugAndroidTest")
+                    bat env.ADB + ' devices'
+                    bat env.ADB + ' -s emulator-5554 shell am instrument -w com.android.example/androidx.test.runner.AndroidJUnitRunner'
                     //bat 'gem -v'
                     //bat "C:\\Ruby32-x64\\lib\\ruby\\gems\\3.2.0\\gems\\fastlane-2.214.0\\bin\\fastlane runUnitTest"
                 }
