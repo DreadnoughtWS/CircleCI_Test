@@ -31,9 +31,10 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    gradle(tasks:"installDebug installDebugAndroidTest")
+                    //gradle(tasks:"installDebug installDebugAndroidTest")
                     bat env.ADB + ' devices'
-                    bat env.ADB + ' -s emulator-5554 shell am instrument -w com.academy.alfagiftmini/androidx.test.runner.AndroidJUnitRunner'
+                    bat env.ADB + ' -s emulator-5554 shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
+                    //gradle(tasks:"connectedAndroidTest")
                     //bat 'gem -v'
                     //bat "C:\\Ruby32-x64\\lib\\ruby\\gems\\3.2.0\\gems\\fastlane-2.214.0\\bin\\fastlane runUnitTest"
                 }
