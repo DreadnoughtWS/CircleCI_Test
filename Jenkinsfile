@@ -5,7 +5,7 @@ pipeline {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
       ADB = "C:\\Users\\davis\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb"
-      APK_PATH = LOCATION_PROJECT + "\\app\\build\\outputs\\apk\\androidTest\\debug"
+      APK_PATH = "${LOCATION_PROJECT}\\app\\build\\outputs\\apk\\androidTest\\debug"
     }
     stages {
         stage('Clean Gradle Cache') {
@@ -32,7 +32,7 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    gradle("assembleAndroidTest")
+                    gradle(tasks:"assembleAndroidTest")
                     //install
                     bat env.ADB + ' install -r ' + env.APK_PATH
                     bat env.ADB + ' devices'
