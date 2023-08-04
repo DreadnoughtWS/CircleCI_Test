@@ -4,8 +4,7 @@ pipeline {
     environment {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
-      ADB = "C:\\Users\\davis\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb"
-      APK_PATH = "${LOCATION_PROJECT}\\app\\build\\outputs\\apk\\androidTest\\debug\\app-debug-androidTest.apk"
+      ADB = "${ANDROID_HOME}\\platform-tools\\adb"
     }
     stages {
         stage('Clean Gradle Cache') {
@@ -32,11 +31,12 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    gradle(tasks:"assembleAndroidTest")
+                    gradle(tasks:"assembledebug")
                     //install
-                    bat env.ADB + ' install -r ' + env.APK_PATH
+                    bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
                     bat env.ADB + ' devices'
                     bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
+                    bat env.ADB + ' uninstall com.academy.alfagiftmini'
                     //uninstall
                }
             }
