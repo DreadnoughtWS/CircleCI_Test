@@ -31,6 +31,7 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
+                    bat 'adb devices'
                     gradle(tasks:"connectedAndroidTest")
                     //bat 'gem -v'
                     //bat "C:\\Ruby32-x64\\lib\\ruby\\gems\\3.2.0\\gems\\fastlane-2.214.0\\bin\\fastlane runUnitTest"
