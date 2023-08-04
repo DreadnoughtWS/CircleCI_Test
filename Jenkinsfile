@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-      ANDROID_HOME = 'D:\\AndroidSdk\\Android\\Sdk'
-      LOCATION_PROJECT = 'E:\\Jenkins_home\\workspace\\Mini Alfagift'
+      ANDROID_HOME = '%Sdk%\Android\Sdk'
+      LOCATION_PROJECT = 'C:\Users\davis\AndroidStudioProjects\GroupProject'
     }
     stages {
         stage('Clean Gradle Cache') {
@@ -34,14 +34,13 @@ pipeline {
             }
         }
 
-        stage('Compile & Build APK') {
-            steps {
-                dir(env.LOCATION_PROJECT) {
-                    bat 'fastlane distribute'
-                }
-            }
-        }
-
+//         stage('Compile & Build APK') {
+//             steps {
+//                 dir(env.LOCATION_PROJECT) {
+//                     bat 'fastlane distribute'
+//                 }
+//             }
+//         }
 
     }
 }

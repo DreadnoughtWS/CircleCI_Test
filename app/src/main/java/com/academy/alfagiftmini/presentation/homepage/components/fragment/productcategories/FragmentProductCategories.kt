@@ -34,9 +34,10 @@ class FragmentProductCategories() : Fragment(),
 
     private fun setObserver() {
         lifecycleScope.launch {
-            viewModel.getAllCategories(this, 5).collectLatest {
-                categoriesAdapter.submitData(lifecycle, it)
-            }
+            viewModel.getAllCategories(this, 5)
+        }
+        viewModel.liveData.observe(requireActivity()) {
+            categoriesAdapter.submitData(lifecycle, it)
         }
     }
 
