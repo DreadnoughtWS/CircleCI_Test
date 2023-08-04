@@ -8,7 +8,7 @@ pipeline {
             steps {
               sh 'gem -v'
               dir(env.WORKSPACE) {
-                  sh "fastlane runClean"
+                  sh "bundle exec fastlane runClean"
               }
 
             }
