@@ -46,7 +46,7 @@ class RegisterRepositoryImpl @Inject constructor(
                     )
                 )
             } catch (e: Exception) {
-                emit(RegisterResponseDomain(null, null, e.message.toString()))
+                emit(RegisterResponseDomain(null, null, "error"))
             }
         }.flowOn(IO)
     }

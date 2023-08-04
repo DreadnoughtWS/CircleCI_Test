@@ -1,7 +1,6 @@
 package com.academy.alfagiftmini.presentation.authentication.viewmodel
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -18,9 +17,7 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import kotlinx.coroutines.withContext
@@ -34,7 +31,6 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Response
-import java.util.concurrent.Flow
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
@@ -147,7 +143,16 @@ internal class RegisterViewModelTest {
   }
 
   @Test
-  fun `checkAvailableEmail returns response flow`() {
+  fun `checkAvailableEmail returns response flow`() = runTest {
+    Mockito.`when`(apiService.checkAvailableEmail(email = "vinboyhuang88@gmail.com"))
+      .thenReturn(Response.success(listOf(registerDummyModel)))
+
+    viewModel.checkAvailableEmail("davidsiew14@gmail.com").collectLatest {
+      assertEquals("error", it.error)
+    }
+    viewModel.checkAvailableEmail("vinboyhuang88@gmail.com").collectLatest {
+      assertEquals(RegisterResponseDomain("",registerDummy2,null),it)
+    }
   }
 
   @Test
