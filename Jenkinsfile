@@ -34,6 +34,7 @@ pipeline {
                     gradle(tasks:"assembledebug")
                     //install
                     bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
+                    bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
                     bat env.ADB + ' devices'
                     bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
                     bat env.ADB + ' uninstall com.academy.alfagiftmini'
