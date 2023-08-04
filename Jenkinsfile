@@ -26,9 +26,9 @@ pipeline {
         stage('Clean Gradle Cache') {
             steps {
               sh 'gem -v'
-              dir(env.WORKSPACE) {
-                  sh "echo fastlane runClean"
-              }
+
+              sh "bundle exec fastlane runClean"
+
 
             }
         }
