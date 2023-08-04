@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs'
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -42,7 +43,8 @@ android {
 }
 
 dependencies {
-
+    implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 
 
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2'
@@ -53,6 +55,7 @@ dependencies {
     androidTestImplementation 'com.google.truth:truth:1.1.3'
     // room!
     implementation 'androidx.room:room-runtime:2.5.1'
+    testImplementation 'junit:junit:4.12'
     kapt 'androidx.room:room-compiler:2.5.1'
     implementation "androidx.room:room-ktx:2.5.1"
 
