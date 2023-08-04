@@ -6,6 +6,7 @@ pipeline {
 
         stage('Clean Gradle Cache') {
             steps {
+              sh 'gem -v'
               sh "fastlane runClean"
             }
         }
