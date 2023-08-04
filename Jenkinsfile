@@ -10,7 +10,8 @@ pipeline {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                    bat "fastlane runClean"
+                  gradle(task:'clean')
+                    //bat "fastlane runClean"
                   }
                 }
             }
@@ -19,8 +20,9 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    bat 'gem -v'
-                    bat "fastlane runUnitTest"
+                gradle(task:'test')
+//                     bat 'gem -v'
+//                     bat "fastlane runUnitTest"
                 }
             }
         }
@@ -28,8 +30,9 @@ pipeline {
         stage('Compile & Build APK') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    bat 'java -version'
-                    bat 'fastlane runBuildApk'
+                gradle(task:"assembledebug")
+//                     bat 'java -version'
+//                     bat 'fastlane runBuildApk'
                 }
             }
         }
