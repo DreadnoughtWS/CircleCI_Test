@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-      ANDROID_HOME = 'C:\Users\davis\AppData\Local\Android\Sdk'
-      LOCATION_PROJECT = 'C:\Users\davis\AndroidStudioProjects\GroupProject'
+      ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
+      LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
     }
     stages {
         stage('Clean Gradle Cache') {
