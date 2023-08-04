@@ -31,7 +31,7 @@ pipeline {
         stage('UI Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                    //gradle(tasks:"installDebug installDebugAndroidTest")
+                    gradle(tasks:"installDebug installDebugAndroidTest")
                     bat env.ADB + ' devices'
                     bat env.ADB + ' -s emulator-5554 shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
                     //gradle(tasks:"connectedAndroidTest")
