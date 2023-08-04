@@ -10,8 +10,7 @@ pipeline {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                  gradle(tasks:'clean')
-                    //bat "fastlane runClean"
+                    bat "fastlane runClean"
                   }
                 }
             }
@@ -20,9 +19,8 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 dir(env.LOCATION_PROJECT) {
-                gradle(tasks:'test')
-//                     bat 'gem -v'
-//                     bat "fastlane runUnitTest"
+                    bat 'gem -v'
+                    bat "fastlane runUnitTest"
                 }
             }
         }
@@ -31,8 +29,8 @@ pipeline {
             steps {
                 dir(env.LOCATION_PROJECT) {
                 gradle(tasks:"assembledebug")
-//                     bat 'java -version'
-//                     bat 'fastlane runBuildApk'
+                    bat 'java -version'
+                    bat 'fastlane runBuildApk'
                 }
             }
         }
