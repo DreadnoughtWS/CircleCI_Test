@@ -19,8 +19,6 @@ pipeline {
                 // sh "echo plutil -replace ReleaseName -string '${params.BASE_URL}' alfagift-ios-cicd/Info.plist"
                 sh "gem install bundler"
                 sh "bundle install"
-                sh "bundle exec fastlane pod_install"
-                sh "ruby -r dotenv/load -e \"Dotenv.load('.env.debug')\""
                 // sh "ruby -r dotenv/load -e \"Dotenv.load('.env.${params.ENV_CONFIG}')\""
             }
         }
