@@ -1,6 +1,7 @@
 package com.academy.alfagiftmini.presentation.homepage.components.activity.productcategories
 
 import android.content.Intent
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -62,6 +63,10 @@ class ProductCategoriesActivity2Test {
 
     @Test
     fun testTwo() {
-
+        activityRule.scenario.onActivity {
+            viewModelList.itemCount.observe(it) {
+                Log.d("TEST", "${it}")
+            }
+        }
     }
 }
