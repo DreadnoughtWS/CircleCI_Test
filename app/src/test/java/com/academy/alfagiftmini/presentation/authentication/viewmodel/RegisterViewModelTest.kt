@@ -157,10 +157,8 @@ internal class RegisterViewModelTest {
     viewModel.registerNewUser(registerDummy).collectLatest {
       assertEquals("error", it.error)
     }
-    Mockito.`when`(apiService.register(body = registerDummyModel)).thenReturn(Response.success(RegisterResponseModel(null,null,"success")))
     viewModel.registerNewUser(registerDummy2).collectLatest {
       assertEquals(RegisterResponseDomain(null,registerDummy,null), it)
     }
-
   }
 }
