@@ -75,10 +75,11 @@ class FragmentBelanja : Fragment(), CategoriesAdapter.setOnItemClicked {
                 }
         }
         lifecycleScope.launch {
-            productCategoriesviewModel.getAllCategories(this, null).collectLatest {
-                categoriesAdapter.submitData(lifecycle, it)
-                PresentationUtils.setLoading(false, dialog)
-            }
+            productCategoriesviewModel.getAllCategories(this, null)
+        }
+        productCategoriesviewModel.liveData.observe(requireActivity()) {
+            categoriesAdapter.submitData(lifecycle, it)
+            PresentationUtils.setLoading(false, dialog)
         }
     }
 

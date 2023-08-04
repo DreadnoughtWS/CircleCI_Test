@@ -2,6 +2,7 @@ package com.academy.alfagiftmini.presentation.homepage.components.fragment.produ
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,9 +34,10 @@ class FragmentProductCategories() : Fragment(),
 
     private fun setObserver() {
         lifecycleScope.launch {
-            viewModel.getAllCategories(this, 5).collectLatest {
-                categoriesAdapter.submitData(lifecycle, it)
-            }
+            viewModel.getAllCategories(this, 5)
+        }
+        viewModel.liveData.observe(requireActivity()) {
+            categoriesAdapter.submitData(lifecycle, it)
         }
     }
 
@@ -58,6 +60,7 @@ class FragmentProductCategories() : Fragment(),
     override fun onCategoryClicked(position: Int) {
         val intent = Intent(requireContext(), ProductCategoriesActivity::class.java)
         intent.putExtra(PresentationUtils.CATEGORIES_KEY, categoriesAdapter.getItemObject(position))
+        Log.d("DATA!", categoriesAdapter.getItemObject(position).toString())
         startActivity(intent)
     }
 }

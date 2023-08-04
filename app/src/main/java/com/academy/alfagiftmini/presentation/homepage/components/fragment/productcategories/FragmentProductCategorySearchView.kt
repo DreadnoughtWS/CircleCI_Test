@@ -40,9 +40,10 @@ class FragmentProductCategorySearchView: Fragment(), CategoriesSearchAdapter.Set
 
     private fun getData() {
         lifecycleScope.launch{
-            viewModel.getAllCategories(this, 5).collectLatest {
-                adapter.submitData(lifecycle, it)
-            }
+            viewModel.getAllCategories(this, 5)
+        }
+        viewModel.liveData.observe(requireActivity()) {
+            adapter.submitData(lifecycle, it)
         }
     }
 

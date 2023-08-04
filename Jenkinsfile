@@ -1,55 +1,65 @@
 pipeline {
     agent any
 
-    tools{
-      gradle 'gradle_for_android'
-    }
-
     environment {
-      LANG = 'en_US.UTF-8'
-      LC_ALL = 'en_US.UTF-8'
-      // // Rbenv VM Path Configuration
-      PATH = "/Users/gli-mac/.rbenv/shims:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin"
-      ANDROID_HOME = '/Users/gli-mac/Library/Android/sdk'
+      ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
+      LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
+      ADB = "${ANDROID_HOME}\\platform-tools\\adb"
     }
-
-
-
     stages {
-        stage('Configure Environment') {
-            steps {
-                // sh "echo plutil -replace ReleaseName -string '${params.BASE_URL}' alfagift-ios-cicd/Info.plist"
-                sh "gem install bundler"
-                sh "bundle install"
-                sh 'java -version'
-                // sh "ruby -r dotenv/load -e \"Dotenv.load('.env.${params.ENV_CONFIG}')\""
-            }
-        }
-
         stage('Clean Gradle Cache') {
             steps {
-              sh 'gem -v'
-              sh "chmod +x gradlew"
-              sh "bundle exec fastlane runClean"
+                script {
+                  dir(env.LOCATION_PROJECT) {
+                  gradle(tasks: 'runClean')
+                    //bat "fastlane runClean"
+                  }
+                }
             }
         }
-//
+
         stage('Unit Tests') {
             steps {
-              sh "bundle exec fastlane runUnitTest"
+                dir(env.LOCATION_PROJECT) {
+                 gradle(tasks:"test")
+                    //bat 'gem -v'
+                    //bat "C:\\Ruby32-x64\\lib\\ruby\\gems\\3.2.0\\gems\\fastlane-2.214.0\\bin\\fastlane runUnitTest"
+                }
             }
         }
-//
+
+        stage('UI Tests') {
+            steps {
+                dir(env.LOCATION_PROJECT) {
+                    gradle(tasks:"assembledebug")
+                    //install
+                    bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
+                    bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
+                    bat env.ADB + ' devices'
+                    bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
+                    bat env.ADB + ' uninstall com.academy.alfagiftmini'
+                    //uninstall
+               }
+            }
+        }
+
         stage('Compile & Build APK') {
             steps {
-              sh 'bundle exec fastlane runBuildApk'
+                dir(env.LOCATION_PROJECT) {
+                gradle(tasks:"assembledebug")
+                    //bat 'java -version'
+                    //bat 'fastlane runBuildApk'
+                }
             }
         }
-//
-        stage('Upload to Firebase') {
-            steps {
-              sh 'bundle exec fastlane distribute'
-            }
-        }
+
+//         stage('Compile & Build APK') {
+//             steps {
+//                 dir(env.LOCATION_PROJECT) {
+//                     bat 'fastlane distribute'
+//                 }
+//             }
+//         }
+
     }
 }
