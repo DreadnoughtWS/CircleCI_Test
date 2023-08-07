@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                    bat "bundle exec fastlane runClean"
+                    bat "fastlane runClean"
                   }
                 }
             }
@@ -21,14 +21,14 @@ pipeline {
                      steps {
                          dir(env.LOCATION_PROJECT) {
                             bat 'gem -v'
-                            bat "bundle exec fastlane runUnitTest"
+                            bat "fastlane runUnitTest"
                          }
                      }
                 }
                 stage('UI Tests') {
                     steps {
                         dir(env.LOCATION_PROJECT) {
-                            bat 'bundle exec fastlane runInstrumentedTest'
+                            bat 'fastlane runInstrumentedTest'
 //                             gradle(tasks:"assembledebug")
 // //                             //install
 //                             bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
@@ -47,7 +47,7 @@ pipeline {
             steps {
                 dir(env.LOCATION_PROJECT) {
                     bat 'java -version'
-                    bat 'bundle exec fastlane runBuildApk'
+                    bat 'fastlane runBuildApk'
                 }
             }
         }
