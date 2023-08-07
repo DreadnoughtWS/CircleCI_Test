@@ -160,6 +160,7 @@ dependencies {
     implementation 'androidx.test.espresso:espresso-idling-resource:3.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.3.0'
 
+    androidTestImplementation 'tools.fastlane:screengrab:2.1.1'
     debugImplementation("androidx.fragment:fragment-testing-manifest:1.6.0-alpha04")
     debugImplementation("androidx.fragment:fragment-testing:1.6.0-alpha04")
 }

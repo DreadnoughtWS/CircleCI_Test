@@ -18,6 +18,9 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import tools.fastlane.screengrab.DecorViewScreenshotStrategy
+import tools.fastlane.screengrab.FalconScreenshotStrategy
+import tools.fastlane.screengrab.Screengrab
 
 @RunWith(AndroidJUnit4::class)
 class LoginActivityTest {
@@ -26,6 +29,9 @@ class LoginActivityTest {
 
     @Before
     fun setUp() {
+        activityRule.scenario.onActivity {
+            Screengrab.setDefaultScreenshotStrategy(FalconScreenshotStrategy(it))
+        }
         IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingresource)
     }
 
@@ -36,6 +42,7 @@ class LoginActivityTest {
 
     @Test
     fun invalidEmailTest() {
+        Screengrab.screenshot("before_button_click")
         Thread.sleep(4000)
         //onView(withId(R.id.tv_title)).check(matches())
         onView(withId(R.id.et_email)).perform(replaceText(""))
@@ -43,6 +50,7 @@ class LoginActivityTest {
         onView(withId(R.id.btn_submit_user_data)).perform(click())
         Thread.sleep(1000)
         onView(withId(R.id.tv_email_err)).check(matches(withEffectiveVisibility(Visibility.INVISIBLE)))
+        Screengrab.screenshot("after_button_click")
     }
 
     @Test
