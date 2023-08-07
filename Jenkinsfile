@@ -13,7 +13,6 @@ pipeline {
                   dir(env.LOCATION_PROJECT) {
                     bat "bundle exec fastlane runClean"
                   }
-                  sh '''#!/bin/bash -l bundle'''
                 }
             }
         }
