@@ -3,7 +3,7 @@ pipeline {
 
     environment {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
-      LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
+      LOCATION_PROJECT = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\JenkinImpact'
     }
     stages {
         stage('Clean Gradle Cache') {
