@@ -4,14 +4,13 @@ pipeline {
     environment {
       ANDROID_HOME = 'C:\\Users\\davis\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\davis\\AndroidStudioProjects\\GroupProject'
-      ADB = "${ANDROID_HOME}\\platform-tools\\adb"
     }
     stages {
         stage('Clean Gradle Cache') {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                    bat "fastlane runClean"
+                    bat "bundle exec fastlane runClean"
                   }
                 }
             }
@@ -22,14 +21,14 @@ pipeline {
                      steps {
                          dir(env.LOCATION_PROJECT) {
                             bat 'gem -v'
-                            bat "fastlane runUnitTest"
+                            bat "bundle exec fastlane runUnitTest"
                          }
                      }
                 }
                 stage('UI Tests') {
                     steps {
                         dir(env.LOCATION_PROJECT) {
-                            bat 'fastlane runInstrumentedTest'
+                            bat 'bundle exec fastlane runInstrumentedTest'
 //                             gradle(tasks:"assembledebug")
 // //                             //install
 //                             bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
@@ -48,7 +47,7 @@ pipeline {
             steps {
                 dir(env.LOCATION_PROJECT) {
                     bat 'java -version'
-                    bat 'fastlane runBuildApk'
+                    bat 'bundle exec fastlane runBuildApk'
                 }
             }
         }
