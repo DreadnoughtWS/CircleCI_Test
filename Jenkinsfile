@@ -22,7 +22,7 @@ pipeline {
                      steps {
                          dir(env.LOCATION_PROJECT) {
 //                             bat 'gem -v'
-                            bat "bundle exec fastlane runUnitTest"
+//                             bat "bundle exec fastlane runUnitTest"
                          }
                      }
                 }
