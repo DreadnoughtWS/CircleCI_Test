@@ -31,7 +31,7 @@ pipeline {
                 stage('UI Tests') {
                     steps {
                         dir(env.LOCATION_PROJECT) {
-                        gradle(tasks:'androidAssembleDebug')
+                        gradle(tasks:'connectedAndroidTest')
 //                             gradle(tasks:"assembledebug")
 // //                             //install
 //                             bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
