@@ -31,6 +31,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 
 
+### android runInstrumentedTest
+
+```sh
+[bundle exec] fastlane android runInstrumentedTest
+```
+
+
+
 ### android runBuildApk
 
 ```sh
