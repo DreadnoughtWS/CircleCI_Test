@@ -7,15 +7,15 @@ pipeline {
       ADB = "${ANDROID_HOME}\\platform-tools\\adb"
     }
     stages {
-//         stage('Clean Gradle Cache') {
-//             steps {
-//                 script {
-//                   dir(env.LOCATION_PROJECT) {
-//                     bat "bundle exec fastlane runClean"
-//                   }
-//                 }
-//             }
-//         }
+        stage('Clean Gradle Cache') {
+            steps {
+                script {
+                  dir(env.LOCATION_PROJECT) {
+                    bat "bundle exec fastlane runClean"
+                  }
+                }
+            }
+        }
         stage('android tests') {
             parallel {
                 stage('Unit Tests') {
