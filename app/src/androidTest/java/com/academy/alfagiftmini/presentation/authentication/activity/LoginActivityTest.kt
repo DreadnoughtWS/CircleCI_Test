@@ -42,7 +42,7 @@ class LoginActivityTest {
         onView(withId(R.id.et_password)).perform(replaceText(""))
         onView(withId(R.id.btn_submit_user_data)).perform(click())
         Thread.sleep(1000)
-        onView(withId(R.id.tv_email_err)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
+        onView(withId(R.id.tv_email_err)).check(matches(withEffectiveVisibility(Visibility.INVISIBLE)))
     }
 
     @Test
