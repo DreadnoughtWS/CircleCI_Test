@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                    bat "bundle exec fastlane runClean"
+//                     bat "bundle exec fastlane runClean"
                   }
                 }
             }
