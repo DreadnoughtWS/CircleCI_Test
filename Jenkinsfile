@@ -5,6 +5,7 @@ pipeline {
       ANDROID_HOME = 'C:\\Users\\theni\\AppData\\Local\\Android\\Sdk'
       LOCATION_PROJECT = 'C:\\Users\\theni\\AndroidStudioProjects\\GroupProject'
       ADB = "${ANDROID_HOME}\\platform-tools\\adb"
+      sh '''#!/bin/bash -l bundle'''
     }
     stages {
         stage('Clean Gradle Cache') {
