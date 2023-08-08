@@ -287,7 +287,7 @@ class RegisterViewModel @Inject constructor(private val useCase: RegisterDomainU
 //    }
     fun otpCountdownTimer() {
         _finished.postValue(false)
-        for (i in 60 downTo 0) {
+        for (i in 10 downTo 0) {
             Thread.sleep(1000)
             if (i == 0) {
                 _finished.postValue(true)

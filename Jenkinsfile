@@ -34,6 +34,7 @@ pipeline {
               bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
             }
           }
+
         }
 //         stage('android tests') {
 //             parallel {
