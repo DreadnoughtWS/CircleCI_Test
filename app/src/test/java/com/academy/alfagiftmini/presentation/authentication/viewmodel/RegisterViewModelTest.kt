@@ -70,8 +70,8 @@ internal class RegisterViewModelTest {
     registerRepository = RegisterRepositoryImpl(apiService)
     useCaseMock = RegisterDomainUseCaseImpl(registerRepository)
     viewModel = RegisterViewModel(useCaseMock)
-    Mockito.`when`(activity.application).thenReturn(application)
-    Mockito.`when`(application.getSharedPreferences("my_key", 0)).thenReturn(sharedPrefs)
+//    Mockito.`when`(activity.application).thenReturn(application)
+//    Mockito.`when`(application.getSharedPreferences("my_key", 0)).thenReturn(sharedPrefs)
     registerDummy = RegisterDataDomain(
       null,
       "",
