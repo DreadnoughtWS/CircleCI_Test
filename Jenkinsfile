@@ -3,7 +3,7 @@ pipeline {
 
     environment {
       ANDROID_HOME = 'C:\\Users\\theni\\AppData\\Local\\Android\\Sdk'
-      LOCATION_PROJECT = 'C:\\Users\\theni\\AndroidStudioProjects\\GroupProject'
+      LOCATION_PROJECT = 'C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\Group Project'
       ADB = "${ANDROID_HOME}\\platform-tools\\adb"
     }
     stages {
