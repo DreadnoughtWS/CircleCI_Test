@@ -11,16 +11,16 @@ platform :android do
   end
 
   lane :runInstrumentedTest do
-    gradle(tasks:"connectedAndroidTest")
+#     gradle(tasks:"connectedAndroidTest")
 
-#     build_android_app(
-#           task: 'assemble',
-#           build_type: 'Debug'
-#         )
-#     build_android_app(
-#           task: 'assemble',
-#           build_type: 'AndroidTest'
-#         )
+    build_android_app(
+          task: 'assemble',
+          build_type: 'Debug'
+        )
+    build_android_app(
+          task: 'assemble',
+          build_type: 'AndroidTest'
+        )
 #     screengrab()
   end
 
