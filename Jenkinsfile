@@ -20,10 +20,17 @@ pipeline {
         stage('android tests') {
           steps{
             parallel(
-              unit_test: {dir(env.LOCATION_PROJECT)
-              {bat 'bundle exec fastlane runUnitTest'}},
-              ui_test: {dir(env.LOCATION_PROJECT)
-              {bat 'bundle exec fastlane runInstrumentedTest'}}
+              unit_test: {
+                dir(env.LOCATION_PROJECT){
+                  bat 'gem -v'
+                  bat 'bundle exec fastlane runUnitTest'
+                }
+              },
+              ui_test: {
+                dir(env.LOCATION_PROJECT){
+                  bat 'bundle exec fastlane runInstrumentedTest'
+                }
+              }
             )
           }
         }
