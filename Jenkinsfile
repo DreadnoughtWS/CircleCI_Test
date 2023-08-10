@@ -11,8 +11,8 @@ pipeline {
             steps {
                 script {
                   dir(env.LOCATION_PROJECT) {
-                    bat "bundle exec fastlane runClean"
                     bat "C:\\Users\\theni\\AppData\\Local\\Android\\Sdk\\platform-tools\\adb uninstall com.academy.alfagiftmini.test"
+                    bat "bundle exec fastlane runClean"
                   }
                 }
             }
