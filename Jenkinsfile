@@ -18,21 +18,12 @@ pipeline {
         }
 
         stage('android tests') {
-          steps {
-            parallel (
-              unit_test: {
-                dir(env.LOCATION_PROJECT {
-                  bat 'gem -v'
-                  bat "bundle exec fastlane runUnitTest"
-                },
-                ui_test: {
-                  bat 'bundle exec fastlane runInstrumentedTest'
-                  //                             bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
-                  //                             bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
-                  //                             bat env.ADB + ' devices'
-                  //                             bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
-                })
-              }
+          steps{
+            parallel(
+              unit_test: {dir(env.LOCATION_PROJECT)
+              {bat 'bundle exec fastlane runUnitTest'}},
+              ui_test: {dir(env.LOCATION_PROJECT)
+              {bat 'bundle exec fastlane runInstrumentedTest'}}
             )
           }
         }
