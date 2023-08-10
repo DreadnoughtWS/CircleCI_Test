@@ -16,49 +16,30 @@ pipeline {
                 }
             }
         }
-        stage('Unit Tests') {
-          steps {
-            dir(env.LOCATION_PROJECT) {
-              bat 'gem -v'
-              bat "bundle exec fastlane runUnitTest"
-            }
-          }
-        }
-        stage('UI Tests') {
-          steps {
-            dir(env.LOCATION_PROJECT) {
-              bat 'bundle exec fastlane runInstrumentedTest'
-//               bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
-//               bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
-//               bat env.ADB + ' devices'
-//               bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
-            }
-          }
 
+        stage('android tests') {
+            parallel {
+                stage('Unit Tests') {
+                     steps {
+                         dir(env.LOCATION_PROJECT) {
+                            bat 'gem -v'
+                            bat "bundle exec fastlane runUnitTest"
+                         }
+                     }
+                }
+                stage('UI Tests') {
+                    steps {
+                        dir(env.LOCATION_PROJECT) {
+                            bat 'bundle exec fastlane runInstrumentedTest'
+                            bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
+                            bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
+                            bat env.ADB + ' devices'
+                            bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
+                        }
+                    }
+                }
+            }
         }
-//         stage('android tests') {
-//             parallel {
-//                 stage('Unit Tests') {
-//                      steps {
-//                          dir(env.LOCATION_PROJECT) {
-//                             bat 'gem -v'
-//                             bat "bundle exec fastlane runUnitTest"
-//                          }
-//                      }
-//                 }
-//                 stage('UI Tests') {
-//                     steps {
-//                         dir(env.LOCATION_PROJECT) {
-//                             bat 'bundle exec fastlane runInstrumentedTest'
-//                             bat env.ADB + ' install -r ./app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk'
-//                             bat env.ADB + ' install -r ./app/build/outputs/apk/debug/app-debug.apk'
-//                             bat env.ADB + ' devices'
-//                             bat env.ADB + ' shell am instrument -w com.academy.alfagiftmini.test/androidx.test.runner.AndroidJUnitRunner'
-//                         }
-//                     }
-//                 }
-//             }
-//         }
 
         stage('Compile & Build APK') {
             steps {
