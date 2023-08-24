@@ -34,6 +34,7 @@ jobs:
      - image: cimg/android:2023.08
     steps:
       - run: echo "bundle exec fastlane build BUILD_VARIANT:debug"
+      - run: echo "$GOOGLE_SERVICE_BASE64 | base64 --decode > google-services.json"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
