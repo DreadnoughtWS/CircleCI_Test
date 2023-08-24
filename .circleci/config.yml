@@ -37,7 +37,8 @@ jobs:
     steps:
       - run:
           command: |
-            $GOOGLE_SERVICE_BASE64 | base64 --decode > google-services.json
+            echo $GOOGLE_SERVICE_BASE64
+            base64 --decode > google-services.json
             bundle exec fastlane build BUILD_VARIANT:debug
 
 # Invoke jobs via workflows
