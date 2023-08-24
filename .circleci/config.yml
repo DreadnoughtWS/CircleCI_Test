@@ -13,37 +13,33 @@ orbs:
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
-  build-and-test:
-    # These next lines define the Android machine image executor.
-    # See: https://circleci.com/docs/executor-types/
-    executor:
-      name: android/android-machine
-
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+  Configure Environment:
+    docker:
+     - image: cimg/android:2023.08
     steps:
-      # Checkout the code as the first step.
       - checkout
+      - run: echo "gem install bundler"
+      - run: echo "bundle install"
+      - run: echo "java -version"
+  
+  Internal test:
+    docker:
+     - image: cimg/android:2023.08
+    steps:
+      - run: echo "unit test"
+      - run: echo "ui test"
 
-      # The next step will run the unit tests
-      - android/run-tests:
-          test-command: ./gradlew lint testDebug --continue
-
-      # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
-
-      # And finally run the release build
-      - run:
-          name: Assemble release build
-          command: |
-            ./gradlew assembleRelease
+  Build:
+    docker:
+     - image: cimg/android:2023.08
+    steps:
+      - run: echo "bundle exec fastlane build BUILD_VARIANT:debug"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
+  sample:
     jobs:
-      - build-and-test
+      - Configure Environment
+      - Internal test
+      - Build
